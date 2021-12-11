@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import { Button } from 'components/Buttons/Buttons';
+import Button from 'components/Button';
 import CancelIcon from '@mui/icons-material/Close';
 import style from './SelectionModal.module.scss';
 

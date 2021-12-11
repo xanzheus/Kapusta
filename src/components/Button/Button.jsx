@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 // import Stack from '@mui/material/Stack';
-import style from './Buttons.module.scss';
+import style from './Button.module.scss';
 
 // const BalanceFormButtons = ({ name, type, onClick }) => {
 //   return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'components/Buttons/Buttons';
+import Button from 'components/Button';
 import SelectionModal from 'components/Modal/SelectionModal';
 import TextField from '@mui/material/TextField';
 

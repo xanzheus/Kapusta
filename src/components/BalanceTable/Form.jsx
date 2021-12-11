@@ -10,7 +10,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
-import BalanceFormButtons from 'components/Buttons/Buttons';
+import BalanceFormButtons from 'components/Button/Button';
 import style from './BalanceTable.module.scss';
 
 const Form = ({ placeholder, categoryArray }) => {
