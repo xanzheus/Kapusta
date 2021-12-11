@@ -1,0 +1,24 @@
+@import 'styles/shared.scss';
+
+.main__button {
+  min-width: 125px;
+  min-height: 44px;
+  background-color: transparent;
+  border: 2px solid $auxiliaryLight-color;
+  border-radius: 16px;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1, 167;
+  color: $primary-color;
+
+  transition: all $timing-function;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: $mainAccent-color;
+    color: $mainLight-color;
+    border: none;
+  }
+}

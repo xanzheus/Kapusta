@@ -1,0 +1,27 @@
+@import 'styles/shared.scss';
+
+.user__name {
+  line-height: 14px;
+  letter-spacing: 0.04em;
+}
+
+.user__button__logout {
+  display: block;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  color: inherit;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+}
+
+.user__line {
+  &::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 36px;
+    background-color: #e0e5eb;
+  }
+}
