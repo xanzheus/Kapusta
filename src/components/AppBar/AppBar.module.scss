@@ -1,0 +1,25 @@
+@import 'styles/shared.scss';
+
+.header {
+  min-width: 100%;
+  min-height: 56px;
+  padding: 0 20px 0 19px;
+  background-color: $mainLight-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (min-width: $tablet) {
+    padding: 0 24px 0 26px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    padding: 0 44px 0 26px;
+  }
+}
+
+.logo {
+  background: url('../../images/logo.png');
+  width: 90px;
+  height: 31px;
+}

@@ -1,0 +1,9 @@
+.statHeader {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin: 10px;
+  justify-content: space-around;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
