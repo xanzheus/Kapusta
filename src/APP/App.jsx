@@ -15,9 +15,10 @@ const NotFound = lazy(() =>
 
 function App() {
   return (
-    <main>
-      <Container>
-        <AppBar />
+    <>
+      <AppBar />
+      <main>
+        {/* <Container> */}
         <Routes>
           <Route path="/" element={<Registration />} />
           <Route path="login" element={<Login />} />
@@ -56,8 +57,9 @@ function App() {
             }
           />
         </Routes>
-      </Container>
-    </main>
+        {/* </Container> */}
+      </main>
+    </>
   );
 }
 

@@ -9,7 +9,8 @@
 
   font-weight: 700;
   font-size: 12px;
-  line-height: 1, 167;
+  line-height: 1.16;
+  letter-spacing: 0.02em;
   color: $primary-color;
 
   transition: all $timing-function;
@@ -21,4 +22,19 @@
     color: $mainLight-color;
     border: none;
   }
+
+  &:disabled {
+    &:hover,
+    &:focus {
+      background-color: $auxiliaryLight-color;
+      border: 2px solid $mainLight-color;
+      color: $secondory-color;
+    }
+  }
+}
+
+.secondary {
+  border: 2px solid $mainLight-color;
+  color: $secondory-color;
+  font-weight: 400;
 }

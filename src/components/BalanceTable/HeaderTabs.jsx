@@ -6,7 +6,6 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/BalanceTable/BalanceTable';
 import Form from 'components/BalanceTable/Form';
-import AddCategory from 'components/BalanceTable/AddCategory';
 import style from './BalanceTable.module.scss';
 
 const IncomData = [
@@ -118,7 +117,7 @@ const HeaderTabs = () => {
           </TabList>
         </Box>
 
-        <TabPanel value="1">
+        <TabPanel className={style.thumb} value="1">
           <Form
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={ExpensesCatagoryArray}
@@ -128,10 +127,9 @@ const HeaderTabs = () => {
             reportData={ExpensesReportData}
             category={ExpensesCatagoryArray}
           />
-          <AddCategory categoryArray={ExpensesCatagoryArray} />
         </TabPanel>
 
-        <TabPanel value="2">
+        <TabPanel className={style.thumb} value="2">
           <Form
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
@@ -141,7 +139,6 @@ const HeaderTabs = () => {
             reportData={IncomReportData}
             category={incomeCatagoryArray}
           />
-          <AddCategory categoryArray={incomeCatagoryArray} />
         </TabPanel>
       </TabContext>
     </Box>
