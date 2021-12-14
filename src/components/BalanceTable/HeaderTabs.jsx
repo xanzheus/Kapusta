@@ -105,10 +105,11 @@ const HeaderTabs = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' }}>
+    <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
         <Box>
           <TabList
+            className={style.tabs__list}
             textColor="secondary"
             indicatorColor="secondary"
             onChange={handleChange}

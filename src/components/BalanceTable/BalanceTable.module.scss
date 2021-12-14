@@ -28,7 +28,8 @@
   background-color: #fafbfd;
   border-radius: 20px 20px 0 0;
   min-width: 140px;
-  height: 40px;
+  min-height: 40px;
+  font-size: 12px;
   line-height: 1.16px;
   letter-spacing: 0.02em;
   font-weight: 700;
@@ -39,6 +40,10 @@
     color: $mainAccent-color;
     background-color: #fefefe;
   }
+}
+
+.tabs__list {
+  min-height: 0;
 }
 
 .tabs__thumb {
