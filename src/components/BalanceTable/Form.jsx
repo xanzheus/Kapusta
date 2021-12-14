@@ -58,43 +58,37 @@ const Form = ({ placeholder, categoryArray }) => {
   return (
     <form className={style.balance__form} autoComplete="off" onSubmit={onSubmit}>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Stack spacing={3}>
+        <Stack spacing={3} className={style.balance__date}>
           <DatePicker
             inputFormat="dd/MM/yyyy"
-            disableFuture
-            label="Дата"
             openTo="year"
             value={date}
             onChange={newValue => {
               setDate(newValue);
             }}
-            renderInput={params => <TextField {...params} />}
+            renderInput={params => (
+              <TextField color="secondary" className={style.date__field} {...params} />
+            )}
           />
         </Stack>
       </LocalizationProvider>
 
       <TextField
+        className={[style.form__field, style.description].join(' ')}
         helperText="Введите описание"
-        id="income"
+        color="secondary"
         label={placeholder[0]}
         onChange={handleChangeDescription}
         value={description}
         type="text"
-        name="income"
+        name="description"
         required
       />
 
-      <Box className={style.category__field}>
-        <FormControl fullWidth>
-          <InputLabel id="category">{placeholder[1]}</InputLabel>
-          <Select
-            labelId="category"
-            id="selectCategory"
-            label={placeholder[1]}
-            value={category}
-            onChange={handleChangeCategry}
-            required
-          >
+      <Box className={[style.form__field, style.category].join(' ')}>
+        <FormControl color="secondary" className={style.qwe} fullWidth>
+          <InputLabel>{placeholder[1]}</InputLabel>
+          <Select label={placeholder[1]} value={category} onChange={handleChangeCategry} required>
             {categoryArray.map(item => (
               <MenuItem key={item} value={item}>
                 {item}
@@ -105,13 +99,14 @@ const Form = ({ placeholder, categoryArray }) => {
       </Box>
 
       <TextField
+        className={[style.form__field, style.amount].join(' ')}
+        color="secondary"
         helperText="Введите сумму"
-        id="sum"
         label="0"
         value={sum}
         onChange={handleChangeSum}
         type="number"
-        name="income"
+        name="amount"
         required
       />
       <div className={style.balance__buttons}>

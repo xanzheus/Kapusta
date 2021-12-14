@@ -1,4 +1,4 @@
-const colors = {
+const COLORS = {
   primary: '#52555f',
   secondory: '#52555fb2',
   mainAccent: '#ff751d',
@@ -12,4 +12,4 @@ const colors = {
   transparent: 'transparent',
 };
 
-export default colors;
+export default COLORS;

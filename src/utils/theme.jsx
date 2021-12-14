@@ -1,25 +1,16 @@
 import { createTheme } from '@mui/material/styles';
-import colors from 'Constants/colors';
+import COLORS from 'Constants/COLORS';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: colors.primary,
-      light: colors.secondory,
+      main: COLORS.primary,
+      light: COLORS.secondory,
     },
 
     secondary: {
-      main: colors.mainAccent,
-      light: colors.secondaryAccent,
-    },
-
-    accent: {
-      main: colors.mainAccent,
-      light: colors.secondaryAccent,
-    },
-
-    transparent: {
-      main: colors.transparent,
+      main: COLORS.mainAccent,
+      light: COLORS.secondaryAccent,
     },
   },
 });
