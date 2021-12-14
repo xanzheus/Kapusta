@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Container from 'components/Container';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from 'utils/theme';
 import AppBar from 'components/AppBar/AppBar';
 import Registration from 'pages/Registration';
 import StatisticPage from 'pages/StatisticPage';
@@ -15,10 +16,9 @@ const NotFound = lazy(() =>
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <AppBar />
       <main>
-        {/* <Container> */}
         <Routes>
           <Route path="/" element={<Registration />} />
           <Route path="login" element={<Login />} />
@@ -57,9 +57,8 @@ function App() {
             }
           />
         </Routes>
-        {/* </Container> */}
       </main>
-    </>
+    </ThemeProvider>
   );
 }
 

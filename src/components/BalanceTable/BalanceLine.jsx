@@ -35,7 +35,7 @@ const BalanceLine = ({ userData }) => {
         <p className={style.balance__title}>Баланс: </p>
 
         {start ? (
-          <p className={style.balance__input}>{`${amount} UAH`}</p>
+          <p className={[style.balance__input, style.disabled].join(' ')}>{`${amount} UAH`}</p>
         ) : (
           <input
             className={style.balance__input}
@@ -47,7 +47,9 @@ const BalanceLine = ({ userData }) => {
         )}
 
         {start ? (
-          <Button name="ПОДТВЕРДИТЬ" variant="secondary" type="submit" disabled={true} />
+          <p className={[style.balance__input, style.disabled, style.disable__button].join(' ')}>
+            ПОДТВЕРДИТЬ
+          </p>
         ) : (
           <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
         )}

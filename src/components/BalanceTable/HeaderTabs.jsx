@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/BalanceTable/BalanceTable';
 import Form from 'components/BalanceTable/Form';
+import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
 import style from './BalanceTable.module.scss';
 
 const IncomData = [
@@ -96,10 +97,6 @@ const ExpensesReportData = [
   },
 ];
 
-const incomeCatagoryArray = ['Зарплата', 'Инвистиции', 'Кредит'];
-
-const ExpensesCatagoryArray = ['Продукты', 'Авто', 'Развлечения'];
-
 const HeaderTabs = () => {
   const [value, setValue] = useState('1');
 
@@ -111,25 +108,30 @@ const HeaderTabs = () => {
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList
+            textColor="secondary"
+            indicatorColor="secondary"
+            onChange={handleChange}
+            aria-label="lab API tabs example"
+          >
             <Tab className={style.tabs} label="Расход" value="1" />
             <Tab className={style.tabs} label="Доход" value="2" />
           </TabList>
         </Box>
 
-        <TabPanel className={style.thumb} value="1">
+        <TabPanel className={style.tabs__thumb} value="1">
           <Form
             placeholder={['Описание товара', 'Категория товара']}
-            categoryArray={ExpensesCatagoryArray}
+            categoryArray={expensesCatagoryArray}
           />
           <BalanceTable
             data={expensesData}
             reportData={ExpensesReportData}
-            category={ExpensesCatagoryArray}
+            category={expensesCatagoryArray}
           />
         </TabPanel>
 
-        <TabPanel className={style.thumb} value="2">
+        <TabPanel className={style.tabs__thumb} value="2">
           <Form
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}

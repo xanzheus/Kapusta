@@ -25,11 +25,24 @@
 
 //Tabs
 .tabs {
-  color: inherit;
+  background-color: #fafbfd;
+  border-radius: 20px 20px 0 0;
+  min-width: 140px;
+  height: 40px;
+  line-height: 1.16px;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  color: $mainDark-color;
+
+  &:focus-within,
+  &:focus-visible {
+    color: $mainAccent-color;
+    background-color: #fefefe;
+  }
 }
 
-.thumb {
-  padding: 30px 20px 60px 20px;
+.tabs__thumb {
+  padding: 35px 20px 60px 20px;
   background: $mainLight-color;
 
   box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
@@ -53,16 +66,22 @@
   background-color: transparent;
   border: 2px solid $mainLight-color;
   border-radius: 16px;
+  margin-right: 15px;
 
   font-weight: 700;
   color: $mainDark-color;
   text-align: center;
 
-  margin-right: 15px;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    outline: 2px solid $mainAccent-color;
+    border: none;
+  }
 
   &::placeholder {
     line-height: 1.16;
@@ -72,6 +91,22 @@
     text-align: center;
     width: 100%;
   }
+}
+
+.disabled {
+  cursor: not-allowed;
+  border: 2px solid $mainLight-color;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    border: 2px solid $mainLight-color;
+  }
+}
+
+.disable__button {
+  color: $secondory-color;
+  margin-right: 0;
 }
 
 .reports__link {
