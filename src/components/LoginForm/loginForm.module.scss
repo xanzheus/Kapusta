@@ -6,7 +6,7 @@ div.box {
   width: 300px;
   height: auto;
   padding: 45px 18px 53px;
-  // background-color: rgb(240, 240, 240);
+  //   background-color: rgb(240, 240, 240);
   border-radius: 30px;
   border: 1px solid;
   border-color: black;
@@ -42,4 +42,10 @@ input .registration__input {
 
 .login__button {
   margin-right: 15px;
+}
+
+.main__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

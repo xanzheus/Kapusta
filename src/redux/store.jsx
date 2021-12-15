@@ -4,9 +4,9 @@ import authReducer from '../redux/service/authSlice';
 import { user } from './service/userAPI';
 const store = configureStore({
   reducer: {
-    [exchangeRates.reducerPath]: exchangeRates.reducer,
     [user.reducerPath]: user.reducer,
     auth: authReducer,
+    [exchangeRates.reducerPath]: exchangeRates.reducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware(),

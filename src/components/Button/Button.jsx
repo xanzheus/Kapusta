@@ -15,9 +15,9 @@ import style from './Button.module.scss';
 //   );
 // };
 
-const Button = ({ name, type, onClick, disabled = false }) => (
+const Button = ({ name, type, onClick, disabled = false, children }) => (
   <button className={style.main__button} onClick={onClick} type={type} disabled={disabled}>
-    {name}
+    {children} {name}
   </button>
 );
 
