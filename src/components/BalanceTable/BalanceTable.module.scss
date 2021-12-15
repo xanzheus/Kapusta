@@ -23,37 +23,6 @@
   justify-content: space-between;
 }
 
-//Tabs
-.tabs {
-  background-color: #fafbfd;
-  border-radius: 20px 20px 0 0;
-  min-width: 140px;
-  min-height: 40px;
-  font-size: 12px;
-  line-height: 1.16px;
-  letter-spacing: 0.02em;
-  font-weight: 700;
-  color: $mainDark-color;
-
-  &:focus-within,
-  &:focus-visible {
-    color: $mainAccent-color;
-    background-color: #fefefe;
-  }
-}
-
-.tabs__list {
-  min-height: 0;
-}
-
-.tabs__thumb {
-  padding: 35px 20px 60px 20px;
-  background: $mainLight-color;
-
-  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
-  border-radius: 0px 30px 30px 30px;
-}
-
 // BalanceLine
 
 .balance__title {

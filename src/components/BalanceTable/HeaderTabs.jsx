@@ -7,7 +7,9 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/BalanceTable/BalanceTable';
 import Form from 'components/BalanceTable/Form';
 import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
-import style from './BalanceTable.module.scss';
+
+import { makeStyles } from '@material-ui/core';
+import COLORS from 'Constants/COLORSS';
 
 const IncomData = [
   {
@@ -97,8 +99,39 @@ const ExpensesReportData = [
   },
 ];
 
+const useStyles = makeStyles({
+  tabs: {
+    backgroundColor: '#fafbfd',
+    borderRadius: '20px 20px 0 0',
+    minWidth: '140px',
+    minHeight: '40px',
+    fontSize: '12px',
+    lineHeight: '1.16',
+    letterSpacing: '0.02em',
+    fontWeight: '700',
+    color: COLORS.mainDark,
+    '&.Mui-selected': {
+      color: COLORS.mainAccent,
+      backgroundColor: '#fefefe',
+    },
+  },
+
+  tabsline: {
+    minHeight: '0',
+  },
+
+  tabsThumb: {
+    padding: '35px 20px 60px 20px',
+    background: COLORS.mainLight,
+    boxShadow: '0px 10px 60px rgba(170, 178, 197, 0.2)',
+    borderRadius: '0px 30px 30px 30px',
+  },
+});
+
 const HeaderTabs = () => {
   const [value, setValue] = useState('1');
+
+  const classes = useStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -109,18 +142,17 @@ const HeaderTabs = () => {
       <TabContext value={value}>
         <Box>
           <TabList
-            className={style.tabs__list}
-            textColor="secondary"
-            indicatorColor="secondary"
+            className={classes.tabsline}
+            TabIndicatorProps={{ style: { display: 'none' } }}
             onChange={handleChange}
             aria-label="lab API tabs example"
           >
-            <Tab className={style.tabs} label="Расход" value="1" />
-            <Tab className={style.tabs} label="Доход" value="2" />
+            <Tab className={classes.tabs} label="Расход" value="1" />
+            <Tab className={classes.tabs} label="Доход" value="2" />
           </TabList>
         </Box>
 
-        <TabPanel className={style.tabs__thumb} value="1">
+        <TabPanel className={classes.tabsThumb} value="1">
           <Form
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
@@ -132,7 +164,7 @@ const HeaderTabs = () => {
           />
         </TabPanel>
 
-        <TabPanel className={style.tabs__thumb} value="2">
+        <TabPanel className={classes.tabsThumb} value="2">
           <Form
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
