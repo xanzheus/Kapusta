@@ -79,7 +79,7 @@ const ProfilePage = () => {
               </Link>
 
               <div className={style.avatar__wrapper}>
-                <IconAvatar src={avatar} width={300} height={300} />
+                {/* <IconAvatar src={avatar} width={300} height={300} />
                 <form
                   autoComplete="off"
                   className={style.addFile__form}
@@ -115,14 +115,14 @@ const ProfilePage = () => {
                       titleAccess="add Photo"
                     ></AddPhotoAlternateIcon>
                   </label>
-                </form>
+                </form> */}
               </div>
               <div className={style.profile__info}>
                 <h2 className={style.profile__name}>{`${firstName} ${lastName}`}</h2>{' '}
                 <h3 className={style.profile__email}>{email}</h3>
               </div>
             </div>
-            <div>
+            {/* <div>
               <h1 className={style.profile__text}>Profile Settings</h1>{' '}
               <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
                 <TextField
@@ -247,7 +247,7 @@ const ProfilePage = () => {
                   Save
                 </Button>
               </form>
-            </div>
+            </div> */}
           </div>
         </Container>
       </section>
