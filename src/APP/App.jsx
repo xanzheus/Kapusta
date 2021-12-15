@@ -19,6 +19,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppBar />
+      {/*нужно добавить условие, если не залогинен, то рендерить auth*/}
       <div className={style.backgroundWrapperAuth}>
         <Routes>
           <Route path="/" element={<Registration />} />
