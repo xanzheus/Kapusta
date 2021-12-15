@@ -17,10 +17,12 @@
   cursor: pointer;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-visible {
     background-color: $mainAccent-color;
     color: $mainLight-color;
     border: none;
+    outline-color: transparent;
   }
 
   &:disabled {

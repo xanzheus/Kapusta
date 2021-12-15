@@ -5,12 +5,10 @@ const theme = createTheme({
   palette: {
     primary: {
       main: COLORS.primary,
-      light: COLORS.secondory,
     },
 
     secondary: {
       main: COLORS.mainAccent,
-      light: COLORS.secondaryAccent,
     },
   },
 });
