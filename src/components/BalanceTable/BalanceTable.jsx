@@ -59,6 +59,7 @@ const BalanceTable = ({ data, reportData, category }) => {
           <DataGrid
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[5, 20, 100]}
+            pageSize={5}
             rows={rows}
             columns={columns}
             components={{

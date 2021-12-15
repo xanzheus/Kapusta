@@ -1,3 +1,10 @@
+@import 'styles/shared.scss';
+
 .balanceSection {
-  padding: 50px 300px;
+  max-width: $desktop;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 0 80px 0;
+  // background-image: url('../../images/background.png');
+  // background-repeat: no-repeat;
 }

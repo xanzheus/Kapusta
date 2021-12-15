@@ -1,20 +1,22 @@
 @import 'styles/shared.scss';
 
 .header {
-  min-width: 100%;
+  max-width: $desktop;
+  margin-left: auto;
+  margin-right: auto;
   min-height: 56px;
-  padding: 0 20px 0 19px;
+  padding: 0 20px;
   background-color: $mainLight-color;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   @media screen and (min-width: $tablet) {
-    padding: 0 24px 0 26px;
+    padding: 0 25px;
   }
 
   @media screen and (min-width: $desktop) {
-    padding: 0 44px 0 26px;
+    padding: 0 45px 0 25px;
   }
 }
 

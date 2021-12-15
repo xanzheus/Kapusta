@@ -35,7 +35,7 @@ const balancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       minWidth: 150,
       editable: true,
       headerAlign: 'center',
-      type: 'number',
+      // type: 'number',
     },
     {
       field: 'delete',
