@@ -5,18 +5,64 @@ import ReportTable from 'components/BalanceTable/ReportTable';
 import balancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
 import style from './BalanceTable.module.scss';
+import { makeStyles } from '@material-ui/core';
+import COLORS from 'Constants/COLORSS';
 
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer className={gridClasses.toolbarContainer}>
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-}
+const useStyles = makeStyles({
+  balancetable: {
+    height: '400px',
+    minWidth: '760px',
+
+    '& .css-1i9y1n9-MuiDataGrid-root': {
+      borderRadius: '20px 20px 0px 0px',
+    },
+
+    '& .MuiDataGrid-columnHeaders.css-okt5j6-MuiDataGrid-columnHeaders': {
+      borderRadius: '20px 20px 0px 0px',
+    },
+
+    '& .MuiDataGrid-columnHeaderTitle': {
+      fontSize: '12px',
+      lineHeight: '1.16',
+      fontWeight: '700',
+      letterSpacing: '0.02em',
+      color: COLORS.mainBlack,
+    },
+
+    '& .MuiDataGrid-columnSeparator': {
+      color: '#F5F6FB',
+    },
+
+    '& .MuiDataGrid-columnHeaders': {
+      backgroundColor: '#F5F6FB',
+    },
+
+    '& .MuiDataGrid-row': {
+      color: COLORS.primary,
+      fontSize: '12px',
+      lineHeight: '1.16',
+    },
+
+    // '& .MuiTableRow-root': {
+    //   color: 'red',
+    //   backgroundColor: 'red',
+    // },
+  },
+});
+
+// function CustomToolbar() {
+//   return (
+//     <GridToolbarContainer className={gridClasses.toolbarContainer}>
+//       <GridToolbarExport />
+//     </GridToolbarContainer>
+//   );
+// }
 
 const BalanceTable = ({ data, reportData, category }) => {
   const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
+
+  const classes = useStyles();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -55,16 +101,18 @@ const BalanceTable = ({ data, reportData, category }) => {
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
       <div className={style.tables__thumb}>
-        <div className={style.balancetable__thumb}>
+        <div className={classes.balancetable}>
           <DataGrid
+            headerHeight={40}
+            rowHeight={40}
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[5, 20, 100]}
-            pageSize={5}
+            pageSize={9}
             rows={rows}
             columns={columns}
-            components={{
-              Toolbar: CustomToolbar,
-            }}
+            // components={{
+            //   Toolbar: CustomToolbar,
+            // }}
           />
         </div>
         <ReportTable data={reportData} />

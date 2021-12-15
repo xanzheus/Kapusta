@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   form: {
     display: 'flex',
     alignItems: 'flex-start',
-    marginBottom: '20px',
+    marginBottom: '60px',
   },
 
   field: {
@@ -102,7 +102,6 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
-  const [commentError, setCommentError] = useState(false);
   const [amountError, setAmountError] = useState(false);
 
   const classes = useStyles();
@@ -112,7 +111,6 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
     setComment('');
     setAmount('');
     setCategoryError(false);
-    setCommentError(false);
     setAmountError(false);
   };
 
@@ -125,7 +123,7 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
   const onSubmit = event => {
     event.preventDefault();
 
-    if (category && comment && amount) {
+    if (category && amount) {
       const dateResponse = {
         date,
         category,
@@ -139,10 +137,6 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
 
     if (category === '') {
       setCategoryError(true);
-    }
-
-    if (comment === '') {
-      setCommentError(true);
     }
 
     if (amount === '') {
@@ -182,8 +176,6 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
         value={comment}
         type="text"
         name="description"
-        error={commentError}
-        required
       />
 
       <Box className={[classes.field, classes.category].join(' ')}>
