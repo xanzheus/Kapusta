@@ -1,19 +1,27 @@
+@import 'styles/shared.scss';
+
 .profile {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .profile__wrapper {
-  display: flex;
+  // display: flex;
 }
 
 .profile__sidebar {
-  margin-right: 80px;
-  width: 360px;
+  position: relative;
+  margin-bottom: 30px;
+  // margin-right: 80px;
+  // width: 360px;
 }
 
-.profile__buttonBack {
-  margin-bottom: 60px;
+.buttonBack svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  // margin-bottom: 60px;
+  fill: $mainAccent-color;
 }
 
 .avatar__wrapper {
@@ -43,7 +51,7 @@
   font-size: 50px;
 
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 8px;
 }
 
 .profile__buttonEdit {
@@ -54,9 +62,9 @@
 
 .profile__email {
   text-transform: uppercase;
-  margin-bottom: 60px;
+  // margin-bottom: 60px;
   text-align: center;
-  font-size: 24px;
+  font-size: 14px;
   color: rgb(138, 138, 138);
 }
 
@@ -64,11 +72,11 @@
   // display: inline-block;
   text-transform: uppercase;
   text-align: right;
-  font-size: 50px;
-  color: rgb(0, 0, 0);
-  margin-bottom: 50px;
+  font-size: 14px;
+  color: $auxiliaryDark-color;
+  margin-bottom: 8px;
 }
 
-div.tableData__field {
-  margin-bottom: 20px;
+.button__submit {
+  width: 100px;
 }

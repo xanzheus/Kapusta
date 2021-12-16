@@ -5,9 +5,16 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuItem from '@mui/material/MenuItem';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+// import Button from '@mui/material/Button';
+import Button from 'components/Button';
+import { makeStyles } from '@mui/styles';
+import { useMediaPredicate } from 'react-media-hook';
 import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
-import { LANGUAGE, CURRENCY, THEME } from '../../Constants';
+import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
 
 import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
@@ -16,14 +23,18 @@ import style from './ProfilePage.module.scss';
 const ProfilePage = () => {
   const location = useLocation();
   const [locationFrom, setLocationFrom] = useState(location?.state?.from ?? '/');
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
+  ////////////test////////////////////////////
   const user = {
     email: 'john.doe@gmail.com',
     fullName: {
       firstName: 'Nikolay',
       lastName: 'Mosalov',
     },
-    avatar: 'https://live.staticflickr.com/65535/51355167828_34e6d20320_n.jpg',
+    avatar: 'https://www.belanta.vet/vet-blog/wp-content/uploads/2019/09/5-4.jpg',
     settings: {
       language: 'en',
       theme: 'light',
@@ -37,6 +48,37 @@ const ProfilePage = () => {
     avatar,
     settings: { language, theme, currency },
   } = user;
+  /////////===========///////////////
+
+  const biggerTablet = useMediaPredicate('(min-width: 768px)');
+
+  const useStyles = makeStyles({
+    field: {
+      '& .MuiInputLabel-root': {
+        fontSize: 14,
+        color: COLORS.auxiliaryDark,
+      },
+
+      '& .MuiTypography-root': {
+        fontSize: '14px',
+      },
+
+      '& .MuiOutlinedInput-root': {
+        marginBottom: 20,
+        borderRadius: 30,
+        backgroundColor: `${COLORS.auxiliaryLight}`,
+        width: 253,
+        '& fieldset': {
+          width: 265,
+          height: 55,
+          border: 'none',
+        },
+      },
+    },
+  });
+
+  // useCustomStyle
+  const classes = useStyles();
 
   const formik = useFormik({
     initialValues: {
@@ -73,13 +115,12 @@ const ProfilePage = () => {
         <Container>
           <div className={style.profile__wrapper}>
             <div className={style.profile__sidebar}>
-              {/* <button className={style.profile__buttonBack}>Back</button> */}
-              <Link className={style.button} type="button" to={locationFrom}>
+              <Link className={style.buttonBack} type="button" to={locationFrom}>
                 <ArrowBackIcon />
               </Link>
 
               <div className={style.avatar__wrapper}>
-                {/* <IconAvatar src={avatar} width={300} height={300} />
+                <IconAvatar src={avatar} width={240} height={240} />
                 <form
                   autoComplete="off"
                   className={style.addFile__form}
@@ -115,49 +156,74 @@ const ProfilePage = () => {
                       titleAccess="add Photo"
                     ></AddPhotoAlternateIcon>
                   </label>
-                </form> */}
+                </form>
               </div>
+
               <div className={style.profile__info}>
                 <h2 className={style.profile__name}>{`${firstName} ${lastName}`}</h2>{' '}
                 <h3 className={style.profile__email}>{email}</h3>
               </div>
             </div>
-            {/* <div>
-              <h1 className={style.profile__text}>Profile Settings</h1>{' '}
+            <div>
+              <h1 className={style.profile__text}>Настройки пользователя</h1>{' '}
               <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  // className={style.tableData__field}
+                  className={classes.field}
                   id="password"
                   name="password"
-                  label=" New password"
-                  type="password"
+                  label="Новый пароль"
+                  type={showPassword ? 'text' : 'password'}
                   value={formik.values.password}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.password && Boolean(formik.errors.password)}
                   helperText={formik.touched.password && formik.errors.password}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
 
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  className={classes.field}
                   id="confirmPassword"
                   name="confirmPassword"
-                  label="Confirm  new password"
-                  type="password"
+                  label="Подтвердите новый пароль"
+                  type={showPassword ? 'text' : 'password'}
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                   helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  className={classes.field}
                   id="firstName"
                   name="firstName"
-                  label="First Name"
+                  label="Имя"
                   value={formik.values.firstName}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -165,11 +231,10 @@ const ProfilePage = () => {
                   helperText={formik.touched.firstName && formik.errors.firstName}
                 />
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  className={classes.field}
                   id="lastName"
                   name="lastName"
-                  label="Last Name"
+                  label="Фамилия"
                   value={formik.values.lastName}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -178,11 +243,11 @@ const ProfilePage = () => {
                 />
 
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  // className={style.tableData__field}
+                  className={classes.field}
                   id="language"
                   name="language"
-                  label="Language"
+                  label="Язык"
                   select
                   value={formik.values.language}
                   onBlur={formik.handleBlur}
@@ -198,12 +263,11 @@ const ProfilePage = () => {
                 </TextField>
 
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  className={classes.field}
                   select
                   id="currency"
                   name="currency"
-                  label="Currency"
+                  label="Валюта"
                   value={formik.values.currency}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -218,12 +282,11 @@ const ProfilePage = () => {
                 </TextField>
 
                 <TextField
-                  fullWidth
-                  className={style.tableData__field}
+                  className={classes.field}
                   select
                   id="theme"
                   name="theme"
-                  label="Theme"
+                  label="Тема"
                   value={formik.values.theme}
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
@@ -237,17 +300,9 @@ const ProfilePage = () => {
                   ))}
                 </TextField>
 
-                <Button
-                  disabled={!formik.dirty}
-                  color="primary"
-                  variant="contained"
-                  fullWidth
-                  type="submit"
-                >
-                  Save
-                </Button>
+                <Button name="Сохранить" type="submit" variant="center" />
               </form>
-            </div> */}
+            </div>
           </div>
         </Container>
       </section>

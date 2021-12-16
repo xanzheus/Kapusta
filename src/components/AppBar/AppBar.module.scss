@@ -1,12 +1,11 @@
 @import 'styles/shared.scss';
 
 .header {
-  max-width: $desktop;
-  margin-left: auto;
-  margin-right: auto;
   min-height: 56px;
-  padding: 0 20px;
   background-color: $mainLight-color;
+}
+
+.header__wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
