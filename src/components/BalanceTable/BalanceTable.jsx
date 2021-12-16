@@ -62,6 +62,26 @@ const useStyles = makeStyles({
       justifyContent: 'center',
     },
 
+    '& .css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
+      color: COLORS.primary,
+      fontSize: '12px',
+      lineHeight: '1.16',
+    },
+
+    '& .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input':
+      {
+        color: COLORS.mainDark,
+        fontSize: '12px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: '0',
+      },
+
+    '& .css-levciy-MuiTablePagination-displayedRows': {
+      fontSize: '12px',
+    },
+
     // '& .MuiButton-root': {
     //   position: 'absolute',
     //   left: '10px',

@@ -130,12 +130,18 @@ const ExpensesReportData = [
   {
     id: 2322,
     month: 'Январь',
-    totalsum: -20000,
+    totalsum: 20000,
   },
   {
     id: 23434,
     month: 'Февраль',
-    totalsum: -25000,
+    totalsum: 25000,
+  },
+
+  {
+    id: 2343444,
+    month: 'Март',
+    totalsum: 2000,
   },
 ];
 

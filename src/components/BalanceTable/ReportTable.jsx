@@ -38,6 +38,11 @@ const useStyles = makeStyles({
     background: COLORS.auxiliaryLight,
     padding: '0px 35px',
     minHeight: '40px',
+    fontSize: '12px',
+    fontWeight: '400',
+    lineHeight: '1.16',
+    color: COLORS.primary,
+    letterSpacing: '0.04em',
     '&:not(:last-child)': {
       marginBottom: '2px',
     },
