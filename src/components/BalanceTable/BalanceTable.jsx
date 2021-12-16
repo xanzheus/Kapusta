@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
 import { DataGrid, GridToolbarContainer, GridToolbarExport, gridClasses } from '@mui/x-data-grid';
-import ReportTable from 'components/BalanceTable/ReportTable';
-import balancePageColumns from 'utils/balancePageColumns';
-import InformationEditModal from 'components/Modal/InformationEditModal';
-import style from './BalanceTable.module.scss';
+import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORSS';
+import { Box } from '@mui/system';
+import ReportTable from 'components/BalanceTable/ReportTable';
+import BalancePageColumns from 'utils/balancePageColumns';
+import InformationEditModal from 'components/Modal/InformationEditModal';
 
 const useStyles = makeStyles({
   balancetable: {
@@ -41,11 +42,35 @@ const useStyles = makeStyles({
       color: COLORS.primary,
       fontSize: '12px',
       lineHeight: '1.16',
+      cursor: 'cell',
+      '&:hover': {
+        backgroundColor: '#F5F6FB',
+      },
     },
 
-    // '& .MuiTableRow-root': {
-    //   color: 'red',
-    //   backgroundColor: 'red',
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textCenter.MuiDataGrid-cell--withRenderer':
+      {
+        justifyContent: 'start',
+      },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
+      backgroundColor: '#F5F6FB',
+    },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
+      display: 'flex',
+      justifyContent: 'center',
+    },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+    },
+
+    // '& .MuiButton-root': {
+    //   position: 'absolute',
+    //   left: '10px',
+    //   bottom: '10px',
+    //   color: 'green',
     // },
   },
 });
@@ -95,28 +120,28 @@ const BalanceTable = ({ data, reportData, category }) => {
     return;
   };
 
-  const columns = balancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
+  const columns = BalancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
 
   return (
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
-      <div className={style.tables__thumb}>
-        <div className={classes.balancetable}>
+      <Box display="flex" alignItems="center" justifyContent="space-between">
+        <Stack className={classes.balancetable}>
           <DataGrid
             headerHeight={40}
-            rowHeight={40}
+            rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[5, 20, 100]}
-            pageSize={9}
+            pageSize={20}
             rows={rows}
             columns={columns}
             // components={{
             //   Toolbar: CustomToolbar,
             // }}
           />
-        </div>
+        </Stack>
         <ReportTable data={reportData} />
-      </div>
+      </Box>
     </>
   );
 };

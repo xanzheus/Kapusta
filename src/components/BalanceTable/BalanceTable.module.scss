@@ -1,11 +1,17 @@
 @import 'styles/shared.scss';
 //ReportTable
 .report__thumb {
+  min-width: 230px;
   margin-bottom: auto;
   border-radius: 10px;
   padding: 20px;
   background-color: rgb(250, 248, 248);
-  margin-left: 80px;
+
+  background: #f5f6fb;
+  border: 2px solid #ffffff;
+  border-radius: 20px 20px 20px 0px;
+  text-align: center;
+  height: 350px;
 }
 
 .report__title {
@@ -106,21 +112,6 @@
 }
 
 // BalanceTable
-.tables__thumb {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-// .balancetable__thumb {
-//   height: 400px;
-//   min-width: 760px;
-
-//   border-radius: 20px 20px 0px 0px;
-
-//   background-color: red;
-// }
 
 .button__delete {
   width: 100%;

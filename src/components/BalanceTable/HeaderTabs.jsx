@@ -71,6 +71,34 @@ const expensesData = [
     category: 'Продукты',
     sum: -100,
   },
+  {
+    id: 207,
+    date: '22.01.2021',
+    description: 'вода',
+    category: 'Продукты',
+    sum: -100,
+  },
+  {
+    id: 208,
+    date: '22.01.2021',
+    description: 'вода',
+    category: 'Продукты',
+    sum: -100,
+  },
+  {
+    id: 209,
+    date: '22.01.2021',
+    description: 'вода',
+    category: 'Продукты',
+    sum: -100,
+  },
+  {
+    id: 210,
+    date: '22.01.2021',
+    description: 'вода',
+    category: 'Продукты',
+    sum: -100,
+  },
 ];
 
 const IncomReportData = [
