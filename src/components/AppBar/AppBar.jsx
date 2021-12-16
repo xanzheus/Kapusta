@@ -10,7 +10,7 @@ const AppBar = () => {
     <>
       <header className={style.header}>
         <Container>
-          <div className={style.heder__wrapper}>
+          <div className={style.header__wrapper}>
             <div className={style.logo}></div>
             {location.pathname === '/balance' || ('/profile' && <UserMenu />)}
           </div>

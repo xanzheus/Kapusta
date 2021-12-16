@@ -1,11 +1,11 @@
 @import 'styles/shared.scss';
 
-.heder__wrapper {
+.header {
   min-height: 56px;
   background-color: $mainLight-color;
 }
 
-.heder__wrapper {
+.header__wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
