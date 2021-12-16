@@ -63,7 +63,7 @@ const Categories = ({ updateData, setActiveCalss }) => {
       </div>
 
       {value === 'РАСХОДЫ' && (
-        <div className="income">
+        <div className={s.income}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
               {categories.map(item => {
@@ -95,7 +95,7 @@ const Categories = ({ updateData, setActiveCalss }) => {
       )}
 
       {value === 'ДОХОДЫ' && (
-        <div className="costs">
+        <div className={s.costs}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
               {categoriesIncome.map(item => {

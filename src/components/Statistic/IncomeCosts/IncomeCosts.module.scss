@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #e0e5eb;
-  background-color: #ffffff;
+  background-color: $mainLight-color;
   box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
   border-radius: 20px;
   font-style: normal;
@@ -54,7 +54,7 @@
 }
 
 .incomeCosts__title {
-  color: #52555f;
+  color: $primary-color;
   @media screen and (min-width: $tablet) {
     margin-right: 15px;
   }
@@ -67,5 +67,5 @@
 
 .incomeCosts__income {
   letter-spacing: 0.04em;
-  color: #407946;
+  color: $pozitive-color;
 }

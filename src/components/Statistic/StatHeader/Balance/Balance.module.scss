@@ -2,7 +2,7 @@
 
 .balance {
   text-align: center;
-  font-family: Roboto;
+  font-family: $primary-font-stack;
   font-style: normal;
   order: 1;
   @media screen and (min-width: $tablet) {
@@ -35,7 +35,7 @@
   width: 183px;
   height: 44px;
   margin: 0 auto;
-  border: 1px solid #ffffff;
+  border: 1px solid $mainLight-color;
   border-radius: 22px;
   @media screen and (min-width: $tablet) {
     width: 125px;
@@ -49,7 +49,7 @@
   line-height: 1.16;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #000000;
+  color: $mainDark-color;
 }
 
 .balance__confirmButton {
@@ -62,7 +62,7 @@
     color: rgba(82, 85, 95, 0.7);
     padding: 12px 6px;
     margin: 0 auto;
-    border: 1px solid #ffffff;
+    border: 1px solid $mainLight-color;
     border-radius: 22px;
     width: 183px;
     height: 44px;

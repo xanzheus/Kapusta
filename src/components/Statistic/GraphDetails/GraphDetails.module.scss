@@ -1,6 +1,4 @@
 @import 'styles/shared.scss';
-// .graphDetails {
-// }
 
 .diagram {
   @media screen and (min-width: $tablet) {
@@ -12,7 +10,7 @@
     padding-bottom: 19px;
     padding-right: 29px;
 
-    background: #ffffff;
+    background: $mainLight-color;
     box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
     border-radius: 30px;
   }
