@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Stack from '@mui/material/Stack';
@@ -125,7 +126,7 @@ const BalanceForm = ({ placeholder, categoryArray, type }) => {
 
     if (category && amount) {
       const dateResponse = {
-        date,
+        date: format(date, 'dd-MM-yyyy'),
         category,
         comment,
         amount: Number(amount),
