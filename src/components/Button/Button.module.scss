@@ -20,6 +20,7 @@
   &:focus {
     background-color: $mainAccent-color;
     color: $mainLight-color;
+    box-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
     border: none;
   }
 
@@ -38,4 +39,13 @@
   border: 2px solid $mainLight-color;
   color: $secondory-color;
   font-weight: 400;
+}
+
+.center {
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  text-transform: uppercase;
+  background-color: $auxiliaryLight-color;
+  box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
 }

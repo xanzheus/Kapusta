@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router';
 import UserMenu from 'components/UserMenu';
+import Container from 'components/Container';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
@@ -8,9 +9,12 @@ const AppBar = () => {
   return (
     <>
       <header className={style.header}>
-        <div className={style.logo}></div>
-
-        {location.pathname === '/balance' && <UserMenu />}
+        <Container>
+          <div className={style.heder__wrapper}>
+            <div className={style.logo}></div>
+            {location.pathname === '/balance' || ('/profile' && <UserMenu />)}
+          </div>
+        </Container>
       </header>
     </>
   );
