@@ -1,33 +1,4 @@
 @import 'styles/shared.scss';
-//ReportTable
-.report__thumb {
-  min-width: 230px;
-  margin-bottom: auto;
-  border-radius: 10px;
-  padding: 20px;
-  background-color: rgb(250, 248, 248);
-
-  background: #f5f6fb;
-  border: 2px solid #ffffff;
-  border-radius: 20px 20px 20px 0px;
-  text-align: center;
-  height: 350px;
-}
-
-.report__title {
-  margin-top: 0;
-}
-
-.report__list {
-  padding-left: 0;
-  list-style: none;
-}
-
-.report__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 // BalanceLine
 
@@ -109,21 +80,4 @@
     height: 24px;
     margin-left: 15px;
   }
-}
-
-// BalanceTable
-
-.button__delete {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  color: inherit;
-  cursor: pointer;
-}
-
-.button__edit,
-.button__save {
-  color: rgb(151, 148, 148);
-  cursor: pointer;
 }

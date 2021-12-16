@@ -35,7 +35,7 @@ const expensesData = [
     id: 200,
     date: '20.01.2021',
     comment: 'ТО',
-    category: 'Авто',
+    category: 'Продукты',
     amount: -3500,
     type: 'expense',
   },
