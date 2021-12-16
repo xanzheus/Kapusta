@@ -2,14 +2,13 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
+import { makeStyles } from '@material-ui/core';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/BalanceTable/BalanceTable';
 import Form from 'components/BalanceTable/BalanceForm';
-import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
-
-import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORSS';
+import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
 
 const IncomData = [
   {
