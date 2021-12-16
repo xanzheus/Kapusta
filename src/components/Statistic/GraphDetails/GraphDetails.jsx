@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import drilldown from 'highcharts/modules/drilldown';
 import Categories from './Categories';
+import s from './GraphDetails.module.scss';
 
-import s from './GraphDetails.module.css';
+const costDetails = [
+  { name: 'meat', id: 1, y: 652 },
+  { name: 'fish', id: 2, y: 420 },
+  { name: 'apple', id: 3, y: 52 },
+  { name: 'pineapple', id: 4, y: 8 },
+  { name: 'mango', id: 5, y: 45 },
+  { name: 'kivi', id: 6, y: 555 },
+];
 
-drilldown(Highcharts);
-//comment
-//comment test
-//РАСХОДЫ - ТЕСТ
-const optionsCosts = {
+const options = {
   chart: {
     type: 'column',
   },
 
   title: {
-    text: 'Расходы',
+    text: '',
+    // text: 'Расходы',
   },
   xAxis: {
     type: 'category',
@@ -25,139 +29,30 @@ const optionsCosts = {
     enabled: false,
   },
 
-  series: [
-    {
-      name: 'Категории',
-      colorByPoint: true,
-      data: [
-        {
-          name: 'ЗДОРОВЬЕ',
-          y: 5,
-          drilldown: 'health',
-        },
-        {
-          name: 'ПРОДУКТЫ',
-          y: 2,
-          drilldown: 'meals',
-        },
-        {
-          name: 'РАЗВЛЕЧЕНИЯ',
-          y: 4,
-          drilldown: 'entertainment',
-        },
-      ],
-    },
-  ],
-  drilldown: {
-    series: [
-      {
-        id: 'health',
-        data: [
-          ['Витамины', 400],
-          ['Лекарства', 200],
-          ['Массаж', 1000],
-          ['Врачи', 2000],
-        ],
-      },
-      {
-        id: 'meals',
-        data: [
-          ['Apples', 40],
-          ['Oranges', 20],
-          ['Meat', 200],
-          ['Fish', 150],
-          ['Vegeatables', 2000],
-        ],
-      },
-      {
-        id: 'entertainment',
-        data: [
-          ['Баня', 4],
-          ['Девки', 2],
-          ['Компот', 2],
-        ],
-      },
-    ],
-  },
-};
-
-//ДОХОДЫ ТЕСТ
-const optionsIncome = {
-  chart: {
-    type: 'column',
-  },
-
-  title: {
-    text: 'Доходы',
-  },
-  xAxis: {
-    type: 'category',
-  },
-  legend: {
-    enabled: false,
-  },
+  responsive: {},
 
   series: [
     {
       name: 'Категории',
       colorByPoint: true,
-      data: [
-        {
-          name: 'ЗП',
-          y: 5,
-          drilldown: 'salary',
-        },
-        {
-          name: 'ДЕПОЗИТЫ',
-          y: 2,
-          drilldown: 'deposits',
-        },
-        {
-          name: 'ПРОЧИЕ ДОХОДЫ',
-          y: 4,
-          drilldown: 'other',
-        },
-      ],
+      data: costDetails,
     },
   ],
-  drilldown: {
-    series: [
-      {
-        id: 'salary',
-        data: [
-          ['МУЖ', 500000],
-          ['ЖЕНА', 20000],
-          ['ДЕТИ', 1000],
-        ],
-      },
-      {
-        id: 'deposits',
-        data: [
-          ['PrivatBank', 400000],
-          ['AlfaBank', 200000],
-          ['OTPBank', 20000000],
-        ],
-      },
-      {
-        id: 'other',
-        data: [
-          ['Украдено', 10000],
-          ['Найдено', 200000],
-          ['Подарки', 2000],
-        ],
-      },
-    ],
-  },
 };
 
 const GraphDetails = () => {
-  const [radioButton, setRadioButton] = useState(false);
+  const [resultValue, setResultValue] = useState('РАСХОДЫ');
+  const [isActive, setisActive] = useState(false);
 
   return (
     <div className={s.graphDetails}>
-      <Categories updateData={setRadioButton} />
-      {radioButton === false && <HighchartsReact highcharts={Highcharts} options={optionsCosts} />}
-      {radioButton === true && <HighchartsReact highcharts={Highcharts} options={optionsIncome} />}
+      <Categories updateData={setResultValue} setActiveCalss={setisActive} />
+
+      <div className={isActive === false ? s.diagramLarge : s.diagram}>
+        {isActive === false && <h2 className={s.diagram_emptyTitle}>Выберите категорию</h2>}
+        {isActive === true && <HighchartsReact highcharts={Highcharts} options={options} />}
+      </div>
+      <div></div>
     </div>
   );
 };

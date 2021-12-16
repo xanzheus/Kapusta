@@ -1,5 +1,5 @@
 //perod current month
-// export { default } from './Period';
+export { default } from './Period';
 
 // period from - to
-export { default } from './PeriodRange';
+// export { default } from './PeriodRange';
