@@ -48,7 +48,7 @@ const GraphDetails = () => {
     <div className={s.graphDetails}>
       <Categories updateData={setResultValue} setActiveCalss={setisActive} />
 
-      <div className={s.diagram}>
+      <div className={isActive === false ? s.diagramLarge : s.diagram}>
         {isActive === false && <h2 className={s.diagram_emptyTitle}>Выберите категорию</h2>}
         {isActive === true && <HighchartsReact highcharts={Highcharts} options={options} />}
       </div>
