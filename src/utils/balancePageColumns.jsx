@@ -44,7 +44,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       headerAlign: 'center',
     },
     {
-      field: 'description',
+      field: 'comment',
       headerName: 'Описание',
       minWidth: 200,
       editable: true,
@@ -60,7 +60,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       valueOptions: category,
     },
     {
-      field: 'sum',
+      field: 'amount',
       headerName: 'Сумма',
       minWidth: 50,
       editable: true,

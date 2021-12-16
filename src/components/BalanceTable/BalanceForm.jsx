@@ -96,7 +96,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BalanceForm = ({ placeholder, categoryArray }) => {
+const BalanceForm = ({ placeholder, categoryArray, type }) => {
   const [date, setDate] = useState(() => new Date());
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
@@ -129,6 +129,7 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
         category,
         comment,
         amount: Number(amount),
+        type,
       };
       console.log(dateResponse);
       console.log('Submit Form');
@@ -223,6 +224,7 @@ const BalanceForm = ({ placeholder, categoryArray }) => {
 BalanceForm.propTypes = {
   placeholder: PropTypes.array.isRequired,
   categoryArray: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default BalanceForm;

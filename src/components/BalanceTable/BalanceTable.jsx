@@ -11,7 +11,7 @@ import InformationEditModal from 'components/Modal/InformationEditModal';
 
 const useStyles = makeStyles({
   balancetable: {
-    height: '400px',
+    height: '385px',
     minWidth: '760px',
 
     '& .css-1i9y1n9-MuiDataGrid-root': {
@@ -31,11 +31,11 @@ const useStyles = makeStyles({
     },
 
     '& .MuiDataGrid-columnSeparator': {
-      color: '#F5F6FB',
+      color: COLORS.auxiliaryLight,
     },
 
     '& .MuiDataGrid-columnHeaders': {
-      backgroundColor: '#F5F6FB',
+      backgroundColor: COLORS.auxiliaryLight,
     },
 
     '& .MuiDataGrid-row': {
@@ -44,7 +44,7 @@ const useStyles = makeStyles({
       lineHeight: '1.16',
       cursor: 'cell',
       '&:hover': {
-        backgroundColor: '#F5F6FB',
+        backgroundColor: COLORS.auxiliaryLight,
       },
     },
 
@@ -54,7 +54,7 @@ const useStyles = makeStyles({
       },
 
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
-      backgroundColor: '#F5F6FB',
+      backgroundColor: COLORS.auxiliaryLight,
     },
 
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
@@ -73,7 +73,7 @@ const useStyles = makeStyles({
   income: {
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
-      color: 'green',
+      color: COLORS.positive,
       fontWeight: '900',
     },
   },
@@ -144,7 +144,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[5, 20, 100]}
-            pageSize={20}
+            // pageSize={20}
             rows={rows}
             columns={columns}
             // components={{
@@ -162,6 +162,7 @@ BalanceTable.propTypes = {
   data: PropTypes.array.isRequired,
   reportData: PropTypes.array.isRequired,
   category: PropTypes.array.isRequired,
+  Class: PropTypes.string.isRequired,
 };
 
 export default BalanceTable;

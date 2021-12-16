@@ -15,16 +15,18 @@ const IncomData = [
   {
     id: 111,
     date: '15.11.2021',
-    description: 'зарплата',
+    comment: 'зарплата',
     category: 'ЗП',
-    sum: 30000,
+    amount: 30000,
+    type: 'income',
   },
   {
     id: 2,
     date: '01.11.2021',
-    description: 'аванс',
+    comment: 'аванс',
     category: 'ЗП',
-    sum: 15000,
+    amount: 15000,
+    type: 'income',
   },
 ];
 
@@ -32,72 +34,82 @@ const expensesData = [
   {
     id: 200,
     date: '20.01.2021',
-    description: 'ТО',
+    comment: 'ТО',
     category: 'Авто',
-    sum: -3500,
+    amount: -3500,
+    type: 'expense',
   },
   {
     id: 202,
     date: '22.01.2021',
-    description: 'мясо',
+    comment: 'мясо',
     category: 'Продукты',
-    sum: -200,
+    amount: -200,
+    type: 'expense',
   },
   {
     id: 203,
     date: '22.01.2021',
-    description: 'курица',
+    comment: 'курица',
     category: 'Продукты',
-    sum: -200,
+    amount: -200,
+    type: 'expense',
   },
   {
     id: 204,
     date: '22.01.2021',
-    description: 'олия',
+    comment: 'олия',
     category: 'Продукты',
-    sum: -64,
+    amount: -64,
+    type: 'expense',
   },
   {
     id: 205,
     date: '22.01.2021',
-    description: 'овощи',
+    comment: 'овощи',
     category: 'Продукты',
-    sum: -200,
+    amount: -200,
+    type: 'expense',
   },
   {
     id: 206,
     date: '22.01.2021',
-    description: 'вода',
+    comment: 'вода',
     category: 'Продукты',
-    sum: -100,
+    amount: -100,
+    type: 'expense',
   },
   {
     id: 207,
     date: '22.01.2021',
-    description: 'вода',
+    comment: 'вода',
     category: 'Продукты',
-    sum: -100,
+    amount: -100,
+    type: 'expense',
   },
   {
     id: 208,
     date: '22.01.2021',
-    description: 'вода',
+    comment: 'вода',
     category: 'Продукты',
-    sum: -100,
+    amount: -100,
+    type: 'expense',
   },
   {
     id: 209,
     date: '22.01.2021',
-    description: 'вода',
+    comment: 'вода',
     category: 'Продукты',
-    sum: -100,
+    amount: -100,
+    type: 'expense',
   },
   {
     id: 210,
     date: '22.01.2021',
-    description: 'вода',
+    comment: 'вода',
     category: 'Продукты',
-    sum: -100,
+    amount: -100,
+    type: 'expense',
   },
 ];
 
@@ -182,6 +194,7 @@ const HeaderTabs = () => {
 
         <TabPanel className={classes.tabsThumb} value="1">
           <Form
+            type="expense"
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
@@ -195,6 +208,7 @@ const HeaderTabs = () => {
 
         <TabPanel className={classes.tabsThumb} value="2">
           <Form
+            type="income"
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
