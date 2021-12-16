@@ -62,16 +62,28 @@ const useStyles = makeStyles({
       justifyContent: 'center',
     },
 
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
-      textAlign: 'center',
-    },
-
     // '& .MuiButton-root': {
     //   position: 'absolute',
     //   left: '10px',
     //   bottom: '10px',
     //   color: 'green',
     // },
+  },
+
+  income: {
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+      color: 'green',
+      fontWeight: '900',
+    },
+  },
+
+  expenses: {
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+      color: COLORS.negative,
+      fontWeight: '900',
+    },
   },
 });
 
@@ -83,7 +95,7 @@ const useStyles = makeStyles({
 //   );
 // }
 
-const BalanceTable = ({ data, reportData, category }) => {
+const BalanceTable = ({ data, reportData, category, Class }) => {
   const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
 
@@ -126,7 +138,7 @@ const BalanceTable = ({ data, reportData, category }) => {
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
       <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Stack className={classes.balancetable}>
+        <Stack className={[classes.balancetable, classes[Class]].join(' ')}>
           <DataGrid
             headerHeight={40}
             rowHeight={35}

@@ -186,6 +186,7 @@ const HeaderTabs = () => {
             categoryArray={expensesCatagoryArray}
           />
           <BalanceTable
+            Class="expenses"
             data={expensesData}
             reportData={ExpensesReportData}
             category={expensesCatagoryArray}
@@ -198,6 +199,7 @@ const HeaderTabs = () => {
             categoryArray={incomeCatagoryArray}
           />
           <BalanceTable
+            Class="income"
             data={IncomData}
             reportData={IncomReportData}
             category={incomeCatagoryArray}
