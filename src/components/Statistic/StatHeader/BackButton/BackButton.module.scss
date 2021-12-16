@@ -1,0 +1,39 @@
+@import 'styles/shared.scss';
+a {
+  text-decoration: none;
+}
+
+.backButton {
+  margin-bottom: 16px;
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    margin-right: 47px;
+  }
+  @media screen and (min-width: $desktop) {
+    margin-right: 158px;
+    width: 174px;
+  }
+}
+
+.backButton__block {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    align-items: center;
+  }
+  @media screen and (min-width: $desktop) {
+  }
+}
+
+.backButton__text {
+  display: none;
+  color: rgba(82, 85, 95, 0.7);
+  @media screen and (min-width: $tablet) {
+    display: block;
+  }
+}
+
+.backButtonIcon {
+  margin-right: 15px;
+}
