@@ -69,6 +69,13 @@ const useStyles = makeStyles({
 
   category: {
     width: '190px',
+
+    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
+      {
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: '20px',
+      },
   },
 
   amount: {
