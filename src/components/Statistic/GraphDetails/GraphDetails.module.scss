@@ -1,0 +1,42 @@
+@import 'styles/shared.scss';
+
+.diagram {
+  @media screen and (min-width: $tablet) {
+    width: 666px;
+    margin: 0 auto;
+    margin-bottom: 76px;
+    padding-top: 20px;
+    padding-left: 32px;
+    padding-bottom: 19px;
+    padding-right: 29px;
+
+    background: $mainLight-color;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    border-radius: 30px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 1060px;
+    padding-top: 20px;
+    padding-left: 151px;
+    padding-bottom: 19px;
+    padding-right: 151px;
+  }
+}
+
+.diagramLarge {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $mainLight-color;
+  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+  border-radius: 30px;
+  margin: 0 auto;
+  width: 100%;
+}
+.diagram_emptyTitle {
+  text-align: center;
+}
+a {
+  cursor: pointer;
+}

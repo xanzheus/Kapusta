@@ -1,0 +1,71 @@
+@import 'styles/shared.scss';
+
+.incomeCosts {
+  display: flex;
+  position: absolute;
+  top: 274px;
+  width: 282px;
+  height: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-left: 14px;
+  padding-right: 11px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e5eb;
+  background-color: $mainLight-color;
+  box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
+  border-radius: 20px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  @media screen and (min-width: $tablet) {
+    width: 668px;
+    height: 50px;
+    top: 171px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 1060px;
+  }
+}
+
+.costs {
+  border-right: 1px solid #e0e5eb;
+  margin-right: 16px;
+  padding-right: 16px;
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    margin-right: 19px;
+    padding-right: 21px;
+    height: 20px;
+    align-items: center;
+  }
+}
+.incoming {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    height: 20px;
+    align-items: center;
+  }
+}
+
+.incomeCosts__title {
+  color: $primary-color;
+  @media screen and (min-width: $tablet) {
+    margin-right: 15px;
+  }
+}
+
+.incomeCosts__costs {
+  letter-spacing: 0.04em;
+  color: #e53935;
+}
+
+.incomeCosts__income {
+  letter-spacing: 0.04em;
+  color: $pozitive-color;
+}

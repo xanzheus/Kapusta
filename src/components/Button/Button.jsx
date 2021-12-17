@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import style from './Button.module.scss';
-
 const Button = ({ name, type, onClick, disabled = false, variant }) => (
   <button
     className={[style.main__button, style[variant]].join(' ')}

@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Roboto:wght@400;500;700;900&display=swap");
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto;
+  line-height: 1.5;
+  font-size: 12px;
+  color: #52555f;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+/*# sourceMappingURL=base.css.map */

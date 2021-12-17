@@ -1,19 +1,80 @@
+@import 'styles/shared.scss';
+
 .profile {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  @media screen and (min-width: $tablet) {
+    padding-top: 50px;
+    padding-bottom: 220px;
+  }
 }
 
 .profile__wrapper {
-  display: flex;
+  padding: 70px 10px;
+  background: $mainLight-color;
+  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+  border-radius: 30px;
+  margin-right: auto;
+  margin-left: auto;
+
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    width: 650px;
+    padding: 90px 30px;
+  }
+  @media screen and (min-width: $desktop) {
+    width: 1050px;
+    padding: 120px 60px;
+  }
 }
 
 .profile__sidebar {
-  margin-right: 80px;
-  width: 360px;
+  position: relative;
+  margin-bottom: 30px;
+  @media screen and (min-width: $tablet) {
+    margin-right: 40px;
+    margin-bottom: 0;
+  }
+
+  @media screen and (min-width: $desktop) {
+    margin-right: 120px;
+    width: 400px;
+  }
 }
 
-.profile__buttonBack {
-  margin-bottom: 60px;
+.buttonBack svg {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  // margin-bottom: 60px;
+  fill: $mainAccent-color;
+  @media screen and (min-width: $tablet) {
+    top: 20px;
+    left: 30px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    top: 30px;
+    left: 50px;
+  }
+}
+
+button.profile__buttonShare {
+  position: absolute;
+  top: 70px;
+  right: 50px;
+  width: 40px;
+  height: 30px;
+  @media screen and (min-width: $tablet) {
+    top: 90px;
+    right: 100px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    top: 100px;
+    right: 150px;
+  }
 }
 
 .avatar__wrapper {
@@ -22,6 +83,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  @media screen and (min-width: $desktop) {
+    margin-bottom: 80px;
+  }
 }
 
 .addFile__form {
@@ -33,42 +99,64 @@
   width: 50px;
   border: none;
   font-size: 45px;
+  @media screen and (min-width: $desktop) {
+    bottom: 10px;
+    right: 80px;
+  }
 }
 
 .profile__info {
+  margin-right: auto;
+  margin-left: auto;
   padding: 10px;
+  width: 260px;
+
+  @media screen and (min-width: $desktop) {
+    width: 400px;
+  }
 }
 
 .profile__name {
-  font-size: 50px;
-
+  font-size: 30px;
+  word-wrap: break-word;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 8px;
+
+  @media screen and (min-width: $desktop) {
+    font-size: 50px;
+  }
 }
 
 .profile__buttonEdit {
   display: block;
   cursor: pointer;
-  color: 000;
+  color: $primary-color;
 }
 
 .profile__email {
   text-transform: uppercase;
-  margin-bottom: 60px;
+  word-wrap: break-word;
   text-align: center;
-  font-size: 24px;
+  font-size: 14px;
   color: rgb(138, 138, 138);
 }
 
-.profile__text {
-  // display: inline-block;
-  text-transform: uppercase;
-  text-align: right;
-  font-size: 50px;
-  color: rgb(0, 0, 0);
-  margin-bottom: 50px;
+// .profile__text {
+//   // display: inline-block;
+//   text-transform: uppercase;
+//   text-align: right;
+//   font-size: 8px;
+//   color: $auxiliaryDark-color;
+//   margin-bottom: 8px;
+// }
+
+.button__submit {
+  width: 100px;
 }
 
-div.tableData__field {
-  margin-bottom: 20px;
+.tableData {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+  }
 }

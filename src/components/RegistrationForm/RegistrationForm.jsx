@@ -1,29 +1,64 @@
-import React from 'react';
-// import Container from '@mui/material/Container';
-// import Box from '@mui/material/Box';
+import { useState } from 'react';
 import { useFormik } from 'formik';
-import TextField from '@mui/material/TextField';
+// MUI
+import { TextField, InputAdornment, IconButton } from '@mui/material/';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
-// import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { makeStyles } from '@mui/styles';
+import Stack from '@mui/material/Stack';
 import { userSchema } from 'validationSchemas/userSchema';
-// import { makeStyles } from '@mui/styles';
 import { useCreateUserMutation } from 'redux/service/userAPI';
 import style from './registrationForm.module.scss';
-// CUSTOM HOOKS
+import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
 
-// import Input from '../FormComponents/Input';
-// import CheckBox from 'components/FormComponents/CheckBox';
+const useStyles = makeStyles({
+  field: {
+    '& .MuiInputLabel-root': {
+      fontSize: 14,
+    },
 
-// const useStyles = makeStyles({
-//   root: {},
-// });
+    '& .MuiTypography-root': {
+      fontSize: '14px',
+    },
+
+    '& .MuiOutlinedInput-root': {
+      // Работает
+      marginBottom: 15,
+      '& fieldset': {
+        borderRadius: 30,
+        width: 265,
+        height: 55,
+        // background: '#F6F7FB',
+        borderColor: 'transparent',
+      },
+
+      '& input': {
+        padding: '13px 14px',
+        background: '#fff',
+        borderRadius: 30,
+      },
+    },
+  },
+});
 
 const RegistrationForm = () => {
+  // API_Hook
   const [createUser] = useCreateUserMutation();
-  // const classes = useStyles();
+
+  // useCustomStyle
+  const classes = useStyles();
+
+  // showPassword
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
   const formik = useFormik({
+    // formik_State
+
     initialValues: {
       firstName: '',
       lastName: '',
@@ -41,19 +76,23 @@ const RegistrationForm = () => {
 
   return (
     <div className={style.box}>
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
+      <form autoComplete="off" onSubmit={formik.handleSubmit} novalidate>
         <p className={style.registration__title}>
           Вы можете авторизоваться с помощью Google Account:
         </p>
-        <div className={style.button__wrapper}>
-          <Button name="Google" type="submit"></Button>
+        <div className={style.google_button__wrapper}>
+          <Button name="Google" type="submit">
+            <Google_Icon />
+          </Button>
         </div>
         <p className={style.registration__title}>
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <TextField
-          className={style.registration__input}
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          color="warning"
           id="email"
           name="email"
           label="Электронная почта:"
@@ -62,40 +101,73 @@ const RegistrationForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.email && Boolean(formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
-          margin="normal"
           required
         />
 
         <TextField
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          color="warning"
           id="password"
           name="password"
           label="Пароль"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
-          margin="normal"
           required
         />
 
         <TextField
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          color="warning"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           id="confirmPassword"
           name="confirmPassword"
           label="Подтвердите пароль"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
           helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-          margin="normal"
+          required
         />
         <TextField
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          color="warning"
           id="firstName"
           name="firstName"
           label="Ваше Имя"
@@ -104,10 +176,12 @@ const RegistrationForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           helperText={formik.touched.firstName && formik.errors.firstName}
-          margin="normal"
         />
         <TextField
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          color="warning"
           id="lastName"
           name="lastName"
           label="Ваша фамилия"
@@ -116,9 +190,9 @@ const RegistrationForm = () => {
           onChange={formik.handleChange}
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
-          margin="normal"
         />
         <FormControlLabel
+          className={classes.field}
           control={
             <Checkbox
               id="acceptedTerms"
@@ -130,8 +204,15 @@ const RegistrationForm = () => {
           }
           label="Пользовательское соглашения"
         ></FormControlLabel>
-        <Button name="Войти" disabled={!(formik.isValid && formik.dirty)} type="submit"></Button>
-        <Button name="Регистрация" type="submit"></Button>
+        <Stack mt={2} spacing={2} direction="row">
+          <Button
+            className={style.login__button}
+            name="Регистрация"
+            disabled={!(formik.isValid && formik.dirty)}
+            type="submit"
+          ></Button>
+          <Button name="Войти" type="submit"></Button>
+        </Stack>
       </form>
     </div>
   );

@@ -1,20 +1,68 @@
-import React from 'react';
-import Container from '@mui/material/Container';
+import { useState } from 'react';
 import { useFormik } from 'formik';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { TextField, InputAdornment, IconButton } from '@mui/material/';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Button from 'components/Button';
+import Stack from '@mui/material/Stack';
 import { useLoginMutation } from 'redux/service/userAPI';
+import { useLogoutMutation } from 'redux/service/userAPI';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from 'redux/service/authSlice';
 import loginSchema from 'validationSchemas/login';
-// CUSTOM HOOKS
-
-// import Input from '../FormComponents/Input';
-// import CheckBox from 'components/FormComponents/CheckBox';
+import { useNavigate } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import style from './loginForm.module.scss';
+import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [login] = useLoginMutation();
+  // const [logout] = useLogoutMutation();
+
+  // showPassword
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
+  const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
+  const navigateToRegistration = () => {
+    navigate('/');
+  };
+  const useStyles = makeStyles({
+    field: {
+      '& .MuiInputLabel-root': {
+        fontSize: 14,
+      },
+
+      '& .MuiTypography-root': {
+        fontSize: '14px',
+      },
+
+      '& .MuiOutlinedInput-root': {
+        // Работает
+        marginBottom: 20,
+        '& fieldset': {
+          border: '1px solid',
+          borderColor: 'black',
+          borderRadius: 30,
+          width: 265,
+          height: 55,
+          // background: '#F6F7FB',
+          // borderColor: 'transparent',
+        },
+
+        '& input': {
+          padding: '13px 14px',
+          background: '#fff',
+          borderRadius: 30,
+        },
+      },
+    },
+  });
+
+  // useCustomStyle
+  const classes = useStyles();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,27 +70,43 @@ const LoginForm = () => {
     },
     validationSchema: loginSchema,
 
-    onSubmit: values => {
-      login(values)
+    onSubmit: ({ email, password }) => {
+      login({ email, password })
         .unwrap()
         .then(({ data }) => {
-          console.log(data);
+          console.log('component', data.accessToken);
           dispatch(setCredentials(data));
+          navigate('/balance');
         })
+
         .catch(error => console.log(error.message));
 
-      // alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify({ email, password }, null, 2));
     },
   });
 
   return (
-    <Container maxWidth="xs">
-      <form autoComplete="off" onSubmit={formik.handleSubmit}>
+    <div className={style.box}>
+      <form autoComplete="off" novalidate onSubmit={formik.handleSubmit}>
+        <p className={style.registration__title}>
+          Вы можете авторизоваться с помощью Google Account:
+        </p>
+        <div className={style.google_button__wrapper}>
+          <Button className={style.main__button} name="Google" type="submit">
+            <Google_Icon />
+          </Button>
+        </div>
+        <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>
+
         <TextField
+          className={classes.field}
           fullWidth
+          // margin="normal"
+          color="warning"
           id="email"
           name="email"
-          label="Email"
+          label="Электронная почта:"
+          autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -52,11 +116,28 @@ const LoginForm = () => {
         />
 
         <TextField
+          className={classes.field}
           fullWidth
+          autocomplete="off"
+          // margin="normal"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          color="warning"
           id="password"
           name="password"
-          label="Password"
-          type="password"
+          label="Пароль"
+          type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -65,19 +146,17 @@ const LoginForm = () => {
           required
         />
 
-        <Button
-          disabled={!(formik.isValid && formik.dirty)}
-          color="primary"
-          variant="contained"
-          type="submit"
-        >
-          Login
-        </Button>
-        <Button color="primary" variant="contained" type="submit">
-          Go to Registration
-        </Button>
+        <Stack mt={2} spacing={2} direction="row">
+          <Button
+            className={style.login__button}
+            name="Войти"
+            disabled={!(formik.isValid && formik.dirty)}
+            type="submit"
+          ></Button>
+          <Button onClick={navigateToRegistration()} name="Регистрация" type="submit"></Button>
+        </Stack>
       </form>
-    </Container>
+    </div>
   );
 };
 

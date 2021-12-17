@@ -7,8 +7,25 @@ import Stack from '@mui/material/Stack';
 import IconAvatar from 'components/IconAvatar';
 import style from './UserMenu.module.scss';
 
+////////////test/////////////////////////
+
+const user = {
+  email: 'john.doe@gmail.com',
+  fullName: {
+    firstName: 'Nikolay',
+    lastName: 'Mosalov',
+  },
+  avatar: 'https://live.staticflickr.com/65535/51355167828_34e6d20320_n.jpg',
+  settings: {
+    language: 'en',
+    theme: 'light',
+    currency: 'UAH',
+  },
+};
+///====////////////////////
+
 const UserMenu = () => {
-  const fullName = 'User Name';
+  const fullName = `${user.fullName.firstName} ${user.fullName.lastName} `;
   const avatarUrl = 'https://live.staticflickr.com/65535/51355167828_34e6d20320_n.jpg';
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -23,7 +40,7 @@ const UserMenu = () => {
   const large = useMediaPredicate('(min-width: 1280px)');
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
+    <Stack direction="row" alignItems="center" spacing={2} color="#CBCCD0">
       <IconAvatar src={avatarUrl} width={32} height={32} />
       {small && <LogoutIcon onClick={handleOpen} />}
       {medium && (

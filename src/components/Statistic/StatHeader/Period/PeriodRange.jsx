@@ -21,6 +21,7 @@ const PeriodRange = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Stack spacing={3}>
           <DateRangePicker
+            showFirstButton={false}
             startText="Период С"
             endText="Период ПО"
             // minDate={new Date('2021-03-01')}
