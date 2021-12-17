@@ -11,6 +11,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 // import Button from '@mui/material/Button';
 import Button from 'components/Button';
+import { InviteModal } from 'components/Modal';
 import { makeStyles } from '@mui/styles';
 import ShareIcon from '@mui/icons-material/Share';
 import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
@@ -24,6 +25,10 @@ const ProfilePage = () => {
   const location = useLocation();
   const [locationFrom, setLocationFrom] = useState(location?.state?.from ?? '/');
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -125,25 +130,15 @@ const ProfilePage = () => {
     },
   });
 
-  // const formikShare = useFormik({
-  //   initialValues: {
-  //     file: null,
-  //   },
-
-  //   onSubmit: values => {
-  //     console.log(values.file);
-  //   },
-  // });
-
   return (
     <>
       <section className={style.profile}>
         <Container>
           <IconButton
             className={style.profile__buttonShare}
-            aria-label="toggle password visibility"
-            onClick={handleClickShowPassword}
-            onMouseDown={handleMouseDownPassword}
+            aria-label="Поделиться с другом"
+            onClick={handleOpen}
+            // onMouseDown={handleMouseDownPassword}
           >
             <ShareIcon
               sx={{ fontSize: 36, color: COLORS.mainAccent }}
@@ -340,6 +335,7 @@ const ProfilePage = () => {
               </form>
             </div>
           </div>
+          {open && <InviteModal open={open} handleClose={handleClose} />}
         </Container>
       </section>
     </>
