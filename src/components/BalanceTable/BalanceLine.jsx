@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 import trend from '../../images/trend.png';
 
 const useStyles = makeStyles({

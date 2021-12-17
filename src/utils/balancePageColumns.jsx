@@ -2,7 +2,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
   button: {

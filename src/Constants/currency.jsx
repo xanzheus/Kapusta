@@ -2,7 +2,7 @@ const CURRENCY = {
   DOLLAR: 'USD',
   RUBLE: 'RUB',
   EURO: 'EUR',
-  HRUVNYA: 'UAH',
+  HRYVNIA: 'UAH',
   ZLOTY: 'ZLT',
 };
 

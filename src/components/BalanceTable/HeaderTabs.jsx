@@ -8,7 +8,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/BalanceTable/BalanceTable';
 import BalanceForm from 'components/BalanceTable/BalanceForm';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
 
 const useStyles = makeStyles({

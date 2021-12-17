@@ -12,7 +12,8 @@ const AppBar = () => {
         <Container>
           <div className={style.header__wrapper}>
             <div className={style.logo}></div>
-            {location.pathname === '/balance' || ('/profile' && <UserMenu />)}
+            {location.pathname === ('/balance' || '/profile') && <UserMenu />}
+            {/*///////////////////временно*/}
           </div>
         </Container>
       </header>

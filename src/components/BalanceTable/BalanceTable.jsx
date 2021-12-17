@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 import { Box } from '@mui/system';
 import ReportTable from 'components/BalanceTable/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';

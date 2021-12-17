@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
   reports__thumb: {

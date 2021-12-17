@@ -13,7 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
-import COLORS from 'Constants/COLORSS';
+import COLORS from 'Constants/COLORS';
 
 // import CalculateIcon from '@mui/icons-material/Calculate';
 // import InputAdornment from '@mui/material/InputAdornment';
