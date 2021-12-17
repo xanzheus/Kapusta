@@ -10,7 +10,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import { userSchema } from 'validationSchemas/userSchema';
-
 import { useCreateUserMutation } from 'redux/service/userAPI';
 import style from './registrationForm.module.scss';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';

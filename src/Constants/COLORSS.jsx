@@ -5,7 +5,7 @@ const COLORS = {
   secondaryAccent: '#ffdac0',
   mainLight: '#fff',
   mainDark: '#000',
-  pozitive: '#407946',
+  positive: '#407946',
   negative: '#e7192e',
   auxiliaryDark: '#a6abb9',
   auxiliaryLight: ' #f5f6fb',

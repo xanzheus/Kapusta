@@ -1,22 +1,117 @@
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
-import { DataGrid, GridToolbarContainer, GridToolbarExport, gridClasses } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
+import { Stack } from '@mui/material';
+import { makeStyles } from '@material-ui/core';
+import COLORS from 'Constants/COLORSS';
+import { Box } from '@mui/system';
 import ReportTable from 'components/BalanceTable/ReportTable';
-import balancePageColumns from 'utils/balancePageColumns';
+import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
-import style from './BalanceTable.module.scss';
 
-function CustomToolbar() {
-  return (
-    <GridToolbarContainer className={gridClasses.toolbarContainer}>
-      <GridToolbarExport />
-    </GridToolbarContainer>
-  );
-}
+const useStyles = makeStyles({
+  balancetable: {
+    height: '385px',
+    minWidth: '760px',
 
-const BalanceTable = ({ data, reportData, category }) => {
+    '& .css-1i9y1n9-MuiDataGrid-root': {
+      borderRadius: '20px 20px 0px 0px',
+    },
+
+    '& .MuiDataGrid-columnHeaders.css-okt5j6-MuiDataGrid-columnHeaders': {
+      borderRadius: '20px 20px 0px 0px',
+    },
+
+    '& .MuiDataGrid-columnHeaderTitle': {
+      fontSize: '12px',
+      lineHeight: '1.16',
+      fontWeight: '700',
+      letterSpacing: '0.02em',
+      color: COLORS.mainBlack,
+    },
+
+    '& .MuiDataGrid-columnSeparator': {
+      color: COLORS.auxiliaryLight,
+    },
+
+    '& .MuiDataGrid-columnHeaders': {
+      backgroundColor: COLORS.auxiliaryLight,
+    },
+
+    '& .MuiDataGrid-row': {
+      color: COLORS.primary,
+      fontSize: '12px',
+      lineHeight: '1.16',
+      cursor: 'cell',
+      '&:hover': {
+        backgroundColor: COLORS.auxiliaryLight,
+      },
+    },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textCenter.MuiDataGrid-cell--withRenderer':
+      {
+        justifyContent: 'start',
+      },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
+      backgroundColor: COLORS.auxiliaryLight,
+    },
+
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
+      display: 'flex',
+      justifyContent: 'center',
+    },
+
+    '& .css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
+      color: COLORS.primary,
+      fontSize: '12px',
+      lineHeight: '1.16',
+    },
+
+    '& .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input':
+      {
+        color: COLORS.mainDark,
+        fontSize: '12px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: '0',
+      },
+
+    '& .css-levciy-MuiTablePagination-displayedRows': {
+      fontSize: '12px',
+    },
+
+    // '& .MuiButton-root': {
+    //   position: 'absolute',
+    //   left: '10px',
+    //   bottom: '10px',
+    //   color: 'green',
+    // },
+  },
+
+  income: {
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+      color: COLORS.positive,
+      fontWeight: '900',
+    },
+  },
+
+  expenses: {
+    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+      color: COLORS.negative,
+      fontWeight: '900',
+    },
+  },
+});
+
+const BalanceTable = ({ data, reportData, category, Class }) => {
   const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
+
+  const classes = useStyles();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -49,26 +144,25 @@ const BalanceTable = ({ data, reportData, category }) => {
     return;
   };
 
-  const columns = balancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
+  const columns = BalancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
 
   return (
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
-      <div className={style.tables__thumb}>
-        <div className={style.balancetable__thumb}>
+      <Box display="flex" alignItems="center" justifyContent="space-between">
+        <Stack className={[classes.balancetable, classes[Class]].join(' ')}>
           <DataGrid
+            headerHeight={40}
+            rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
-            rowsPerPageOptions={[5, 20, 100]}
-            pageSize={5}
+            rowsPerPageOptions={[8, 20]}
+            pageSize={8}
             rows={rows}
             columns={columns}
-            components={{
-              Toolbar: CustomToolbar,
-            }}
           />
-        </div>
+        </Stack>
         <ReportTable data={reportData} />
-      </div>
+      </Box>
     </>
   );
 };
@@ -77,6 +171,7 @@ BalanceTable.propTypes = {
   data: PropTypes.array.isRequired,
   reportData: PropTypes.array.isRequired,
   category: PropTypes.array.isRequired,
+  Class: PropTypes.string.isRequired,
 };
 
 export default BalanceTable;

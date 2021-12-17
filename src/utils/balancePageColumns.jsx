@@ -1,20 +1,50 @@
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
+import { makeStyles } from '@material-ui/core';
+import COLORS from 'Constants/COLORSS';
 
-const balancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
+const useStyles = makeStyles({
+  button: {
+    width: '18px',
+    height: '18px',
+    cursor: 'pointer',
+  },
+
+  delete: {
+    '&:hover': {
+      color: COLORS.negative,
+    },
+  },
+
+  edit: {
+    justifyContent: 'start',
+    '&:hover': {
+      color: COLORS.positive,
+    },
+  },
+
+  save: {
+    '&:hover': {
+      color: COLORS.mainAccent,
+    },
+  },
+});
+
+const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
+  const classes = useStyles();
   return [
     { field: 'id', hide: true, headerAlign: 'center' },
     {
       field: 'date',
       headerName: 'Дата',
-      minWidth: 150,
+      minWidth: 120,
       type: 'date',
       editable: true,
       headerAlign: 'center',
     },
     {
-      field: 'description',
+      field: 'comment',
       headerName: 'Описание',
       minWidth: 200,
       editable: true,
@@ -23,53 +53,61 @@ const balancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'category',
       headerName: 'Категория',
-      minWidth: 150,
+      minWidth: 110,
       editable: true,
       headerAlign: 'center',
       type: 'singleSelect',
       valueOptions: category,
     },
     {
-      field: 'sum',
+      field: 'amount',
       headerName: 'Сумма',
-      minWidth: 150,
+      minWidth: 120,
       editable: true,
       headerAlign: 'center',
-      // type: 'number',
+      type: 'number',
     },
     {
       field: 'delete',
       headerName: '',
-      minWidth: 50,
-      headerAlign: 'center',
+      minWidth: 100,
+
       renderCell: params => (
-        <strong>
-          <DeleteIcon
-            onClick={deleteTransAction(params.id)}
-            titleAccess="удалить"
-            // className={style.button__delete}
-          />
-        </strong>
+        <DeleteForeverIcon
+          className={[classes.button, classes.delete].join(' ')}
+          onClick={deleteTransAction(params.id)}
+          titleAccess="удалить"
+        />
       ),
     },
     {
-      field: 'actions',
-      type: 'actions',
-      width: 100,
-      getActions: params => [
+      field: 'edit',
+      headerName: '',
+      width: 50,
+
+      renderCell: params => (
         <EditIcon
+          className={[classes.button, classes.edit].join(' ')}
           titleAccess="редактировать"
           onClick={handleOpen}
-          // className={style.button__edit}
-        />,
+        />
+      ),
+    },
+
+    {
+      field: 'save',
+      headerName: '',
+      width: 50,
+
+      renderCell: params => (
         <SaveIcon
+          className={[classes.button, classes.save].join(' ')}
           titleAccess="сохранит"
           onClick={updateTransAction(params)}
-          // className={style.button__save}
-        />,
-      ],
+        />
+      ),
     },
   ];
 };
 
-export default balancePageColumns;
+export default BalancePageColumns;

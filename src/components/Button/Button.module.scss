@@ -17,11 +17,13 @@
   cursor: pointer;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-visible {
     background-color: $mainAccent-color;
     color: $mainLight-color;
     box-shadow: 1px 3px 5px rgba(255, 107, 8, 0.35);
     border: none;
+    outline-color: transparent;
   }
 
   &:disabled {
