@@ -15,6 +15,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORSS';
 
+// import CalculateIcon from '@mui/icons-material/Calculate';
+// import InputAdornment from '@mui/material/InputAdornment';
+
 const useStyles = makeStyles({
   form: {
     display: 'flex',
@@ -35,7 +38,7 @@ const useStyles = makeStyles({
       fontSize: '12px',
       color: COLORS.primary,
       fontWeight: '700',
-      padding: '0 15px',
+      padding: '0 0 0 15px',
     },
 
     '& .MuiFormHelperText-root ': {
@@ -82,7 +85,7 @@ const useStyles = makeStyles({
     },
 
     '& .MuiButtonBase-root': {
-      padding: '0',
+      paddingLeft: '0',
     },
 
     '& .MuiSvgIcon-root': {
@@ -210,6 +213,13 @@ const BalanceForm = ({ placeholder, categoryArray, type }) => {
         name="amount"
         required
         error={amountError}
+        // InputProps={{
+        //   startAdornment: (
+        //     <InputAdornment position="start">
+        //       <CalculateIcon onClick={() => console.log('Button')} />
+        //     </InputAdornment>
+        //   ),
+        // }}
       />
 
       <Stack ml="auto">

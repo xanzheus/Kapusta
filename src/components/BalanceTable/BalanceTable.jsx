@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useCallback, useState } from 'react';
-import { DataGrid, GridToolbarContainer, GridToolbarExport, gridClasses } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORSS';
@@ -107,14 +107,6 @@ const useStyles = makeStyles({
   },
 });
 
-// function CustomToolbar() {
-//   return (
-//     <GridToolbarContainer className={gridClasses.toolbarContainer}>
-//       <GridToolbarExport />
-//     </GridToolbarContainer>
-//   );
-// }
-
 const BalanceTable = ({ data, reportData, category, Class }) => {
   const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
@@ -163,13 +155,10 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             headerHeight={40}
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
-            rowsPerPageOptions={[5, 20, 100]}
-            // pageSize={20}
+            // rowsPerPageOptions={[5, 20]}
+            pageSize={8}
             rows={rows}
             columns={columns}
-            // components={{
-            //   Toolbar: CustomToolbar,
-            // }}
           />
         </Stack>
         <ReportTable data={reportData} />
