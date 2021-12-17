@@ -155,7 +155,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             headerHeight={40}
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
-            // rowsPerPageOptions={[5, 20]}
+            rowsPerPageOptions={[8, 20]}
             pageSize={8}
             rows={rows}
             columns={columns}
