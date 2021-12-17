@@ -53,7 +53,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'category',
       headerName: 'Категория',
-      minWidth: 150,
+      minWidth: 120,
       editable: true,
       headerAlign: 'center',
       type: 'singleSelect',
@@ -81,22 +81,31 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       ),
     },
     {
-      field: 'actions',
-      type: 'actions',
-      width: 100,
+      field: 'edit',
+      headerName: '',
+      width: 50,
 
-      getActions: params => [
+      renderCell: params => (
         <EditIcon
           className={[classes.button, classes.edit].join(' ')}
           titleAccess="редактировать"
           onClick={handleOpen}
-        />,
+        />
+      ),
+    },
+
+    {
+      field: 'save',
+      headerName: '',
+      width: 50,
+
+      renderCell: params => (
         <SaveIcon
           className={[classes.button, classes.save].join(' ')}
           titleAccess="сохранит"
           onClick={updateTransAction(params)}
-        />,
-      ],
+        />
+      ),
     },
   ];
 };
