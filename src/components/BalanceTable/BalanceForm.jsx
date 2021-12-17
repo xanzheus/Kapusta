@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core';
@@ -107,13 +107,20 @@ const useStyles = makeStyles({
   },
 });
 
-const BalanceForm = ({ placeholder, categoryArray, type }) => {
+const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
   const [date, setDate] = useState(() => new Date());
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
   const [amountError, setAmountError] = useState(false);
+
+  useEffect(() => {
+    getCurrentDate(date);
+  }, [date, getCurrentDate]);
+
+  // console.log(format(date, 'yyyy-MM-dd'));
+  // console.log(format(startOfMonth(date), 'yyyy-MM-dd'));
 
   const classes = useStyles();
 
@@ -243,6 +250,7 @@ BalanceForm.propTypes = {
   placeholder: PropTypes.array.isRequired,
   categoryArray: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
+  getCurrentDate: PropTypes.func.isRequired,
 };
 
 export default BalanceForm;
