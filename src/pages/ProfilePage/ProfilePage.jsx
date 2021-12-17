@@ -12,7 +12,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 // import Button from '@mui/material/Button';
 import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
-import { useMediaPredicate } from 'react-media-hook';
+import ShareIcon from '@mui/icons-material/Share';
 import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
 
@@ -50,9 +50,19 @@ const ProfilePage = () => {
   } = user;
   /////////===========///////////////
 
-  const biggerTablet = useMediaPredicate('(min-width: 768px)');
+  // const themeStyles = createTheme({
+  //   breakpoints: {
+  //     values: {
+  //       xs: 0,
+  //       sm: 600,
+  //       md: 900,
+  //       lg: 1200,
+  //       xl: 1536,
+  //     },
+  //   },
+  // });
 
-  const useStyles = makeStyles({
+  const useStyles = makeStyles(theme => ({
     field: {
       '& .MuiInputLabel-root': {
         fontSize: 14,
@@ -65,17 +75,23 @@ const ProfilePage = () => {
 
       '& .MuiOutlinedInput-root': {
         marginBottom: 20,
+        marginLeft: 'auto',
+        marginBRight: 'auto',
+        padding: 0,
         borderRadius: 30,
         backgroundColor: `${COLORS.auxiliaryLight}`,
-        width: 253,
+        width: 252,
         '& fieldset': {
           width: 265,
           height: 55,
           border: 'none',
         },
+        [theme.breakpoints.up('1280')]: {
+          width: 380,
+        },
       },
     },
-  });
+  }));
 
   // useCustomStyle
   const classes = useStyles();
@@ -109,16 +125,37 @@ const ProfilePage = () => {
     },
   });
 
+  // const formikShare = useFormik({
+  //   initialValues: {
+  //     file: null,
+  //   },
+
+  //   onSubmit: values => {
+  //     console.log(values.file);
+  //   },
+  // });
+
   return (
     <>
       <section className={style.profile}>
         <Container>
+          <IconButton
+            className={style.profile__buttonShare}
+            aria-label="toggle password visibility"
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+          >
+            <ShareIcon
+              sx={{ fontSize: 36, color: COLORS.mainAccent }}
+              titleAccess={'Поделиться с другом'}
+            />
+          </IconButton>
+
+          <Link className={style.buttonBack} type="button" to={locationFrom}>
+            <ArrowBackIcon />
+          </Link>
           <div className={style.profile__wrapper}>
             <div className={style.profile__sidebar}>
-              <Link className={style.buttonBack} type="button" to={locationFrom}>
-                <ArrowBackIcon />
-              </Link>
-
               <div className={style.avatar__wrapper}>
                 <IconAvatar src={avatar} width={240} height={240} />
                 <form
@@ -164,8 +201,8 @@ const ProfilePage = () => {
                 <h3 className={style.profile__email}>{email}</h3>
               </div>
             </div>
-            <div>
-              <h1 className={style.profile__text}>Настройки пользователя</h1>{' '}
+            <div className={style.profile__settings}>
+              {/* <h1 className={style.profile__text}>Настройки пользователя</h1>{' '} */}
               <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
                 <TextField
                   // className={style.tableData__field}
@@ -299,7 +336,6 @@ const ProfilePage = () => {
                     </MenuItem>
                   ))}
                 </TextField>
-
                 <Button name="Сохранить" type="submit" variant="center" />
               </form>
             </div>

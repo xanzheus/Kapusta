@@ -10,14 +10,14 @@
 
   @media screen and (min-width: $tablet) {
     max-width: $tablet;
-    min-height: 1184px; ////////////временно
+    // min-height: 1184px; ////////////временно
     background-image: url(../images/bgc-grey-t.png), url(../images/bag-moneys-auth-bottom-d.png);
     background-size: $tablet, 183px;
     background-position: top 0 center, right 88px bottom 64px;
   }
 
   @media screen and (min-width: $desktop) {
-    min-height: 920px; ////////////временно
+    // min-height: 920px; ////////////временно
     max-width: $desktop;
     background-image: url(../images/bgc-grey-d.png), url(../images/bag-moneys-auth-3rows-d.png);
 
