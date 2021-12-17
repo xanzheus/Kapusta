@@ -16,7 +16,7 @@ const incomData = [
     date: '15.11.2021',
     comment: 'зарплата',
     category: 'ЗП',
-    amount: 30000,
+    amount: '30 000.00 грн.',
     type: 'income',
   },
   {
@@ -24,7 +24,7 @@ const incomData = [
     date: '01.11.2021',
     comment: 'аванс',
     category: 'ЗП',
-    amount: 15000,
+    amount: '15 000.00 грн.',
     type: 'income',
   },
 ];
@@ -35,7 +35,7 @@ const expensesData = [
     date: '20.01.2021',
     comment: 'ТО',
     category: 'Продукты',
-    amount: -3500,
+    amount: '- 3 500.00 грн.',
     type: 'expense',
   },
   {
@@ -43,7 +43,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'мясо',
     category: 'Продукты',
-    amount: -200,
+    amount: '- 200.00 грн.',
     type: 'expense',
   },
   {
@@ -51,7 +51,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'курица',
     category: 'Продукты',
-    amount: -200,
+    amount: '- 200.00 грн.',
     type: 'expense',
   },
   {
@@ -59,7 +59,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'олия',
     category: 'Продукты',
-    amount: -64,
+    amount: '- 64.00 грн.',
     type: 'expense',
   },
   {
@@ -67,7 +67,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'овощи',
     category: 'Продукты',
-    amount: -200,
+    amount: '- 200.00 грн.',
     type: 'expense',
   },
   {
@@ -75,7 +75,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'вода',
     category: 'Продукты',
-    amount: -100,
+    amount: '- 100.00 грн.',
     type: 'expense',
   },
   {
@@ -83,7 +83,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'вода',
     category: 'Продукты',
-    amount: -100,
+    amount: '- 100.00 грн.',
     type: 'expense',
   },
   {
@@ -91,7 +91,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'вода',
     category: 'Продукты',
-    amount: -100,
+    amount: '- 100.00 грн.',
     type: 'expense',
   },
   {
@@ -99,7 +99,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'вода',
     category: 'Продукты',
-    amount: -100,
+    amount: '- 100.00 грн.',
     type: 'expense',
   },
   {
@@ -107,7 +107,7 @@ const expensesData = [
     date: '22.01.2021',
     comment: 'вода',
     category: 'Продукты',
-    amount: -100,
+    amount: '- 100.00 грн.',
     type: 'expense',
   },
 ];

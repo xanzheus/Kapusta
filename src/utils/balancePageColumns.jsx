@@ -53,7 +53,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'category',
       headerName: 'Категория',
-      minWidth: 120,
+      minWidth: 110,
       editable: true,
       headerAlign: 'center',
       type: 'singleSelect',
@@ -62,7 +62,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'amount',
       headerName: 'Сумма',
-      minWidth: 50,
+      minWidth: 120,
       editable: true,
       headerAlign: 'center',
       type: 'number',
