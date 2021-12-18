@@ -154,7 +154,7 @@ const BalanceLine = ({ userData }) => {
         direction={{ sm: 'column', md: 'row', lg: 'row' }}
         alignItems="center"
         justifyContent="end"
-        mb={{ md: 7, lg: 1 }}
+        mb={{ sm: 5, md: 7, lg: 1 }}
       >
         <p className={classes.balance__title}>Баланс: </p>
 

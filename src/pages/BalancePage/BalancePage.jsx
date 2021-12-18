@@ -4,6 +4,7 @@ import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
 import HeaderTabs from 'components/BalanceTable/HeaderTabs';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
+import MobileTable from 'components/BalanceTable/MobileTable/MobileTable';
 import style from '../BalancePage/BalancePage.module.scss';
 
 const userBalance = {
@@ -165,7 +166,7 @@ const BalancePage = () => {
       <Container>
         <BalanceLine userData={userBalance} />
 
-        {small && <h1>Hello</h1>}
+        {small && <MobileTable getCurrentDate={getCurrentDate} />}
 
         {medium && (
           <HeaderTabs

@@ -230,6 +230,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
             />
           </Stack>
         </LocalizationProvider>
+
         <TextField
           className={[classes.field, classes.description].join(' ')}
           color="info"
