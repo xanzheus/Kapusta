@@ -20,12 +20,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <AppBar />
       {/*нужно добавить условие, если не залогинен, то рендерить auth*/}
-      {/* <div className={style.backgroundWrapperAuth}>
+      <div className={style.backgroundWrapperAuth}>
         <Routes>
           <Route path="/" element={<Registration />} />
           <Route path="login" element={<Login />} />
         </Routes>
-      </div> */}
+      </div>
       {/*нужно добавить условие, если залогинен, то рендерить мейн*/}
       <main className={style.main}>
         <div className={style.backgroundWrapperMain}>

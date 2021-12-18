@@ -11,6 +11,7 @@ import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import { userSchema } from 'validationSchemas/userSchema';
 import { useCreateUserMutation } from 'redux/service/userAPI';
+import { COLORS } from '../../Constants';
 import style from './registrationForm.module.scss';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
 
@@ -26,6 +27,8 @@ const useStyles = makeStyles({
 
     '& .MuiOutlinedInput-root': {
       // Работает
+      backgroundColor: `${COLORS.auxiliaryLight}`,
+      borderRadius: 30,
       marginBottom: 15,
       '& fieldset': {
         borderRadius: 30,
@@ -37,7 +40,6 @@ const useStyles = makeStyles({
 
       '& input': {
         padding: '13px 14px',
-        background: '#fff',
         borderRadius: 30,
       },
     },
@@ -211,7 +213,7 @@ const RegistrationForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button name="Войти" type="submit"></Button>
+          <Button name="Войти" type="button"></Button>
         </Stack>
       </form>
     </div>

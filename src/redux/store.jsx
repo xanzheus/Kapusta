@@ -1,11 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import { exchangeRates } from './service/exchangeAPI';
 import authReducer from '../redux/service/authSlice';
 import { user } from './service/userAPI';
-const store = configureStore({
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['accessToken'],
+};
+export const store = configureStore({
   reducer: {
     [user.reducerPath]: user.reducer,
-    auth: authReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
     [exchangeRates.reducerPath]: exchangeRates.reducer,
   },
   middleware: getDefaultMiddleware => [
@@ -14,4 +21,5 @@ const store = configureStore({
     exchangeRates.middleware,
   ],
 });
-export default store;
+
+export const persistor = persistStore(store);
