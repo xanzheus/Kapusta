@@ -84,7 +84,7 @@ const LoginForm = () => {
 
   return (
     <div className={style.box}>
-      <form autoComplete="off" novalidate onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
           Вы можете авторизоваться с помощью Google Account:
         </p>
