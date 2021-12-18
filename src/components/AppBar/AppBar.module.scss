@@ -22,7 +22,12 @@
 }
 
 .logo {
-  background: url('../../images/logo.png');
+  background: url('../../images/logo.svg');
   width: 90px;
   height: 31px;
+}
+
+.buttonProfile {
+  border: none;
+  background-color: transparent;
 }

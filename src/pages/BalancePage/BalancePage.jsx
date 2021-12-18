@@ -4,6 +4,8 @@ import Container from 'components/Container';
 import HeaderTabs from 'components/BalanceTable/HeaderTabs';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
 import style from '../BalancePage/BalancePage.module.scss';
+import { useGetCurrentUserQuery } from 'redux/service/userAPI'; ////////////////////////////////////////
+import { AppBar } from 'components/AppBar';
 
 const userBalance = {
   balance: 2500000,
@@ -145,6 +147,7 @@ const expensesReportData = [
 ];
 
 const BalancePage = () => {
+  const { user } = useGetCurrentUserQuery(); ////////////////////////////////////////
   const [date, setDate] = useState(() => new Date());
 
   const getCurrentDate = date => setDate(date);
@@ -156,19 +159,21 @@ const BalancePage = () => {
   console.log(firstOfYear);
 
   return (
-    <section className={style.balanceSection}>
-      <Container>
-        <BalanceLine userData={userBalance} />
+    <>
+      <section className={style.balanceSection}>
+        <Container>
+          <BalanceLine userData={userBalance} />
 
-        <HeaderTabs
-          getCurrentDate={getCurrentDate}
-          incomData={incomData}
-          expensesData={expensesData}
-          incomReportData={incomReportData}
-          expensesReportData={expensesReportData}
-        />
-      </Container>
-    </section>
+          <HeaderTabs
+            getCurrentDate={getCurrentDate}
+            incomData={incomData}
+            expensesData={expensesData}
+            incomReportData={incomReportData}
+            expensesReportData={expensesReportData}
+          />
+        </Container>
+      </section>
+    </>
   );
 };
 

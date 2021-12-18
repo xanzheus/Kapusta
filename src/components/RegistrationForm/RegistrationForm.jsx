@@ -211,7 +211,7 @@ const RegistrationForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button name="Войти" type="submit"></Button>
+          <Button name="Войти" type="button"></Button>
         </Stack>
       </form>
     </div>

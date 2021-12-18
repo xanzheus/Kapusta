@@ -5,35 +5,43 @@ import SelectionModal from 'components/Modal/SelectionModal';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
 import IconAvatar from 'components/IconAvatar';
+import { COLORS } from '../../Constants';
+import { useGetCurrentUserQuery, useLogoutMutation } from 'redux/service/userAPI';
 import style from './UserMenu.module.scss';
 
-////////////test/////////////////////////
-
-const user = {
-  email: 'john.doe@gmail.com',
-  fullName: {
-    firstName: 'Nikolay',
-    lastName: 'Mosalov',
-  },
-  avatar: 'https://live.staticflickr.com/65535/51355167828_34e6d20320_n.jpg',
-  settings: {
-    language: 'en',
-    theme: 'light',
-    currency: 'UAH',
-  },
-};
-///====////////////////////
-
 const UserMenu = () => {
-  const fullName = `${user.fullName.firstName} ${user.fullName.lastName} `;
-  const avatarUrl = 'https://live.staticflickr.com/65535/51355167828_34e6d20320_n.jpg';
+  const navigate = useNavigate();
+
+  const {
+    data: {
+      data: {
+        user: {
+          email,
+          fullName: { firstName, lastName },
+          avatar,
+        },
+      },
+    },
+    isFetching,
+  } = useGetCurrentUserQuery();
+
+  const { logout } = useLogoutMutation();
+  const handleClick = () => {
+    navigate('/profile');
+  };
+
+  const fullNameValid = firstName & lastName ? `${firstName} ${lastName}` : null;
+  const avatarUrl = avatar ? avatar : '';
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  let navigate = useNavigate();
-
-  const goToHomePage = () => navigate('/');
+  const goToHomePage = () => {
+    // logout();
+    handleClose();
+    navigate('/');
+  };
 
   const small = useMediaPredicate('(max-width: 767px)');
   const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
@@ -41,12 +49,35 @@ const UserMenu = () => {
 
   return (
     <Stack direction="row" alignItems="center" spacing={2} color="#CBCCD0">
-      <IconAvatar src={avatarUrl} width={32} height={32} />
-      {small && <LogoutIcon onClick={handleOpen} />}
+      <button className={style.buttonProfile} type="button" onClick={handleClick}>
+        <IconAvatar src={avatarUrl} width={32} height={32} />{' '}
+        {small && (
+          <LogoutIcon
+            onClick={handleOpen}
+            sx={{ fontSize: 18, color: COLORS.auxiliaryDark }}
+            titleAccess={'Выйти'}
+          />
+        )}
+        {medium && (
+          <>
+            {(fullNameValid || email) && (
+              <p className={style.user__name}>{fullNameValid ? fullNameValid : email}</p>
+            )}
+            <span className={style.user__line}></span>{' '}
+          </>
+        )}
+        {large && (
+          <>
+            {(fullNameValid || email) && (
+              <p className={style.user__name}>{fullNameValid ? fullNameValid : email}</p>
+            )}
+            <span className={style.user__line}></span>
+          </>
+        )}
+      </button>
+
       {medium && (
         <>
-          <p className={style.user__name}>{fullName}</p>
-          <span className={style.user__line}></span>
           <button className={style.user__button__logout} onClick={handleOpen}>
             Выйти
           </button>
@@ -54,8 +85,6 @@ const UserMenu = () => {
       )}
       {large && (
         <>
-          <p className={style.user__name}>{fullName}</p>
-          <span className={style.user__line}></span>
           <button className={style.user__button__logout} onClick={handleOpen}>
             Выйти
           </button>

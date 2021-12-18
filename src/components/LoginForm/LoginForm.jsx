@@ -153,7 +153,7 @@ const LoginForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button onClick={navigateToRegistration()} name="Регистрация" type="submit"></Button>
+          <Button onClick={navigateToRegistration} name="Регистрация" type="button"></Button>
         </Stack>
       </form>
     </div>
