@@ -8,6 +8,7 @@ const authSlice = createSlice({
       console.log('slice', accessToken);
       state.user = user;
       state.accessToken = accessToken;
+
     },
   },
 });

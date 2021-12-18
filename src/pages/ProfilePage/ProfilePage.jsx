@@ -16,14 +16,15 @@ import { makeStyles } from '@mui/styles';
 import ShareIcon from '@mui/icons-material/Share';
 import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
+import { AppBar } from 'components/AppBar';
 
 import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
 import style from './ProfilePage.module.scss';
 
 const ProfilePage = () => {
-  const location = useLocation();
-  const [locationFrom, setLocationFrom] = useState(location?.state?.from ?? '/');
+  // const location = useLocation();
+  // const [locationFrom, setLocationFrom] = useState(location?.state?.from ?? '/');
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -39,7 +40,7 @@ const ProfilePage = () => {
       firstName: 'Nikolay',
       lastName: 'Mosalov',
     },
-    avatar: 'https://www.belanta.vet/vet-blog/wp-content/uploads/2019/09/5-4.jpg',
+    avatar: '',
     settings: {
       language: 'en',
       theme: 'light',
@@ -81,7 +82,7 @@ const ProfilePage = () => {
       '& .MuiOutlinedInput-root': {
         marginBottom: 20,
         marginLeft: 'auto',
-        marginBRight: 'auto',
+        marginRight: 'auto',
         padding: 0,
         borderRadius: 30,
         backgroundColor: `${COLORS.auxiliaryLight}`,
@@ -138,15 +139,11 @@ const ProfilePage = () => {
             className={style.profile__buttonShare}
             aria-label="Поделиться с другом"
             onClick={handleOpen}
-            // onMouseDown={handleMouseDownPassword}
           >
-            <ShareIcon
-              sx={{ fontSize: 36, color: COLORS.mainAccent }}
-              titleAccess={'Поделиться с другом'}
-            />
+            <ShareIcon sx={{ fontSize: 32, color: COLORS.mainAccent }} />
           </IconButton>
 
-          <Link className={style.buttonBack} type="button" to={locationFrom}>
+          <Link className={style.buttonBack} type="button" to={'/balance'}>
             <ArrowBackIcon />
           </Link>
           <div className={style.profile__wrapper}>
@@ -331,7 +328,12 @@ const ProfilePage = () => {
                     </MenuItem>
                   ))}
                 </TextField>
-                <Button name="Сохранить" type="submit" variant="center" />
+                <Button
+                  name="Сохранить"
+                  type="submit"
+                  variant="center"
+                  disabled={!(formik.isValid && formik.dirty)}
+                />
               </form>
             </div>
           </div>

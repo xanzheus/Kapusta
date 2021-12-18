@@ -22,7 +22,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     // try to get a new token
     const refreshResult = await baseQuery(
       {
-        url: `/refresh`,
+        url: `refresh`,
         method: 'POST',
       },
       api,
@@ -34,20 +34,20 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(user.logout());
+      api.dispatch(userAPI.logout());
     }
   }
   return result;
 };
 
-export const user = createApi({
+export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['userAPI'],
   endpoints: builder => ({
     createUser: builder.mutation({
       query: ({ email, password }) => ({
-        url: `/registration`,
+        url: `registration`,
         method: 'POST',
         body: {
           email,
@@ -57,7 +57,7 @@ export const user = createApi({
     }),
     login: builder.mutation({
       query: ({ email, password }) => ({
-        url: '/login',
+        url: 'login',
         method: 'POST',
         body: {
           email,
@@ -68,14 +68,23 @@ export const user = createApi({
 
     logout: builder.mutation({
       query: () => ({
-        url: '/logout',
+        url: 'logout',
         method: 'POST',
         headers: {
           Authorization: '',
         },
       }),
     }),
+
+    getCurrentUser: builder.query({
+      query: () => 'current',
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useLoginMutation, useLogoutMutation } = user;
+export const {
+  useCreateUserMutation,
+  useLoginMutation,
+  useLogoutMutation,
+  useGetCurrentUserQuery,
+} = userAPI;
