@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import Calculator from 'components/Calculator';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -62,13 +63,6 @@ const useStyles = makeStyles(theme => ({
       borderRadius: 0,
     },
 
-    // '& .MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-mgqsxp-MuiInputBase-root-MuiOutlinedInput-root':
-    //   {
-    //     '&:hover': {
-    //       color: 'red',
-    //     },
-    //   },
-
     '& .MuiOutlinedInput-notchedOutline': {
       border: '2px solid #F5F6FB',
     },
@@ -111,12 +105,21 @@ const useStyles = makeStyles(theme => ({
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px 16px 16px 0px',
     },
+
+    '& .css-axso3v-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
+      {
+        borderColor: COLORS.mainAccent,
+      },
   },
 
   dateField: {
     width: 130,
     '& .MuiOutlinedInput-root': {
       borderRadius: '16px 0px 0px 0px',
+    },
+
+    '& .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root:hover': {
+      backgroundColor: 'transparent',
     },
 
     '& .MuiButtonBase-root': {
@@ -137,6 +140,10 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 15,
     },
   },
+
+  calculateButton: {
+    cursor: 'pointer',
+  },
 }));
 
 const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
@@ -146,6 +153,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
   const [amountError, setAmountError] = useState(false);
+  const [isCalculator, setIsCalculator] = useState(false);
 
   useEffect(() => {
     getCurrentDate(date);
@@ -159,6 +167,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     setAmount('');
     setCategoryError(false);
     setAmountError(false);
+    setIsCalculator(false);
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -171,6 +180,10 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     event.preventDefault();
 
     if (category && amount) {
+      if (amount <= 0) {
+        alert('Сумма должна быть дольше нуля');
+        return;
+      }
       const dateResponse = {
         date: format(date, 'dd-MM-yyyy'),
         category,
@@ -197,76 +210,88 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     console.log('Reset');
   };
 
-  return (
-    <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Stack className={classes.dateField}>
-          <DatePicker
-            inputFormat="dd/MM/yyyy"
-            openTo="year"
-            value={date}
-            onChange={newValue => {
-              setDate(newValue);
-            }}
-            renderInput={params => <TextField color="info" className={classes.field} {...params} />}
-          />
-        </Stack>
-      </LocalizationProvider>
-      <TextField
-        className={[classes.field, classes.description].join(' ')}
-        color="info"
-        helperText="Введите описание"
-        label={placeholder[0]}
-        onChange={handleChangeDescription}
-        value={comment}
-        type="text"
-        name="description"
-      />
-      <Box className={[classes.field, classes.category].join(' ')}>
-        <FormControl fullWidth>
-          <InputLabel>{placeholder[1]}</InputLabel>
-          <Select
-            color="info"
-            error={categoryError}
-            label={placeholder[1]}
-            value={category}
-            onChange={handleChangeCategry}
-            required
-          >
-            {categoryArray.map(item => (
-              <MenuItem key={item} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      <TextField
-        color="info"
-        className={[classes.field, classes.amount].join(' ')}
-        helperText="Введите сумму"
-        value={amount}
-        onChange={handleChangeSum}
-        type="number"
-        name="amount"
-        required
-        error={amountError}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <CalculateIcon onClick={() => console.log('Button')} />
-            </InputAdornment>
-          ),
-        }}
-      />
+  const getAmountFromCalculator = amount => setAmount(amount.result);
 
-      <Stack m="auto" mt={{ md: 4, lg: 0 }}>
-        <Stack spacing={2} direction="row" alignItems="center">
-          <Button name="ВВОД" type="submit" />
-          <Button name="ОЧИСТИТЬ" type="button" onClick={onResetClick} />
+  return (
+    <>
+      <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Stack className={classes.dateField}>
+            <DatePicker
+              inputFormat="dd/MM/yyyy"
+              openTo="year"
+              value={date}
+              onChange={newValue => {
+                setDate(newValue);
+              }}
+              renderInput={params => (
+                <TextField color="info" className={classes.field} {...params} />
+              )}
+            />
+          </Stack>
+        </LocalizationProvider>
+        <TextField
+          className={[classes.field, classes.description].join(' ')}
+          color="info"
+          helperText="Введите описание"
+          label={placeholder[0]}
+          onChange={handleChangeDescription}
+          value={comment}
+          type="text"
+          name="description"
+        />
+        <Box className={[classes.field, classes.category].join(' ')}>
+          <FormControl fullWidth>
+            <InputLabel>{placeholder[1]}</InputLabel>
+            <Select
+              color="info"
+              error={categoryError}
+              label={placeholder[1]}
+              value={category}
+              onChange={handleChangeCategry}
+              required
+            >
+              {categoryArray.map(item => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+
+        <TextField
+          color="info"
+          className={[classes.field, classes.amount].join(' ')}
+          helperText="Введите сумму"
+          value={amount}
+          onChange={handleChangeSum}
+          type="number"
+          name="amount"
+          required
+          error={amountError}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <CalculateIcon
+                  className={classes.calculateButton}
+                  onClick={() => setIsCalculator(!isCalculator)}
+                />
+              </InputAdornment>
+            ),
+          }}
+        />
+
+        <Stack m="auto" mt={{ md: 4, lg: 0 }}>
+          <Stack spacing={2} direction="row" alignItems="center">
+            <Button name="ВВОД" type="submit" />
+            <Button name="ОЧИСТИТЬ" type="button" onClick={onResetClick} />
+          </Stack>
         </Stack>
-      </Stack>
-    </form>
+      </form>
+
+      {isCalculator && <Calculator getAmountFromCalculator={getAmountFromCalculator} />}
+    </>
   );
 };
 
