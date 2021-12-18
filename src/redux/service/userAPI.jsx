@@ -79,6 +79,14 @@ export const userAPI = createApi({
     getCurrentUser: builder.query({
       query: () => 'current',
     }),
+
+    updateAvatar: builder.mutation({
+      query: body => ({
+        url: 'avatar',
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -87,4 +95,5 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useGetCurrentUserQuery,
+  useUpdateAvatarMutation,
 } = userAPI;
