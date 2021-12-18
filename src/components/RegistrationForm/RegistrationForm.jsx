@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
+// API
+import { useCreateUserMutation } from 'redux/service/userAPI';
+import { userSchema } from 'validationSchemas/userSchema';
+import { useNavigate } from 'react-router-dom';
 // MUI
 import { TextField, InputAdornment, IconButton } from '@mui/material/';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -9,8 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
-import { userSchema } from 'validationSchemas/userSchema';
-import { useCreateUserMutation } from 'redux/service/userAPI';
+// STYLES
 import { COLORS } from '../../Constants';
 import style from './registrationForm.module.scss';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
@@ -49,7 +52,10 @@ const useStyles = makeStyles({
 const RegistrationForm = () => {
   // API_Hook
   const [createUser] = useCreateUserMutation();
-
+  const navigate = useNavigate();
+  const moveToLogin = () => {
+    navigate('/login');
+  };
   // useCustomStyle
   const classes = useStyles();
 
@@ -213,7 +219,7 @@ const RegistrationForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button name="Войти" type="button"></Button>
+          <Button name="Войти" type="button" onClick={moveToLogin}></Button>
         </Stack>
       </form>
     </div>

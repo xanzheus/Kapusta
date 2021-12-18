@@ -10,7 +10,7 @@
 }
 
 .registration__title {
-  width: 300px;
+  width: 377px;
   height: 46px;
   @media screen and(min-width:$tablet) {
     width: 306px;
@@ -23,14 +23,18 @@
 }
 
 .title__wrapper {
-  margin-right: 127px;
+  display: flex;
+  justify-content: center;
+  width: 624px;
+  padding-top: 190px;
 }
+
 .registration__subtitle {
   font-weight: 700;
   font-size: 16px;
   line-height: 1.19;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin-left: 70px;
   color: $primary-color;
+  margin-left: 70px;
 }

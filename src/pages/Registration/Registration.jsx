@@ -9,13 +9,10 @@ const Registration = () => {
       <Container>
         <div className={style.main__wrapper}>
           <div className={style.title__wrapper}>
-            <img
-              className={style.registration__title}
-              src={kapusta_title}
-              alt="main-title"
-              width={330}
-            />
-            <p className={style.registration__subtitle}>Smart Finance</p>
+            <div>
+              <img className={style.registration__title} src={kapusta_title} alt="main-title" />
+              <p className={style.registration__subtitle}>Smart Finance</p>
+            </div>
           </div>
           <RegisterForm />
         </div>
