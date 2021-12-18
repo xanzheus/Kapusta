@@ -91,13 +91,6 @@ const useStyles = makeStyles(theme => ({
     '& .css-levciy-MuiTablePagination-displayedRows': {
       fontSize: 12,
     },
-
-    // '& .MuiButton-root': {
-    //   position: 'absolute',
-    //   left: '10px',
-    //   bottom: '10px',
-    //   color: 'green',
-    // },
   },
 
   income: {
