@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { format, startOfMonth, startOfYear } from 'date-fns';
+import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
 import HeaderTabs from 'components/BalanceTable/HeaderTabs';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
 import style from '../BalancePage/BalancePage.module.scss';
 
 const userBalance = {
-  balance: 2500000,
-  isStart: true,
+  balance: 0,
+  isStart: false,
 };
 
 const incomData = [
@@ -147,6 +148,10 @@ const expensesReportData = [
 const BalancePage = () => {
   const [date, setDate] = useState(() => new Date());
 
+  const small = useMediaPredicate('(max-width: 767px)');
+  const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
+  const large = useMediaPredicate('(min-width: 1280px)');
+
   const getCurrentDate = date => setDate(date);
 
   const firstOfMonth = format(startOfMonth(date), 'yyyy-MM-dd');
@@ -160,13 +165,27 @@ const BalancePage = () => {
       <Container>
         <BalanceLine userData={userBalance} />
 
-        <HeaderTabs
-          getCurrentDate={getCurrentDate}
-          incomData={incomData}
-          expensesData={expensesData}
-          incomReportData={incomReportData}
-          expensesReportData={expensesReportData}
-        />
+        {small && <h1>Hello</h1>}
+
+        {medium && (
+          <HeaderTabs
+            getCurrentDate={getCurrentDate}
+            incomData={incomData}
+            expensesData={expensesData}
+            incomReportData={incomReportData}
+            expensesReportData={expensesReportData}
+          />
+        )}
+
+        {large && (
+          <HeaderTabs
+            getCurrentDate={getCurrentDate}
+            incomData={incomData}
+            expensesData={expensesData}
+            incomReportData={incomReportData}
+            expensesReportData={expensesReportData}
+          />
+        )}
       </Container>
     </section>
   );

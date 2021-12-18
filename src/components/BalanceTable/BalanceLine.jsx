@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useMediaPredicate } from 'react-media-hook';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
@@ -13,7 +14,12 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     lineHeight: 1.16,
     letterSpacing: '0.02em',
-    marginRight: 40,
+    marginBottom: 5,
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      marginRight: 40,
+      marginBottom: 0,
+    },
   },
 
   balance__input: {
@@ -21,14 +27,18 @@ const useStyles = makeStyles(theme => ({
     height: 44,
     backgroundColor: 'transparent',
     border: `2px solid ${COLORS.mainLight}`,
-    borderRadius: 16,
-    marginRight: 15,
+    borderRadius: '16px 0 0 16px ',
     fontWeight: 700,
     color: COLORS.mainDark,
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      marginRight: 15,
+      borderRadius: 16,
+    },
 
     '&:focus-visible': {
       border: `2px solid ${COLORS.mainAccent}`,
@@ -68,6 +78,12 @@ const useStyles = makeStyles(theme => ({
   disable__button: {
     color: COLORS.secondory,
     marginRight: 0,
+
+    borderRadius: '0 16px 16px 0 ',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      borderRadius: 16,
+    },
   },
 
   reports__link: {
@@ -79,8 +95,12 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
 
+    position: 'absolute',
+    top: 100,
+
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginLeft: 110,
+      position: 'static',
     },
 
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
@@ -124,33 +144,58 @@ const BalanceLine = ({ userData }) => {
     setStart(true);
   };
 
+  const small = useMediaPredicate('(max-width: 767px)');
+  const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
+  const large = useMediaPredicate('(min-width: 1280px)');
+
   return (
     <>
-      <Stack direction="row" alignItems="center" justifyContent="end" mb={{ md: 7, lg: 1 }}>
+      <Stack
+        direction={{ sm: 'column', md: 'row', lg: 'row' }}
+        alignItems="center"
+        justifyContent="end"
+        mb={{ md: 7, lg: 1 }}
+      >
         <p className={classes.balance__title}>Баланс: </p>
 
         {start ? (
-          <p className={[classes.balance__input, classes.disabled].join(' ')}>{`${amount} UAH`}</p>
+          <Stack direction="row">
+            <p
+              className={[classes.balance__input, classes.disabled].join(' ')}
+            >{`${amount} UAH`}</p>
+            <p
+              className={[classes.balance__input, classes.disabled, classes.disable__button].join(
+                ' ',
+              )}
+            >
+              ПОДТВЕРДИТЬ
+            </p>
+          </Stack>
         ) : (
-          <input
-            className={classes.balance__input}
-            placeholder="00.00 UAH"
-            onChange={handleChangeBalance}
-            type="number"
-            name="balance"
-          />
-        )}
-
-        {start ? (
-          <p
-            className={[classes.balance__input, classes.disabled, classes.disable__button].join(
-              ' ',
+          <Stack direction="row">
+            <input
+              className={classes.balance__input}
+              placeholder="00.00 UAH"
+              onChange={handleChangeBalance}
+              type="number"
+              name="balance"
+            />
+            {small && (
+              <Button
+                name="ПОДТВЕРДИТЬ"
+                type="submit"
+                onClick={onSubmit}
+                variant="secondary"
+                borderType="mobile"
+              />
             )}
-          >
-            ПОДТВЕРДИТЬ
-          </p>
-        ) : (
-          <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+            {medium && (
+              <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+            )}
+            {large && (
+              <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+            )}
+          </Stack>
         )}
 
         <Link className={classes.reports__link} to="/reports">
