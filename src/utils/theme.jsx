@@ -12,6 +12,14 @@ const theme = createTheme({
       main: COLORS.mainAccent,
     },
   },
+
+  breakpoints: {
+    values: {
+      sm: 320,
+      md: 768,
+      lg: 1280,
+    },
+  },
 });
 
 export default theme;

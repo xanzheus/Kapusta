@@ -14,43 +14,53 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 // import CalculateIcon from '@mui/icons-material/Calculate';
 // import InputAdornment from '@mui/material/InputAdornment';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   form: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    marginBottom: '60px',
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      flexWrap: 'wrap',
+      marginBottom: 50,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      marginBottom: 60,
+    },
   },
 
   field: {
     '& .MuiInputLabel-root': {
-      fontSize: '12px',
-      lineHeight: '1.16',
+      fontSize: 12,
+      lineHeight: 1.16,
       letterSpacing: '0.02em',
       color: '#c7ccdc',
     },
 
     '& .MuiOutlinedInput-input': {
-      minHeight: '44px',
-      fontSize: '12px',
+      minHeight: 44,
+      fontSize: 12,
       color: COLORS.primary,
-      fontWeight: '700',
+      fontWeight: 700,
       padding: '0 0 0 15px',
     },
 
     '& .MuiFormHelperText-root ': {
-      fontSize: '10px',
-      lineHeight: '1.16',
+      fontSize: 10,
+      lineHeight: 1.16,
       letterSpacing: '0.02em',
       color: '#c7ccdc',
       textAlign: 'center',
     },
 
     '& .MuiOutlinedInput-root': {
-      borderRadius: '0',
+      borderRadius: 0,
     },
 
     '& .MuiOutlinedInput-notchedOutline': {
@@ -64,40 +74,52 @@ const useStyles = makeStyles({
   },
 
   description: {
-    width: '290px',
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      width: 200,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      width: 290,
+    },
   },
 
   category: {
-    width: '190px',
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      width: 165,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      width: 190,
+    },
 
     '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
       {
         display: 'flex',
         alignItems: 'center',
-        paddingLeft: '20px',
+        paddingLeft: 20,
       },
   },
 
   amount: {
-    width: '120px',
+    width: 120,
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px 16px 16px 0px',
     },
   },
 
   dateField: {
-    width: '130px',
+    width: 130,
     '& .MuiOutlinedInput-root': {
       borderRadius: '16px 0px 0px 0px',
     },
 
     '& .MuiButtonBase-root': {
-      paddingLeft: '0',
+      paddingLeft: 0,
     },
 
     '& .MuiSvgIcon-root': {
-      width: '20px',
-      hight: '20px',
+      width: 20,
+      hight: 20,
     },
 
     '& .css-axso3v-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
@@ -105,7 +127,7 @@ const useStyles = makeStyles({
         borderColor: COLORS.mainAccent,
       },
   },
-});
+}));
 
 const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
   const [date, setDate] = useState(() => new Date());
@@ -185,7 +207,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
           />
         </Stack>
       </LocalizationProvider>
-
       <TextField
         className={[classes.field, classes.description].join(' ')}
         helperText="Введите описание"
@@ -196,7 +217,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         type="text"
         name="description"
       />
-
       <Box className={[classes.field, classes.category].join(' ')}>
         <FormControl color="secondary" fullWidth>
           <InputLabel>{placeholder[1]}</InputLabel>
@@ -215,7 +235,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
           </Select>
         </FormControl>
       </Box>
-
       <TextField
         className={[classes.field, classes.amount].join(' ')}
         color="secondary"
@@ -236,7 +255,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         // }}
       />
 
-      <Stack ml="auto">
+      <Stack m="auto" mt={{ md: 4, lg: 0 }}>
         <Stack spacing={2} direction="row" alignItems="center">
           <Button name="ВВОД" type="submit" />
           <Button name="ОЧИСТИТЬ" type="button" onClick={onResetClick} />
