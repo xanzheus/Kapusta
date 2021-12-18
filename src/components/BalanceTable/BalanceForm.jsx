@@ -8,6 +8,8 @@ import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
+import CalculateIcon from '@mui/icons-material/Calculate';
+import InputAdornment from '@mui/material/InputAdornment';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
@@ -15,9 +17,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
-
-// import CalculateIcon from '@mui/icons-material/Calculate';
-// import InputAdornment from '@mui/material/InputAdornment';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -48,7 +47,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: COLORS.primary,
       fontWeight: 700,
-      padding: '0 0 0 15px',
+      padding: '0 10px 0 0',
     },
 
     '& .MuiFormHelperText-root ': {
@@ -62,6 +61,13 @@ const useStyles = makeStyles(theme => ({
     '& .MuiOutlinedInput-root': {
       borderRadius: 0,
     },
+
+    // '& .MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-mgqsxp-MuiInputBase-root-MuiOutlinedInput-root':
+    //   {
+    //     '&:hover': {
+    //       color: 'red',
+    //     },
+    //   },
 
     '& .MuiOutlinedInput-notchedOutline': {
       border: '2px solid #F5F6FB',
@@ -126,6 +132,10 @@ const useStyles = makeStyles(theme => ({
       {
         borderColor: COLORS.mainAccent,
       },
+
+    '& .MuiOutlinedInput-input': {
+      paddingLeft: 15,
+    },
   },
 }));
 
@@ -140,9 +150,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
   useEffect(() => {
     getCurrentDate(date);
   }, [date, getCurrentDate]);
-
-  // console.log(format(date, 'yyyy-MM-dd'));
-  // console.log(format(startOfMonth(date), 'yyyy-MM-dd'));
 
   const classes = useStyles();
 
@@ -201,16 +208,14 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
             onChange={newValue => {
               setDate(newValue);
             }}
-            renderInput={params => (
-              <TextField color="secondary" className={classes.field} {...params} />
-            )}
+            renderInput={params => <TextField color="info" className={classes.field} {...params} />}
           />
         </Stack>
       </LocalizationProvider>
       <TextField
         className={[classes.field, classes.description].join(' ')}
+        color="info"
         helperText="Введите описание"
-        color="secondary"
         label={placeholder[0]}
         onChange={handleChangeDescription}
         value={comment}
@@ -218,9 +223,10 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         name="description"
       />
       <Box className={[classes.field, classes.category].join(' ')}>
-        <FormControl color="secondary" fullWidth>
+        <FormControl fullWidth>
           <InputLabel>{placeholder[1]}</InputLabel>
           <Select
+            color="info"
             error={categoryError}
             label={placeholder[1]}
             value={category}
@@ -236,23 +242,22 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         </FormControl>
       </Box>
       <TextField
+        color="info"
         className={[classes.field, classes.amount].join(' ')}
-        color="secondary"
         helperText="Введите сумму"
-        label="0,00"
         value={amount}
         onChange={handleChangeSum}
         type="number"
         name="amount"
         required
         error={amountError}
-        // InputProps={{
-        //   startAdornment: (
-        //     <InputAdornment position="start">
-        //       <CalculateIcon onClick={() => console.log('Button')} />
-        //     </InputAdornment>
-        //   ),
-        // }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <CalculateIcon onClick={() => console.log('Button')} />
+            </InputAdornment>
+          ),
+        }}
       />
 
       <Stack m="auto" mt={{ md: 4, lg: 0 }}>
