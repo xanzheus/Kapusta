@@ -9,7 +9,7 @@ import ProfilePage from 'pages/ProfilePage';
 import Login from 'pages/Login';
 import style from './App.module.scss';
 
-import { useGetCurrentUserQuery } from 'redux/service/userAPI';
+import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 
 const BalancePage = lazy(() => import('pages' /* webpackChunkName: "BalancePage" */));
 
@@ -41,7 +41,6 @@ function App() {
         </>
       )}
 
-      {/* {data && ( */}
       <>
         <main className={style.main}>
           <div className={style.backgroundWrapperMain}>
@@ -75,7 +74,6 @@ function App() {
           </div>
         </main>
       </>
-      {/* )} */}
     </ThemeProvider>
   );
 }

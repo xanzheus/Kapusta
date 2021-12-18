@@ -43,7 +43,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['userAPI'],
+  tagTypes: ['User'],
   endpoints: builder => ({
     createUser: builder.mutation({
       query: ({ email, password }) => ({
@@ -64,6 +64,7 @@ export const userAPI = createApi({
           password,
         },
       }),
+      providesTags: ['User'],
     }),
 
     logout: builder.mutation({
@@ -77,7 +78,10 @@ export const userAPI = createApi({
     }),
 
     getCurrentUser: builder.query({
-      query: () => 'current',
+      query: () => ({
+        url: 'current',
+        providesTags: ['User'],
+      }),
     }),
 
     updateAvatar: builder.mutation({
@@ -86,6 +90,7 @@ export const userAPI = createApi({
         method: 'PATCH',
         body,
       }),
+      invalidatesTags: ['User'],
     }),
   }),
 });

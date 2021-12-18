@@ -6,7 +6,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
 import IconAvatar from 'components/IconAvatar';
 import { COLORS } from '../../Constants';
-import { useGetCurrentUserQuery, useLogoutMutation } from 'redux/service/userAPI';
+import { useLogoutMutation } from 'redux/service/userAPI';
+import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 import style from './UserMenu.module.scss';
 
 const UserMenu = () => {
@@ -22,7 +23,6 @@ const UserMenu = () => {
         },
       },
     },
-    isFetching,
   } = useGetCurrentUserQuery();
 
   const [logout] = useLogoutMutation();
@@ -30,7 +30,7 @@ const UserMenu = () => {
     navigate('/profile');
   };
 
-  const fullNameValid = firstName & lastName ? `${firstName} ${lastName}` : '';
+  const fullNameValid = firstName || lastName ? `${firstName} ${lastName}` : '';
   const avatarUrl = avatar ? avatar : '';
 
   const [open, setOpen] = useState(false);
