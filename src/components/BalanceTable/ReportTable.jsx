@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       position: 'absolute',
-      top: 940,
+      top: 1000,
     },
 
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {

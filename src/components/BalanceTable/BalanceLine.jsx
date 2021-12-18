@@ -4,25 +4,36 @@ import Stack from '@mui/material/Stack';
 import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
 import COLORS from 'Constants/COLORS';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import trend from '../../images/trend.png';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   balance__title: {
     color: COLORS.secondory,
-    fontWeight: '500',
-    lineHeight: '1.16',
+    fontWeight: 500,
+    lineHeight: 1.16,
     letterSpacing: '0.02em',
-    marginRight: '40px',
+    marginRight: 40,
+
+    // [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+    //   position: 'absolute',
+    //   top: 940,
+    // },
+
+    // [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+    //   marginBottom: 'auto',
+    //   position: 'static',
+    // },
   },
 
   balance__input: {
-    width: '125px',
-    height: '44px',
+    width: 125,
+    height: 44,
     backgroundColor: 'transparent',
     border: `2px solid ${COLORS.mainLight}`,
-    borderRadius: '16px',
-    marginRight: '15px',
-    fontWeight: '700',
+    borderRadius: 16,
+    marginRight: 15,
+    fontWeight: 700,
     color: COLORS.mainDark,
     textAlign: 'center',
     display: 'flex',
@@ -45,9 +56,9 @@ const useStyles = makeStyles({
     },
 
     '&::placeholder': {
-      lineHeight: '1.16',
+      lineHeight: 1.16,
       letterSpacing: '0.02em',
-      fontWeight: '700',
+      fontWeight: 700,
       color: COLORS.mainDark,
       textAlign: 'center',
       width: '100%',
@@ -66,30 +77,36 @@ const useStyles = makeStyles({
 
   disable__button: {
     color: COLORS.secondory,
-    marginRight: '0',
+    marginRight: 0,
   },
 
   reports__link: {
     color: COLORS.secondory,
-    lineHeight: '1.16',
+    lineHeight: 1.16,
     letterSpacing: '0.04em',
     textDecoration: 'none',
-    // color: 'inherit',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: '205px',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      marginLeft: 110,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      marginLeft: 205,
+    },
 
     '&::after': {
       content: "' '",
       display: 'block',
       backgroundImage: `url(${trend})`,
-      width: '24px',
-      height: '24px',
-      marginLeft: '15px',
+      width: 24,
+      height: 24,
+      marginLeft: 15,
     },
   },
-});
+}));
 
 const BalanceLine = ({ userData }) => {
   const { balance, isStart } = userData;
@@ -119,7 +136,7 @@ const BalanceLine = ({ userData }) => {
 
   return (
     <>
-      <Stack direction="row" alignItems="center" justifyContent="end" mb={1}>
+      <Stack direction="row" alignItems="center" justifyContent="end" mb={{ md: 7, lg: 1 }}>
         <p className={classes.balance__title}>Баланс: </p>
 
         {start ? (
