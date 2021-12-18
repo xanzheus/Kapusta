@@ -10,6 +10,9 @@ import { useLogoutMutation } from 'redux/service/userAPI';
 import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 import style from './UserMenu.module.scss';
 
+import { useDispatch } from 'react-redux';
+import { logOut } from 'redux/service/authSlice';
+
 const UserMenu = () => {
   const navigate = useNavigate();
 
