@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -34,7 +34,7 @@ const ProfilePage = () => {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const { data, isFetching } = useGetCurrentUserQuery();
+  const { data } = useGetCurrentUserQuery();
 
   const {
     email,
@@ -89,7 +89,6 @@ const ProfilePage = () => {
     },
     validationSchema: userUpdateSchema,
     onSubmit: (values, formikBag) => {
-      console.log(values);
       formikBag.setFieldValue('password', '');
       formikBag.setFieldValue('confirmPassword', '');
     },
@@ -101,7 +100,6 @@ const ProfilePage = () => {
     },
 
     onSubmit: values => {
-      console.log(values.avatar);
       updateAvatar(values.avatar);
     },
   });
@@ -132,7 +130,7 @@ const ProfilePage = () => {
                   onSubmit={formikAvatar.handleSubmit}
                 >
                   <input
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                     className={style.addFile__input}
                     type="file"
                     name="avatarUpload"

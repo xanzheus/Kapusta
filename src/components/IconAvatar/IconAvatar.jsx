@@ -14,7 +14,6 @@ const IconAvatar = ({ width, height }) => {
         },
       },
     },
-    isFetching,
   } = useGetCurrentUserQuery();
 
   const fullNameValid = firstName || lastName ? `${firstName} ${lastName}` : email;
