@@ -22,7 +22,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     // try to get a new token
     const refreshResult = await baseQuery(
       {
-        url: `refresh`,
+        url: `/refresh`,
         method: 'POST',
       },
       api,
@@ -47,7 +47,7 @@ export const userAPI = createApi({
   endpoints: builder => ({
     createUser: builder.mutation({
       query: ({ email, password }) => ({
-        url: `registration`,
+        url: `/registration`,
         method: 'POST',
         body: {
           email,
@@ -57,7 +57,7 @@ export const userAPI = createApi({
     }),
     login: builder.mutation({
       query: ({ email, password }) => ({
-        url: 'login',
+        url: '/login',
         method: 'POST',
         body: {
           email,
@@ -69,29 +69,13 @@ export const userAPI = createApi({
 
     logout: builder.mutation({
       query: () => ({
-        url: 'logout',
+        url: '/logout',
         method: 'POST',
         headers: {
           Authorization: '',
         },
       }),
     }),
-
-    // getCurrentUser: builder.query({
-    //   query: () => ({
-    //     url: 'current',
-    //     providesTags: ['User'],
-    //   }),
-    // }),
-
-    // updateAvatar: builder.mutation({
-    //   query: body => ({
-    //     url: 'avatar',
-    //     method: 'PATCH',
-    //     body,
-    //   }),
-    //   invalidatesTags: ['User'],
-    // }),
   }),
 });
 
