@@ -14,16 +14,6 @@ const useStyles = makeStyles(theme => ({
     lineHeight: 1.16,
     letterSpacing: '0.02em',
     marginRight: 40,
-
-    // [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
-    //   position: 'absolute',
-    //   top: 940,
-    // },
-
-    // [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
-    //   marginBottom: 'auto',
-    //   position: 'static',
-    // },
   },
 
   balance__input: {
