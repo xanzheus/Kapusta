@@ -77,21 +77,21 @@ export const userAPI = createApi({
       }),
     }),
 
-    getCurrentUser: builder.query({
-      query: () => ({
-        url: 'current',
-        providesTags: ['User'],
-      }),
-    }),
+    // getCurrentUser: builder.query({
+    //   query: () => ({
+    //     url: 'current',
+    //     providesTags: ['User'],
+    //   }),
+    // }),
 
-    updateAvatar: builder.mutation({
-      query: body => ({
-        url: 'avatar',
-        method: 'PATCH',
-        body,
-      }),
-      invalidatesTags: ['User'],
-    }),
+    // updateAvatar: builder.mutation({
+    //   query: body => ({
+    //     url: 'avatar',
+    //     method: 'PATCH',
+    //     body,
+    //   }),
+    //   invalidatesTags: ['User'],
+    // }),
   }),
 });
 
@@ -99,6 +99,6 @@ export const {
   useCreateUserMutation,
   useLoginMutation,
   useLogoutMutation,
-  useGetCurrentUserQuery,
-  useUpdateAvatarMutation,
+  // useGetCurrentUserQuery,
+  // useUpdateAvatarMutation,
 } = userAPI;

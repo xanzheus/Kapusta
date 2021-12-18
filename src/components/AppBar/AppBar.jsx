@@ -1,6 +1,6 @@
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
-import { useGetCurrentUserQuery } from 'redux/service/userAPI';
+import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 
 import style from './AppBar.module.scss';
 
