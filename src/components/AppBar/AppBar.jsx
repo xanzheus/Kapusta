@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router';
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
 import { useGetCurrentUserQuery } from 'redux/service/userAPI';

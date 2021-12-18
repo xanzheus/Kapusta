@@ -9,19 +9,24 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import storage from 'redux-persist/lib/storage';
 import { exchangeRates } from './service/exchangeAPI';
 import authReducer from '../redux/service/authSlice';
 
 import { userAPI } from './service/userAPI';
+import { currentUserAPI } from './service/currentUserAPI';
+
 const authPersistConfig = {
   key: 'auth',
   storage,
   whitelist: ['accessToken'],
 };
+
 export const store = configureStore({
   reducer: {
     [userAPI.reducerPath]: userAPI.reducer,
+    [currentUserAPI.reducerPath]: currentUserAPI.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
 
     [exchangeRates.reducerPath]: exchangeRates.reducer,
@@ -35,6 +40,10 @@ export const store = configureStore({
 
     userAPI.middleware,
     exchangeRates.middleware,
+    currentUserAPI.middleware,
   ],
 });
+
+setupListeners(store.dispatch);
+
 export const persistor = persistStore(store);

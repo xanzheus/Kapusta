@@ -9,66 +9,39 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-// import Button from '@mui/material/Button';
 import Button from 'components/Button';
 import { InviteModal } from 'components/Modal';
 import { makeStyles } from '@mui/styles';
 import ShareIcon from '@mui/icons-material/Share';
-import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
+import { userUpdateSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
-import { AppBar } from 'components/AppBar';
-import { useUpdateAvatarMutation } from 'redux/service/userAPI';
+
+import { useUpdateAvatarMutation, useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 
 import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
 import style from './ProfilePage.module.scss';
 
 const ProfilePage = () => {
-  // const location = useLocation();
-  // const [locationFrom, setLocationFrom] = useState(location?.state?.from ?? '/');
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [updateAvatar] = useUpdateAvatarMutation();
+  const [updateAvatar] = useUpdateAvatarMutation({
+    fixedCacheKey: 'shared-update-avatar',
+  });
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  ////////////test////////////////////////////
-  const user = {
-    email: 'john.doe@gmail.com',
-    fullName: {
-      firstName: 'Nikolay',
-      lastName: 'Mosalov',
-    },
-    avatar: '',
-    settings: {
-      language: 'en',
-      theme: 'light',
-      currency: 'UAH',
-    },
-  };
+  const { data, isFetching } = useGetCurrentUserQuery();
 
   const {
     email,
     fullName: { firstName, lastName },
     avatar,
     settings: { language, theme, currency },
-  } = user;
-  /////////===========///////////////
-
-  // const themeStyles = createTheme({
-  //   breakpoints: {
-  //     values: {
-  //       xs: 0,
-  //       sm: 600,
-  //       md: 900,
-  //       lg: 1200,
-  //       xl: 1536,
-  //     },
-  //   },
-  // });
+  } = data.data.user;
 
   const useStyles = makeStyles(theme => ({
     field: {
@@ -101,7 +74,6 @@ const ProfilePage = () => {
     },
   }));
 
-  // useCustomStyle
   const classes = useStyles();
 
   const formik = useFormik({
@@ -172,14 +144,6 @@ const ProfilePage = () => {
                       formikAvatar.setFieldValue('avatar', avatar);
                       formikAvatar.submitForm();
                     }}
-                    //   const fileReader = new FileReader();
-                    //   fileReader.onload = () => {
-                    //     if (fileReader.readyState === 2) {
-                    //       formikAvatar.setFieldValue('file', fileReader.result);
-                    //     }
-                    //   };
-                    //   fileReader.readAsDataURL(event.target.files[0]);
-                    // }}
                   ></input>
 
                   <label htmlFor="avatarUpload">
@@ -195,15 +159,15 @@ const ProfilePage = () => {
               </div>
 
               <div className={style.profile__info}>
-                <h2 className={style.profile__name}>{`${firstName} ${lastName}`}</h2>{' '}
+                <h2 className={style.profile__name}>
+                  {firstName || lastName ? `${firstName} ${lastName}` : ''}
+                </h2>{' '}
                 <h3 className={style.profile__email}>{email}</h3>
               </div>
             </div>
             <div className={style.profile__settings}>
-              {/* <h1 className={style.profile__text}>Настройки пользователя</h1>{' '} */}
               <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
                 <TextField
-                  // className={style.tableData__field}
                   className={classes.field}
                   id="password"
                   name="password"
@@ -278,7 +242,6 @@ const ProfilePage = () => {
                 />
 
                 <TextField
-                  // className={style.tableData__field}
                   className={classes.field}
                   id="language"
                   name="language"
