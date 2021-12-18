@@ -25,7 +25,7 @@ const UserMenu = () => {
     isFetching,
   } = useGetCurrentUserQuery();
 
-  const { logout } = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const handleClick = () => {
     navigate('/profile');
   };
@@ -38,7 +38,7 @@ const UserMenu = () => {
   const handleClose = () => setOpen(false);
 
   const goToHomePage = () => {
-    // logout();
+    logout();
     handleClose();
     navigate('/');
   };

@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
 
     if (token) {
       // console.log('token', token);
-      headers.set('Authorization', `Bearer ${token}`);
+      headers.set('authorization', `Bearer ${token}`);
     }
 
     return headers;
@@ -47,7 +47,7 @@ export const userAPI = createApi({
   endpoints: builder => ({
     createUser: builder.mutation({
       query: ({ email, password }) => ({
-        url: `registration`,
+        url: `/registration`,
         method: 'POST',
         body: {
           email,
@@ -57,7 +57,7 @@ export const userAPI = createApi({
     }),
     login: builder.mutation({
       query: ({ email, password }) => ({
-        url: 'login',
+        url: '/login',
         method: 'POST',
         body: {
           email,
@@ -68,7 +68,7 @@ export const userAPI = createApi({
 
     logout: builder.mutation({
       query: () => ({
-        url: 'logout',
+        url: '/logout',
         method: 'POST',
         headers: {
           Authorization: '',
