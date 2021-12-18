@@ -17,6 +17,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { userUpdateSchema, fileSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
 import { AppBar } from 'components/AppBar';
+import { useUpdateAvatarMutation } from 'redux/service/userAPI';
 
 import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
@@ -29,6 +30,7 @@ const ProfilePage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [updateAvatar] = useUpdateAvatarMutation();
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -123,11 +125,12 @@ const ProfilePage = () => {
 
   const formikAvatar = useFormik({
     initialValues: {
-      file: null,
+      file: {},
     },
 
     onSubmit: values => {
-      console.log(values.file);
+      console.log(values.avatar);
+      updateAvatar(values.avatar);
     },
   });
 
@@ -157,13 +160,16 @@ const ProfilePage = () => {
                   onSubmit={formikAvatar.handleSubmit}
                 >
                   <input
+                    enctype="multipart/form-data"
                     className={style.addFile__input}
                     type="file"
                     name="avatarUpload"
                     id="avatarUpload"
                     hidden
                     onChange={event => {
-                      formikAvatar.setFieldValue('file', event.currentTarget.files[0]);
+                      const avatar = new FormData();
+                      avatar.append('avatar', event.currentTarget.files[0]);
+                      formikAvatar.setFieldValue('avatar', avatar);
                       formikAvatar.submitForm();
                     }}
                     //   const fileReader = new FileReader();

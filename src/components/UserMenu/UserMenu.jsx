@@ -30,7 +30,7 @@ const UserMenu = () => {
     navigate('/profile');
   };
 
-  const fullNameValid = firstName & lastName ? `${firstName} ${lastName}` : null;
+  const fullNameValid = firstName & lastName ? `${firstName} ${lastName}` : '';
   const avatarUrl = avatar ? avatar : '';
 
   const [open, setOpen] = useState(false);

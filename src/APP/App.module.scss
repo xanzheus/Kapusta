@@ -6,14 +6,14 @@
   margin-right: auto;
   background-image: url(../images/bgc-grey-m.png);
   background-repeat: no-repeat;
-  background-position: top 0 center;
+  background-position: top -56px center;
 
   @media screen and (min-width: $tablet) {
     max-width: $tablet;
     // min-height: 1184px; ////////////временно
     background-image: url(../images/bgc-grey-t.png), url(../images/bag-moneys-auth-bottom-d.png);
     background-size: $tablet, 183px;
-    background-position: top 0 center, right 88px bottom 64px;
+    background-position: top -56px center, right 88px bottom 64px;
   }
 
   @media screen and (min-width: $desktop) {
@@ -22,7 +22,7 @@
     background-image: url(../images/bgc-grey-d.png), url(../images/bag-moneys-auth-3rows-d.png);
 
     background-size: $desktop, $desktop;
-    background-position: top 0 left 0, left 2px bottom 0;
+    background-position: top -56px left 0, left 2px bottom 0;
   }
 }
 

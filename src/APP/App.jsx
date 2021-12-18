@@ -28,6 +28,14 @@ function App() {
             <Routes>
               <Route path="/" element={<Registration />} />
               <Route path="login" element={<Login />} />
+              <Route
+                path="*"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <NotFound />
+                  </Suspense>
+                }
+              />
             </Routes>
           </div>
         </>
@@ -55,15 +63,6 @@ function App() {
                 }
               />
 
-
-              <Route
-                path="*"
-                element={
-                  <Suspense fallback={<h1>Loading...</h1>}>
-                    <NotFound />
-                  </Suspense>
-                }
-              />
               <Route
                 path="reports"
                 element={
