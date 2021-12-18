@@ -1,33 +1,43 @@
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   reports__thumb: {
-    minWidth: '230px',
-    marginBottom: 'auto',
+    width: '230px',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      position: 'absolute',
+      top: 940,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      marginBottom: 'auto',
+      position: 'static',
+    },
   },
 
   report__title: {
     background: COLORS.auxiliaryLight,
     textAlign: 'center',
-    minHeight: '40px',
+    minHeight: 40,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: '20px 20px 0px 0px',
-    marginBottom: '2px',
-    fontSize: '12px',
-    lineHeight: '1.16',
+    marginBottom: 2,
+    fontSize: 12,
+    lineHeight: 1.16,
     letterSpacing: '0.02em',
     color: COLORS.mainDark,
-    fontWeight: '700',
+    fontWeight: 700,
   },
 
   report__list: {
-    paddingLeft: '0',
+    paddingLeft: 0,
     listStyle: 'none',
-    margin: '0',
+    margin: 0,
   },
 
   report__item: {
@@ -36,21 +46,21 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     background: COLORS.auxiliaryLight,
     padding: '0px 35px',
-    minHeight: '40px',
-    fontSize: '12px',
-    fontWeight: '400',
-    lineHeight: '1.16',
+    minHeight: 40,
+    fontSize: 12,
+    fontWeight: 400,
+    lineHeight: 1.16,
     color: COLORS.primary,
     letterSpacing: '0.04em',
     '&:not(:last-child)': {
-      marginBottom: '2px',
+      marginBottom: 2,
     },
 
     '&:last-child': {
       borderRadius: '0px 0px 20px 0px',
     },
   },
-});
+}));
 
 const ReportTable = ({ data }) => {
   const classes = useStyles();

@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
 
   description: {
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
-      width: 200,
+      width: 197,
     },
 
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
 
   category: {
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
-      width: 165,
+      width: 160,
     },
 
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {

@@ -8,11 +8,21 @@ import { Box } from '@mui/system';
 import ReportTable from 'components/BalanceTable/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   balancetable: {
-    height: '385px',
-    minWidth: '760px',
+    height: 385,
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      minWidth: 605,
+      marginBottom: 40,
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      minWidth: 760,
+      marginBottom: 0,
+    },
 
     '& .css-1i9y1n9-MuiDataGrid-root': {
       borderRadius: '20px 20px 0px 0px',
@@ -23,9 +33,9 @@ const useStyles = makeStyles({
     },
 
     '& .MuiDataGrid-columnHeaderTitle': {
-      fontSize: '12px',
-      lineHeight: '1.16',
-      fontWeight: '700',
+      fontSize: 12,
+      lineHeight: 1.16,
+      fontWeight: 700,
       letterSpacing: '0.02em',
       color: COLORS.mainBlack,
     },
@@ -40,8 +50,8 @@ const useStyles = makeStyles({
 
     '& .MuiDataGrid-row': {
       color: COLORS.primary,
-      fontSize: '12px',
-      lineHeight: '1.16',
+      fontSize: 12,
+      lineHeight: 1.16,
       cursor: 'cell',
       '&:hover': {
         backgroundColor: COLORS.auxiliaryLight,
@@ -64,22 +74,22 @@ const useStyles = makeStyles({
 
     '& .css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
       color: COLORS.primary,
-      fontSize: '12px',
-      lineHeight: '1.16',
+      fontSize: 12,
+      lineHeight: 1.16,
     },
 
     '& .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input':
       {
         color: COLORS.mainDark,
-        fontSize: '12px',
+        fontSize: 12,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: '0',
+        paddingLeft: 0,
       },
 
     '& .css-levciy-MuiTablePagination-displayedRows': {
-      fontSize: '12px',
+      fontSize: 12,
     },
 
     // '& .MuiButton-root': {
@@ -94,7 +104,7 @@ const useStyles = makeStyles({
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.positive,
-      fontWeight: '900',
+      fontWeight: 900,
     },
   },
 
@@ -102,10 +112,10 @@ const useStyles = makeStyles({
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.negative,
-      fontWeight: '900',
+      fontWeight: 900,
     },
   },
-});
+}));
 
 const BalanceTable = ({ data, reportData, category, Class }) => {
   const [rows, setRows] = useState(data);
@@ -149,7 +159,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
   return (
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
-      <Box display="flex" alignItems="center" justifyContent="space-between">
+      <Box display={{ md: 'block', lg: 'flex' }} alignItems="center" justifyContent="space-between">
         <Stack className={[classes.balancetable, classes[Class]].join(' ')}>
           <DataGrid
             headerHeight={40}

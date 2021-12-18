@@ -10,17 +10,18 @@ import BalanceTable from 'components/BalanceTable/BalanceTable';
 import BalanceForm from 'components/BalanceTable/BalanceForm';
 import COLORS from 'Constants/COLORS';
 import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   tabs: {
     backgroundColor: '#fafbfd',
     borderRadius: '20px 20px 0 0',
-    minWidth: '140px',
-    minHeight: '40px',
-    fontSize: '12px',
-    lineHeight: '1.16',
+    minWidth: 140,
+    minHeight: 40,
+    fontSize: 12,
+    lineHeight: 1.16,
     letterSpacing: '0.02em',
-    fontWeight: '700',
+    fontWeight: 700,
     color: COLORS.mainDark,
     '&.Mui-selected': {
       color: COLORS.mainAccent,
@@ -29,16 +30,24 @@ const useStyles = makeStyles({
   },
 
   tabsline: {
-    minHeight: '0',
+    minHeight: 0,
   },
 
   tabsThumb: {
-    padding: '35px 20px 60px 20px',
+    padding: '35px 20px 50px 20px',
     background: COLORS.mainLight,
     boxShadow: '0px 10px 60px rgba(170, 178, 197, 0.2)',
     borderRadius: '0px 30px 30px 30px',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      padding: '30px 30px 60px 30px',
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      padding: '35px 20px 50px 20px',
+    },
   },
-});
+}));
 
 const HeaderTabs = ({
   getCurrentDate,
