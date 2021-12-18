@@ -78,10 +78,7 @@ const LoginForm = () => {
           dispatch(setCredentials(data));
           navigate('/balance');
         })
-
         .catch(error => console.log(error.message));
-
-      alert(JSON.stringify({ email, password }, null, 2));
     },
   });
 

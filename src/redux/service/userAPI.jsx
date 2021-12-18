@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users/',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
