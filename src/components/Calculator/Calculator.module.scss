@@ -1,0 +1,22 @@
+@import 'styles/shared.scss';
+
+.calculator {
+  @media screen and (min-width: $tablet) {
+    height: 250px;
+    width: 200px;
+    position: absolute;
+    z-index: 100;
+    top: 315px;
+    right: 0;
+  }
+
+  @media screen and (min-width: $desktop) {
+    top: 272px;
+    right: 340px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    top: 272px;
+    right: 660px;
+  }
+}

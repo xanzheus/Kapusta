@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
-import Calculator from 'awesome-react-calculator';
+import style from './Calculator.module.scss';
 
-const style = {
-  height: 250,
-  width: 200,
-  position: 'absolute',
-  zIndex: 100,
-  top: '20%',
-  left: '85%',
-};
+import Calculator from 'awesome-react-calculator';
 
 class Calculate extends Component {
   static propTypes = {
@@ -18,7 +11,7 @@ class Calculate extends Component {
   };
   render() {
     return (
-      <Box style={style}>
+      <Box className={style.calculator}>
         <Calculator onResultChange={this.props.getAmountFromCalculator} />
       </Box>
     );

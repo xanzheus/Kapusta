@@ -68,6 +68,11 @@ const MobileTable = ({ getCurrentDate }) => {
       </LocalizationProvider>
 
       <TranceActions />
+
+      <Stack direction="row">
+        <button>Расход</button>
+        <button>Доход</button>
+      </Stack>
     </>
   );
 };
