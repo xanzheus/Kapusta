@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
 
     if (token) {
       // console.log('token', token);
-      headers.set('authorization', `Bearer ${token}`);
+      headers.set('Authorization', `Bearer ${token}`);
     }
 
     return headers;
@@ -76,22 +76,6 @@ export const userAPI = createApi({
         },
       }),
     }),
-
-    // getCurrentUser: builder.query({
-    //   query: () => ({
-    //     url: 'current',
-    //     providesTags: ['User'],
-    //   }),
-    // }),
-
-    // updateAvatar: builder.mutation({
-    //   query: body => ({
-    //     url: 'avatar',
-    //     method: 'PATCH',
-    //     body,
-    //   }),
-    //   invalidatesTags: ['User'],
-    // }),
   }),
 });
 

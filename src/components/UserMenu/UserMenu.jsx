@@ -15,6 +15,7 @@ import { logOut } from 'redux/service/authSlice';
 
 const UserMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     data: {
@@ -41,7 +42,11 @@ const UserMenu = () => {
   const handleClose = () => setOpen(false);
 
   const goToHomePage = () => {
-    logout();
+    logout()
+      .then(() => {
+        dispatch(logOut());
+      })
+      .catch(error => console.log(error.message));
     handleClose();
     navigate('/');
   };

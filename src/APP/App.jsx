@@ -40,41 +40,41 @@ function App() {
           </div>
         </>
       )}
-      {data && (
-        <>
-          <main className={style.main}>
-            <div className={style.backgroundWrapperMain}>
-              <Routes>
-                <Route
-                  path="balance"
-                  element={
-                    <Suspense fallback={<h1>Loading...</h1>}>
-                      <BalancePage />
-                    </Suspense>
-                  }
-                />
-                <Route
-                  path="profile"
-                  element={
-                    <Suspense fallback={<h1>Loading...</h1>}>
-                      <ProfilePage />
-                    </Suspense>
-                  }
-                />
+      {/* {data && ( */}
+      <>
+        <main className={style.main}>
+          <div className={style.backgroundWrapperMain}>
+            <Routes>
+              <Route
+                path="balance"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <BalancePage />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="profile"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <ProfilePage />
+                  </Suspense>
+                }
+              />
 
-                <Route
-                  path="reports"
-                  element={
-                    <Suspense fallback={<h1>Loading...</h1>}>
-                      <StatisticPage />
-                    </Suspense>
-                  }
-                />
-              </Routes>
-            </div>
-          </main>
-        </>
-      )}
+              <Route
+                path="reports"
+                element={
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <StatisticPage />
+                  </Suspense>
+                }
+              />
+            </Routes>
+          </div>
+        </main>
+      </>
+      {/* )} */}
     </ThemeProvider>
   );
 }
