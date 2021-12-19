@@ -10,8 +10,12 @@ import { useLogoutMutation } from 'redux/service/userAPI';
 import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 import style from './UserMenu.module.scss';
 
+import { useDispatch } from 'react-redux';
+import { logOut } from 'redux/service/authSlice';
+
 const UserMenu = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     data: {
@@ -25,7 +29,7 @@ const UserMenu = () => {
     },
   } = useGetCurrentUserQuery();
 
-  const { logout } = useLogoutMutation();
+  const [logout] = useLogoutMutation();
   const handleClick = () => {
     navigate('/profile');
   };
@@ -38,7 +42,11 @@ const UserMenu = () => {
   const handleClose = () => setOpen(false);
 
   const goToHomePage = () => {
-    // logout();
+    logout()
+      .then(() => {
+        dispatch(logOut());
+      })
+      .catch(error => console.log(error.message));
     handleClose();
     navigate('/');
   };
