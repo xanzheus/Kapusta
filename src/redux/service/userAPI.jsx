@@ -72,7 +72,7 @@ export const userAPI = createApi({
         url: '/logout',
         method: 'POST',
         headers: {
-          Authorization: '',
+          authorization: '',
         },
       }),
     }),
