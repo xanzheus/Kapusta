@@ -89,14 +89,10 @@ const RegistrationForm = () => {
           Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
-          <IconButton
-            name="Google"
-            type="submit"
-            // aria-label="toggle password visibility"
-            // onClick={}
-          >
-            <Google_Icon /> Google
-          </IconButton>
+          <Button>
+            <Google_Icon />
+            Google
+          </Button>
         </div>
         <p className={style.registration__title}>
           Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:

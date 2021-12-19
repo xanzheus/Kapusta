@@ -13,6 +13,7 @@ import loginSchema from 'validationSchemas/login';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import style from './loginForm.module.scss';
+import { COLORS } from '../../Constants';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
 
 const LoginForm = () => {
@@ -41,20 +42,19 @@ const LoginForm = () => {
 
       '& .MuiOutlinedInput-root': {
         // Работает
-        marginBottom: 20,
+        backgroundColor: `${COLORS.auxiliaryLight}`,
+        borderRadius: 30,
+        marginBottom: 15,
         '& fieldset': {
-          border: '1px solid',
-          borderColor: 'black',
           borderRadius: 30,
           width: 265,
           height: 55,
           // background: '#F6F7FB',
-          // borderColor: 'transparent',
+          borderColor: 'transparent',
         },
 
         '& input': {
           padding: '13px 14px',
-          background: '#fff',
           borderRadius: 30,
         },
       },
