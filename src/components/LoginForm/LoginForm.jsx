@@ -103,7 +103,7 @@ const LoginForm = () => {
           id="email"
           name="email"
           label="Электронная почта:"
-          autocomplete="off"
+          // autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -115,7 +115,7 @@ const LoginForm = () => {
         <TextField
           className={classes.field}
           fullWidth
-          autocomplete="off"
+          // autocomplete="off"
           // margin="normal"
           InputProps={{
             endAdornment: (

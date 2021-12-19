@@ -6,10 +6,9 @@ import AppBar from 'components/AppBar/AppBar';
 import Registration from 'pages/Registration';
 import StatisticPage from 'pages/StatisticPage';
 import ProfilePage from 'pages/ProfilePage';
+import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
-
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 
 const BalancePage = lazy(() => import('pages' /* webpackChunkName: "BalancePage" */));
 
@@ -18,63 +17,56 @@ const NotFound = lazy(() =>
 );
 
 function App() {
-  const { data } = useGetCurrentUserQuery();
+  const accessToken = useSelector(state => state.auth.accessToken);
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar />
-      {!data && (
+      {!accessToken && (
         <>
           <div className={style.backgroundWrapperAuth}>
             <Routes>
               <Route path="/" element={<Registration />} />
               <Route path="login" element={<Login />} />
-              <Route
-                path="*"
-                element={
-                  <Suspense fallback={<h1>Loading...</h1>}>
-                    <NotFound />
-                  </Suspense>
-                }
-              />
             </Routes>
           </div>
         </>
       )}
-      {/* {data && ( */}
-      <>
-        <main className={style.main}>
-          <div className={style.backgroundWrapperMain}>
-            <Routes>
-              <Route
-                path="balance"
-                element={
-                  <Suspense fallback={<h1>Loading...</h1>}>
-                    <BalancePage />
-                  </Suspense>
-                }
-              />
-              <Route
-                path="profile"
-                element={
-                  <Suspense fallback={<h1>Loading...</h1>}>
-                    <ProfilePage />
-                  </Suspense>
-                }
-              />
+      {accessToken && (
+        <>
+          <main className={style.main}>
+            <div className={style.backgroundWrapperMain}>
+              <Routes>
+                <Route
+                  path="balance"
+                  element={
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                      <BalancePage />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="profile"
+                  element={
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                      <ProfilePage />
+                    </Suspense>
+                  }
+                />
 
-              <Route
-                path="reports"
-                element={
-                  <Suspense fallback={<h1>Loading...</h1>}>
-                    <StatisticPage />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </div>
-        </main>
-      </>
-      {/* )} */}
+                <Route
+                  path="reports"
+                  element={
+                    <Suspense fallback={<h1>Loading...</h1>}>
+                      <StatisticPage />
+                    </Suspense>
+                  }
+                />
+              </Routes>
+            </div>
+          </main>
+        </>
+      )}
     </ThemeProvider>
   );
 }
