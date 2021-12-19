@@ -4,7 +4,7 @@ import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
 import HeaderTabs from 'components/BalanceTable/HeaderTabs';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
-import MobileTable from 'components/BalanceTable/MobileTable/MobileTable';
+import MobileTable from 'components/BalanceTable/Mobile/Mobile';
 import style from '../BalancePage/BalancePage.module.scss';
 
 const userBalance = {
@@ -164,28 +164,40 @@ const BalancePage = () => {
   return (
     <section className={style.balanceSection}>
       <Container>
-        <BalanceLine userData={userBalance} />
-
-        {small && <MobileTable getCurrentDate={getCurrentDate} />}
-
-        {medium && (
-          <HeaderTabs
+        {small && (
+          <MobileTable
             getCurrentDate={getCurrentDate}
-            incomData={incomData}
-            expensesData={expensesData}
-            incomReportData={incomReportData}
-            expensesReportData={expensesReportData}
+            userData={userBalance}
+            tranceActionsData={expensesData}
           />
         )}
 
+        {medium && (
+          <>
+            <BalanceLine userData={userBalance} />
+
+            <HeaderTabs
+              getCurrentDate={getCurrentDate}
+              incomData={incomData}
+              expensesData={expensesData}
+              incomReportData={incomReportData}
+              expensesReportData={expensesReportData}
+            />
+          </>
+        )}
+
         {large && (
-          <HeaderTabs
-            getCurrentDate={getCurrentDate}
-            incomData={incomData}
-            expensesData={expensesData}
-            incomReportData={incomReportData}
-            expensesReportData={expensesReportData}
-          />
+          <>
+            <BalanceLine userData={userBalance} />
+
+            <HeaderTabs
+              getCurrentDate={getCurrentDate}
+              incomData={incomData}
+              expensesData={expensesData}
+              incomReportData={incomReportData}
+              expensesReportData={expensesReportData}
+            />
+          </>
         )}
       </Container>
     </section>

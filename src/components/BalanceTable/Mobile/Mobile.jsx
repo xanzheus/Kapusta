@@ -6,7 +6,8 @@ import Stack from '@mui/material/Stack';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
-import TranceActions from 'components/BalanceTable/MobileTable/TranceActions';
+import BalanceLine from 'components/BalanceTable/BalanceLine';
+import TranceActions from 'components/BalanceTable/Mobile/TranceActions';
 import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
@@ -41,9 +42,29 @@ const useStyles = makeStyles({
       paddingLeft: 15,
     },
   },
+
+  button: {
+    height: 55,
+    width: '50%',
+    border: 'none',
+    backgroundColor: COLORS.auxiliaryLight,
+    fontSize: 12,
+    fontWeight: 700,
+    lineHeight: 1.16,
+    letterSpacing: '0.02em',
+
+    '&:not(:last-child)': {
+      borderRight: `2px solid ${COLORS.mainLight}`,
+    },
+
+    '&:hover': {
+      color: COLORS.mainLight,
+      backgroundColor: COLORS.mainAccent,
+    },
+  },
 });
 
-const MobileTable = ({ getCurrentDate }) => {
+const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
   const [date, setDate] = useState(() => new Date());
   const classes = useStyles();
 
@@ -53,6 +74,10 @@ const MobileTable = ({ getCurrentDate }) => {
 
   return (
     <>
+      <div style={{ position: 'relative' }}>
+        <BalanceLine userData={userData} />
+      </div>
+
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Stack className={classes.dateField}>
           <DatePicker
@@ -67,18 +92,25 @@ const MobileTable = ({ getCurrentDate }) => {
         </Stack>
       </LocalizationProvider>
 
-      <TranceActions />
+      <TranceActions tranceActionsData={tranceActionsData} />
 
-      <Stack direction="row">
-        <button>Расход</button>
-        <button>Доход</button>
+      <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
+        <button className={classes.button} type="button">
+          Расход
+        </button>
+
+        <button className={classes.button} type="button">
+          Доход
+        </button>
       </Stack>
     </>
   );
 };
 
-MobileTable.propTypes = {
+Mobile.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
+  userData: PropTypes.object.isRequired,
+  tranceActionsData: PropTypes.array.isRequired,
 };
 
-export default MobileTable;
+export default Mobile;

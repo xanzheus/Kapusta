@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaPredicate } from 'react-media-hook';
@@ -14,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     lineHeight: 1.16,
     letterSpacing: '0.02em',
+    marginTop: 95,
     marginBottom: 5,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
@@ -96,7 +98,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
 
     position: 'absolute',
-    top: 100,
+    top: 30,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginLeft: 110,
@@ -204,6 +206,10 @@ const BalanceLine = ({ userData }) => {
       </Stack>
     </>
   );
+};
+
+BalanceLine.propTypes = {
+  userData: PropTypes.object.isRequired,
 };
 
 export default BalanceLine;
