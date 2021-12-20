@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+
 // import Categories from './Categories';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/getReportsData';
@@ -16,7 +17,7 @@ const GraphDetails = () => {
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
-  console.log(diagramType);
+  // console.log(diagramType);
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
     setWindowSize(window.outerWidth);

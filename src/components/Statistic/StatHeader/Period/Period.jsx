@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { format, startOfMonth, endOfMonth } from 'date-fns';
 // import TextField from '@mui/material/TextField';
 // import AdapterDateFns from '@mui/lab/AdapterDateFns';
 // import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -8,13 +9,19 @@ import s from './Period.module.scss';
 
 const Period = () => {
   const [value, setValue] = useState(new Date());
+
+  const [startMonth, setStartMonth] = [format(startOfMonth(value), 'yyyy-MM-dd')];
+  const [endMonth, setEndMonth] = [format(endOfMonth(value), 'yyyy-MM-dd')];
+
   const newMonth = value.toLocaleString('ru', { month: 'long' }).toUpperCase();
   const newYear = value.getFullYear();
-
   const monthRangePicker = (currentDate, range) => {
     const newDate = currentDate.setMonth(currentDate.getMonth() + range);
     setValue(new Date(newDate));
   };
+
+  console.log(`1й день выбраного месяца(${newMonth}): ${startMonth}`);
+  console.log(`последний выбраного месяца(${newMonth}): ${endMonth}`);
 
   return (
     <div className={s.period}>
@@ -23,7 +30,9 @@ const Period = () => {
       <div className={s.period__select}>
         <button
           className={s.search__buttonPickerBack}
-          onClick={() => monthRangePicker(value, -1)}
+          onClick={() => {
+            monthRangePicker(value, -1);
+          }}
         ></button>
 
         <div className={s.period__currentDate}>{`${newMonth} ${newYear}`}</div>
