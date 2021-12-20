@@ -14,6 +14,7 @@ import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
 const FormaUpdatePhone = ({ phone = '' }) => {
+  const [newPhone, setnewPhone] = useState('');
   const [sendRequestAccept] = useSendRequestAcceptMutation({
     fixedCacheKey: 'shared-update-user',
   });
@@ -53,25 +54,18 @@ const FormaUpdatePhone = ({ phone = '' }) => {
 
   const formikPhone = useFormik({
     initialValues: {
-      phone: phone || '+380(0**)***-**-**',
+      phone: phone || '',
       phoneVerified: false,
     },
     validationSchema: phoneSchema,
     onSubmit: (values, formikBag) => {
+      setnewPhone(values.phone);
       const req = {
         phone: values.phone,
         acceptCode: '',
       };
       console.log(req);
       sendRequestAccept(req);
-
-      // formikBag.setFieldValue('password', '');
-      // formikBag.setFieldValue('confirmPassword', '');
-      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
-      // formikBag.setFieldValue('lastName', values.lastName);
-      // formikBag.setFieldValue('language', values.language);
-      // formikBag.setFieldValue('currency', values.currency);
-      // formikBag.setFieldValue('theme', values.theme);
     },
   });
 
@@ -82,16 +76,12 @@ const FormaUpdatePhone = ({ phone = '' }) => {
     },
 
     onSubmit: (values, formikBag) => {
-      console.log(values);
-      // sendRequestAccept(values);
-
-      formikBag.setFieldValue('acceptCode', '');
-      // formikBag.setFieldValue('confirmPassword', '');
-      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
-      // formikBag.setFieldValue('lastName', values.lastName);
-      // formikBag.setFieldValue('language', values.language);
-      // formikBag.setFieldValue('currency', values.currency);
-      // formikBag.setFieldValue('theme', values.theme);
+      const req = {
+        phone: values.phone,
+        acceptCode: values.acceptCode,
+      };
+      console.log(req);
+      sendRequestAccept(req);
     },
   });
 
