@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
@@ -37,18 +38,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       api.dispatch(userAPI.logout());
     }
   }
-  if (result.error && result.error.status === 400) {
-    const { data } = result.error;
-    // toast.error(`${data.message}`, {
-    //   position: 'top-left',
-    //   autoClose: 5000,
-    //   hideProgressBar: false,
-    //   closeOnClick: true,
-    //   pauseOnHover: true,
-    //   draggable: true,
-    //   progress: undefined,
-    // });
-  }
+  // if (result.error && result.error.status === 400) {
+  //   const { data } = result.error;
+  //   toast.error(`${data.message}`, {
+  //     position: 'top-left',
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //   });
+  // }
 
   if (result.error && result.error.status === 403) {
     const { data } = result.error;
@@ -87,10 +88,7 @@ export const userAPI = createApi({
     logout: builder.mutation({
       query: () => ({
         url: '/logout',
-        method: 'POST',
-        headers: {
-          authorization: '',
-        },
+        method: 'GET',
       }),
     }),
   }),
