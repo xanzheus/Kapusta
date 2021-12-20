@@ -65,6 +65,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className={style.profile__info}>
+                  {data.data.user.fullName.firstName || data.data.user.fullName.lastName}
                   <h2 className={style.profile__name}>
                     {data.data.user.fullName.firstName || data.data.user.fullName.lastName
                       ? `${data.data.user.fullName.firstName} ${data.data.user.fullName.lastName}`

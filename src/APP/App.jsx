@@ -32,18 +32,22 @@ const App = () => {
         <Route
           path="/"
           element={
-            <PublicRoute accessToken={accessToken}>
-              <Registration />
-            </PublicRoute>
+            <div className={style.backgroundWrapperAuth}>
+              <PublicRoute accessToken={accessToken}>
+                <Registration />
+              </PublicRoute>
+            </div>
           }
         />
 
         <Route
           path="login"
           element={
-            <PublicRoute accessToken={accessToken}>
-              <Login />
-            </PublicRoute>
+            <div className={style.backgroundWrapperAuth}>
+              <PublicRoute accessToken={accessToken}>
+                <Login />
+              </PublicRoute>
+            </div>
           }
         />
 
@@ -52,7 +56,11 @@ const App = () => {
           element={
             <PrivateRoute accessToken={accessToken}>
               <Suspense fallback={<h1>Loading...</h1>}>
-                <BalancePage />
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <BalancePage />{' '}
+                  </div>
+                </main>
               </Suspense>
             </PrivateRoute>
           }
@@ -62,7 +70,11 @@ const App = () => {
           element={
             <PrivateRoute accessToken={accessToken}>
               <Suspense fallback={<h1>Loading...</h1>}>
-                <ProfilePage />
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <ProfilePage />{' '}
+                  </div>
+                </main>
               </Suspense>
             </PrivateRoute>
           }
@@ -72,7 +84,11 @@ const App = () => {
           element={
             <PrivateRoute accessToken={accessToken}>
               <Suspense fallback={<h1>Loading...</h1>}>
-                <StatisticPage />
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <StatisticPage />{' '}
+                  </div>
+                </main>
               </Suspense>
             </PrivateRoute>
           }
@@ -82,7 +98,11 @@ const App = () => {
           element={
             <PrivateRoute accessToken={accessToken}>
               <Suspense fallback={<h1>Loading...</h1>}>
-                <BalancePage />
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <BalancePage />{' '}
+                  </div>
+                </main>
               </Suspense>
             </PrivateRoute>
           }
@@ -91,7 +111,9 @@ const App = () => {
           path="*"
           element={
             <PublicRoute accessToken={accessToken}>
-              <Registration />
+              <div className={style.backgroundWrapperAuth}>
+                <Registration />
+              </div>
             </PublicRoute>
           }
         />
