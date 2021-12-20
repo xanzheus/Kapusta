@@ -6143,6 +6143,11 @@ globule@^1.0.0:
     lodash "~4.17.10"
     minimatch "~3.0.2"
 
+goober@^2.0.35:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.1.tgz#2328a6dae015c3cd30fc55a70090037a244ad2f6"
+  integrity sha512-TkGCqHxE4g5DtdpwxFCi53bXRtvw0BoSgCihVSIOioe9kfkqin5wXG8BQKykN0tjzmxZJ81qU2KWinZf5qKVlw==
+
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.3, graceful-fs@^4.2.4:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
@@ -10391,6 +10396,13 @@ react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
+react-hot-toast@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.1.1.tgz#56409ab406b534e9e58274cf98d80355ba0fdda0"
+  integrity sha512-Odrp4wue0fHh0pOfZt5H+9nWCMtqs3wdlFSzZPp7qsxfzmbE26QmGWIh6hG43CukiPeOjA8WQhBJU8JwtWvWbQ==
+  dependencies:
+    goober "^2.0.35"
+
 react-i18next@^11.14.3:
   version "11.14.3"
   resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-11.14.3.tgz#b44b5c4d1aadac5211be011827a2830be60f2522"
@@ -10518,6 +10530,13 @@ react-snowfall@^1.1.1:
   integrity sha512-SREER5iikqVY8Fu0BpaYllzGHB1iKZacXY76E/rW1n1zKUH5ClqVWG1UZS+3fR6OTg9GkeGG459juSnARVoNGQ==
   dependencies:
     react-fast-compare "^3.2.0"
+
+react-toastify@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-8.1.0.tgz#acaca4e8c4415c8474562dd84a14e6f390ed7f17"
+  integrity sha512-M+Q3rTmEw/53Csr7NsV/YnldJe4c7uERcY7Tma9mvLU98QT2VhIkKwjBzzxZkJRk/oBKyUAtkyMjMgO00hx6gQ==
+  dependencies:
+    clsx "^1.1.1"
 
 react-transition-group@^4.4.0, react-transition-group@^4.4.2:
   version "4.4.2"

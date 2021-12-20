@@ -94,11 +94,11 @@ const LoginForm = () => {
             onClick={() => {
               googleAuth();
             }}
-            className={style.main__button}
+            variant="google__button"
             name="Google"
-            type="submit"
+            type="button"
           >
-            <Google_Icon />
+            <Google_Icon className={style.google__icon} />
           </Button>
         </div>
         <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>
