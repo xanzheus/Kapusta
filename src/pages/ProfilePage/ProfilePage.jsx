@@ -7,7 +7,7 @@ import FormaUser from './FormaUser';
 import FormaUpdatePhoto from './FormaUpdatePhoto';
 import { COLORS } from '../../Constants';
 
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useGetDataUserQuery } from 'redux/service/userAPI';
 
 import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
@@ -16,12 +16,11 @@ import style from './ProfilePage.module.scss';
 const ProfilePage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
-    console.log('жмяк');
     return setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  const { data, isLoading, isFetching } = useGetCurrentUserQuery();
+  const { data, isFetching } = useGetDataUserQuery();
 
   return (
     <>

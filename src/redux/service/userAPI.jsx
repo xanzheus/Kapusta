@@ -9,7 +9,6 @@ const baseQuery = fetchBaseQuery({
     const token = getState().auth.accessToken;
     console.log('header', token);
     if (token) {
-      // console.log('token', token);
       headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
@@ -18,7 +17,6 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log(result);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
@@ -57,7 +55,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
   return result;
 };
-
+//////////////////////////////////////////////////////////////////
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: baseQueryWithReauth,
@@ -81,14 +79,59 @@ export const userAPI = createApi({
           email,
           password,
         },
+        credentials: 'include',
+      }),
+    }),
+
+    logout: builder.query({
+      query: () => ({
+        url: '/logout',
+        method: 'GET',
+        headers: {
+          authorization: '',
+        },
+        credentials: 'include',
+      }),
+    }),
+
+    getDataUser: builder.query({
+      query: () => ({
+        url: `/current`,
       }),
       providesTags: ['User'],
     }),
 
-    logout: builder.mutation({
-      query: () => ({
-        url: '/logout',
-        method: 'GET',
+    updateAvatar: builder.mutation({
+      query: body => ({
+        url: '/avatar',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    updateDataUser: builder.mutation({
+      query: body => ({
+        url: '/update',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    inviteFriend: builder.mutation({
+      query: body => ({
+        url: '/invite',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    sendRequestAccept: builder.mutation({
+      query: body => ({
+        url: '/phone-verify',
+        method: 'POST',
+        body,
       }),
     }),
   }),
@@ -97,7 +140,10 @@ export const userAPI = createApi({
 export const {
   useCreateUserMutation,
   useLoginMutation,
-  useLogoutMutation,
-  // useGetCurrentUserQuery,
-  // useUpdateAvatarMutation,
+  useLogoutQuery,
+  useGetDataUserQuery,
+  useUpdateAvatarMutation,
+  useInviteFriendMutation,
+  useUpdateDataUserMutation,
+  useSendRequestAcceptMutation,
 } = userAPI;

@@ -1,20 +1,19 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuItem from '@mui/material/MenuItem';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
+import EditIcon from '@mui/icons-material/Edit';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
+import { EditPhoneModal } from 'components/Modal';
 import { userUpdateSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
-import { useUpdateDataUserMutation, useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useUpdateDataUserMutation, useGetDataUserQuery } from 'redux/service/userAPI';
+// import FormaUpdatePhone from './FormaUpdatePhone';
 import style from './ProfilePage.module.scss';
 
 const FormaUser = ({
@@ -30,8 +29,12 @@ const FormaUser = ({
   const [updateDataUser] = useUpdateDataUserMutation({
     fixedCacheKey: 'shared-update-user',
   });
-  const { getCurrentUser } = useGetCurrentUserQuery;
-  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    return setOpen(true);
+  };
+  const handleClose = () => setOpen(false);
+
   const useStyles = makeStyles(theme => ({
     field: {
       '& .MuiInputLabel-root': {
@@ -69,6 +72,7 @@ const FormaUser = ({
     initialValues: {
       firstName: firstName || '',
       lastName: lastName || '',
+      phone: '111-11-11',
       password: '',
       confirmPassword: '',
       language,
@@ -77,7 +81,6 @@ const FormaUser = ({
     },
     validationSchema: userUpdateSchema,
     onSubmit: (values, formikBag) => {
-      console.log(values);
       const newData = {
         fullName: {
           firstName: values.firstName,
@@ -89,19 +92,15 @@ const FormaUser = ({
           currency: values.currency,
         },
       };
-      dispatch(updateDataUser(JSON.stringify(newData)))
-        .unwrap()
-        .then(getCurrentUser())
-        .catch(rejectedValueOrSerializedError => {
-          console.log(rejectedValueOrSerializedError);
-        });
+      updateDataUser(newData);
+
       formikBag.setFieldValue('password', '');
       formikBag.setFieldValue('confirmPassword', '');
-      formikBag.setFieldValue('firstName', values.firstName);
-      formikBag.setFieldValue('lastName', values.lastName);
-      formikBag.setFieldValue('language', values.language);
-      formikBag.setFieldValue('currency', values.currency);
-      formikBag.setFieldValue('theme', values.theme);
+      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
+      // formikBag.setFieldValue('lastName', values.lastName);
+      // formikBag.setFieldValue('language', values.language);
+      // formikBag.setFieldValue('currency', values.currency);
+      // formikBag.setFieldValue('theme', values.theme);
     },
   });
 
@@ -133,7 +132,6 @@ const FormaUser = ({
             ),
           }}
         />
-
         <TextField
           className={classes.field}
           id="confirmPassword"
@@ -159,6 +157,29 @@ const FormaUser = ({
             ),
           }}
         />
+        <div className={style.phoneWrapper}>
+          <TextField
+            className={classes.field}
+            id="phone"
+            name="phone"
+            label="Номер телефона"
+            value={formik.values.phone}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            disabled
+            error={formik.touched.phone && Boolean(formik.errors.phone)}
+            helperText={formik.touched.phone && formik.errors.phone}
+          />
+          <IconButton
+            className={style.profile__buttonEdit}
+            aria-label="Поделиться с другом"
+            onClick={handleOpen}
+            type={'button'}
+          >
+            <EditIcon sx={{ fontSize: 26 }} />
+          </IconButton>
+        </div>
+
         <TextField
           className={classes.field}
           id="firstName"
@@ -181,7 +202,6 @@ const FormaUser = ({
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
         />
-
         <TextField
           className={classes.field}
           id="language"
@@ -200,7 +220,6 @@ const FormaUser = ({
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           className={classes.field}
           select
@@ -219,7 +238,6 @@ const FormaUser = ({
             </MenuItem>
           ))}
         </TextField>
-
         <TextField
           className={classes.field}
           select
@@ -245,6 +263,7 @@ const FormaUser = ({
           disabled={!(formik.isValid && formik.dirty)}
         />
       </form>
+      {open && <EditPhoneModal open={open} handleClose={handleClose} />}
     </>
   );
 };

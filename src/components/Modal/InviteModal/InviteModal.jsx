@@ -11,7 +11,7 @@ import CancelIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import { inviteFriendSchema } from '../../../validationSchemas/userSchema';
 import { COLORS } from '../../../Constants';
-import { useInviteFriendMutation } from 'redux/service/currentUserAPI';
+import { useInviteFriendMutation } from 'redux/service/userAPI';
 import style from './inviteModal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
