@@ -1,18 +1,24 @@
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
-
+import { Link } from 'react-router-dom';
+// import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
-  const { data } = useGetCurrentUserQuery();
+  const accessToken = useSelector(state => state.auth.accessToken);
+
+  // const { data } = useGetCurrentUserQuery();
   return (
     <>
       <header className={style.header}>
         <Container>
           <div className={style.header__wrapper}>
-            <div className={style.logo}></div>
-            {data && <UserMenu />}
+            <Link to="/balance">
+              <div className={style.logo}></div>
+            </Link>
+
+            {accessToken && <UserMenu />}
           </div>
         </Container>
       </header>

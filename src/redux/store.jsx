@@ -21,7 +21,7 @@ import { googleAPI } from './service/googleAuth';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['user', 'accessToken'],
+  whitelist: ['accessToken'],
 };
 
 export const store = configureStore({
