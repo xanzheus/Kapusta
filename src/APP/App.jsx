@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
 import toast, { Toaster } from 'react-hot-toast';
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 const BalancePage = lazy(() =>
   import('pages/BalancePage/BalancePage' /* webpackChunkName: "BalancePage" */),
 );
@@ -28,17 +28,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <ToastContainer
-        position="top-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <Toaster />
       <AppBar />
       <Routes>
         <Route
