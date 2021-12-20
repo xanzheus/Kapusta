@@ -1,12 +1,8 @@
 import * as Yup from 'yup';
 
 const userUpdateSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Must be 2 characters or more')
-    .max(15, 'Must be 15 characters or less'),
-  lastName: Yup.string()
-    .min(2, 'Must be 2 characters or more')
-    .max(15, 'Must be 15 characters or less'),
+  firstName: Yup.string().max(15, 'Must be 15 characters or less'),
+  lastName: Yup.string().max(15, 'Must be 15 characters or less'),
   password: Yup.string().matches(
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,12}$/,
     'Must Contain 6 Characters, One Uppercase, One Lowercase, One Number and one special case Character',

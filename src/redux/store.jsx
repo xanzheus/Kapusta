@@ -20,7 +20,7 @@ import { currentUserAPI } from './service/currentUserAPI';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['user', 'accessToken'],
+  whitelist: ['accessToken'],
 };
 
 export const store = configureStore({

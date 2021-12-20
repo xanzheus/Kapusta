@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,13 +14,12 @@ import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
 import { userUpdateSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useUpdateDataUserMutation, useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
 import style from './ProfilePage.module.scss';
 
 const FormaUser = ({
   firstName = '',
   lastName = '',
-  email = '',
   language = LANGUAGE.RUSSIAN,
   currency = CURRENCY.HRYVNIA,
   theme = THEME.LIGHT,
@@ -27,6 +27,11 @@ const FormaUser = ({
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+  const [updateDataUser] = useUpdateDataUserMutation({
+    fixedCacheKey: 'shared-update-user',
+  });
+  const { getCurrentUser } = useGetCurrentUserQuery;
+  const dispatch = useDispatch();
   const useStyles = makeStyles(theme => ({
     field: {
       '& .MuiInputLabel-root': {
@@ -62,9 +67,8 @@ const FormaUser = ({
 
   const formik = useFormik({
     initialValues: {
-      firstName,
-      lastName,
-      email: '',
+      firstName: firstName || '',
+      lastName: lastName || '',
       password: '',
       confirmPassword: '',
       language,
@@ -73,14 +77,37 @@ const FormaUser = ({
     },
     validationSchema: userUpdateSchema,
     onSubmit: (values, formikBag) => {
+      console.log(values);
+      const newData = {
+        fullName: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+        },
+        settings: {
+          language: values.language,
+          theme: values.theme,
+          currency: values.currency,
+        },
+      };
+      dispatch(updateDataUser(JSON.stringify(newData)))
+        .unwrap()
+        .then(getCurrentUser())
+        .catch(rejectedValueOrSerializedError => {
+          console.log(rejectedValueOrSerializedError);
+        });
       formikBag.setFieldValue('password', '');
       formikBag.setFieldValue('confirmPassword', '');
+      formikBag.setFieldValue('firstName', values.firstName);
+      formikBag.setFieldValue('lastName', values.lastName);
+      formikBag.setFieldValue('language', values.language);
+      formikBag.setFieldValue('currency', values.currency);
+      formikBag.setFieldValue('theme', values.theme);
     },
   });
 
   return (
     <>
-      <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
+      <form className={style.tableData} onSubmit={formik.handleSubmit}>
         <TextField
           className={classes.field}
           id="password"

@@ -14,19 +14,19 @@ import style from './UserMenu.module.scss';
 
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/service/authSlice';
-import { DataArray } from '@mui/icons-material';
 
 const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
-  const accessToken = useSelector(state => state.auth.accessToken);
+  // const accessToken = useSelector(state => state.auth.accessToken);
 
   const { data, isLoading, isFetching } = useGetCurrentUserQuery();
 
-  const fullName = (firstName, lastName) =>
-    firstName || lastName ? `${firstName} ${lastName}` : '';
+  const fullName = (firstName, lastName) => {
+    return firstName || lastName ? `${firstName} ${lastName}` : '';
+  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -67,11 +67,14 @@ const UserMenu = () => {
             <>
               {!isFetching && (
                 <>
-                  {(fullName(data.data.user.firstName, data.data.user.lastName) ||
+                  {(fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName) ||
                     data.data.user.email) && (
                     <p className={style.user__name}>
-                      {fullName(data.data.user.firstName, data.data.user.lastName)
-                        ? fullName(data.data.user.firstName, data.data.user.lastName)
+                      {fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName)
+                        ? fullName(
+                            data.data.user.fullName.firstName,
+                            data.data.user.fullName.lastName,
+                          )
                         : data.data.user.email}
                     </p>
                   )}{' '}
@@ -84,11 +87,14 @@ const UserMenu = () => {
             <>
               {!isFetching && (
                 <>
-                  {(fullName(data.data.user.firstName, data.data.user.lastName) ||
+                  {(fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName) ||
                     data.data.user.email) && (
                     <p className={style.user__name}>
-                      {fullName(data.data.user.firstName, data.data.user.lastName)
-                        ? fullName(data.data.user.firstName, data.data.user.lastName)
+                      {fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName)
+                        ? fullName(
+                            data.data.user.fullName.firstName,
+                            data.data.user.fullName.lastName,
+                          )
                         : data.data.user.email}
                     </p>
                   )}

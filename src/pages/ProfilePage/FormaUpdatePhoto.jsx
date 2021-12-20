@@ -33,6 +33,7 @@ const FormaUpdatePhoto = () => {
           name="avatarUpload"
           id="avatarUpload"
           hidden
+          value=""
           onChange={event => {
             const avatar = new FormData();
             avatar.append('avatar', event.currentTarget.files[0]);

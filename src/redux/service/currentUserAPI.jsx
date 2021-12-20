@@ -62,7 +62,30 @@ export const currentUserAPI = createApi({
       }),
       invalidatesTags: ['CurrentUser'],
     }),
+
+    updateDataUser: builder.mutation({
+      query: body => ({
+        url: '/update',
+        method: 'PATCH',
+        body,
+      }),
+      providesTags: ['CurrentUser'],
+    }),
+
+    inviteFriend: builder.mutation({
+      query: body => ({
+        url: '/invite',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['CurrentUser'],
+    }),
   }),
 });
 
-export const { useGetCurrentUserQuery, useUpdateAvatarMutation } = currentUserAPI;
+export const {
+  useGetCurrentUserQuery,
+  useUpdateAvatarMutation,
+  useInviteFriendMutation,
+  useUpdateDataUserMutation,
+} = currentUserAPI;

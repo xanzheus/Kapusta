@@ -27,7 +27,7 @@
   @media screen and (min-width: $tablet) {
     background-image: url(../../images/bag-money-115.png), url(../../images/logo.svg);
     background-size: 83px, 183px;
-    background-position: left 4px top 300px, left 50px top 500px;
+    background-position: left 4px top 300px, left 50px top 550px;
     display: flex;
     width: 650px;
     padding: 90px 30px 70px 30px;
@@ -35,7 +35,7 @@
   @media screen and (min-width: $desktop) {
     width: 1050px;
     padding: 120px 60px;
-    background-position: left 30px top 330px, left 160px top 600px;
+    background-position: left 30px top 330px, left 160px top 650px;
   }
 }
 
@@ -76,19 +76,20 @@ button.profile__buttonShare {
   right: 45px;
   width: 50px;
   height: 50px;
-  background-repeat: 50%;
+  border-radius: 50%;
   &:hover,
   &:focus {
     background-color: transparent;
   }
   @media screen and (min-width: $tablet) {
-    top: 615px;
-    left: 280px;
+    top: 675px;
+    right: 450px;
+    z-index: 1;
   }
 
   @media screen and (min-width: $desktop) {
-    top: 715px;
-    left: 460px;
+    top: 775px;
+    right: 760px;
   }
 }
 

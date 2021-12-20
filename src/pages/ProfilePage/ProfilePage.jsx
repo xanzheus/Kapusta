@@ -15,17 +15,11 @@ import style from './ProfilePage.module.scss';
 
 const ProfilePage = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    console.log('жмяк');
+    return setOpen(true);
+  };
   const handleClose = () => setOpen(false);
-
-  // const { data } = useGetCurrentUserQuery();
-
-  // const {
-  //   email,
-  //   fullName: { firstName, lastName },
-  //   avatar,
-  //   settings: { language, theme, currency },
-  // } = data.data.user;
 
   const { data, isLoading, isFetching } = useGetCurrentUserQuery();
 
@@ -38,6 +32,7 @@ const ProfilePage = () => {
               className={style.profile__buttonShare}
               aria-label="Поделиться с другом"
               onClick={handleOpen}
+              type={'button'}
             >
               <ShareIcon sx={{ fontSize: 32, color: COLORS.mainAccent }} />
             </IconButton>
@@ -65,12 +60,13 @@ const ProfilePage = () => {
                 </div>
 
                 <div className={style.profile__info}>
-                  {data.data.user.fullName.firstName || data.data.user.fullName.lastName}
-                  <h2 className={style.profile__name}>
-                    {data.data.user.fullName.firstName || data.data.user.fullName.lastName
-                      ? `${data.data.user.fullName.firstName} ${data.data.user.fullName.lastName}`
-                      : ''}
-                  </h2>{' '}
+                  {(data.data.user.fullName.firstName || data.data.user.fullName.lastName) && (
+                    <h2 className={style.profile__name}>
+                      {data.data.user.fullName.firstName || data.data.user.fullName.lastName
+                        ? `${data.data.user.fullName.firstName} ${data.data.user.fullName.lastName}`
+                        : ''}
+                    </h2>
+                  )}
                   <h3 className={style.profile__email}>{data.data.user.email}</h3>
                 </div>
               </div>
@@ -78,7 +74,6 @@ const ProfilePage = () => {
                 <FormaUser
                   firstName={data.data.user.fullName.firstName}
                   lastName={data.data.user.fullName.lastName}
-                  email={data.data.user.email}
                   language={data.data.user.language}
                   currency={data.data.user.currency}
                   theme={data.data.user.theme}
