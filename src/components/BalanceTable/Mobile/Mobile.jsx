@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
 import TranceActions from 'components/BalanceTable/Mobile/TranceActions';
 import MobileForm from 'components/BalanceTable/Mobile/MobileForm';
-import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
+import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
@@ -81,13 +81,13 @@ const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
 
   const incomeButtonClick = () => {
     toggleForm();
-    setTypes('income');
+    setTypes(CATEGORYTYPE.INCOME);
     setCtegories(incomeCatagoryArray);
   };
 
   const expenseButtonClick = () => {
     toggleForm();
-    setTypes('expense');
+    setTypes(CATEGORYTYPE.EXPENSE);
     setCtegories(expensesCatagoryArray);
   };
 
@@ -95,9 +95,9 @@ const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
     <>
       {!isOpenForm ? (
         <>
-          <div style={{ position: 'relative' }}>
+          <Stack style={{ position: 'relative' }}>
             <BalanceLine userData={userData} />
-          </div>
+          </Stack>
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <Stack className={classes.dateField}>

@@ -8,8 +8,8 @@ import MobileTable from 'components/BalanceTable/Mobile/Mobile';
 import style from '../BalancePage/BalancePage.module.scss';
 
 const userBalance = {
-  balance: 0,
-  isStart: false,
+  balance: 1000000,
+  isStart: true,
 };
 
 const incomData = [
