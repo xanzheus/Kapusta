@@ -8,6 +8,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import BalanceLine from 'components/BalanceTable/BalanceLine';
 import TranceActions from 'components/BalanceTable/Mobile/TranceActions';
+import MobileForm from 'components/BalanceTable/Mobile/MobileForm';
+import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
@@ -66,43 +68,68 @@ const useStyles = makeStyles({
 
 const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
   const [date, setDate] = useState(() => new Date());
+  const [isOpenForm, setIsOpenForm] = useState(false);
+  const [types, setTypes] = useState('');
+  const [categories, setCtegories] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     getCurrentDate(date);
   }, [date, getCurrentDate]);
 
+  const toggleForm = () => setIsOpenForm(!isOpenForm);
+
+  const incomeButtonClick = () => {
+    toggleForm();
+    setTypes('income');
+    setCtegories(incomeCatagoryArray);
+  };
+
+  const expenseButtonClick = () => {
+    toggleForm();
+    setTypes('expense');
+    setCtegories(expensesCatagoryArray);
+  };
+
   return (
     <>
-      <div style={{ position: 'relative' }}>
-        <BalanceLine userData={userData} />
-      </div>
+      {!isOpenForm ? (
+        <>
+          <div style={{ position: 'relative' }}>
+            <BalanceLine userData={userData} />
+          </div>
 
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Stack className={classes.dateField}>
-          <DatePicker
-            inputFormat="dd/MM/yyyy"
-            openTo="year"
-            value={date}
-            onChange={newValue => {
-              setDate(newValue);
-            }}
-            renderInput={params => <TextField color="info" className={classes.field} {...params} />}
-          />
-        </Stack>
-      </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack className={classes.dateField}>
+              <DatePicker
+                inputFormat="dd/MM/yyyy"
+                openTo="year"
+                value={date}
+                onChange={newValue => {
+                  setDate(newValue);
+                }}
+                renderInput={params => (
+                  <TextField color="info" className={classes.field} {...params} />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
 
-      <TranceActions tranceActionsData={tranceActionsData} />
+          <TranceActions tranceActionsData={tranceActionsData} />
 
-      <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
-        <button className={classes.button} type="button">
-          Расход
-        </button>
+          <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
+            <button onClick={expenseButtonClick} className={classes.button} type="button">
+              Расход
+            </button>
 
-        <button className={classes.button} type="button">
-          Доход
-        </button>
-      </Stack>
+            <button onClick={incomeButtonClick} className={classes.button} type="button">
+              Доход
+            </button>
+          </Stack>
+        </>
+      ) : (
+        <MobileForm date={date} toggleForm={toggleForm} types={types} categories={categories} />
+      )}
     </>
   );
 };

@@ -5,11 +5,11 @@ import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 const useStyles = makeStyles(theme => ({
   reports__thumb: {
-    width: '230px',
+    width: 230,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       position: 'absolute',
-      top: 1000,
+      top: 1050,
     },
 
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
