@@ -59,7 +59,9 @@ const FormaUpdatePhone = ({ phone = '' }) => {
     },
     validationSchema: phoneSchema,
     onSubmit: (values, formikBag) => {
+      console.log(values.phone);
       setnewPhone(values.phone);
+      console.log(newPhone);
       const req = {
         phone: values.phone,
         acceptCode: '',
@@ -71,7 +73,7 @@ const FormaUpdatePhone = ({ phone = '' }) => {
 
   const formikPhoneAccept = useFormik({
     initialValues: {
-      phone: formikPhone.values.phone,
+      phone: newPhone,
       acceptCode: '',
     },
 
