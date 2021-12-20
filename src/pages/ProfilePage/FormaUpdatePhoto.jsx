@@ -1,6 +1,6 @@
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useFormik } from 'formik';
-import { useUpdateAvatarMutation } from 'redux/service/currentUserAPI';
+import { useUpdateAvatarMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
 const FormaUpdatePhoto = () => {
