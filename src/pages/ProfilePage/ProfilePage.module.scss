@@ -93,6 +93,29 @@ button.profile__buttonShare {
   }
 }
 
+.profile__buttonEdit {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
+  @media screen and (min-width: $tablet) {
+    //   top: 675px;
+    //   right: 450px;
+    z-index: 1;
+  }
+
+  @media screen and (min-width: $desktop) {
+    //   top: 775px;
+    //   right: 760px;
+  }
+}
+
 .avatar__wrapper {
   position: relative;
   display: flex;
@@ -108,8 +131,8 @@ button.profile__buttonShare {
 
 .addFile__form {
   position: absolute;
-  right: 20px;
-  bottom: 10px;
+  right: 15px;
+  bottom: 6px;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -146,7 +169,7 @@ button.profile__buttonShare {
 .profile__buttonEdit {
   display: block;
   cursor: pointer;
-  color: $primary-color;
+  color: rgba(0, 0, 0, 0.64);
 }
 
 .profile__email {
@@ -175,4 +198,8 @@ button.profile__buttonShare {
     display: flex;
     flex-direction: column;
   }
+}
+
+.phoneWrapper {
+  position: relative;
 }

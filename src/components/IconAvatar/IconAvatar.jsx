@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useGetDataUserQuery } from 'redux/service/userAPI';
 
 const IconAvatar = ({ width, height }) => {
   const {
@@ -14,7 +14,7 @@ const IconAvatar = ({ width, height }) => {
         },
       },
     },
-  } = useGetCurrentUserQuery();
+  } = useGetDataUserQuery();
 
   const fullNameValid = firstName || lastName ? `${firstName} ${lastName}` : email;
 

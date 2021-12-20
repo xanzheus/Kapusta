@@ -50,4 +50,25 @@
   text-transform: uppercase;
   background-color: $auxiliaryLight-color;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  z-index: 1;
+}
+
+.smallRight {
+  @extend .center;
+  width: 106px;
+  margin-left: auto;
+  display: block;
+  margin-bottom: 20px;
+  color: $mainAccent-color;
+  background-color: $auxiliaryLight-color;
+  box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  // background-color: $mainAccent-color;
+  // color: $mainLight-color;
+}
+
+.accentButton {
+  @extend .smallRight;
+
+  background-color: $mainAccent-color;
+  color: $mainLight-color;
 }
