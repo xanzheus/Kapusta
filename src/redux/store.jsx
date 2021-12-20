@@ -15,7 +15,7 @@ import { exchangeRates } from './service/exchangeAPI';
 import authReducer from '../redux/service/authSlice';
 
 import { userAPI } from './service/userAPI';
-import { currentUserAPI } from './service/currentUserAPI';
+// import { currentUserAPI } from './service/currentUserAPI';
 import { transactionApi } from './service/transactionApi';
 
 const authPersistConfig = {
