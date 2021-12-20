@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useGetCategoriesQuery } from '../../../../redux/service/getReportsData';
+import { useGetCategoriesQuery } from '../../../../redux/service/transactionApi';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import sprite from '../../../../images/svg/sprite.svg';

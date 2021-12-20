@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 
 // import Categories from './Categories';
 import CategoriesRTK from './CategoriesRTK';
-import { useGetCategoriesQuery } from '../../../redux/service/getReportsData';
+import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
