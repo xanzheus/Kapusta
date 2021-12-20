@@ -6,10 +6,9 @@ import SelectionModal from 'components/Modal/SelectionModal';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
 import IconAvatar from 'components/IconAvatar';
-import { useSelector } from 'react-redux';
 import { COLORS } from '../../Constants';
 import { useLogoutMutation } from 'redux/service/userAPI';
-import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useGetDataUserQuery } from 'redux/service/userAPI';
 import style from './UserMenu.module.scss';
 
 import { useDispatch } from 'react-redux';
@@ -20,9 +19,8 @@ const UserMenu = () => {
   const dispatch = useDispatch();
   const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
-  // const accessToken = useSelector(state => state.auth.accessToken);
 
-  const { data, isLoading, isFetching } = useGetCurrentUserQuery();
+  const { data, isFetching } = useGetDataUserQuery();
 
   const fullName = (firstName, lastName) => {
     return firstName || lastName ? `${firstName} ${lastName}` : '';

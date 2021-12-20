@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users/',
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
 
     if (token) {
-      // console.log('token', token);
       headers.set('Authorization', `Bearer ${token}`);
     }
 
@@ -17,7 +17,6 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log(result);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
@@ -39,7 +38,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   }
   return result;
 };
-
+//////////////////////////////////////////////////////////////////
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: baseQueryWithReauth,
@@ -63,8 +62,8 @@ export const userAPI = createApi({
           email,
           password,
         },
+        credentials: 'include',
       }),
-      providesTags: ['User'],
     }),
 
     logout: builder.mutation({
@@ -74,6 +73,48 @@ export const userAPI = createApi({
         headers: {
           authorization: '',
         },
+        credentials: 'include',
+      }),
+    }),
+
+    getDataUser: builder.query({
+      query: () => ({
+        url: `/current`,
+      }),
+      providesTags: ['User'],
+    }),
+
+    updateAvatar: builder.mutation({
+      query: body => ({
+        url: '/avatar',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    updateDataUser: builder.mutation({
+      query: body => ({
+        url: '/update',
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
+    inviteFriend: builder.mutation({
+      query: body => ({
+        url: '/invite',
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    sendRequestAccept: builder.mutation({
+      query: body => ({
+        url: '/phone-verify',
+        method: 'POST',
+        body,
       }),
     }),
   }),
@@ -83,6 +124,9 @@ export const {
   useCreateUserMutation,
   useLoginMutation,
   useLogoutMutation,
-  // useGetCurrentUserQuery,
-  // useUpdateAvatarMutation,
+  useGetDataUserQuery,
+  useUpdateAvatarMutation,
+  useInviteFriendMutation,
+  useUpdateDataUserMutation,
+  useSendRequestAcceptMutation,
 } = userAPI;
