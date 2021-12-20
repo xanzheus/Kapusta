@@ -7,7 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
 import IconAvatar from 'components/IconAvatar';
 import { COLORS } from '../../Constants';
-import { useLogoutQuery } from 'redux/service/userAPI';
+import { useLogoutMutation } from 'redux/service/userAPI';
 import { useGetDataUserQuery } from 'redux/service/userAPI';
 import style from './UserMenu.module.scss';
 
@@ -17,7 +17,7 @@ import { logOut } from 'redux/service/authSlice';
 const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [logout] = useLogoutQuery();
+  const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
   const { data, isFetching } = useGetDataUserQuery();

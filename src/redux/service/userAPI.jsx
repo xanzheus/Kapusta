@@ -79,18 +79,16 @@ export const userAPI = createApi({
           email,
           password,
         },
-        credentials: 'include',
       }),
     }),
 
-    logout: builder.query({
+    logout: builder.mutation({
       query: () => ({
         url: '/logout',
-        method: 'GET',
+        method: 'POST',
         headers: {
           authorization: '',
         },
-        credentials: 'include',
       }),
     }),
 
@@ -140,7 +138,7 @@ export const userAPI = createApi({
 export const {
   useCreateUserMutation,
   useLoginMutation,
-  useLogoutQuery,
+  useLogoutMutation,
   useGetDataUserQuery,
   useUpdateAvatarMutation,
   useInviteFriendMutation,
