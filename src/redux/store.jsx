@@ -16,6 +16,7 @@ import authReducer from '../redux/service/authSlice';
 
 import { userAPI } from './service/userAPI';
 import { currentUserAPI } from './service/currentUserAPI';
+import { googleAPI } from './service/googleAuth';
 
 const authPersistConfig = {
   key: 'auth',
@@ -28,7 +29,7 @@ export const store = configureStore({
     [userAPI.reducerPath]: userAPI.reducer,
     [currentUserAPI.reducerPath]: currentUserAPI.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
-
+    [googleAPI.reducerPath]: googleAPI.reducer,
     [exchangeRates.reducerPath]: exchangeRates.reducer,
   },
   middleware: getDefaultMiddleware => [
@@ -41,6 +42,7 @@ export const store = configureStore({
     userAPI.middleware,
     exchangeRates.middleware,
     currentUserAPI.middleware,
+    googleAPI.middleware,
   ],
 });
 

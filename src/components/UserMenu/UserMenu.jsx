@@ -42,6 +42,8 @@ const UserMenu = () => {
   const handleClose = () => setOpen(false);
 
   const goToHomePage = () => {
+    // logout(dispatch(logOut()));
+
     logout()
       .then(() => {
         dispatch(logOut());
