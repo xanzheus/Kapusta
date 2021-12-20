@@ -1,0 +1,57 @@
+@import 'styles/shared.scss';
+
+.backgroundWrapperMain {
+  max-width: $mobile;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(../images/bgc-grey-m.png);
+  background-repeat: no-repeat;
+  background-position: top -56px center;
+
+  @media screen and (min-width: $tablet) {
+    max-width: $tablet;
+    // min-height: 1184px; ////////////временно
+    background-image: url(../images/bgc-grey-t.png), url(../images/bag-moneys-auth-bottom-d.png);
+    background-size: $tablet, 183px;
+    background-position: top -56px center, right 88px bottom 64px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    // min-height: 920px; ////////////временно
+    max-width: $desktop;
+    background-image: url(../images/bgc-grey-d.png), url(../images/bag-moneys-auth-3rows-d.png);
+
+    background-size: $desktop, $desktop;
+    background-position: top -56px left 0, left 2px bottom 0;
+  }
+}
+
+.backgroundWrapperAuth {
+  max-width: $mobile;
+  // padding-top: 84px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(../images/bag-money-115.png), url(../images/bag-money-75.png),
+    url(../images/bgc-grey-m.png);
+  background-size: 84px, 86px, $mobile;
+  background-repeat: no-repeat;
+  background-position: right -20px top 104px, left 6px bottom 6px, top 0 center;
+
+  @media screen and (min-width: $tablet) {
+    max-width: $tablet;
+    min-height: 1184px; ////////////временно
+    background-image: url(../images/bag-moneys-auth-top-d.png), url(../images/bgc-grey-t.png),
+      url(../images/bag-moneys-auth-bottom-d.png);
+    background-size: 1200px, $tablet, 183px;
+    background-position: top 20px left 10px, top 0 left 0, left 100px bottom 56px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    min-height: 920px; ////////////временно
+    max-width: $desktop;
+    background-image: url(../images/bag-moneys-auth-top-d.png), url(../images/bgc-grey-d.png),
+      url(../images/bag-moneys-auth-bottom-d.png);
+    background-size: $desktop, $desktop, 183px;
+    background-position: top 20px left 10px, top 0 left 0, left 100px bottom 56px;
+  }
+}

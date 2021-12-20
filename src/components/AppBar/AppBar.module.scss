@@ -1,0 +1,33 @@
+@import 'styles/shared.scss';
+
+.header {
+  min-height: 56px;
+  background-color: $mainLight-color;
+  // padding-top: 12px;
+  // padding-bottom: 12px;
+}
+
+.header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (min-width: $tablet) {
+    padding: 0 25px;
+  }
+
+  @media screen and (min-width: $desktop) {
+    padding: 0 45px 0 25px;
+  }
+}
+
+.logo {
+  background: url('../../images/logo.svg');
+  width: 90px;
+  height: 31px;
+}
+
+.buttonProfile {
+  border: none;
+  background-color: transparent;
+}

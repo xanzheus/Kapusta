@@ -1,0 +1,51 @@
+@import 'styles/shared.scss';
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  min-height: 194px;
+  text-align: center;
+  background-color: $mainLight-color;
+  box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
+  border-radius: 30px;
+
+  @media screen and (min-width: $tablet) {
+    width: 500px;
+    min-height: 380px;
+  }
+
+  @media screen and (min-width: $tablet) {
+    width: 500px;
+  }
+}
+
+.modal__title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1, 116;
+  letter-spacing: 0.02em;
+}
+
+.modal__close_button {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+
+  transition: color $timing-function;
+
+  &:hover,
+  &:focus {
+    color: $mainAccent-color;
+  }
+}
+
+.tableData {
+  // display: flex;
+  // flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
