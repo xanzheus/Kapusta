@@ -27,7 +27,7 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     [userAPI.reducerPath]: userAPI.reducer,
-    [currentUserAPI.reducerPath]: currentUserAPI.reducer,
+    // [currentUserAPI.reducerPath]: currentUserAPI.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
 
     [exchangeRates.reducerPath]: exchangeRates.reducer,
@@ -42,7 +42,7 @@ export const store = configureStore({
 
     userAPI.middleware,
     exchangeRates.middleware,
-    currentUserAPI.middleware,
+    // currentUserAPI.middleware,
     transactionApi.middleware,
   ],
 });
