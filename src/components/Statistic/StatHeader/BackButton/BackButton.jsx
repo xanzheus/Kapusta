@@ -4,7 +4,7 @@ import s from './BackButton.module.scss';
 const BackButton = () => {
   return (
     <div className={s.backButton}>
-      <Link to="/">
+      <Link to="/balance">
         <div className={s.backButton__block}>
           {' '}
           <svg
