@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users/',
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
@@ -61,16 +62,18 @@ export const userAPI = createApi({
           email,
           password,
         },
+        credentials: 'include',
       }),
     }),
 
-    logout: builder.mutation({
+    logout: builder.query({
       query: () => ({
         url: '/logout',
-        method: 'POST',
+        method: 'GET',
         headers: {
           authorization: '',
         },
+        credentials: 'include',
       }),
     }),
 
@@ -120,7 +123,7 @@ export const userAPI = createApi({
 export const {
   useCreateUserMutation,
   useLoginMutation,
-  useLogoutMutation,
+  useLogoutQuery,
   useGetDataUserQuery,
   useUpdateAvatarMutation,
   useInviteFriendMutation,
