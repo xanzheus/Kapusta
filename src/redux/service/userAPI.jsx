@@ -79,6 +79,7 @@ export const userAPI = createApi({
           email,
           password,
         },
+        credentials: 'include',
       }),
     }),
 
@@ -86,6 +87,10 @@ export const userAPI = createApi({
       query: () => ({
         url: '/logout',
         method: 'GET',
+        headers: {
+          authorization: '',
+        },
+        credentials: 'include',
       }),
     }),
 
