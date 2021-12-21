@@ -18,6 +18,7 @@ import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import Calculator from 'components/Calculator';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -181,8 +182,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         return;
       }
       const dateResponse = {
-        date: format(date, 'dd-MM-yyyy'),
-        category,
+        date: format(date, 'yyyy-MM-dd'),
+        category: TRANSLATE_CATEGORIES[category],
         comment,
         amount: Number(amount),
         type,

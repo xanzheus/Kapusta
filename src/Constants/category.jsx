@@ -28,6 +28,20 @@ export const TRANSLATE_CATEGORIES = {
   other: 'Прочее',
   salary: 'ЗП',
   additional: 'Доп. доход',
+
+  Продукты: 'products',
+  Алкоголь: 'alcohol',
+  Развлечения: 'entertainment',
+  Здоровье: 'healthy',
+  Транспорт: 'transport',
+  'Всё для дома': 'home',
+  Техника: 'technic',
+  'Комуналка, связь': 'communication',
+  'Спорт, Хоби': 'hobby',
+  Образование: 'education',
+  Прочее: 'other',
+  ЗП: 'salary',
+  'Доп. доход': 'additional',
 };
 
 export const CATEGORYTYPE = {
