@@ -7,6 +7,7 @@ import HeaderTabs from 'components/Balance/HeaderTabs';
 import BalanceLine from 'components/Balance/BalanceLine';
 import MobilePage from 'components/Balance/Mobile/MobilePage';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import { useGetTransactionsQuery } from 'redux/service/transactionApi';
 
 const useStyles = makeStyles(theme => ({
   balanceSection: {
@@ -26,10 +27,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const userBalance = {
-  balance: 1000000,
-  isStart: true,
-};
+// const userBalance = {
+//   balance: 1000000,
+//   isStart: true,
+// };
 
 const incomData = [
   {
@@ -168,6 +169,8 @@ const expensesReportData = [
 const BalancePage = () => {
   const [date, setDate] = useState(() => new Date());
 
+  const { data, isFetching } = useGetTransactionsQuery();
+
   const classes = useStyles();
 
   const small = useMediaPredicate('(max-width: 767px)');
@@ -186,38 +189,48 @@ const BalancePage = () => {
     <section className={classes.balanceSection}>
       <Container>
         {small && (
-          <MobilePage
-            getCurrentDate={getCurrentDate}
-            userData={userBalance}
-            tranceActionsData={expensesData}
-          />
+          <>
+            {!isFetching && (
+              <MobilePage
+                getCurrentDate={getCurrentDate}
+                userData={data.data?.transactions.find(item => item.balance)}
+                transactionsData={data.data?.transactions}
+              />
+            )}
+          </>
         )}
 
         {medium && (
           <>
-            <BalanceLine userData={userBalance} />
+            {!isFetching && (
+              <>
+                <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
 
-            <HeaderTabs
-              getCurrentDate={getCurrentDate}
-              incomData={incomData}
-              expensesData={expensesData}
-              incomReportData={incomReportData}
-              expensesReportData={expensesReportData}
-            />
+                <HeaderTabs
+                  getCurrentDate={getCurrentDate}
+                  transactions={data.data?.transactions}
+                  incomReportData={incomReportData}
+                  expensesReportData={expensesReportData}
+                />
+              </>
+            )}
           </>
         )}
 
         {large && (
           <>
-            <BalanceLine userData={userBalance} />
+            {!isFetching && (
+              <>
+                <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
 
-            <HeaderTabs
-              getCurrentDate={getCurrentDate}
-              incomData={incomData}
-              expensesData={expensesData}
-              incomReportData={incomReportData}
-              expensesReportData={expensesReportData}
-            />
+                <HeaderTabs
+                  getCurrentDate={getCurrentDate}
+                  transactions={data.data?.transactions}
+                  incomReportData={incomReportData}
+                  expensesReportData={expensesReportData}
+                />
+              </>
+            )}
           </>
         )}
       </Container>

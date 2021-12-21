@@ -9,7 +9,12 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
+import {
+  expensesCatagoryArray,
+  incomeCatagoryArray,
+  CATEGORYTYPE,
+  TRANSLATE_CATEGORIES,
+} from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 const useStyles = makeStyles(theme => ({
@@ -49,14 +54,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderTabs = ({
-  getCurrentDate,
-  incomData,
-  expensesData,
-  incomReportData,
-  expensesReportData,
-}) => {
+const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesReportData }) => {
   const [value, setValue] = useState('1');
+
+  const refreshedTransactions = (symbol, type) => {
+    return transactions
+      .map(item => ({
+        id: item._id,
+        date: item.date,
+        type: item.type,
+        category: TRANSLATE_CATEGORIES[item.category],
+        comment: item.comment,
+        amount: `${symbol} ${item.amount} грн.`,
+      }))
+      .filter(item => item.type === type);
+  };
 
   const classes = useStyles();
 
@@ -88,7 +100,7 @@ const HeaderTabs = ({
           />
           <BalanceTable
             Class="expenses"
-            data={expensesData}
+            data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
             reportData={expensesReportData}
             category={expensesCatagoryArray}
           />
@@ -103,7 +115,7 @@ const HeaderTabs = ({
           />
           <BalanceTable
             Class="income"
-            data={incomData}
+            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
             reportData={incomReportData}
             category={incomeCatagoryArray}
           />
@@ -115,10 +127,9 @@ const HeaderTabs = ({
 
 HeaderTabs.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
-  incomData: PropTypes.array.isRequired,
-  expensesData: PropTypes.array.isRequired,
   incomReportData: PropTypes.array.isRequired,
   expensesReportData: PropTypes.array.isRequired,
+  transactions: PropTypes.array.isRequired,
 };
 
 export default HeaderTabs;
