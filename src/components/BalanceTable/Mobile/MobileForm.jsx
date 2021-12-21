@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import GoBackButton from 'components/BalanceTable/Mobile/GoBackButton';
@@ -99,7 +100,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MobileForm = ({ date, types, toggleForm, categories }) => {
+const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
@@ -137,7 +138,7 @@ const MobileForm = ({ date, types, toggleForm, categories }) => {
         category,
         comment,
         amount: Number(amount),
-        types,
+        types: categoryTypes,
       };
       console.log(dateResponse);
       console.log('Submit Form');
@@ -228,6 +229,13 @@ const MobileForm = ({ date, types, toggleForm, categories }) => {
       {isCalculator && <Calculator getAmountFromCalculator={getAmountFromCalculator} />}
     </>
   );
+};
+
+MobileForm.propTypes = {
+  date: PropTypes.object.isRequired,
+  categoryTypes: PropTypes.string.isRequired,
+  toggleForm: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
 };
 
 export default MobileForm;

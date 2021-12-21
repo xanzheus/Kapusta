@@ -69,7 +69,7 @@ const useStyles = makeStyles({
 const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
   const [date, setDate] = useState(() => new Date());
   const [isOpenForm, setIsOpenForm] = useState(false);
-  const [types, setTypes] = useState('');
+  const [categoryTypes, setCategoryTypes] = useState('');
   const [categories, setCtegories] = useState([]);
   const classes = useStyles();
 
@@ -81,13 +81,13 @@ const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
 
   const incomeButtonClick = () => {
     toggleForm();
-    setTypes(CATEGORYTYPE.INCOME);
+    setCategoryTypes(CATEGORYTYPE.INCOME);
     setCtegories(incomeCatagoryArray);
   };
 
   const expenseButtonClick = () => {
     toggleForm();
-    setTypes(CATEGORYTYPE.EXPENSE);
+    setCategoryTypes(CATEGORYTYPE.EXPENSE);
     setCtegories(expensesCatagoryArray);
   };
 
@@ -128,7 +128,12 @@ const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
           </Stack>
         </>
       ) : (
-        <MobileForm date={date} toggleForm={toggleForm} types={types} categories={categories} />
+        <MobileForm
+          date={date}
+          toggleForm={toggleForm}
+          categoryTypes={categoryTypes}
+          categories={categories}
+        />
       )}
     </>
   );
