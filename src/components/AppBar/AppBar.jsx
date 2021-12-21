@@ -1,19 +1,24 @@
-import { useLocation } from 'react-router';
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
+import { Link } from 'react-router-dom';
+// import { useGetCurrentUserQuery } from 'redux/service/currentUserAPI';
+import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
-  let location = useLocation();
+  const accessToken = useSelector(state => state.auth.accessToken);
 
+  // const { data } = useGetCurrentUserQuery();
   return (
     <>
       <header className={style.header}>
         <Container>
           <div className={style.header__wrapper}>
-            <div className={style.logo}></div>
-            {location.pathname === ('/balance' || '/profile') && <UserMenu />}
-            {/*///////////////////временно*/}
+            <Link to="/balance">
+              <div className={style.logo}></div>
+            </Link>
+
+            {accessToken && <UserMenu />}
           </div>
         </Container>
       </header>

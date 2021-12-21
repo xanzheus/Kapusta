@@ -50,6 +50,41 @@
   text-transform: uppercase;
   background-color: $auxiliaryLight-color;
   box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  z-index: 1;
+}
+
+.smallRight {
+  @extend .center;
+  width: 106px;
+  margin-left: auto;
+  display: block;
+  margin-bottom: 20px;
+  color: $mainAccent-color;
+  background-color: $auxiliaryLight-color;
+  box-shadow: 1px 3px 5px rgba(82, 85, 95, 0.15);
+  // background-color: $mainAccent-color;
+  // color: $mainLight-color;
+}
+
+.accentButton {
+  @extend .smallRight;
+
+  background-color: $mainAccent-color;
+  color: $mainLight-color;
+}
+
+.google__button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.02em;
+  color: #000000;
+  border-radius: 26px;
+  background: #f6f7fb;
+  padding: 10px 20px;
 }
 
 .mobile {

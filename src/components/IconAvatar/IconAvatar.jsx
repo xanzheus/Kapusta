@@ -1,34 +1,26 @@
 import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 
-////для теста /////////////////////////////
-const user = {
-  email: 'john.doe@gmail.com',
-  fullName: {
-    firstName: 'Nikolay',
-    lastName: 'Mosalov',
-  },
-  avatar: 'https://www.belanta.vet/vet-blog/wp-content/uploads/2019/09/5-4.jpg',
-  settings: {
-    language: 'en',
-    theme: 'light',
-    currency: 'UAH',
-  },
-};
+import { useGetDataUserQuery } from 'redux/service/userAPI';
 
-const {
-  email,
-  fullName: { firstName, lastName },
-  avatar,
-} = user;
-
-///==========///////////
-
-const fullName = firstName || lastName ? `${firstName} ${lastName}` : email;
 const IconAvatar = ({ width, height }) => {
+  const {
+    data: {
+      data: {
+        user: {
+          email,
+          fullName: { firstName, lastName },
+          avatar,
+        },
+      },
+    },
+  } = useGetDataUserQuery();
+
+  const fullNameValid = firstName || lastName ? `${firstName} ${lastName}` : email;
+
   return (
     <>
-      <Avatar alt={fullName} src={avatar} sx={{ width, height }} />
+      <Avatar alt={fullNameValid} src={avatar} sx={{ width, height }} />
     </>
   );
 };

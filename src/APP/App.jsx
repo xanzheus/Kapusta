@@ -3,71 +3,124 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from 'utils/theme';
 import AppBar from 'components/AppBar/AppBar';
+import PrivateRoute from 'components/PrivateRoute';
+import PublicRoute from 'components/PublicRoute';
 import Registration from 'pages/Registration';
-import StatisticPage from 'pages/StatisticPage';
-import ProfilePage from 'pages/ProfilePage';
+import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
+import toast, { Toaster } from 'react-hot-toast';
+// import { ToastContainer } from 'react-toastify';
 
 const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
 
-const NotFound = lazy(() =>
-  import('pages/NotFound/NotFound' /* webpackChunkName: "Not-Found-page" */),
+const ProfilePage = lazy(() =>
+  import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
 );
 
-function App() {
+const StatisticPage = lazy(() =>
+  import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
+);
+
+const App = () => {
+  const accessToken = useSelector(state => state.auth.accessToken);
+
   return (
     <ThemeProvider theme={theme}>
+      <Toaster />
       <AppBar />
-      {/*нужно добавить условие, если не залогинен, то рендерить auth*/}
-      {/* <div className={style.backgroundWrapperAuth}>
-        <Routes>
-          <Route path="/" element={<Registration />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
-      </div> */}
-      {/*нужно добавить условие, если залогинен, то рендерить мейн*/}
-      <main className={style.main}>
-        <div className={style.backgroundWrapperMain}>
-          <Routes>
-            <Route
-              path="balance"
-              element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  <BalancePage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="profile"
-              element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  <ProfilePage />
-                </Suspense>
-              }
-            />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className={style.backgroundWrapperAuth}>
+              <PublicRoute accessToken={accessToken}>
+                <Registration />
+              </PublicRoute>
+            </div>
+          }
+        />
 
-            <Route
-              path="*"
-              element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  <NotFound />
-                </Suspense>
-              }
-            />
-            <Route
-              path="reports"
-              element={
-                <Suspense fallback={<h1>Loading...</h1>}>
-                  <StatisticPage />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </div>
-      </main>
+        <Route
+          path="login"
+          element={
+            <div className={style.backgroundWrapperAuth}>
+              <PublicRoute accessToken={accessToken}>
+                <Login />
+              </PublicRoute>
+            </div>
+          }
+        />
+
+        <Route
+          path="balance"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <BalancePage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="profile"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <ProfilePage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="reports"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <StatisticPage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense fallback={<h1>Loading...</h1>}>
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <BalancePage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PublicRoute accessToken={accessToken}>
+              <div className={style.backgroundWrapperAuth}>
+                <Registration />
+              </div>
+            </PublicRoute>
+          }
+        />
+      </Routes>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

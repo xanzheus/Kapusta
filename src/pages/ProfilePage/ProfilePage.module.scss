@@ -4,6 +4,7 @@
   position: relative;
   padding-top: 30px;
   padding-bottom: 30px;
+
   @media screen and (min-width: $tablet) {
     padding-top: 50px;
     padding-bottom: 220px;
@@ -11,21 +12,30 @@
 }
 
 .profile__wrapper {
-  padding: 70px 10px;
+  padding: 150px 10px 70px 10px;
   background: $mainLight-color;
   box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
   border-radius: 30px;
   margin-right: auto;
   margin-left: auto;
+  background-image: url(../../images/bag-money-115.png), url(../../images/logo.svg),
+    url(../../images/bag-money-75.png);
+  background-repeat: no-repeat;
+  background-size: 83px, 183px, 83px;
+  background-position: left 4px top 370px, center top 30px, right 16px bottom 4px;
 
   @media screen and (min-width: $tablet) {
+    background-image: url(../../images/bag-money-115.png), url(../../images/logo.svg);
+    background-size: 83px, 183px;
+    background-position: left 4px top 300px, left 50px top 550px;
     display: flex;
     width: 650px;
-    padding: 90px 30px;
+    padding: 90px 30px 70px 30px;
   }
   @media screen and (min-width: $desktop) {
     width: 1050px;
     padding: 120px 60px;
+    background-position: left 30px top 330px, left 160px top 650px;
   }
 }
 
@@ -62,18 +72,47 @@
 
 button.profile__buttonShare {
   position: absolute;
-  top: 70px;
-  right: 50px;
-  width: 40px;
-  height: 30px;
+  top: 125px;
+  right: 45px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
   @media screen and (min-width: $tablet) {
-    top: 90px;
-    right: 100px;
+    top: 675px;
+    right: 450px;
+    z-index: 1;
   }
 
   @media screen and (min-width: $desktop) {
-    top: 100px;
-    right: 150px;
+    top: 775px;
+    right: 760px;
+  }
+}
+
+.profile__buttonEdit {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
+  @media screen and (min-width: $tablet) {
+    //   top: 675px;
+    //   right: 450px;
+    z-index: 1;
+  }
+
+  @media screen and (min-width: $desktop) {
+    //   top: 775px;
+    //   right: 760px;
   }
 }
 
@@ -92,8 +131,8 @@ button.profile__buttonShare {
 
 .addFile__form {
   position: absolute;
-  right: 20px;
-  bottom: 10px;
+  right: 15px;
+  bottom: 6px;
   border-radius: 50%;
   height: 50px;
   width: 50px;
@@ -130,7 +169,7 @@ button.profile__buttonShare {
 .profile__buttonEdit {
   display: block;
   cursor: pointer;
-  color: $primary-color;
+  color: rgba(0, 0, 0, 0.64);
 }
 
 .profile__email {
@@ -159,4 +198,8 @@ button.profile__buttonShare {
     display: flex;
     flex-direction: column;
   }
+}
+
+.phoneWrapper {
+  position: relative;
 }

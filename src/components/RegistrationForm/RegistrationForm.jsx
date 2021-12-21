@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
+// API
+import { useCreateUserMutation } from 'redux/service/userAPI';
+import { useGoogleAuthMutation } from 'redux/service/googleAuth';
+import { userSchema } from 'validationSchemas/userSchema';
+import { useNavigate } from 'react-router-dom';
 // MUI
 import { TextField, InputAdornment, IconButton } from '@mui/material/';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -7,10 +12,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+// import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
-import { userSchema } from 'validationSchemas/userSchema';
-import { useCreateUserMutation } from 'redux/service/userAPI';
+// STYLES
+import { COLORS } from '../../Constants';
 import style from './registrationForm.module.scss';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
 
@@ -26,6 +32,8 @@ const useStyles = makeStyles({
 
     '& .MuiOutlinedInput-root': {
       // Работает
+      backgroundColor: `${COLORS.auxiliaryLight}`,
+      borderRadius: 30,
       marginBottom: 15,
       '& fieldset': {
         borderRadius: 30,
@@ -37,7 +45,6 @@ const useStyles = makeStyles({
 
       '& input': {
         padding: '13px 14px',
-        background: '#fff',
         borderRadius: 30,
       },
     },
@@ -47,7 +54,11 @@ const useStyles = makeStyles({
 const RegistrationForm = () => {
   // API_Hook
   const [createUser] = useCreateUserMutation();
-
+  const [googleAuth] = useGoogleAuthMutation();
+  const navigate = useNavigate();
+  const moveToLogin = () => {
+    navigate('/login');
+  };
   // useCustomStyle
   const classes = useStyles();
 
@@ -76,13 +87,20 @@ const RegistrationForm = () => {
 
   return (
     <div className={style.box}>
-      <form autoComplete="off" onSubmit={formik.handleSubmit} novalidate>
+      <form autoComplete="off" onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
           Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
-          <Button name="Google" type="submit">
-            <Google_Icon />
+          <Button
+            onClick={() => {
+              googleAuth();
+            }}
+            variant="google__button"
+            type="button"
+          >
+            <Google_Icon className={style.google__icon} />
+            Google
           </Button>
         </div>
         <p className={style.registration__title}>
@@ -211,7 +229,7 @@ const RegistrationForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button name="Войти" type="submit"></Button>
+          <Button name="Войти" type="button" onClick={moveToLogin}></Button>
         </Stack>
       </form>
     </div>

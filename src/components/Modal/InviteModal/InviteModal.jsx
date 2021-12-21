@@ -11,11 +11,14 @@ import CancelIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
 import { inviteFriendSchema } from '../../../validationSchemas/userSchema';
 import { COLORS } from '../../../Constants';
+import { useInviteFriendMutation } from 'redux/service/userAPI';
 import style from './inviteModal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
 const InviteModal = ({ open, handleClose }) => {
+  const [inviteFriend] = useInviteFriendMutation();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -24,10 +27,15 @@ const InviteModal = ({ open, handleClose }) => {
 
     validationSchema: inviteFriendSchema,
     onSubmit: (values, formikBag) => {
+      inviteFriend({
+        friendEmail: values.email,
+        friendName: values.name,
+      });
       console.log(`send invite for friend ${values.name} to ${values.email}`);
       handleClose();
 
       formikBag.setFieldValue('email', '');
+      formikBag.setFieldValue('name', '');
     },
   });
 

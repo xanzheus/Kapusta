@@ -13,14 +13,16 @@ import loginSchema from 'validationSchemas/login';
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import style from './loginForm.module.scss';
+import { COLORS } from '../../Constants';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
+import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   // const [logout] = useLogoutMutation();
-
+  const [googleAuth] = useGoogleAuthMutation();
   // showPassword
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -41,20 +43,19 @@ const LoginForm = () => {
 
       '& .MuiOutlinedInput-root': {
         // Работает
-        marginBottom: 20,
+        backgroundColor: `${COLORS.auxiliaryLight}`,
+        borderRadius: 30,
+        marginBottom: 15,
         '& fieldset': {
-          border: '1px solid',
-          borderColor: 'black',
           borderRadius: 30,
           width: 265,
           height: 55,
           // background: '#F6F7FB',
-          // borderColor: 'transparent',
+          borderColor: 'transparent',
         },
 
         '& input': {
           padding: '13px 14px',
-          background: '#fff',
           borderRadius: 30,
         },
       },
@@ -78,22 +79,26 @@ const LoginForm = () => {
           dispatch(setCredentials(data));
           navigate('/balance');
         })
-
         .catch(error => console.log(error.message));
-
-      alert(JSON.stringify({ email, password }, null, 2));
     },
   });
 
   return (
     <div className={style.box}>
-      <form autoComplete="off" novalidate onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
           Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
-          <Button className={style.main__button} name="Google" type="submit">
-            <Google_Icon />
+          <Button
+            onClick={() => {
+              googleAuth();
+            }}
+            variant="google__button"
+            name="Google"
+            type="button"
+          >
+            <Google_Icon className={style.google__icon} />
           </Button>
         </div>
         <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>
@@ -106,7 +111,7 @@ const LoginForm = () => {
           id="email"
           name="email"
           label="Электронная почта:"
-          autocomplete="off"
+          // autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -118,7 +123,7 @@ const LoginForm = () => {
         <TextField
           className={classes.field}
           fullWidth
-          autocomplete="off"
+          // autocomplete="off"
           // margin="normal"
           InputProps={{
             endAdornment: (
@@ -153,7 +158,7 @@ const LoginForm = () => {
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button onClick={navigateToRegistration()} name="Регистрация" type="submit"></Button>
+          <Button onClick={navigateToRegistration} name="Регистрация" type="button"></Button>
         </Stack>
       </form>
     </div>

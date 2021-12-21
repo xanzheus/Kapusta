@@ -1,21 +1,22 @@
 @import 'styles/shared.scss';
+@import 'styles/colors.scss';
 
 div.box {
-  display: flex;
-  justify-content: center;
   width: 300px;
   height: auto;
   padding: 45px 18px 53px;
-  // background-color: rgb(240, 240, 240);
+  background-color: $mainLight-color;
   border-radius: 30px;
-  border: 1px solid;
-  border-color: black;
+  box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
+  margin-left: -10px;
+
   @media screen and (min-width: $tablet) {
     width: 436px;
     height: auto;
     padding: 50px 85px;
     // background-color: rgb(240, 240, 240);
     border-radius: 30px;
+    margin-right: 0px;
   }
 }
 
@@ -32,14 +33,14 @@ div.box {
   margin-bottom: 30px;
 }
 
-input .registration__input {
-  background-color: aqua;
-}
-
 .button__wrapper {
   margin-top: 15px;
 }
 
 .login__button {
   margin-right: 15px;
+}
+
+.google__icon {
+  margin-right: 10px;
 }
