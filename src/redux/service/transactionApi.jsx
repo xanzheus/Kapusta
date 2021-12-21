@@ -57,7 +57,6 @@ export const transactionApi = createApi({
       query: ({ startDate, endDate }) => ({
         url: `transactions?startDate${startDate}&endDate=${endDate}`,
       }),
-      // transformResponse(response, meta, args)
     }),
     createTransaction: builder.mutation({
       query: ({ date, category, comment, amount, type }) => ({

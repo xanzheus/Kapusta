@@ -54,24 +54,20 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderTabs = ({
-  getCurrentDate,
-  transactions,
-  incomReportData,
-  expensesReportData,
-  isFetching,
-}) => {
+const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesReportData }) => {
   const [value, setValue] = useState('1');
 
-  const refreshedTransactions = (symbol, type, transactions) => {
-    const fn = str => str.slice(0, str.indexOf('T'));
+  const refreshedTransactions = (symbol, type) => {
+    const transactionsArr = transactions.slice(0, transactions.length - 1);
 
-    return transactions
+    return transactionsArr
       .map(item => {
-        console.log(item.date);
+        const dateStr = item?.date?.toString();
+        const preparedDate = dateStr.slice(0, dateStr.indexOf('T'));
+
         return {
           id: item._id,
-          date: fn(item.date),
+          date: preparedDate,
           type: item.type,
           category: TRANSLATE_CATEGORIES[item.category],
           comment: item.comment,
@@ -109,14 +105,13 @@ const HeaderTabs = ({
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
-          {/* {!isFetching && (
-            <BalanceTable
-              Class="expenses"
-              data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE, transactions)}
-              reportData={expensesReportData}
-              category={expensesCatagoryArray}
-            />
-          )} */}
+
+          <BalanceTable
+            Class="expenses"
+            data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
+            reportData={expensesReportData}
+            category={expensesCatagoryArray}
+          />
         </TabPanel>
 
         <TabPanel className={classes.tabsThumb} value="2">
@@ -126,14 +121,13 @@ const HeaderTabs = ({
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
-          {/* {!isFetching && (
-            <BalanceTable
-              Class="income"
-              data={refreshedTransactions('', CATEGORYTYPE.INCOME, transactions)}
-              reportData={incomReportData}
-              category={incomeCatagoryArray}
-            />
-          )} */}
+
+          <BalanceTable
+            Class="income"
+            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
+            reportData={incomReportData}
+            category={incomeCatagoryArray}
+          />
         </TabPanel>
       </TabContext>
     </Box>
