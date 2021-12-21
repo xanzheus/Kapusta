@@ -195,8 +195,16 @@ button.profile__buttonShare {
 
 .tableData {
   @media screen and (min-width: $tablet) {
+    margin-right: auto;
+    margin-left: auto;
     display: flex;
     flex-direction: column;
+    width: 250px;
+    color: #aabafa;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 380px;
   }
 }
 

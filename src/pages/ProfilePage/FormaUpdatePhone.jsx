@@ -1,19 +1,15 @@
 import { useState } from 'react';
-import MenuItem from '@mui/material/MenuItem';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
-import { phoneSchema, userUpdatePhoneSchema } from '../../validationSchemas/userSchema';
-import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
+import { phoneSchema } from '../../validationSchemas/userSchema';
+import { COLORS } from '../../Constants';
 import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
 const FormaUpdatePhone = ({ phone = '' }) => {
+  const [newPhone, setnewPhone] = useState('');
   const [sendRequestAccept] = useSendRequestAcceptMutation({
     fixedCacheKey: 'shared-update-user',
   });
@@ -53,45 +49,35 @@ const FormaUpdatePhone = ({ phone = '' }) => {
 
   const formikPhone = useFormik({
     initialValues: {
-      phone: phone || '+380(0**)***-**-**',
+      phone: phone || '',
       phoneVerified: false,
     },
     validationSchema: phoneSchema,
     onSubmit: (values, formikBag) => {
+      console.log(values.phone);
+      setnewPhone(values.phone);
+      console.log(newPhone);
       const req = {
         phone: values.phone,
         acceptCode: '',
       };
       console.log(req);
       sendRequestAccept(req);
-
-      // formikBag.setFieldValue('password', '');
-      // formikBag.setFieldValue('confirmPassword', '');
-      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
-      // formikBag.setFieldValue('lastName', values.lastName);
-      // formikBag.setFieldValue('language', values.language);
-      // formikBag.setFieldValue('currency', values.currency);
-      // formikBag.setFieldValue('theme', values.theme);
     },
   });
 
   const formikPhoneAccept = useFormik({
     initialValues: {
-      phone: formikPhone.values.phone,
       acceptCode: '',
     },
 
     onSubmit: (values, formikBag) => {
-      console.log(values);
-      // sendRequestAccept(values);
-
-      formikBag.setFieldValue('acceptCode', '');
-      // formikBag.setFieldValue('confirmPassword', '');
-      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
-      // formikBag.setFieldValue('lastName', values.lastName);
-      // formikBag.setFieldValue('language', values.language);
-      // formikBag.setFieldValue('currency', values.currency);
-      // formikBag.setFieldValue('theme', values.theme);
+      const req = {
+        phone: newPhone,
+        acceptCode: values.acceptCode,
+      };
+      console.log(req);
+      sendRequestAccept(req);
     },
   });
 
@@ -102,7 +88,7 @@ const FormaUpdatePhone = ({ phone = '' }) => {
           className={classes.field}
           id="phone"
           name="phone"
-          placeholder="+38(067)123-12-12"
+          placeholder="+380671234567"
           type="text"
           label="Номер телефона"
           value={formikPhone.values.phone}

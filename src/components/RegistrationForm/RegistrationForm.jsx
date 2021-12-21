@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 // API
 import { useCreateUserMutation } from 'redux/service/userAPI';
+import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 import { userSchema } from 'validationSchemas/userSchema';
 import { useNavigate } from 'react-router-dom';
 // MUI
@@ -11,6 +12,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+// import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 // STYLES
@@ -52,6 +54,7 @@ const useStyles = makeStyles({
 const RegistrationForm = () => {
   // API_Hook
   const [createUser] = useCreateUserMutation();
+  const [googleAuth] = useGoogleAuthMutation();
   const navigate = useNavigate();
   const moveToLogin = () => {
     navigate('/login');
@@ -89,8 +92,14 @@ const RegistrationForm = () => {
           Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
-          <Button>
-            <Google_Icon />
+          <Button
+            onClick={() => {
+              googleAuth();
+            }}
+            variant="google__button"
+            type="button"
+          >
+            <Google_Icon className={style.google__icon} />
             Google
           </Button>
         </div>
