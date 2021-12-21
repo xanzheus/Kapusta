@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import sprite from '../../../../images/svg/sprite.svg';
 import s from './Categories.module.scss';
 
