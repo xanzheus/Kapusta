@@ -8,10 +8,10 @@ import s from './CategoriesRTK.module.scss';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
   const [value, setValue] = useState('costs');
-  const [selectedCategory, setselectedCategory] = useState('');
+  // const [selectedCategory, setselectedCategory] = useState('');
 
-  // const { data = [], isLoading } = useGetCategoriesQuery();
-  const { data = [], isLoading } = useGetCategoriesQuery({ startDate, endDate });
+  const { data = [], isLoading } = useGetCategoriesQuery();
+  // const { data = [], isLoading } = useGetCategoriesQuery({ startDate, endDate });
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = type => {
@@ -77,12 +77,12 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                     data-name={item.name}
                     key={item.name}
                     onClick={e => {
-                      setselectedCategory(e.currentTarget.getAttribute('data-name'));
+                      // setselectedCategory(e.currentTarget.getAttribute('data-name'));
                       setCategory(e.currentTarget.getAttribute('data-name'));
                       setActiveCalss(true);
                     }}
                   >
-                    <a className={s.categorie__link}>
+                    <div className={s.categorie__link}>
                       {item.total}
 
                       {/* <svg className={isActive ? s.icon : s.iconActive}> */}
@@ -91,7 +91,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                       </svg>
 
                       <p className={s.categorie__name}>{item.name}</p>
-                    </a>
+                    </div>
                   </li>
                 );
               })}

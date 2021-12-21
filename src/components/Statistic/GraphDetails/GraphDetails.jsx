@@ -10,11 +10,11 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
 
 const GraphDetails = ({ startDate, endDate }) => {
-  const [resultValue, setResultValue] = useState('РАСХОДЫ');
+  // const [resultValue, setResultValue] = useState('РАСХОДЫ');
   const [isActive, setisActive] = useState(false);
   const [selectedCategory, setselectedCategory] = useState('');
-  // const { data = [] } = useGetCategoriesQuery();
-  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
+  const { data = [] } = useGetCategoriesQuery();
+  // const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
@@ -49,14 +49,14 @@ const GraphDetails = ({ startDate, endDate }) => {
     });
 
     selectedCat.map(item => {
-      Object.keys(item.details).map(i => {
-        detailsArrayKeys.push(i);
+      return Object.keys(item.details).map(i => {
+        return detailsArrayKeys.push(i);
       });
     });
 
     selectedCat.map(item => {
-      Object.values(item.details).map(i => {
-        detailsArrayValues.push(i);
+      return Object.values(item.details).map(i => {
+        return detailsArrayValues.push(i);
       });
     });
 
@@ -128,7 +128,7 @@ const GraphDetails = ({ startDate, endDate }) => {
     <div className={s.graphDetails}>
       {/* <Categories updateData={setResultValue} setActiveCalss={setisActive} /> */}
       <CategoriesRTK
-        updateData={setResultValue}
+        // updateData={setResultValue}
         setActiveCalss={setisActive}
         setCategory={setselectedCategory}
         setDiagramType={setDiagramType}
