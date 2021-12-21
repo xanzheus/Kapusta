@@ -9,7 +9,7 @@ import ProfilePage from 'pages/ProfilePage';
 import Login from 'pages/Login';
 import style from './App.module.scss';
 
-const BalancePage = lazy(() => import('pages' /* webpackChunkName: "BalancePage" */));
+const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
 
 const NotFound = lazy(() =>
   import('pages/NotFound/NotFound' /* webpackChunkName: "Not-Found-page" */),

@@ -5,7 +5,7 @@ import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
 import { Box } from '@mui/system';
-import ReportTable from 'components/BalanceTable/ReportTable';
+import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';

@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
-import trend from '../../images/trend.png';
+import trend from 'images/trend.png';
 
 const useStyles = makeStyles(theme => ({
   balance__title: {

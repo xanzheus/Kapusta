@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import GoBackButton from 'components/BalanceTable/Mobile/GoBackButton';
+import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import Stack from '@mui/material/Stack';
 import format from 'date-fns/format';
 import TextField from '@mui/material/TextField';

@@ -6,9 +6,9 @@ import Stack from '@mui/material/Stack';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
-import BalanceLine from 'components/BalanceTable/BalanceLine';
-import TranceActions from 'components/BalanceTable/Mobile/TranceActions';
-import MobileForm from 'components/BalanceTable/Mobile/MobileForm';
+import BalanceLine from 'components/Balance/BalanceLine/BalanceLine';
+import TranceActions from 'components/Balance/Mobile/TranceActions';
+import MobileForm from 'components/Balance/Mobile/MobileForm';
 import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 
@@ -66,7 +66,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
+const MobilePage = ({ getCurrentDate, userData, tranceActionsData }) => {
   const [date, setDate] = useState(() => new Date());
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [categoryTypes, setCategoryTypes] = useState('');
@@ -139,10 +139,10 @@ const Mobile = ({ getCurrentDate, userData, tranceActionsData }) => {
   );
 };
 
-Mobile.propTypes = {
+MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
   tranceActionsData: PropTypes.array.isRequired,
 };
 
-export default Mobile;
+export default MobilePage;

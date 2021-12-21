@@ -1,11 +1,30 @@
 import { useState } from 'react';
+import { makeStyles } from '@material-ui/core';
 import { format, startOfMonth, startOfYear } from 'date-fns';
 import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
-import HeaderTabs from 'components/BalanceTable/HeaderTabs';
-import BalanceLine from 'components/BalanceTable/BalanceLine';
-import MobileTable from 'components/BalanceTable/Mobile/Mobile';
-import style from '../BalancePage/BalancePage.module.scss';
+import HeaderTabs from 'components/Balance/HeaderTabs';
+import BalanceLine from 'components/Balance/BalanceLine';
+import MobilePage from 'components/Balance/Mobile/MobilePage';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
+
+const useStyles = makeStyles(theme => ({
+  balanceSection: {
+    maxWidth: BREAKPOINTS.mobile,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+
+    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+      maxWidth: BREAKPOINTS.tablet,
+      padding: '40px 0 280px 0',
+    },
+
+    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+      maxWidth: BREAKPOINTS.desktop,
+      padding: '40px 0 80px 0',
+    },
+  },
+}));
 
 const userBalance = {
   balance: 1000000,
@@ -149,6 +168,8 @@ const expensesReportData = [
 const BalancePage = () => {
   const [date, setDate] = useState(() => new Date());
 
+  const classes = useStyles();
+
   const small = useMediaPredicate('(max-width: 767px)');
   const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
   const large = useMediaPredicate('(min-width: 1280px)');
@@ -162,10 +183,10 @@ const BalancePage = () => {
   console.log(firstOfYear);
 
   return (
-    <section className={style.balanceSection}>
+    <section className={classes.balanceSection}>
       <Container>
         {small && (
-          <MobileTable
+          <MobilePage
             getCurrentDate={getCurrentDate}
             userData={userBalance}
             tranceActionsData={expensesData}
