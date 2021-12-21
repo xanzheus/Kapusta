@@ -11,9 +11,8 @@ import Login from 'pages/Login';
 import style from './App.module.scss';
 import toast, { Toaster } from 'react-hot-toast';
 // import { ToastContainer } from 'react-toastify';
-const BalancePage = lazy(() =>
-  import('pages/BalancePage/BalancePage' /* webpackChunkName: "BalancePage" */),
-);
+
+const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
 
 const ProfilePage = lazy(() =>
   import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
