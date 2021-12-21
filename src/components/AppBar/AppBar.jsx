@@ -10,19 +10,10 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
-  // const [snowVisibility, setSnowVisibility] = useState(false);
-  const snowflakes = new Snowflakes({ height: 40, speed: 0.2, count: 16 });
-
-  true && snowflakes.start();
-
-  // const [showPassword, setShowPassword] = useState(false);
+  const snowflakes = new Snowflakes({ height: 40, speed: 0.1, count: 16 });
+  snowflakes.start();
   const accessToken = useSelector(state => state.auth.accessToken);
-  // const handleClickSnow = () => {
-  //   console.log(snowVisibility);
-  //   setSnowVisibility(!snowVisibility);
-  // };
 
-  // const { data } = useGetCurrentUserQuery();
   return (
     <>
       <header className={style.header}>
