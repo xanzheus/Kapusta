@@ -55,7 +55,7 @@ export const transactionApi = createApi({
     }),
     getTransactions: builder.query({
       query: ({ startDate, endDate }) => ({
-        url: `transactions?startDate${startDate}&endDate=${endDate}`,
+        url: `transactions?startDate=${startDate}&endDate=${endDate}`,
       }),
     }),
     createTransaction: builder.mutation({

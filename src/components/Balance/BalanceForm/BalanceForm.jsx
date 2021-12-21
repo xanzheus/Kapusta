@@ -144,18 +144,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
-  const [date, setDate] = useState(() => new Date());
+const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initialDate }) => {
+  const [date, setDate] = useState(initialDate);
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
   const [amountError, setAmountError] = useState(false);
   const [isCalculator, setIsCalculator] = useState(false);
-
-  useEffect(() => {
-    getCurrentDate(date);
-  }, [date, getCurrentDate]);
 
   const [createTransaction] = useCreateTransactionMutation();
 
@@ -205,10 +201,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     }
   };
 
-  const onResetClick = () => {
-    reset();
-    console.log('Reset');
-  };
+  const onResetClick = () => reset();
 
   const getAmountFromCalculator = amount => {
     setAmount(amount.result);
@@ -226,6 +219,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
               value={date}
               onChange={newValue => {
                 setDate(newValue);
+                getCurrentDate(newValue);
               }}
               renderInput={params => (
                 <TextField color="info" className={classes.field} {...params} />
@@ -305,6 +299,7 @@ BalanceForm.propTypes = {
   categoryArray: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
   getCurrentDate: PropTypes.func.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default BalanceForm;
