@@ -9,44 +9,79 @@ import s from './CategoriesRTK.module.scss';
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
   const [value, setValue] = useState('expense');
   // const [selectedCategory, setselectedCategory] = useState('');
+  // const { data = [], isLoading, isFetching } = useGetCategoriesQuery();
+  const { data = [], isLoading, isFetching } = useGetCategoriesQuery({ startDate, endDate });
 
-  const { data = [], isLoading } = useGetCategoriesQuery();
-  // const { data = [], isLoading } = useGetCategoriesQuery(startDate, endDate);
+  // const newDDD = data.map(p => (p.category === 'products' ? { ...p, category: 'Продукты' } : p));
+  const dataTranslated = val => {
+    const newOb = val.map(i => {
+      if (i.category === 'products') {
+        return { ...i, category: 'Продукты' };
+      }
+      if (i.category === 'home') {
+        return { ...i, category: 'Всё для дома' };
+      }
+      if (i.category === 'entertainment') {
+        return { ...i, category: 'Развлечения' };
+      }
+      if (i.category === 'healthy') {
+        return { ...i, category: 'Здоровье' };
+      }
+      if (i.category === 'transport') {
+        return { ...i, category: 'Транспорт' };
+      }
+      if (i.category === 'technic') {
+        return { ...i, category: 'Техника' };
+      }
+      if (i.category === 'communication') {
+        return { ...i, category: 'Комуналка, связь' };
+      }
+      if (i.category === 'hobby') {
+        return { ...i, category: 'Спорт, хобби' };
+      }
+      if (i.category === 'education') {
+        return { ...i, category: 'Образование' };
+      }
+      if (i.category === 'other') {
+        return { ...i, category: 'Прочее' };
+      }
+      if (i.category === 'salary') {
+        return { ...i, category: 'ЗП' };
+      }
+      if (i.category === 'additional') {
+        return { ...i, category: 'Доп.доход' };
+      }
+    });
+    return newOb;
+  };
 
-  // console.log(data);
-  // const newData = data.data;
-  // console.log(newData);
+  // const EXPENSE_CATEGORIES = [
+  //   { PRODUCTS: 'products' },
+  //   { ALCOHOL: 'alcohol' },
+  //   { ENTERTAINMENT: 'entertainment' },
+  //   { HEALTHY: 'healthy' },
+  //   { TRANSPORT: 'transport' },
+  //   { HOME: 'home' },
+  //   { TECHNIC: 'technic' },
+  //   { COMMUNICATION: 'communication' },
+  //   { HOBBY: 'hobby' },
+  //   { EDUCATION: 'education' },
+  //   { OTHER: 'other' },
+  // ];
 
-  const newDDD = data.map(p => (p.category === 'products' ? { ...p, category: 'Продукты' } : p));
-  console.log(newDDD);
-
-  const EXPENSE_CATEGORIES = [
-    { PRODUCTS: 'products' },
-    { ALCOHOL: 'alcohol' },
-    { ENTERTAINMENT: 'entertainment' },
-    { HEALTHY: 'healthy' },
-    { TRANSPORT: 'transport' },
-    { HOME: 'home' },
-    { TECHNIC: 'technic' },
-    { COMMUNICATION: 'communication' },
-    { HOBBY: 'hobby' },
-    { EDUCATION: 'education' },
-    { OTHER: 'other' },
-  ];
-
-  const EXPENSE_CATEGORIES_RU = [
-    { PRODUCTS: 'ПРОДУКТЫ' },
-    { ALCOHOL: 'АЛКОГОЛЬ' },
-    { ENTERTAINMENT: 'РАЗВЛЕЧЕНИУ' },
-    { HEALTHY: 'ЗДОРОВЬЕ' },
-    { TRANSPORT: 'ТРАНСПОРТ' },
-    { HOME: 'ВСЕ ДЛЯ ДОМА' },
-    { TECHNIC: 'ТЕХНКА' },
-    { COMMUNICATION: 'КОМУНАЛКА, СВЯЗЬ' },
-    { HOBBY: 'СПОРТ, ХОББИ' },
-    { EDUCATION: 'ОБРАЗОВАНИЕ' },
-    { OTHER: 'ПРОЧЕЕ' },
-  ];
+  // const EXPENSE_CATEGORIES_RU = [
+  //   { PRODUCTS: 'Продукты' },
+  //   { ALCOHOL: 'Алкоголь' },
+  //   { ENTERTAINMENT: 'Развлечения' },
+  //   { HEALTHY: 'Здоровье' },
+  //   { TRANSPORT: 'Транспорт' },
+  //   { HOME: 'Все для дома' },
+  //   { TECHNIC: 'Техника' },
+  //   { COMMUNICATION: 'Комуналка, связь' },
+  //   { HOBBY: 'Спорт, хобби' },
+  //   { EDUCATION: 'Образование' },
+  //   { OTHER: 'Прочее' },
+  // ];
 
   // let newData = [];
   // if ('data' in data) {
@@ -57,10 +92,12 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
   // }
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
-  const sortCategoryValues = type => {
+  const sortCategoryValues = (type, data) => {
+    // const newCat = data.data.filter(category => {
     const newCat = data.filter(category => {
       return category.type === type;
     });
+    console.log(newCat);
     return newCat;
   };
 
@@ -102,18 +139,18 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           }}
         ></button>
       </div>
-
-      {isLoading ? (
+      {isLoading && (
         <div className={s.categories__loader}>
           <Stack sx={{ color: 'grey.500' }}>
             <CircularProgress color="inherit" />
           </Stack>
         </div>
-      ) : (
+      )}{' '}
+      {!isFetching && (
         <div className={s.income}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
-              {sortCategoryValues(value).map(item => {
+              {sortCategoryValues(value, dataTranslated(data.data)).map(item => {
                 return (
                   <li
                     className={s.categorie__items}
@@ -121,13 +158,13 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                     key={item.category}
                     onClick={e => {
                       // setselectedCategory(e.currentTarget.getAttribute('data-name'));
+
                       setCategory(e.currentTarget.getAttribute('data-name'));
                       setActiveCalss(true);
                     }}
                   >
                     <div className={s.categorie__link}>
                       {item.total}
-
                       {/* <svg className={isActive ? s.icon : s.iconActive}> */}
                       <svg className={s.icon}>
                         <use xlinkHref={`${sprite}#${item.category}`} />
@@ -142,7 +179,6 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           </div>
         </div>
       )}
-
       {/* <Stack sx={{ color: 'grey.500' }}>
         <CircularProgress color="inherit" />
       </Stack> */}

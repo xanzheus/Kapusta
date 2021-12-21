@@ -44,28 +44,22 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const transactionApi = createApi({
   reducerPath: 'transactionApi',
-  // baseQuery: fetchBaseQuery({
-  //   baseUrl: 'http://localhost:3004/',
-  // }),
   baseQuery: baseQueryWithReauth,
-  // tagTypes: ['Transaction'],
+  tagTypes: ['Transaction'],
   endpoints: builder => ({
     getCategories: builder.query({
-      // query: arg => {
-      //   const { startDate, endDate } = arg;
-      //   console.log(startDate);
-      //   console.log(endDate);
-      //   return {
-      //     url: `categories`,
-      //     params: { startDate, endDate },
-      //   };
-      // },
-      query: () => ({
-        url: `categories?startDate=2021-12-01&endDate=2021-12-31`,
-        // url: `categories`,
-      }),
-      // query: ({ startDate, endDate }) => ({
-      //   url: `categories?startDate=${startDate}&endDate=${endDate}`,
+      query: arg => {
+        const { startDate, endDate } = arg;
+        console.log(startDate);
+        console.log(endDate);
+        return {
+          url: `categories`,
+          params: { startDate, endDate },
+        };
+      },
+      // query: () => ({
+      //   url: `categories?startDate=2021-12-01&endDate=2021-12-31`,
+      //   // url: `categories`,
       // }),
     }),
   }),
