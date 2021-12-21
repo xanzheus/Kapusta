@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 // import Snowfall from 'react-snowfall';
 import Snowflakes from 'magic-snowflakes';
 // import AcUnitIcon from '@mui/icons-material/AcUnit';
+import SurpriseSanta from 'surprise-santa';
+
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
@@ -16,6 +18,7 @@ const AppBar = () => {
 
   return (
     <>
+      <SurpriseSanta minTime={1} maxTime={1} />;
       <header className={style.header}>
         <Container>
           <div className={style.header__wrapper}>
