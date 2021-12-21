@@ -7,15 +7,25 @@ import sprite from '../../../../images/svg/sprite.svg';
 import s from './CategoriesRTK.module.scss';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
-  const [value, setValue] = useState('costs');
+  const [value, setValue] = useState('expense');
   // const [selectedCategory, setselectedCategory] = useState('');
 
   const { data = [], isLoading } = useGetCategoriesQuery();
-  // const { data = [], isLoading } = useGetCategoriesQuery({ startDate, endDate });
+  // const { data = [], isLoading } = useGetCategoriesQuery(startDate, endDate);
+
+  const newData = data.data;
+  console.log(newData);
+  // let newData = [];
+  // if ('data' in data) {
+  //   const { transactions } = data.data;
+  //   transactions.forEach(el => console.log(el));
+  //   console.log(transactions);
+  //   newData = [...transactions];
+  // }
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = type => {
-    const newCat = data.filter(category => {
+    const newCat = newData.filter(category => {
       return category.type === type;
     });
     return newCat;
@@ -23,11 +33,11 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
 
   // ************** Функция изменения данных в стейт РАСХОДЫ-ДОХОДЫ
   const resultValue = () => {
-    if (value === 'costs') {
+    if (value === 'expense') {
       setValue('income');
     }
     if (value === 'income') {
-      setValue('costs');
+      setValue('expense');
     }
   };
 
@@ -47,7 +57,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           }}
           className={s.categories__currentValue}
         >
-          {value === 'costs' ? 'Расходы' : 'Доходы'}
+          {value === 'expense' ? 'Расходы' : 'Доходы'}
         </div>
 
         <button
