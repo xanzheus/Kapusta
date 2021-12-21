@@ -64,10 +64,12 @@ const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesRep
       .map(item => {
         const dateStr = item?.date?.toString();
         const preparedDate = dateStr.slice(0, dateStr.indexOf('T'));
+        const splitDate = preparedDate.split('-');
+        const resultDate = `${splitDate[2]}.${splitDate[1]}.${splitDate[0]}`;
 
         return {
           id: item._id,
-          date: preparedDate,
+          date: resultDate,
           type: item.type,
           category: TRANSLATE_CATEGORIES[item.category],
           comment: item.comment,

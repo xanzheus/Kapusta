@@ -180,8 +180,8 @@ const BalancePage = () => {
   const firstOfMonth = format(startOfMonth(date), 'yyyy-MM-dd');
   const lastOfMonth = format(lastDayOfMonth(date), 'yyyy-MM-dd');
 
-  console.log(firstOfMonth);
-  console.log(lastOfMonth);
+  // console.log(firstOfMonth);
+  // console.log(lastOfMonth);
 
   // const firstOfYear = format(startOfYear(date), 'yyyy-MM-dd');
 
