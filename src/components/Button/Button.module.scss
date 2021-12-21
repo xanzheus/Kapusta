@@ -68,10 +68,17 @@
 }
 
 .accentButton {
-  @extend .smallRight;
-
   background-color: $mainAccent-color;
   color: $mainLight-color;
+}
+.centerAccent {
+  @extend .center;
+  @extend .accentButton;
+}
+
+.accentButtonRight {
+  @extend .smallRight;
+  @extend .accentButton;
 }
 
 .google__button {

@@ -258,7 +258,7 @@ const FormaUser = ({
         <Button
           name="Сохранить"
           type="submit"
-          variant="center"
+          variant="centerAccent"
           disabled={!(formik.isValid && formik.dirty)}
         />
       </form>

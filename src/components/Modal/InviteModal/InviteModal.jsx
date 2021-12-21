@@ -112,7 +112,7 @@ const InviteModal = ({ open, handleClose }) => {
               helperText={formik.touched.name && formik.errors.name}
             />
             <Stack direction="row" alignItems="center" spacing={2} justifyContent="center">
-              <Button type="submit" name="Отправить" />
+              <Button type="submit" name="Отправить" variant="accentButton" />
               <Button type="button" name="Отмена" onClick={handleClose} />
             </Stack>
           </form>
