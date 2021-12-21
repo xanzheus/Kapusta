@@ -54,19 +54,30 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesReportData }) => {
+const HeaderTabs = ({
+  getCurrentDate,
+  transactions,
+  incomReportData,
+  expensesReportData,
+  isFetching,
+}) => {
   const [value, setValue] = useState('1');
 
-  const refreshedTransactions = (symbol, type) => {
+  const refreshedTransactions = (symbol, type, transactions) => {
+    const fn = str => str.slice(0, str.indexOf('T'));
+
     return transactions
-      .map(item => ({
-        id: item._id,
-        date: item.date,
-        type: item.type,
-        category: TRANSLATE_CATEGORIES[item.category],
-        comment: item.comment,
-        amount: `${symbol} ${item.amount} грн.`,
-      }))
+      .map(item => {
+        console.log(item.date);
+        return {
+          id: item._id,
+          date: fn(item.date),
+          type: item.type,
+          category: TRANSLATE_CATEGORIES[item.category],
+          comment: item.comment,
+          amount: `${symbol} ${item.amount} грн.`,
+        };
+      })
       .filter(item => item.type === type);
   };
 
@@ -98,12 +109,14 @@ const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesRep
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
-          <BalanceTable
-            Class="expenses"
-            data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
-            reportData={expensesReportData}
-            category={expensesCatagoryArray}
-          />
+          {/* {!isFetching && (
+            <BalanceTable
+              Class="expenses"
+              data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE, transactions)}
+              reportData={expensesReportData}
+              category={expensesCatagoryArray}
+            />
+          )} */}
         </TabPanel>
 
         <TabPanel className={classes.tabsThumb} value="2">
@@ -113,12 +126,14 @@ const HeaderTabs = ({ getCurrentDate, transactions, incomReportData, expensesRep
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
-          <BalanceTable
-            Class="income"
-            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
-            reportData={incomReportData}
-            category={incomeCatagoryArray}
-          />
+          {/* {!isFetching && (
+            <BalanceTable
+              Class="income"
+              data={refreshedTransactions('', CATEGORYTYPE.INCOME, transactions)}
+              reportData={incomReportData}
+              category={incomeCatagoryArray}
+            />
+          )} */}
         </TabPanel>
       </TabContext>
     </Box>
