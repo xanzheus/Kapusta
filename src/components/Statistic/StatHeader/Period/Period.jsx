@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { format, startOfMonth, endOfMonth } from 'date-fns';
+// import { format, startOfMonth, endOfMonth } from 'date-fns';
 // import TextField from '@mui/material/TextField';
 // import AdapterDateFns from '@mui/lab/AdapterDateFns';
 // import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -32,6 +32,7 @@ const Period = ({ monthRangePicker, month, year }) => {
         <button
           className={s.search__buttonPickerBack}
           onClick={() => {
+            setDate(date, -1);
             monthRangePicker(date, -1);
           }}
         ></button>
@@ -55,6 +56,7 @@ const Period = ({ monthRangePicker, month, year }) => {
         <button
           className={s.search__buttonPickerNext}
           onClick={() => {
+            setDate(date, +1);
             monthRangePicker(date, +1);
           }}
         ></button>

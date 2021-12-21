@@ -6,12 +6,15 @@ import { format, startOfMonth, endOfMonth } from 'date-fns';
 // import Categories from '../Categories';
 // import s from './StatisticPage.module.css';
 
-const StatisticPage = ({}) => {
+const StatisticPage = () => {
   const [date, setDate] = useState(new Date());
-  const [startMonth, setStartMonth] = [format(startOfMonth(date), 'yyyy-MM-dd')];
-  const [endMonth, setEndMonth] = [format(endOfMonth(date), 'yyyy-MM-dd')];
+  // const [startMonth, setStartMonth] = [format(startOfMonth(date), 'yyyy-MM-dd')];
+  // const [endMonth, setEndMonth] = [format(endOfMonth(date), 'yyyy-MM-dd')];
   const newMonth = date.toLocaleString('ru', { month: 'long' }).toUpperCase();
   const newYear = date.getFullYear();
+
+  const startMonth = [format(startOfMonth(date), 'yyyy-MM-dd')];
+  const endMonth = [format(endOfMonth(date), 'yyyy-MM-dd')];
 
   console.log(`1й день выбраного месяца(${newMonth}): ${startMonth}`);
   console.log(`последний выбраного месяца(${newMonth}): ${endMonth}`);
