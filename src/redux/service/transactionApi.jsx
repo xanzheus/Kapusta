@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  // baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/transactions',
-  baseUrl: 'http://localhost:3004/',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/transactions',
+  // baseUrl: 'http://localhost:3004/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
@@ -51,7 +51,17 @@ export const transactionApi = createApi({
   tagTypes: ['Transaction'],
   endpoints: builder => ({
     getCategories: builder.query({
-      query: () => ({ url: `categories?startDate=2021-12-01&endDate=2021-12-31` }),
+      query: arg => {
+        const { startDate, endDate } = arg;
+        return {
+          url: `categories`,
+          params: { startDate, endDate },
+        };
+      },
+      // query: () => ({
+      //   // url: `categories?startDate=2021-12-01&endDate=2021-12-31`
+      //   url: `categories`,
+      // }),
     }),
   }),
 });

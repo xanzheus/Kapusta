@@ -6,11 +6,12 @@ import CircularProgress from '@mui/material/CircularProgress';
 import sprite from '../../../../images/svg/sprite.svg';
 import s from './CategoriesRTK.module.scss';
 
-const CategoriesQuery = ({ updateData, setActiveCalss, setCategory }) => {
+const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
   const [value, setValue] = useState('costs');
   const [selectedCategory, setselectedCategory] = useState('');
 
-  const { data = [], isLoading } = useGetCategoriesQuery();
+  // const { data = [], isLoading } = useGetCategoriesQuery();
+  const { data = [], isLoading } = useGetCategoriesQuery({ startDate, endDate });
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = type => {

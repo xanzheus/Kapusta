@@ -9,11 +9,12 @@ import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
 
-const GraphDetails = () => {
+const GraphDetails = ({ startDate, endDate }) => {
   const [resultValue, setResultValue] = useState('РАСХОДЫ');
   const [isActive, setisActive] = useState(false);
   const [selectedCategory, setselectedCategory] = useState('');
-  const { data = [] } = useGetCategoriesQuery();
+  // const { data = [] } = useGetCategoriesQuery();
+  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
@@ -131,6 +132,8 @@ const GraphDetails = () => {
         setActiveCalss={setisActive}
         setCategory={setselectedCategory}
         setDiagramType={setDiagramType}
+        startDate={startDate}
+        endDate={endDate}
       />
       <div className={isActive === false ? s.diagramLarge : s.diagram}>
         {isActive === false && <h2 className={s.diagram_emptyTitle}>Выберите категорию</h2>}
