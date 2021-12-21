@@ -16,6 +16,7 @@ import authReducer from '../redux/service/authSlice';
 
 import { userAPI } from './service/userAPI';
 // import { currentUserAPI } from './service/currentUserAPI';
+import { transactionApi } from './service/transactionApi';
 
 const authPersistConfig = {
   key: 'auth',
@@ -30,6 +31,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
 
     [exchangeRates.reducerPath]: exchangeRates.reducer,
+    [transactionApi.reducerPath]: transactionApi.reducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -41,6 +43,7 @@ export const store = configureStore({
     userAPI.middleware,
     exchangeRates.middleware,
     // currentUserAPI.middleware,
+    transactionApi.middleware,
   ],
 });
 

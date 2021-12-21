@@ -1,6 +1,7 @@
 @import 'styles/shared.scss';
 
 .diagram {
+  // position: relative;
   @media screen and (min-width: $tablet) {
     width: 666px;
     margin: 0 auto;
@@ -39,4 +40,46 @@
 }
 a {
   cursor: pointer;
+}
+
+.diagram__button {
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+  opacity: 60%;
+}
+
+button:hover,
+button:focus {
+  color: $mainAccent-color;
+}
+
+.diagram__buttonPie {
+  display: inline-block;
+}
+
+.diagram__buttonColumn {
+  display: none;
+  @media screen and (min-width: $tablet) {
+    display: inline-block;
+  }
+  @media screen and (min-width: $desktop) {
+    display: inline-block;
+  }
+}
+
+// горизонтвльно
+.diagram__buttonBar {
+  display: inline-block;
+  transform: rotate(90deg);
+  @media screen and (min-width: $tablet) {
+    display: none;
+  }
+  @media screen and (min-width: $desktop) {
+    display: none;
+  }
 }
