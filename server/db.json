@@ -1,7 +1,7 @@
 {
   "categories": [
     {
-      "name": "Продукты",
+      "category": "products",
       "id": 1,
       "type": "costs",
       "total": 5000,
@@ -18,7 +18,7 @@
       }
     },
     {
-      "name": "Алкоголь",
+      "category": "Алкоголь",
       "id": 2,
       "type": "costs",
       "total": 200,
@@ -31,7 +31,7 @@
       }
     },
     {
-      "name": "Развлечения",
+      "category": "Развлечения",
       "id": 3,
       "type": "costs",
       "total": 800,
@@ -42,7 +42,7 @@
       }
     },
     {
-      "name": "Здоровье",
+      "category": "healthy",
       "id": 4,
       "type": "costs",
       "total": 900,
@@ -53,7 +53,7 @@
       }
     },
     {
-      "name": "Транспорт",
+      "category": "Транспорт",
       "id": 5,
       "type": "costs",
       "total": 2000,
@@ -65,7 +65,7 @@
       }
     },
     {
-      "name": "Коммуналка, связь",
+      "category": "Коммуналка, связь",
       "id": 6,
       "type": "costs",
       "total": 1500,
@@ -78,7 +78,7 @@
       }
     },
     {
-      "name": "Всё для дома",
+      "category": "home",
       "id": 7,
       "type": "costs",
       "total": 1500,
@@ -91,7 +91,7 @@
       }
     },
     {
-      "name": "Образование",
+      "category": "Образование",
       "id": 8,
       "type": "costs",
       "total": 2400,
@@ -105,7 +105,7 @@
       }
     },
     {
-      "name": "Прочее",
+      "category": "Прочее",
       "id": 9,
       "type": "costs",
       "total": 12000.0,
@@ -119,7 +119,7 @@
       }
     },
     {
-      "name": "ЗП",
+      "category": "ЗП",
       "id": 1,
       "type": "income",
       "total": 5000,
@@ -130,7 +130,7 @@
       }
     },
     {
-      "name": "Доп.доход",
+      "category": "Доп.доход",
       "id": 2,
       "type": "income",
       "total": 200,

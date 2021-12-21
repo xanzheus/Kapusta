@@ -13,8 +13,41 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
   const { data = [], isLoading } = useGetCategoriesQuery();
   // const { data = [], isLoading } = useGetCategoriesQuery(startDate, endDate);
 
-  const newData = data.data;
-  console.log(newData);
+  // console.log(data);
+  // const newData = data.data;
+  // console.log(newData);
+
+  const newDDD = data.map(p => (p.category === 'products' ? { ...p, category: 'Продукты' } : p));
+  console.log(newDDD);
+
+  const EXPENSE_CATEGORIES = [
+    { PRODUCTS: 'products' },
+    { ALCOHOL: 'alcohol' },
+    { ENTERTAINMENT: 'entertainment' },
+    { HEALTHY: 'healthy' },
+    { TRANSPORT: 'transport' },
+    { HOME: 'home' },
+    { TECHNIC: 'technic' },
+    { COMMUNICATION: 'communication' },
+    { HOBBY: 'hobby' },
+    { EDUCATION: 'education' },
+    { OTHER: 'other' },
+  ];
+
+  const EXPENSE_CATEGORIES_RU = [
+    { PRODUCTS: 'ПРОДУКТЫ' },
+    { ALCOHOL: 'АЛКОГОЛЬ' },
+    { ENTERTAINMENT: 'РАЗВЛЕЧЕНИУ' },
+    { HEALTHY: 'ЗДОРОВЬЕ' },
+    { TRANSPORT: 'ТРАНСПОРТ' },
+    { HOME: 'ВСЕ ДЛЯ ДОМА' },
+    { TECHNIC: 'ТЕХНКА' },
+    { COMMUNICATION: 'КОМУНАЛКА, СВЯЗЬ' },
+    { HOBBY: 'СПОРТ, ХОББИ' },
+    { EDUCATION: 'ОБРАЗОВАНИЕ' },
+    { OTHER: 'ПРОЧЕЕ' },
+  ];
+
   // let newData = [];
   // if ('data' in data) {
   //   const { transactions } = data.data;
@@ -25,7 +58,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = type => {
-    const newCat = newData.filter(category => {
+    const newCat = data.filter(category => {
       return category.type === type;
     });
     return newCat;
@@ -84,8 +117,8 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                 return (
                   <li
                     className={s.categorie__items}
-                    data-name={item.name}
-                    key={item.name}
+                    data-name={item.category}
+                    key={item.category}
                     onClick={e => {
                       // setselectedCategory(e.currentTarget.getAttribute('data-name'));
                       setCategory(e.currentTarget.getAttribute('data-name'));
@@ -97,10 +130,10 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
 
                       {/* <svg className={isActive ? s.icon : s.iconActive}> */}
                       <svg className={s.icon}>
-                        <use xlinkHref={`${sprite}#${item.name}`} />
+                        <use xlinkHref={`${sprite}#${item.category}`} />
                       </svg>
 
-                      <p className={s.categorie__name}>{item.name}</p>
+                      <p className={s.categorie__name}>{item.category}</p>
                     </div>
                   </li>
                 );

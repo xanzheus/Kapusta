@@ -18,12 +18,17 @@ const GraphDetails = ({ startDate, endDate }) => {
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
-  // console.log(diagramType);
+  // if ('data' in data) {
+  //   const newData = data.data;
+  //   console.log(newData);
+  // }
+  // console.log(data);
+
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
     setWindowSize(window.outerWidth);
   };
-  // console.log(windowSize);
+
   // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
   const handlerDiagramType = () => {
     if (windowSize < 321) {
@@ -44,8 +49,8 @@ const GraphDetails = ({ startDate, endDate }) => {
     const detailsArrayKeys = [];
     const detailsArrayValues = [];
 
-    const selectedCat = data.filter(item => {
-      return item.name === selectedCategory;
+    const selectedCat = data.data.filter(item => {
+      return item.category === selectedCategory;
     });
 
     selectedCat.map(item => {
@@ -66,7 +71,7 @@ const GraphDetails = ({ startDate, endDate }) => {
         y: detailsArrayValues[index],
       };
     });
-
+    console.log(detailsArrayKeys);
     return detailsArray;
   };
 
