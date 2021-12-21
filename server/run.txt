@@ -1,0 +1,59 @@
+json-server --watch server/db.json --port 3004
+alexx.voloshyn@gmail.com Hello123-
+kornulio@gmail.com
+
+
+    "message": "success",
+    "data": {
+        "transactions": [
+            {
+                "_id": "61bc7ab9c8e4fc912fd18ce4",
+                "type": "income",
+                "category": "salary",
+                "comment": "meat",
+                "amount": 500,
+                "date": "2021-12-12T00:00:00.000Z",
+                "owner": {
+                    "_id": "61b767b54d1a2d9d7d4d3110",
+                    "email": "gennadiy_mariev@ukr.net"
+                },
+                "createdAt": "2021-12-17T11:55:37.246Z",
+                "updatedAt": "2021-12-17T11:55:37.246Z"
+            },
+            {
+                "_id": "61bc7b04c8e4fc912fd18cf3",
+                "type": "expense",
+                "category": "products",
+                "comment": "meat",
+                "amount": 100,
+                "date": "2021-12-12T00:00:00.000Z",
+                "owner": {
+                    "_id": "61b767b54d1a2d9d7d4d3110",
+                    "email": "gennadiy_mariev@ukr.net"
+                },
+                "createdAt": "2021-12-17T11:56:52.529Z",
+                "updatedAt": "2021-12-17T11:56:52.529Z"
+            },
+            {
+                "_id": "61bc7c49c8e4fc912fd18d0b",
+                "type": "expense",
+                "category": "products",
+                "comment": "meat",
+                "amount": 100,
+                "date": "2021-12-12T00:00:00.000Z",
+                "owner": {
+                    "_id": "61b767b54d1a2d9d7d4d3110",
+                    "email": "gennadiy_mariev@ukr.net"
+                },
+                "createdAt": "2021-12-17T12:02:17.506Z",
+                "updatedAt": "2021-12-17T12:02:17.506Z"
+            },
+            {
+                "total": 300
+            }
+        ]
+    }
+}
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoia29ybnVsaW9AZ21haWwuY29tIiwiaWF0IjoxNjQwMDc5MTgzLCJleHAiOjE2NDAwODYzODN9.6aPaSEB6w4bB0s0U0ASuxjRmINBSG_cWqrWGcZqErx0
