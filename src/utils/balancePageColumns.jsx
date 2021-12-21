@@ -6,8 +6,8 @@ import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
   button: {
-    width: '18px',
-    height: '18px',
+    width: 18,
+    height: 18,
     cursor: 'pointer',
   },
 
@@ -53,7 +53,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'category',
       headerName: 'Категория',
-      minWidth: 110,
+      minWidth: 120,
       editable: true,
       headerAlign: 'center',
       type: 'singleSelect',
@@ -62,7 +62,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'amount',
       headerName: 'Сумма',
-      minWidth: 120,
+      minWidth: 150,
       editable: true,
       headerAlign: 'center',
       type: 'number',
@@ -70,7 +70,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     {
       field: 'delete',
       headerName: '',
-      minWidth: 100,
+      width: 50,
 
       renderCell: params => (
         <DeleteForeverIcon

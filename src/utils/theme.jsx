@@ -9,7 +9,19 @@ const theme = createTheme({
     },
 
     secondary: {
+      main: COLORS.mainLight,
+    },
+
+    info: {
       main: COLORS.mainAccent,
+    },
+  },
+
+  breakpoints: {
+    values: {
+      sm: 320,
+      md: 768,
+      lg: 1280,
     },
   },
 });
