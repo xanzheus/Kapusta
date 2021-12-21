@@ -1,5 +1,5 @@
 {
-  "name": "wallet-final-project-front",
+  "name": "kapusta-final-project-front",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +20,9 @@
     "formik": "^2.2.9",
     "highcharts": "^9.3.2",
     "highcharts-react-official": "^3.1.0",
+    "magic-snowflakes": "^6.0.1",
     "modern-normalize": "^1.1.0",
+    "netlify-cli": "^8.2.4",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -35,12 +37,13 @@
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
+    "snow-react": "^1.1.6",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "babel src -d lib",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
