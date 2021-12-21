@@ -9,7 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import { expensesCatagoryArray, incomeCatagoryArray } from 'Constants/category';
+import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 const useStyles = makeStyles(theme => ({
@@ -82,7 +82,7 @@ const HeaderTabs = ({
         <TabPanel className={classes.tabsThumb} value="1">
           <BalanceForm
             getCurrentDate={getCurrentDate}
-            type="expense"
+            type={CATEGORYTYPE.EXPENSE}
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
@@ -97,7 +97,7 @@ const HeaderTabs = ({
         <TabPanel className={classes.tabsThumb} value="2">
           <BalanceForm
             getCurrentDate={getCurrentDate}
-            type="income"
+            type={CATEGORYTYPE.INCOME}
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
