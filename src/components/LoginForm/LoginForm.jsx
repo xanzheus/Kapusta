@@ -15,13 +15,14 @@ import { makeStyles } from '@mui/styles';
 import style from './loginForm.module.scss';
 import { COLORS } from '../../Constants';
 import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
+import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   // const [logout] = useLogoutMutation();
-
+  const [googleAuth] = useGoogleAuthMutation();
   // showPassword
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -89,8 +90,15 @@ const LoginForm = () => {
           Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
-          <Button className={style.main__button} name="Google" type="submit">
-            <Google_Icon />
+          <Button
+            onClick={() => {
+              googleAuth();
+            }}
+            variant="google__button"
+            name="Google"
+            type="button"
+          >
+            <Google_Icon className={style.google__icon} />
           </Button>
         </div>
         <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>

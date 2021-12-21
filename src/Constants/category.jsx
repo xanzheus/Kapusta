@@ -13,3 +13,8 @@ export const expensesCatagoryArray = [
 ];
 
 export const incomeCatagoryArray = ['ЗП', 'Доп. доход'];
+
+export const CATEGORYTYPE = {
+  INCOME: 'income',
+  EXPENSE: 'expense',
+};

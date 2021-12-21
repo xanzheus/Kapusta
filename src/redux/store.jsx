@@ -13,9 +13,9 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import storage from 'redux-persist/lib/storage';
 import { exchangeRates } from './service/exchangeAPI';
 import authReducer from '../redux/service/authSlice';
-
 import { userAPI } from './service/userAPI';
-// import { currentUserAPI } from './service/currentUserAPI';
+import { googleAPI } from './service/googleAuth';
+import { transactionApi } from './service/transactionApi';
 
 const authPersistConfig = {
   key: 'auth',
@@ -26,10 +26,10 @@ const authPersistConfig = {
 export const store = configureStore({
   reducer: {
     [userAPI.reducerPath]: userAPI.reducer,
-    // [currentUserAPI.reducerPath]: currentUserAPI.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
-
+    [googleAPI.reducerPath]: googleAPI.reducer,
     [exchangeRates.reducerPath]: exchangeRates.reducer,
+    [transactionApi.reducerPath]: transactionApi.reducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -40,7 +40,8 @@ export const store = configureStore({
 
     userAPI.middleware,
     exchangeRates.middleware,
-    // currentUserAPI.middleware,
+    googleAPI.middleware,
+    transactionApi.middleware,
   ],
 });
 
