@@ -18,7 +18,7 @@ import Stack from '@mui/material/Stack';
 // STYLES
 import { COLORS } from '../../Constants';
 import style from './registrationForm.module.scss';
-import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
+import { ReactComponent as GoogleIcon } from '../../images/google_icon.svg';
 
 const useStyles = makeStyles({
   field: {
@@ -99,7 +99,7 @@ const RegistrationForm = () => {
             variant="google__button"
             type="button"
           >
-            <Google_Icon className={style.google__icon} />
+            <GoogleIcon className={style.google__icon} />
             Google
           </Button>
         </div>
