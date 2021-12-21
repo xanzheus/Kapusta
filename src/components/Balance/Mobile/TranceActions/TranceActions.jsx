@@ -3,16 +3,17 @@ import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 // import SaveIcon from '@mui/icons-material/Save';
 // import EditIcon from '@mui/icons-material/Edit';
+import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   list: {
     listStyle: 'none',
     paddingLeft: 0,
     margin: 0,
   },
 
-  tranceAction: {
+  transaction: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -61,44 +62,65 @@ const useStyles = makeStyles(theme => ({
     fontSize: 12,
     lineHeight: 1.16,
     letterSpacing: '0.04em',
+  },
+
+  negative: {
     color: COLORS.negative,
+  },
+
+  positive: {
+    color: COLORS.positive,
   },
 
   buttonIcon: {
     width: 18,
     height: 18,
   },
-}));
+});
 
-const TranceActions = ({ tranceActionsData }) => {
+const TranceActions = ({ transactionsData }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.wrapper}>
       <ul className={classes.list}>
-        {tranceActionsData.map(tranceAction => (
-          <li className={classes.tranceAction} key={tranceAction.id}>
-            <span className={classes.flexColumn}>
-              <p className={classes.comment}>{tranceAction.comment}</p>
-              <p className={classes.dateAndCategory}>{tranceAction.date}</p>
-            </span>
-            <p className={[classes.dateAndCategory, classes.category].join(' ')}>
-              {tranceAction.category}
-            </p>
-            <p className={classes.amoun}>{tranceAction.amount}</p>
+        {transactionsData
+          .filter(item => item.type === CATEGORYTYPE.INCOME || item.type === CATEGORYTYPE.EXPENSE)
+          .map(item => (
+            <li className={classes.transaction} key={item._id}>
+              <span className={classes.flexColumn}>
+                <p className={classes.comment}>{item.comment}</p>
+                <p className={classes.dateAndCategory}>
+                  {item.date.slice(0, item.date.indexOf('T'))}
+                </p>
+              </span>
 
-            <DeleteForeverIcon className={classes.buttonIcon} />
-            {/* <EditIcon className={classes.buttonIcon} />
+              <p className={[classes.dateAndCategory, classes.category].join(' ')}>
+                {TRANSLATE_CATEGORIES[item.category]}
+              </p>
+
+              {item.type === CATEGORYTYPE.EXPENSE ? (
+                <p className={[classes.amoun, classes.negative].join(' ')}>
+                  {` - ${item.amount} грн.`}
+                </p>
+              ) : (
+                <p
+                  className={[classes.amoun, classes.positive].join(' ')}
+                >{` ${item.amount} грн.`}</p>
+              )}
+
+              <DeleteForeverIcon className={classes.buttonIcon} />
+              {/* <EditIcon className={classes.buttonIcon} />
             <SaveIcon className={classes.buttonIcon} /> */}
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
     </div>
   );
 };
 
 TranceActions.propTypes = {
-  tranceActionsData: PropTypes.array.isRequired,
+  transactionsData: PropTypes.array.isRequired,
 };
 
 export default TranceActions;

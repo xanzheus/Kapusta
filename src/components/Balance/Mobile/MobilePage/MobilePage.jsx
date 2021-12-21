@@ -66,7 +66,7 @@ const useStyles = makeStyles({
   },
 });
 
-const MobilePage = ({ getCurrentDate, userData, tranceActionsData }) => {
+const MobilePage = ({ getCurrentDate, userData, transactionsData }) => {
   const [date, setDate] = useState(() => new Date());
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [categoryTypes, setCategoryTypes] = useState('');
@@ -115,7 +115,7 @@ const MobilePage = ({ getCurrentDate, userData, tranceActionsData }) => {
             </Stack>
           </LocalizationProvider>
 
-          <TranceActions tranceActionsData={tranceActionsData} />
+          <TranceActions transactionsData={transactionsData} />
 
           <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
             <button onClick={expenseButtonClick} className={classes.button} type="button">
@@ -142,7 +142,7 @@ const MobilePage = ({ getCurrentDate, userData, tranceActionsData }) => {
 MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
   userData: PropTypes.object.isRequired,
-  tranceActionsData: PropTypes.array.isRequired,
+  transactionsData: PropTypes.array.isRequired,
 };
 
 export default MobilePage;

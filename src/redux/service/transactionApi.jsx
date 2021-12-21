@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
@@ -59,7 +59,28 @@ export const transactionApi = createApi({
       //   // url: `categories`,
       // }),
     }),
+    getTransactions: builder.query({
+      query: ({ startDate, endDate }) => ({
+        url: `transactions?startDate${startDate}&endDate=${endDate}`,
+      }),
+      // transformResponse(response, meta, args)
+    }),
+    createTransaction: builder.mutation({
+      query: ({ date, category, comment, amount, type }) => ({
+        url: `transactions`,
+        method: 'POST',
+        body: {
+          date,
+          category,
+          comment,
+          amount,
+          type,
+        },
+        invalidatesTags: ['Transaction'],
+      }),
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery } = transactionApi;
+export const { useGetCategoriesQuery, useGetTransactionsQuery, useCreateTransactionMutation } =
+  transactionApi;
