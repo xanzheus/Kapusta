@@ -1,20 +1,34 @@
 @import 'styles/colors.scss';
 @import 'styles/breakpoints.scss';
 .main__wrapper {
-  display: flex;
-  justify-content: space-between;
+  display: block;
+  @media screen and(min-width:$tablet) {
+    padding-left: 120px;
+  }
+  @media screen and(min-width:$desktop) {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 .registration {
-  padding-top: 117px;
-  padding-bottom: 142px;
+  padding-top: 76px;
+  padding-bottom: 86px;
+  @media screen and(min-width:$tablet) {
+    padding-top: 90px;
+    padding-bottom: 190px;
+  }
+  @media screen and(min-width:$desktop) {
+    padding-top: 117px;
+    padding-bottom: 142px;
+  }
 }
 
 .registration__title {
-  width: 377px;
-  height: 46px;
+  width: 183px;
+  height: 63px;
   @media screen and(min-width:$tablet) {
     width: 306px;
-    height: 78px;
+    height: 100px;
   }
   @media screen and(min-width:$desktop) {
     width: 377px;
@@ -23,18 +37,37 @@
 }
 
 .title__wrapper {
-  display: flex;
-  justify-content: center;
-  width: 624px;
-  padding-top: 190px;
+  padding-left: 39px;
+  margin-bottom: 50px;
+  @media screen and(min-width:$tablet) {
+    padding-left: 0px;
+  }
+  @media screen and(min-width:$desktop) {
+    width: 624px;
+    padding-top: 190px;
+  }
 }
 
 .registration__subtitle {
   font-weight: 700;
-  font-size: 16px;
-  line-height: 1.19;
-  letter-spacing: 0.18em;
+  font-size: 13px;
+  line-height: 1.15;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: $primary-color;
-  margin-left: 70px;
+  padding-left: 17px;
+  @media screen and(min-width:$tablet) {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.19;
+    letter-spacing: 0.18em;
+    padding-left: 60px;
+  }
+  @media screen and(min-width:$desktop) {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.19;
+    letter-spacing: 0.18em;
+    padding-left: 70px;
+  }
 }

@@ -72,3 +72,17 @@
   background-color: $mainAccent-color;
   color: $mainLight-color;
 }
+
+.google__button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.02em;
+  color: #000000;
+  border-radius: 26px;
+  background: #f6f7fb;
+  padding: 10px 20px;
+}
