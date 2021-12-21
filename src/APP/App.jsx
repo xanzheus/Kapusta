@@ -9,7 +9,7 @@ import Registration from 'pages/Registration';
 import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 // import { ToastContainer } from 'react-toastify';
 
 const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));

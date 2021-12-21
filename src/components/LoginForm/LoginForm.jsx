@@ -6,7 +6,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import Stack from '@mui/material/Stack';
 import { useLoginMutation } from 'redux/service/userAPI';
-import { useLogoutMutation } from 'redux/service/userAPI';
+// import { useLogoutMutation } from 'redux/service/userAPI';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from 'redux/service/authSlice';
 import loginSchema from 'validationSchemas/login';
@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import style from './loginForm.module.scss';
 import { COLORS } from '../../Constants';
-import { ReactComponent as Google_Icon } from '../../images/google_icon.svg';
+import { ReactComponent as GoogleIcon } from '../../images/google_icon.svg';
 import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 
 const LoginForm = () => {
@@ -98,7 +98,7 @@ const LoginForm = () => {
             name="Google"
             type="button"
           >
-            <Google_Icon className={style.google__icon} />
+            <GoogleIcon className={style.google__icon} />
           </Button>
         </div>
         <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>
