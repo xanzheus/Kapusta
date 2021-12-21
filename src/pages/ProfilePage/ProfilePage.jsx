@@ -73,9 +73,9 @@ const ProfilePage = () => {
                 <FormaUser
                   firstName={data.data.user.fullName.firstName}
                   lastName={data.data.user.fullName.lastName}
-                  language={data.data.user.language}
-                  currency={data.data.user.currency}
-                  theme={data.data.user.theme}
+                  language={data.data.user.settings.language}
+                  currency={data.data.user.settings.currency}
+                  theme={data.data.user.settings.theme}
                 />
               </div>
             </div>

@@ -12,8 +12,7 @@ import { makeStyles } from '@mui/styles';
 import { EditPhoneModal } from 'components/Modal';
 import { userUpdateSchema } from '../../validationSchemas/userSchema';
 import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
-import { useUpdateDataUserMutation, useGetDataUserQuery } from 'redux/service/userAPI';
-// import FormaUpdatePhone from './FormaUpdatePhone';
+import { useUpdateDataUserMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
 const FormaUser = ({

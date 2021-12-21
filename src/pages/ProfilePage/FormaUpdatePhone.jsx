@@ -1,15 +1,10 @@
 import { useState } from 'react';
-import MenuItem from '@mui/material/MenuItem';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
-import { phoneSchema, userUpdatePhoneSchema } from '../../validationSchemas/userSchema';
-import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
+import { phoneSchema } from '../../validationSchemas/userSchema';
+import { COLORS } from '../../Constants';
 import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
@@ -73,13 +68,12 @@ const FormaUpdatePhone = ({ phone = '' }) => {
 
   const formikPhoneAccept = useFormik({
     initialValues: {
-      phone: newPhone,
       acceptCode: '',
     },
 
     onSubmit: (values, formikBag) => {
       const req = {
-        phone: values.phone,
+        phone: newPhone,
         acceptCode: values.acceptCode,
       };
       console.log(req);
@@ -94,7 +88,7 @@ const FormaUpdatePhone = ({ phone = '' }) => {
           className={classes.field}
           id="phone"
           name="phone"
-          placeholder="+38(067)123-12-12"
+          placeholder="+380671234567"
           type="text"
           label="Номер телефона"
           value={formikPhone.values.phone}
