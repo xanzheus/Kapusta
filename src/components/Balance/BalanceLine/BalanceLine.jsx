@@ -150,6 +150,9 @@ const BalanceLine = ({ userData }) => {
 
     updateBalanse(result);
 
+    toast('Поздравляем всё готово к работе!', {
+      icon: '👏',
+    });
     setStart(true);
   };
 
