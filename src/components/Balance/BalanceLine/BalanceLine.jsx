@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginRight: 40,
       marginBottom: 0,
+      marginTop: 0,
     },
   },
 
