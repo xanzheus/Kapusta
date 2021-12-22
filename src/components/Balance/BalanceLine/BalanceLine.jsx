@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     lineHeight: 1.16,
     letterSpacing: '0.02em',
-    marginTop: 95,
+    marginTop: 90,
     marginBottom: 5,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
@@ -157,7 +157,7 @@ const BalanceLine = ({ userData }) => {
         direction={{ sm: 'column', md: 'row', lg: 'row' }}
         alignItems="center"
         justifyContent="end"
-        mb={{ sm: 5, md: 7, lg: 1 }}
+        mb={{ sm: 4, md: 7, lg: 1 }}
       >
         <p className={classes.balance__title}>Баланс: </p>
 

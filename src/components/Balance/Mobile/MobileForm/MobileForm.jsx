@@ -15,6 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import Calculator from 'components/Calculator';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
+import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
 const useStyles = makeStyles({
   form: {
@@ -110,6 +112,8 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
   const classes = useStyles();
 
+  const [createTransaction] = useCreateTransactionMutation();
+
   const reset = () => {
     setCategory('');
     setComment('');
@@ -133,14 +137,17 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
         alert('Сумма должна быть дольше нуля');
         return;
       }
-      const dateResponse = {
-        date: format(date, 'dd-MM-yyyy'),
-        category,
+
+      const result = {
+        date: format(date, 'yyyy-MM-dd'),
+        category: TRANSLATE_CATEGORIES[category],
         comment,
-        amount: Number(amount),
-        types: categoryTypes,
+        amount,
+        type: categoryTypes,
       };
-      console.log(dateResponse);
+      createTransaction(result);
+
+      console.log(result);
       console.log('Submit Form');
       reset();
       toggleForm();

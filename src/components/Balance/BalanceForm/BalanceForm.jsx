@@ -180,6 +180,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         alert('Сумма должна быть дольше нуля');
         return;
       }
+
       const result = {
         date: format(date, 'yyyy-MM-dd'),
         category: TRANSLATE_CATEGORIES[category],
