@@ -25,6 +25,10 @@ const StatisticPage = lazy(() =>
   import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
 );
 
+const DevelopersPage = lazy(() =>
+  import('pages/DevelopersPage/DevelopersPage' /* webpackChunkName: "Developers-page" */),
+);
+
 const App = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
 
@@ -114,7 +118,7 @@ const App = () => {
               >
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
-                    <ProfilePage />{' '}
+                    <DevelopersPage />{' '}
                   </div>
                 </main>
               </Suspense>
