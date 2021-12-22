@@ -9,20 +9,67 @@ import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
 
-const GraphDetails = () => {
-  const [resultValue, setResultValue] = useState('РАСХОДЫ');
+const GraphDetails = ({ startDate, endDate }) => {
+  // const [resultValue, setResultValue] = useState('РАСХОДЫ');
   const [isActive, setisActive] = useState(false);
   const [selectedCategory, setselectedCategory] = useState('');
-  const { data = [] } = useGetCategoriesQuery();
+  // const { data = [] } = useGetCategoriesQuery();
+  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
-  // console.log(diagramType);
+  // if ('data' in data) {
+  //   const newData = data.data;
+  //   console.log(newData);
+  // }
+
+  const dataTranslated = val => {
+    const newOb = val.map(i => {
+      if (i.category === 'products') {
+        return { ...i, category: 'Продукты' };
+      }
+      if (i.category === 'home') {
+        return { ...i, category: 'Всё для дома' };
+      }
+      if (i.category === 'entertainment') {
+        return { ...i, category: 'Развлечения' };
+      }
+      if (i.category === 'healthy') {
+        return { ...i, category: 'Здоровье' };
+      }
+      if (i.category === 'transport') {
+        return { ...i, category: 'Транспорт' };
+      }
+      if (i.category === 'technic') {
+        return { ...i, category: 'Техника' };
+      }
+      if (i.category === 'communication') {
+        return { ...i, category: 'Комуналка, связь' };
+      }
+      if (i.category === 'hobby') {
+        return { ...i, category: 'Спорт, хобби' };
+      }
+      if (i.category === 'education') {
+        return { ...i, category: 'Образование' };
+      }
+      if (i.category === 'other') {
+        return { ...i, category: 'Прочее' };
+      }
+      if (i.category === 'salary') {
+        return { ...i, category: 'ЗП' };
+      }
+      if (i.category === 'additional') {
+        return { ...i, category: 'Доп.доход' };
+      }
+    });
+    return newOb;
+  };
+
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
     setWindowSize(window.outerWidth);
   };
-  // console.log(windowSize);
+
   // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
   const handlerDiagramType = () => {
     if (windowSize < 321) {
@@ -39,23 +86,23 @@ const GraphDetails = () => {
   }, [windowSize]);
 
   // Функция вывода детелей расходов или доходов выбраной категории
-  const sortCategoryDetails = () => {
+  const sortCategoryDetails = data => {
     const detailsArrayKeys = [];
     const detailsArrayValues = [];
 
-    const selectedCat = data.filter(item => {
-      return item.name === selectedCategory;
+    const selectedCat = dataTranslated(data.data).filter(item => {
+      return item.category === selectedCategory;
     });
 
     selectedCat.map(item => {
-      Object.keys(item.details).map(i => {
-        detailsArrayKeys.push(i);
+      return Object.keys(item.details).map(i => {
+        return detailsArrayKeys.push(i);
       });
     });
 
     selectedCat.map(item => {
-      Object.values(item.details).map(i => {
-        detailsArrayValues.push(i);
+      return Object.values(item.details).map(i => {
+        return detailsArrayValues.push(i);
       });
     });
 
@@ -65,72 +112,78 @@ const GraphDetails = () => {
         y: detailsArrayValues[index],
       };
     });
-
+    console.log(detailsArrayKeys);
     return detailsArray;
   };
 
   // Опции диаграммы
-  const options = {
-    chart: {
-      type: diagramType,
-      // type: pie, column, bar,
-      // options3d: {
-      //   enabled: true,
-      //   alpha: 45,
-      // },
-    },
+  const options = data => {
+    const options = {
+      chart: {
+        type: diagramType,
+        // type: pie, column, bar,
+        // options3d: {
+        //   enabled: true,
+        //   alpha: 45,
+        // },
+      },
 
-    title: {
-      text: '',
-      // text: 'Расходы',
-    },
-    xAxis: {
-      type: 'category',
-    },
-    yAxis: {
       title: {
         text: '',
+        // text: 'Расходы',
       },
-    },
-    legend: {
-      enabled: false,
-    },
-    plotOptions: {
-      pie: {
-        allowPointSelect: true,
-        cursor: 'pointer',
-        dataLabels: {
-          enabled: true,
-          distance: -40,
-          // rotation: 40,
-          style: {
-            textOverflow: 'ellipsis',
-            rotate: 42,
+      xAxis: {
+        type: 'category',
+      },
+      yAxis: {
+        title: {
+          text: '',
+        },
+      },
+      legend: {
+        enabled: false,
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: true,
+            distance: -40,
+            // rotation: 40,
+            style: {
+              textOverflow: 'ellipsis',
+              rotate: 42,
+            },
           },
         },
       },
-    },
 
-    responsive: {},
+      responsive: {},
 
-    series: [
-      {
-        name: 'Категории',
-        colorByPoint: true,
-        data: sortCategoryDetails(),
-        // keys: ['y', 'name'],
-      },
-    ],
+      series: [
+        {
+          name: 'Категории',
+          colorByPoint: true,
+          data: sortCategoryDetails(data),
+          // keys: ['y', 'name'],
+        },
+      ],
+    };
+    return options;
   };
 
   return (
+    // <></>
     <div className={s.graphDetails}>
       {/* <Categories updateData={setResultValue} setActiveCalss={setisActive} /> */}
       <CategoriesRTK
-        updateData={setResultValue}
+        // updateData={setResultValue}
         setActiveCalss={setisActive}
         setCategory={setselectedCategory}
         setDiagramType={setDiagramType}
+        startDate={startDate}
+        endDate={endDate}
       />
       <div className={isActive === false ? s.diagramLarge : s.diagram}>
         {isActive === false && <h2 className={s.diagram_emptyTitle}>Выберите категорию</h2>}
@@ -145,7 +198,7 @@ const GraphDetails = () => {
             <button onClick={() => setDiagramType('bar')} className={s.diagram__buttonBar}>
               <BarChartIcon />
             </button>
-            <HighchartsReact highcharts={Highcharts} options={options} />
+            <HighchartsReact highcharts={Highcharts} options={options(data)} />
           </div>
         )}
       </div>
