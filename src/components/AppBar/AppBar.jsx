@@ -1,4 +1,3 @@
-
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
@@ -18,7 +17,7 @@ const AppBar = () => {
             <Link to="/balance">
               <div className={style.logo}></div>
             </Link>
-            {!isFetching && <UserMenu />}
+            {/* {!isFetching && <UserMenu />} */}
           </div>
         </Container>
       </header>
