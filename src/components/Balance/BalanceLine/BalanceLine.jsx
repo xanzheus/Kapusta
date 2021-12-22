@@ -10,6 +10,7 @@ import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { useUpdateBalanseMutation } from 'redux/service/transactionApi';
 import trend from 'images/trend.png';
+import Baner from './Baner';
 
 const useStyles = makeStyles(theme => ({
   balance__title: {
@@ -184,30 +185,36 @@ const BalanceLine = ({ userData }) => {
             </p>
           </Stack>
         ) : (
-          <Stack direction="row">
-            <input
-              className={classes.balance__input}
-              placeholder="00.00 UAH"
-              onChange={handleChangeBalance}
-              type="number"
-              name="balance"
-            />
-            {small && (
-              <Button
-                name="ПОДТВЕРДИТЬ"
-                type="submit"
-                onClick={onSubmit}
-                variant="secondary"
-                borderType="mobile"
+          <>
+            <Baner />
+            <Stack direction="row">
+              <input
+                className={classes.balance__input}
+                placeholder="00.00 UAH"
+                onChange={handleChangeBalance}
+                type="number"
+                name="balance"
               />
-            )}
-            {medium && (
-              <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
-            )}
-            {large && (
-              <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
-            )}
-          </Stack>
+
+              {small && (
+                <Button
+                  name="ПОДТВЕРДИТЬ"
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                  borderType="mobile"
+                />
+              )}
+
+              {medium && (
+                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+              )}
+
+              {large && (
+                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+              )}
+            </Stack>
+          </>
         )}
 
         <Link className={classes.reports__link} to="/reports">
