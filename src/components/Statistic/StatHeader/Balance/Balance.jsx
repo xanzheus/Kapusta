@@ -16,7 +16,7 @@ const Balance = () => {
       <h2 className={s.balance__title}>Баланс:</h2>
       <div className={s.balance__amountBlock}>
         <div className={s.balance__amountSum}>
-          {!isFetching && console.log(dataCurrency)}
+          {/* {!isFetching && console.log(dataCurrency)} */}
           {isSuccess && getBalanceTotal(data).toFixed(2)} {!isFetching && currency(dataCurrency)}
         </div>
       </div>
