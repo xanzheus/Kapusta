@@ -5,12 +5,16 @@ import Button from 'components/Button';
 import { makeStyles } from '@mui/styles';
 import { phoneSchema } from '../../validationSchemas/userSchema';
 import { COLORS } from '../../Constants';
-import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
+import { useSendRequestAcceptMutation, useUpdateDataUserMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
-const FormaUpdatePhone = ({ phone = '', setOpen }) => {
+const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
   const [newPhone, setnewPhone] = useState('');
-  const [sendRequestAccept] = useSendRequestAcceptMutation({
+  const [sendRequestAccept, isSuccess] = useSendRequestAcceptMutation({
+    fixedCacheKey: 'shared-update-user',
+  });
+
+  const [updateDataUser] = useUpdateDataUserMutation({
     fixedCacheKey: 'shared-update-user',
   });
 
@@ -54,9 +58,7 @@ const FormaUpdatePhone = ({ phone = '', setOpen }) => {
     },
     validationSchema: phoneSchema,
     onSubmit: (values, formikBag) => {
-      console.log(values.phone);
       setnewPhone(values.phone);
-      console.log(newPhone);
       const req = {
         phone: values.phone,
       };
@@ -75,8 +77,11 @@ const FormaUpdatePhone = ({ phone = '', setOpen }) => {
         phone: newPhone,
         code: values.code,
       };
-      setOpen(false);
+      toggleOpen();
       sendRequestAccept(req);
+      if (isSuccess) {
+        updateDataUser({ phone: newPhone });
+      }
     },
   });
 
