@@ -4,11 +4,17 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
+import toast from 'react-hot-toast';
 import { Box } from '@mui/system';
 import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
+import {
+  useDeleteTransactionMutation,
+  useUpdateTransactionMutation,
+} from 'redux/service/transactionApi';
 
 const useStyles = makeStyles(theme => ({
   balancetable: {
@@ -111,8 +117,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceTable = ({ data, reportData, category, Class }) => {
-  const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
+
+  const [deleteTransaction] = useDeleteTransactionMutation();
+  const [updateTransaction] = useUpdateTransactionMutation();
 
   const classes = useStyles();
 
@@ -121,25 +129,41 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
 
   const deleteTransAction = useCallback(
     id => () => {
-      setTimeout(() => {
-        setRows(prevRows => prevRows.filter(row => row.id !== id));
-      });
+      deleteTransaction(id);
+      toast.error('Трансакция удалена!');
     },
-    [],
+    [deleteTransaction],
   );
 
   const updateTransAction = useCallback(
     params => () => {
-      if (rows.find(row => row === params.row)) {
-        alert('Изменения не обнаружены, либо ещё не готовы к сохранению');
+      if (data.find(row => row === params.row)) {
+        toast(t => (
+          <span>
+            <b>Изменения не обнаружены!</b>
+            <button onClick={() => toast.dismiss(t.id)}> Понятно </button>
+          </span>
+        ));
         return;
       }
+      const preparedDate = params.row.date.toString();
+      const splitDate = preparedDate.split('.');
+      const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
-      setRows(prevRows => prevRows.map(row => (row.id === params.id ? { ...params.row } : row)));
+      const result = {
+        id: params.id,
+        type: params.row.type,
+        date: resultDate,
+        category: TRANSLATE_CATEGORIES[params.row.category],
+        comment: params.row.comment,
+        amount: Number(params.row.amount.slice(2, -5)),
+      };
 
-      alert('Изменения сохранены');
+      updateTransaction(result);
+
+      toast.success('Изменения сохранены!');
     },
-    [rows],
+    [data, updateTransaction],
   );
 
   const infoMessageByEdit = () => {
@@ -160,7 +184,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[8, 20]}
             pageSize={8}
-            rows={rows}
+            rows={data}
             columns={columns}
           />
         </Stack>

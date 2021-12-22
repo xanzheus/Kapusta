@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaPredicate } from 'react-media-hook';
 import Stack from '@mui/material/Stack';
+import toast from 'react-hot-toast';
 import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import { useUpdateBalanseMutation } from 'redux/service/transactionApi';
 import trend from 'images/trend.png';
 
 const useStyles = makeStyles(theme => ({
@@ -15,12 +17,13 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     lineHeight: 1.16,
     letterSpacing: '0.02em',
-    marginTop: 95,
+    marginTop: 90,
     marginBottom: 5,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginRight: 40,
       marginBottom: 0,
+      marginTop: 0,
     },
   },
 
@@ -121,12 +124,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceLine = ({ userData }) => {
-  const { balance } = userData;
-
-  const classes = useStyles();
+  const balance = userData[userData.length - 1].balance;
 
   const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(false);
+
+  const [updateBalanse] = useUpdateBalanseMutation();
+
+  const classes = useStyles();
 
   const handleChangeBalance = event => setAmount(event.target.value);
 
@@ -134,16 +139,20 @@ const BalanceLine = ({ userData }) => {
     event.preventDefault();
 
     if (Number(amount) <= 0) {
-      alert('Введите сумму');
+      toast.error('Введите сумму больше нуля.');
+
       return;
     }
 
-    const dateResponse = {
+    const result = {
       balance: Number(amount),
-      isStart: true,
     };
-    console.log(dateResponse);
-    console.log(amount);
+
+    updateBalanse(result);
+
+    toast('Поздравляем всё готово к работе!', {
+      icon: '👏',
+    });
     setStart(true);
   };
 
@@ -157,7 +166,7 @@ const BalanceLine = ({ userData }) => {
         direction={{ sm: 'column', md: 'row', lg: 'row' }}
         alignItems="center"
         justifyContent="end"
-        mb={{ sm: 5, md: 7, lg: 1 }}
+        mb={{ sm: 4, md: 7, lg: 1 }}
       >
         <p className={classes.balance__title}>Баланс: </p>
 
@@ -165,7 +174,7 @@ const BalanceLine = ({ userData }) => {
           <Stack direction="row">
             <p
               className={[classes.balance__input, classes.disabled].join(' ')}
-            >{`${amount} UAH`}</p>
+            >{`${balance} UAH`}</p>
             <p
               className={[classes.balance__input, classes.disabled, classes.disable__button].join(
                 ' ',
@@ -210,7 +219,7 @@ const BalanceLine = ({ userData }) => {
 };
 
 BalanceLine.propTypes = {
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.array.isRequired,
 };
 
 export default BalanceLine;

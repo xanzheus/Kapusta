@@ -20,7 +20,7 @@ const ProfilePage = () => {
   };
   const handleClose = () => setOpen(false);
 
-  const { data, isFetching } = useGetDataUserQuery();
+  const { data, isSuccess } = useGetDataUserQuery();
 
   const firstName = data => data.data.user.fullName.firstName;
   const lastName = data => data.data.user.fullName.lastName;
@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      {!isFetching && (
+      {isSuccess && (
         <section className={style.profile}>
           <Container>
             <IconButton

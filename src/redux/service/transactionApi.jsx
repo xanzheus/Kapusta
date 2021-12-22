@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import toast from 'react-hot-toast';
+import { userAPI } from './userAPI';
+// import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
-  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
     if (token) {
-      // console.log('token', token);
       headers.set('Authorization', `Bearer ${token}`);
     }
     return headers;
@@ -16,15 +17,15 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log(result);
+  const refreshToken = api.getState().auth.refreshToken;
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
       {
         url: `/refresh`,
         method: 'POST',
+        body: { refreshToken },
       },
-      api,
       extraOptions,
     );
     if (refreshResult.data) {
@@ -33,9 +34,18 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(transactionApi.logout());
+      api.dispatch(userAPI.logout());
     }
   }
+  if (result.error && result.error.status === 400) {
+    const { data } = result.error;
+    toast.error(data.message);
+  }
+
+  // if (result.error && result.error.status === 403) {
+  //   const { data } = result.error;
+  //   toast.error(data.message);
+  // }
   return result;
 };
 
@@ -59,11 +69,11 @@ export const transactionApi = createApi({
 
     getTransactions: builder.query({
       query: ({ startDate, endDate }) => ({
-        url: `transactions?startDate${startDate}&endDate=${endDate}`,
+        url: `transactions?startDate=${startDate}&endDate=${endDate}`,
       }),
-      // transformResponse(response, meta, args)
       providesTags: ['Transaction'],
     }),
+
     createTransaction: builder.mutation({
       query: ({ date, category, comment, amount, type }) => ({
         url: `transactions`,
@@ -78,8 +88,47 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+
+    deleteTransaction: builder.mutation({
+      query: id => ({
+        url: `transactions/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
+
+    updateTransaction: builder.mutation({
+      query: ({ id, date, category, comment, amount, type }) => ({
+        url: `transactions/${id}`,
+        method: 'PATCH',
+        body: {
+          date,
+          category,
+          comment,
+          amount,
+          type,
+        },
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
+    updateBalanse: builder.mutation({
+      query: ({ balance }) => ({
+        url: `users/update`,
+        method: 'PATCH',
+        body: {
+          balance,
+        },
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery, useGetTransactionsQuery, useCreateTransactionMutation } =
-  transactionApi;
+export const {
+  useGetCategoriesQuery,
+  useGetTransactionsQuery,
+  useCreateTransactionMutation,
+  useDeleteTransactionMutation,
+  useUpdateTransactionMutation,
+  useUpdateBalanseMutation,
+} = transactionApi;

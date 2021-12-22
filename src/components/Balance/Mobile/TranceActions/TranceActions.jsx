@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
+import toast from 'react-hot-toast';
 // import SaveIcon from '@mui/icons-material/Save';
 // import EditIcon from '@mui/icons-material/Edit';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
     width: '100%',
     maxHeight: 150,
     overflow: 'scroll',
-    marginTop: 60,
+    marginTop: 50,
     marginBottom: 5,
   },
 
@@ -80,40 +82,49 @@ const useStyles = makeStyles({
 
 const TranceActions = ({ transactionsData }) => {
   const classes = useStyles();
+  const transactionsArr = transactionsData.slice(0, transactionsData.length - 1);
+
+  const [deleteTransaction] = useDeleteTransactionMutation();
+
+  const handelDeleteTransaction = id => {
+    deleteTransaction(id);
+    toast.error('Трансакция удалена!');
+  };
 
   return (
     <div className={classes.wrapper}>
       <ul className={classes.list}>
-        {transactionsData
-          .filter(item => item.type === CATEGORYTYPE.INCOME || item.type === CATEGORYTYPE.EXPENSE)
-          .map(item => (
-            <li className={classes.transaction} key={item._id}>
-              <span className={classes.flexColumn}>
-                <p className={classes.comment}>{item.comment}</p>
-                <p className={classes.dateAndCategory}>
-                  {item.date.slice(0, item.date.indexOf('T'))}
-                </p>
-              </span>
-
-              <p className={[classes.dateAndCategory, classes.category].join(' ')}>
-                {TRANSLATE_CATEGORIES[item.category]}
+        {transactionsArr.map(item => (
+          <li className={classes.transaction} key={item._id}>
+            <span className={classes.flexColumn}>
+              <p className={classes.comment}>{item.comment}</p>
+              <p className={classes.dateAndCategory}>
+                {item.date.slice(0, item.date.indexOf('T'))}
               </p>
+            </span>
 
-              {item.type === CATEGORYTYPE.EXPENSE ? (
-                <p className={[classes.amoun, classes.negative].join(' ')}>
-                  {` - ${item.amount} грн.`}
-                </p>
-              ) : (
-                <p
-                  className={[classes.amoun, classes.positive].join(' ')}
-                >{` ${item.amount} грн.`}</p>
-              )}
+            <p className={[classes.dateAndCategory, classes.category].join(' ')}>
+              {TRANSLATE_CATEGORIES[item.category]}
+            </p>
 
-              <DeleteForeverIcon className={classes.buttonIcon} />
-              {/* <EditIcon className={classes.buttonIcon} />
+            {item.type === CATEGORYTYPE.EXPENSE ? (
+              <p className={[classes.amoun, classes.negative].join(' ')}>
+                {` - ${item.amount} грн.`}
+              </p>
+            ) : (
+              <p
+                className={[classes.amoun, classes.positive].join(' ')}
+              >{` ${item.amount} грн.`}</p>
+            )}
+
+            <DeleteForeverIcon
+              onClick={() => handelDeleteTransaction(item._id)}
+              className={classes.buttonIcon}
+            />
+            {/* <EditIcon className={classes.buttonIcon} />
             <SaveIcon className={classes.buttonIcon} /> */}
-            </li>
-          ))}
+          </li>
+        ))}
       </ul>
     </div>
   );
