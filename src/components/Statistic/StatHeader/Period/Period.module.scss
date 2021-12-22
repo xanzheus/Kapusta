@@ -52,11 +52,11 @@
 .search__buttonPickerNextDisabled {
   border: none;
   background: transparent;
-  background-image: url(../../../../images/svg/picker_next.svg);
+  background-image: url(../../../../images/svg/picker_next_disabled.svg);
   background-repeat: no-repeat;
   background-position: center;
-  cursor: pointer;
-  color: rgba(82, 85, 95, 0.7);
+  cursor: no-drop;
+
 }
 
 .period__currentDate {
