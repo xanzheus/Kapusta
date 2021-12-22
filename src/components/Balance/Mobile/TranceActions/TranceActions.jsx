@@ -8,6 +8,9 @@ import toast from 'react-hot-toast';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles({
   list: {
     listStyle: 'none',
@@ -86,9 +89,12 @@ const TranceActions = ({ transactionsData }) => {
 
   const [deleteTransaction] = useDeleteTransactionMutation();
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   const handelDeleteTransaction = id => {
     deleteTransaction(id);
-    toast.error('Трансакция удалена!');
+    toast.error(t('tranceActions.transactionDeleted'));
   };
 
   return (
@@ -109,12 +115,12 @@ const TranceActions = ({ transactionsData }) => {
 
             {item.type === CATEGORYTYPE.EXPENSE ? (
               <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount} грн.`}
+                {` - ${item.amount} ${t('tranceActions.currencyUAH')}.`}
               </p>
             ) : (
-              <p
-                className={[classes.amoun, classes.positive].join(' ')}
-              >{` ${item.amount} грн.`}</p>
+              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount} ${t(
+                'tranceActions.currencyUAH',
+              )}.`}</p>
             )}
 
             <DeleteForeverIcon

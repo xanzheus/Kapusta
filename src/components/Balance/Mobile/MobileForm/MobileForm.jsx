@@ -19,6 +19,9 @@ import Calculator from 'components/Calculator';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
 import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles({
   form: {
     width: '100%',
@@ -115,6 +118,9 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
   const [createTransaction] = useCreateTransactionMutation();
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   const reset = () => {
     setCategory('');
     setComment('');
@@ -122,7 +128,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
-    toast.success('Форма очищена!');
+    toast.success(t('balanceForm.clearForm'));
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -136,7 +142,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
     if (category && amount) {
       if (amount <= 0) {
-        toast.error('Сумма должна быть дольше нуля.');
+        toast.error(t('balanceForm.amountGreaterZero'));
 
         return;
       }
@@ -154,7 +160,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
       toggleForm();
 
-      toast('Транс акция добавлена!', {
+      toast(t('balanceForm.transactionAdded'), {
         icon: '👏',
       });
     }
@@ -187,7 +193,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
         <TextField
           className={[classes.field, classes.description].join(' ')}
           color="info"
-          label="Описание товара"
+          label={t('headersTabs.productDescription')}
           onChange={handleChangeDescription}
           value={comment}
           type="text"
@@ -195,7 +201,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
         />
         <Box className={[classes.field, classes.category].join(' ')}>
           <FormControl fullWidth>
-            <InputLabel>Категория товара</InputLabel>
+            <InputLabel>{t('headersTabs.incomeCategory')}</InputLabel>
             <Select
               color="info"
               error={categoryError}
@@ -233,8 +239,13 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
         <Stack m="auto" mt={{ md: 4, lg: 0 }}>
           <Stack spacing={2} direction="row" alignItems="center">
-            <Button name="ВВОД" type="submit" variant="greyBackground" />
-            <Button name="ОЧИСТИТЬ" type="button" variant="greyBackground" onClick={onResetClick} />
+            <Button name={t('balanceForm.enterButton')} type="submit" variant="greyBackground" />
+            <Button
+              name={t('balanceForm.clearButton')}
+              type="button"
+              variant="greyBackground"
+              onClick={onResetClick}
+            />
           </Stack>
         </Stack>
       </form>

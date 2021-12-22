@@ -15,6 +15,41 @@ const translationEN = {
     registration: 'Registration',
     enter: 'Enter',
   },
+  balanceForm: {
+    clearForm: 'The form is cleared!',
+    amountGreaterZero: 'The amount must be greater than zero.',
+    transactionAdded: 'Transaction added!',
+    enterDescription: 'Enter a description',
+    enterAmount: 'Enter the amount',
+    enterButton: 'Input',
+    clearButton: 'To clear',
+  },
+  balanceLine: {
+    congratulations: 'Congratulations, everything is ready to go!',
+    balance: 'Balance:',
+    confirm: 'CONFIRM',
+    reports: 'Go to reports',
+  },
+  balanceTable: {
+    TransactionDeleted: 'Transaction deleted!',
+    noChangesFound: 'No changes found!',
+    itsClear: 'it is clear',
+    сhangesSaved: 'Changes saved!',
+    madeChange: 'If youve made a change, do not forget to save it!',
+  },
+
+  headersTabs: {
+    consumption: 'Сonsumption',
+    income: 'Income',
+    productDescription: 'Product description',
+    productCategory: 'Product category',
+    descriptionIncome: 'Description of income',
+    incomeCategory: 'Income category',
+  },
+  tranceActions: {
+    transactionDeleted: 'Transaction deleted!',
+    currencyUAH: 'UAH',
+  },
 };
 const translationRU = {
   registration: {
@@ -28,6 +63,40 @@ const translationRU = {
     aceptedTerms: 'Пользовательское соглашение',
     registration: 'Регистрация',
     enter: 'Войти',
+  },
+  balanceForm: {
+    clearForm: 'Форма очищена!',
+    amountGreaterZero: 'Сумма должна быть больше нуля.',
+    transactionAdded: 'Трансакция добавлена!',
+    enterDescription: 'Введите описание',
+    enterAmount: 'Введите сумму',
+    enterButton: 'ВВОД',
+    clearButton: 'ОЧИСТИТЬ',
+  },
+  balanceLine: {
+    congratulations: 'Поздравляем всё готово к работе!',
+    balance: 'Баланс:',
+    confirm: 'ПОДТВЕРДИТЬ',
+    reports: 'Перейти к отчётам',
+  },
+  balanceTable: {
+    transactionDeleted: 'Трансакция удалена!',
+    noChangesFound: 'Изменения не обнаружены!',
+    itsClear: 'Понятно',
+    сhangesSaved: 'Изменения сохранены!',
+    madeChange: 'Если вы внесли изминение, не забудьте сохранить их!',
+  },
+  headersTabs: {
+    consumption: 'Расход',
+    income: 'Доход',
+    productDescription: 'Описание товара',
+    productCategory: 'Категория товара',
+    descriptionIncome: 'Описание дохода',
+    incomeCategory: 'Категория дохода',
+  },
+  tranceActions: {
+    transactionDeleted: 'Трансакция удалена!',
+    currencyUAH: 'UAH',
   },
 };
 const resources = {
@@ -57,3 +126,9 @@ i18n
   });
 
 export default i18n;
+
+// // LOCALISE
+// import { useTranslation } from 'react-i18next';
+
+// // LOCALISE
+// const { t } = useTranslation();
