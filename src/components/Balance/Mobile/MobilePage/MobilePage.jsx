@@ -141,7 +141,7 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData }) => {
 
 MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.array.isRequired,
   transactionsData: PropTypes.array.isRequired,
 };
 

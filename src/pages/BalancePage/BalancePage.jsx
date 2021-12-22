@@ -78,12 +78,6 @@ const BalancePage = () => {
     endDate: lastOfMonth,
   });
 
-  // console.log(data?.data.transactions);
-
-  // if (data?.data.transactions.length <= 1) {
-  //   return;
-  // }
-
   return (
     <section className={classes.balanceSection}>
       <Container>
@@ -92,7 +86,7 @@ const BalancePage = () => {
             {!isFetching && (
               <MobilePage
                 getCurrentDate={getCurrentDate}
-                userData={data.data?.transactions.find(item => item.balance)}
+                userData={data?.data?.transactions}
                 transactionsData={data.data?.transactions}
               />
             )}

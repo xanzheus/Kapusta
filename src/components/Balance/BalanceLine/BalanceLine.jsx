@@ -126,7 +126,7 @@ const BalanceLine = ({ userData }) => {
   const balance = userData[userData.length - 1].balance;
 
   const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(false);
+  const [start, setStart] = useState(true);
 
   const [updateBalanse] = useUpdateBalanseMutation();
 
