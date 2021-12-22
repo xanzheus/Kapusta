@@ -40,6 +40,9 @@ const GraphDetails = ({ startDate, endDate }) => {
       if (i.category === 'transport') {
         return { ...i, category: 'Транспорт' };
       }
+      if (i.category === 'alcohol') {
+        return { ...i, category: 'Алкоголь' };
+      }
       if (i.category === 'technic') {
         return { ...i, category: 'Техника' };
       }

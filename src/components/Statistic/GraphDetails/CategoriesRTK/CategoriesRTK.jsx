@@ -30,11 +30,14 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
       if (i.category === 'transport') {
         return { ...i, category: 'Транспорт' };
       }
+      if (i.category === 'alcohol') {
+        return { ...i, category: 'Алкоголь' };
+      }
       if (i.category === 'technic') {
         return { ...i, category: 'Техника' };
       }
       if (i.category === 'communication') {
-        return { ...i, category: 'Комуналка, связь' };
+        return { ...i, category: 'Коммуналка, связь' };
       }
       if (i.category === 'hobby') {
         return { ...i, category: 'Спорт, хобби' };
@@ -77,7 +80,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
   //   { TRANSPORT: 'Транспорт' },
   //   { HOME: 'Все для дома' },
   //   { TECHNIC: 'Техника' },
-  //   { COMMUNICATION: 'Комуналка, связь' },
+  //   { COMMUNICATION: 'Коммуналка, связь' },
   //   { HOBBY: 'Спорт, хобби' },
   //   { EDUCATION: 'Образование' },
   //   { OTHER: 'Прочее' },
@@ -92,9 +95,10 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
   // }
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
-  const sortCategoryValues = (type, data) => {
+  const sortCategoryValues = (type, value) => {
     // const newCat = data.data.filter(category => {
-    const newCat = data.filter(category => {
+    console.log(value);
+    const newCat = value.filter(category => {
       return category.type === type;
     });
     console.log(newCat);
@@ -150,6 +154,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
         <div className={s.income}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
+              {console.log(data)}
               {sortCategoryValues(value, dataTranslated(data.data)).map(item => {
                 return (
                   <li
