@@ -6,14 +6,14 @@ import TabContext from '@mui/lab/TabContext';
 import { makeStyles } from '@material-ui/core';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import BalanceTable from 'components/Balance/BalanceTable';
+// import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
 import {
   expensesCatagoryArray,
   incomeCatagoryArray,
   CATEGORYTYPE,
-  TRANSLATE_CATEGORIES,
+  // TRANSLATE_CATEGORIES,
 } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
@@ -63,23 +63,23 @@ const HeaderTabs = ({
 }) => {
   const [value, setValue] = useState('1');
 
-  const refreshedTransactions = (symbol, type, transactions) => {
-    const fn = str => str.slice(0, str.indexOf('T'));
+  // const refreshedTransactions = (symbol, type, transactions) => {
+  //   const fn = str => str.slice(0, str.indexOf('T'));
 
-    return transactions
-      .map(item => {
-        console.log(item.date);
-        return {
-          id: item._id,
-          date: fn(item.date),
-          type: item.type,
-          category: TRANSLATE_CATEGORIES[item.category],
-          comment: item.comment,
-          amount: `${symbol} ${item.amount} грн.`,
-        };
-      })
-      .filter(item => item.type === type);
-  };
+  //   return transactions
+  //     .map(item => {
+  //       console.log(item.date);
+  //       return {
+  //         id: item._id,
+  //         date: fn(item.date),
+  //         type: item.type,
+  //         category: TRANSLATE_CATEGORIES[item.category],
+  //         comment: item.comment,
+  //         amount: `${symbol} ${item.amount} грн.`,
+  //       };
+  //     })
+  //     .filter(item => item.type === type);
+  // };
 
   const classes = useStyles();
 

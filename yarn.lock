@@ -16141,11 +16141,6 @@ supports-hyperlinks@^2.0.0:
     has-flag "^4.0.0"
     supports-color "^7.0.0"
 
-surprise-santa@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/surprise-santa/-/surprise-santa-1.0.6.tgz#8bf6b2f040745418cad6a9f12d326946b992557c"
-  integrity sha512-EZxWhq0gEP4mtlBbyN8xR87DNEv+lC4E2NevUswUMVffDKrJHKBPUwWomhjFEKFdko549dlyUg0LdDyemNdMUA==
-
 svg-parser@^2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/svg-parser/-/svg-parser-2.0.4.tgz#fdc2e29e13951736140b76cb122c8ee6630eb6b5"
