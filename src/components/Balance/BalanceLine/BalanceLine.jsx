@@ -128,8 +128,6 @@ const BalanceLine = ({ userData }) => {
 
   const [amount, setAmount] = useState(null);
 
-  console.log(amount);
-
   const [updateBalanse] = useUpdateBalanseMutation();
 
   const classes = useStyles();
