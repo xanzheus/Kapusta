@@ -27,40 +27,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// const incomReportData = [
-//   {
-//     id: 234,
-//     month: 'Январь',
-//     totalsum: 30000,
-//     type: 'income',
-//   },
-//   {
-//     id: 235,
-//     month: 'Февраль',
-//     type: 'income',
-//     totalsum: 35000,
-//   },
-// ];
-
-// const expensesReportData = [
-//   {
-//     id: 2322,
-//     month: 'Январь',
-//     totalsum: 20000,
-//   },
-//   {
-//     id: 23434,
-//     month: 'Февраль',
-//     totalsum: 25000,
-//   },
-
-//   {
-//     id: 2343444,
-//     month: 'Март',
-//     totalsum: 2000,
-//   },
-// ];
-
 const BalancePage = () => {
   const [date, setDate] = useState(() => new Date());
 
@@ -106,8 +72,6 @@ const BalancePage = () => {
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
                   transactions={data?.data?.transactions}
-                  // incomReportData={incomReportData}
-                  // expensesReportData={expensesReportData}
                 />
               </>
             )}
@@ -124,8 +88,6 @@ const BalancePage = () => {
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
                   transactions={data?.data?.transactions}
-                  // incomReportData={incomReportData}
-                  // expensesReportData={expensesReportData}
                 />
               </>
             )}
