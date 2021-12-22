@@ -16,14 +16,14 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  // const refreshToken = api.getState().auth.refreshToken;
+  const refreshToken = api.getState().auth.refreshToken;
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
       {
         url: `/refresh`,
         method: 'POST',
-        // body: { refreshToken },
+        body: { refreshToken },
       },
       extraOptions,
     );
@@ -74,7 +74,6 @@ export const userAPI = createApi({
           refreshToken,
         },
       }),
-      invalidatesTags: ['Auth'],
     }),
 
     logout: builder.mutation({
@@ -92,7 +91,6 @@ export const userAPI = createApi({
       query: () => ({
         url: `/current`,
       }),
-      providesTags: ['User'],
     }),
 
     updateAvatar: builder.mutation({
