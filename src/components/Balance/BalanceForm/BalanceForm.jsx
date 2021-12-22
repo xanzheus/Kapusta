@@ -18,6 +18,8 @@ import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import Calculator from 'components/Calculator';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
+import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -48,7 +50,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: COLORS.primary,
       fontWeight: 700,
-      padding: '0 10px 0 0',
+      padding: '0 10px 0 20px',
     },
 
     '& .MuiFormHelperText-root ': {
@@ -155,6 +157,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     getCurrentDate(date);
   }, [date, getCurrentDate]);
 
+  const [createTransaction] = useCreateTransactionMutation();
+
   const classes = useStyles();
 
   const reset = () => {
@@ -180,15 +184,15 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
         alert('Сумма должна быть дольше нуля');
         return;
       }
-      const dateResponse = {
-        date: format(date, 'dd-MM-yyyy'),
-        category,
+      const result = {
+        date: format(date, 'yyyy-MM-dd'),
+        category: TRANSLATE_CATEGORIES[category],
         comment,
-        amount: Number(amount),
+        amount,
         type,
       };
-      console.log(dateResponse);
-      console.log('Submit Form');
+
+      createTransaction(result);
       reset();
     }
 

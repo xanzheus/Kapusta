@@ -6,10 +6,15 @@ import TabContext from '@mui/lab/TabContext';
 import { makeStyles } from '@material-ui/core';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import BalanceTable from 'components/Balance/BalanceTable';
+// import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
+import {
+  expensesCatagoryArray,
+  incomeCatagoryArray,
+  CATEGORYTYPE,
+  // TRANSLATE_CATEGORIES,
+} from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 const useStyles = makeStyles(theme => ({
@@ -51,12 +56,30 @@ const useStyles = makeStyles(theme => ({
 
 const HeaderTabs = ({
   getCurrentDate,
-  incomData,
-  expensesData,
+  transactions,
   incomReportData,
   expensesReportData,
+  isFetching,
 }) => {
   const [value, setValue] = useState('1');
+
+  // const refreshedTransactions = (symbol, type, transactions) => {
+  //   const fn = str => str.slice(0, str.indexOf('T'));
+
+  //   return transactions
+  //     .map(item => {
+  //       console.log(item.date);
+  //       return {
+  //         id: item._id,
+  //         date: fn(item.date),
+  //         type: item.type,
+  //         category: TRANSLATE_CATEGORIES[item.category],
+  //         comment: item.comment,
+  //         amount: `${symbol} ${item.amount} грн.`,
+  //       };
+  //     })
+  //     .filter(item => item.type === type);
+  // };
 
   const classes = useStyles();
 
@@ -86,12 +109,14 @@ const HeaderTabs = ({
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
-          <BalanceTable
-            Class="expenses"
-            data={expensesData}
-            reportData={expensesReportData}
-            category={expensesCatagoryArray}
-          />
+          {/* {!isFetching && (
+            <BalanceTable
+              Class="expenses"
+              data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE, transactions)}
+              reportData={expensesReportData}
+              category={expensesCatagoryArray}
+            />
+          )} */}
         </TabPanel>
 
         <TabPanel className={classes.tabsThumb} value="2">
@@ -101,12 +126,14 @@ const HeaderTabs = ({
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
-          <BalanceTable
-            Class="income"
-            data={incomData}
-            reportData={incomReportData}
-            category={incomeCatagoryArray}
-          />
+          {/* {!isFetching && (
+            <BalanceTable
+              Class="income"
+              data={refreshedTransactions('', CATEGORYTYPE.INCOME, transactions)}
+              reportData={incomReportData}
+              category={incomeCatagoryArray}
+            />
+          )} */}
         </TabPanel>
       </TabContext>
     </Box>
@@ -115,10 +142,9 @@ const HeaderTabs = ({
 
 HeaderTabs.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
-  incomData: PropTypes.array.isRequired,
-  expensesData: PropTypes.array.isRequired,
   incomReportData: PropTypes.array.isRequired,
   expensesReportData: PropTypes.array.isRequired,
+  transactions: PropTypes.array.isRequired,
 };
 
 export default HeaderTabs;

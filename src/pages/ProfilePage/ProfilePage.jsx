@@ -22,6 +22,10 @@ const ProfilePage = () => {
 
   const { data, isFetching } = useGetDataUserQuery();
 
+  const firstName = data => data.data.user.fullName.firstName;
+  const lastName = data => data.data.user.fullName.lastName;
+  const avatar = data => data.data.user.avatar;
+
   return (
     <>
       {!isFetching && (
@@ -54,15 +58,15 @@ const ProfilePage = () => {
             <div className={style.profile__wrapper}>
               <div className={style.profile__sidebar}>
                 <div className={style.avatar__wrapper}>
-                  <IconAvatar src={data.data.user.avatar} width={240} height={240} />
+                  <IconAvatar src={avatar(data)} width={240} height={240} />
                   <FormaUpdatePhoto />
                 </div>
 
                 <div className={style.profile__info}>
-                  {(data.data.user.fullName.firstName || data.data.user.fullName.lastName) && (
+                  {(firstName(data) || data.data.user.fullName.lastName) && (
                     <h2 className={style.profile__name}>
-                      {data.data.user.fullName.firstName || data.data.user.fullName.lastName
-                        ? `${data.data.user.fullName.firstName} ${data.data.user.fullName.lastName}`
+                      {firstName(data) || lastName(data)
+                        ? `${firstName(data)} ${lastName(data)}`
                         : ''}
                     </h2>
                   )}
@@ -71,8 +75,8 @@ const ProfilePage = () => {
               </div>
               <div className={style.profile__settings}>
                 <FormaUser
-                  firstName={data.data.user.fullName.firstName}
-                  lastName={data.data.user.fullName.lastName}
+                  firstName={firstName(data)}
+                  lastName={lastName(data)}
                   language={data.data.user.settings.language}
                   currency={data.data.user.settings.currency}
                   theme={data.data.user.settings.theme}

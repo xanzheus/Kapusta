@@ -1,18 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  // baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/transactions',
-  baseUrl: 'http://localhost:3004/',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
-
     if (token) {
       // console.log('token', token);
       headers.set('Authorization', `Bearer ${token}`);
     }
-
     return headers;
   },
 });
@@ -44,16 +41,46 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const transactionApi = createApi({
   reducerPath: 'transactionApi',
-  // baseQuery: fetchBaseQuery({
-  //   baseUrl: 'http://localhost:3004/',
-  // }),
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Transaction'],
   endpoints: builder => ({
     getCategories: builder.query({
-      query: () => ({ url: `categories?startDate=2021-12-01&endDate=2021-12-31` }),
+      query: arg => {
+        const { startDate, endDate } = arg;
+        console.log(startDate);
+        console.log(endDate);
+        return {
+          url: `transactions/categories`,
+          params: { startDate, endDate },
+        };
+      },
+      // query: () => ({
+      //   url: `categories?startDate=2021-12-01&endDate=2021-12-31`,
+      //   // url: `categories`,
+      // }),
+    }),
+    getTransactions: builder.query({
+      query: ({ startDate, endDate }) => ({
+        url: `transactions?startDate${startDate}&endDate=${endDate}`,
+      }),
+      // transformResponse(response, meta, args)
+    }),
+    createTransaction: builder.mutation({
+      query: ({ date, category, comment, amount, type }) => ({
+        url: `transactions`,
+        method: 'POST',
+        body: {
+          date,
+          category,
+          comment,
+          amount,
+          type,
+        },
+        invalidatesTags: ['Transaction'],
+      }),
     }),
   }),
 });
 
-export const { useGetCategoriesQuery } = transactionApi;
+export const { useGetCategoriesQuery, useGetTransactionsQuery, useCreateTransactionMutation } =
+  transactionApi;

@@ -121,11 +121,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceLine = ({ userData }) => {
-  const { balance, isStart } = userData;
+  const { balance } = userData;
+
   const classes = useStyles();
 
   const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(isStart);
+  const [start, setStart] = useState(true);
 
   const handleChangeBalance = event => setAmount(event.target.value);
 

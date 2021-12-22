@@ -95,11 +95,6 @@ const FormaUser = ({
 
       formikBag.setFieldValue('password', '');
       formikBag.setFieldValue('confirmPassword', '');
-      // formikBag.setFieldValue('firstName', data.data.user.fullName.firstName);
-      // formikBag.setFieldValue('lastName', values.lastName);
-      // formikBag.setFieldValue('language', values.language);
-      // formikBag.setFieldValue('currency', values.currency);
-      // formikBag.setFieldValue('theme', values.theme);
     },
   });
 
