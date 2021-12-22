@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { format, startOfMonth, lastDayOfMonth } from 'date-fns';
+import { format, startOfMonth, lastDayOfMonth, startOfYear, endOfYear } from 'date-fns';
 import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
 import HeaderTabs from 'components/Balance/HeaderTabs';
@@ -32,10 +32,12 @@ const incomReportData = [
     id: 234,
     month: 'Январь',
     totalsum: 30000,
+    type: 'income',
   },
   {
     id: 235,
     month: 'Февраль',
+    type: 'income',
     totalsum: 35000,
   },
 ];
@@ -72,8 +74,13 @@ const BalancePage = () => {
 
   const firstOfMonth = format(startOfMonth(date), 'yyyy-MM-dd');
   const lastOfMonth = format(lastDayOfMonth(date), 'yyyy-MM-dd');
+  const firstDayOfYear = format(startOfYear(date), 'yyyy-MM-dd');
+  const lastDayOfYear = format(endOfYear(date), 'yyyy-MM-dd');
 
-  const { data, isFetching } = useGetTransactionsQuery({
+  console.log(firstDayOfYear);
+  console.log(lastDayOfYear);
+
+  const { data, isSuccess } = useGetTransactionsQuery({
     startDate: firstOfMonth,
     endDate: lastOfMonth,
   });
@@ -83,7 +90,7 @@ const BalancePage = () => {
       <Container>
         {small && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <MobilePage
                 initialDate={date}
                 getCurrentDate={getCurrentDate}
@@ -96,7 +103,7 @@ const BalancePage = () => {
 
         {medium && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <>
                 <BalanceLine userData={data?.data?.transactions} />
 
@@ -114,7 +121,7 @@ const BalancePage = () => {
 
         {large && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <>
                 <BalanceLine userData={data?.data?.transactions} />
 
