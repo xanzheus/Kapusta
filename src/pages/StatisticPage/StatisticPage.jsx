@@ -12,7 +12,7 @@ const StatisticPage = () => {
   // const [endMonth, setEndMonth] = [format(endOfMonth(date), 'yyyy-MM-dd')];
   const newMonth = date.toLocaleString('ru', { month: 'long' }).toUpperCase();
   const newYear = date.getFullYear();
-
+  console.log(date);
   const startMonth = [format(startOfMonth(date), 'yyyy-MM-dd')];
   const endMonth = [format(endOfMonth(date), 'yyyy-MM-dd')];
 
