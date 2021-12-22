@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import { useUpdateBalanseMutation } from 'redux/service/transactionApi';
 import trend from 'images/trend.png';
 
 const useStyles = makeStyles(theme => ({
@@ -127,7 +128,7 @@ const BalanceLine = ({ userData }) => {
   const [amount, setAmount] = useState(balance);
   const [start, setStart] = useState(false);
 
-  console.log(amount);
+  const [updateBalanse] = useUpdateBalanseMutation();
 
   const classes = useStyles();
 
@@ -141,14 +142,12 @@ const BalanceLine = ({ userData }) => {
       return;
     }
 
-    const dateResponse = {
+    const result = {
       balance: Number(amount),
     };
 
-    setStart(true);
+    updateBalanse(result);
 
-    console.log(dateResponse);
-    console.log(amount);
     setStart(true);
   };
 

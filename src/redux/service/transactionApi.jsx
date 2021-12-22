@@ -94,6 +94,15 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+    updateBalanse: builder.mutation({
+      query: ({ balance }) => ({
+        url: `users/update`,
+        method: 'PATCH',
+        body: {
+          balance,
+        },
+      }),
+    }),
   }),
 });
 
@@ -103,4 +112,5 @@ export const {
   useCreateTransactionMutation,
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
+  useUpdateBalanseMutation,
 } = transactionApi;
