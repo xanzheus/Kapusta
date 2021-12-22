@@ -37,15 +37,17 @@
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "surprise-santa": "^1.0.6",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-script build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "predeploy": "yarn run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [

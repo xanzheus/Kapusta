@@ -1,32 +1,23 @@
-// import { useState } from 'react';
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
-// import { IconButton } from '@mui/material';
-import { useSelector } from 'react-redux';
-// import Snowfall from 'react-snowfall';
 import Snowflakes from 'magic-snowflakes';
-// import AcUnitIcon from '@mui/icons-material/AcUnit';
-import SurpriseSanta from 'surprise-santa';
-
+import { useGetDataUserQuery } from 'redux/service/userAPI';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
+  const { isFetching } = useGetDataUserQuery();
   const snowflakes = new Snowflakes({ height: 40, speed: 0.1, count: 16 });
   snowflakes.start();
-  const accessToken = useSelector(state => state.auth.accessToken);
-
   return (
     <>
-      <SurpriseSanta minTime={1} maxTime={1} />;
       <header className={style.header}>
         <Container>
           <div className={style.header__wrapper}>
             <Link to="/balance">
               <div className={style.logo}></div>
             </Link>
-
-            {accessToken && <UserMenu />}
+            {/* {!isFetching && <UserMenu />} */}
           </div>
         </Container>
       </header>

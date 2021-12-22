@@ -13,7 +13,7 @@ import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
 import style from './ProfilePage.module.scss';
 
-const ProfilePage = () => {
+const DevelopersPage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     return setOpen(true);
@@ -91,4 +91,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default DevelopersPage;

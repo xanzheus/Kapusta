@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { exchangeRates } from './service/exchangeAPI';
 import authReducer from '../redux/service/authSlice';
 import { userAPI } from './service/userAPI';
+import { developerAPI } from './service/developerAPI';
 import { googleAPI } from './service/googleAuth';
 import { transactionApi } from './service/transactionApi';
 
@@ -30,6 +31,7 @@ export const store = configureStore({
     [googleAPI.reducerPath]: googleAPI.reducer,
     [exchangeRates.reducerPath]: exchangeRates.reducer,
     [transactionApi.reducerPath]: transactionApi.reducer,
+    [developerAPI.reducerPath]: developerAPI.reducer,
   },
   middleware: getDefaultMiddleware => [
     ...getDefaultMiddleware({
@@ -42,6 +44,7 @@ export const store = configureStore({
     exchangeRates.middleware,
     googleAPI.middleware,
     transactionApi.middleware,
+    developerAPI.middleware,
   ],
 });
 
