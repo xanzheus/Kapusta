@@ -1,20 +1,16 @@
-// import { useState } from 'react';
 import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
-// import { IconButton } from '@mui/material';
-import { useSelector } from 'react-redux';
-// import Snowfall from 'react-snowfall';
 import Snowflakes from 'magic-snowflakes';
-// import AcUnitIcon from '@mui/icons-material/AcUnit';
-
+import { useGetDataUserQuery } from 'redux/service/userAPI';
+import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
 
 const AppBar = () => {
+  const { isSuccess } = useGetDataUserQuery();
   const snowflakes = new Snowflakes({ height: 40, speed: 0.1, count: 16 });
-  snowflakes.start();
   const accessToken = useSelector(state => state.auth.accessToken);
-
+  snowflakes.start();
   return (
     <>
       <header className={style.header}>
@@ -23,8 +19,8 @@ const AppBar = () => {
             <Link to="/balance">
               <div className={style.logo}></div>
             </Link>
-
-            {accessToken && <UserMenu />}
+            {console.log(`AppBar ${isSuccess}`)}
+            {isSuccess && accessToken && <UserMenu />}
           </div>
         </Container>
       </header>

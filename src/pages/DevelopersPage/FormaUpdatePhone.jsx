@@ -8,7 +8,7 @@ import { COLORS } from '../../Constants';
 import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
-const FormaUpdatePhone = ({ phone = '', setOpen }) => {
+const FormaUpdatePhone = ({ phone = '' }) => {
   const [newPhone, setnewPhone] = useState('');
   const [sendRequestAccept] = useSendRequestAcceptMutation({
     fixedCacheKey: 'shared-update-user',
@@ -59,6 +59,7 @@ const FormaUpdatePhone = ({ phone = '', setOpen }) => {
       console.log(newPhone);
       const req = {
         phone: values.phone,
+        acceptCode: '',
       };
       console.log(req);
       sendRequestAccept(req);
@@ -67,15 +68,15 @@ const FormaUpdatePhone = ({ phone = '', setOpen }) => {
 
   const formikPhoneAccept = useFormik({
     initialValues: {
-      code: '',
+      acceptCode: '',
     },
 
     onSubmit: (values, formikBag) => {
       const req = {
         phone: newPhone,
-        code: values.code,
+        acceptCode: values.acceptCode,
       };
-      setOpen(false);
+      console.log(req);
       sendRequestAccept(req);
     },
   });
@@ -106,14 +107,16 @@ const FormaUpdatePhone = ({ phone = '', setOpen }) => {
       <form className={style.tableData} onSubmit={formikPhoneAccept.handleSubmit}>
         <TextField
           className={classes.field}
-          id="code"
-          name="code"
+          id="acceptCode"
+          name="acceptCode"
           label="Код подтверждения"
-          value={formikPhoneAccept.values.code}
+          value={formikPhoneAccept.values.acceptCode}
           onBlur={formikPhoneAccept.handleBlur}
           onChange={formikPhoneAccept.handleChange}
-          error={formikPhoneAccept.touched.code && Boolean(formikPhoneAccept.errors.code)}
-          helperText={formikPhoneAccept.touched.code && formikPhoneAccept.errors.code}
+          error={
+            formikPhoneAccept.touched.acceptCode && Boolean(formikPhoneAccept.errors.acceptCode)
+          }
+          helperText={formikPhoneAccept.touched.acceptCode && formikPhoneAccept.errors.acceptCode}
         />
 
         <Button

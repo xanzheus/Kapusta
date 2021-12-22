@@ -13,14 +13,14 @@ import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
 import style from './ProfilePage.module.scss';
 
-const ProfilePage = () => {
+const DevelopersPage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     return setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
-  const { data, isSuccess } = useGetDataUserQuery();
+  const { data, isFetching } = useGetDataUserQuery();
 
   const firstName = data => data.data.user.fullName.firstName;
   const lastName = data => data.data.user.fullName.lastName;
@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      {isSuccess && (
+      {!isFetching && (
         <section className={style.profile}>
           <Container>
             <IconButton
@@ -91,4 +91,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default DevelopersPage;

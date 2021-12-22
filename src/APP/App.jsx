@@ -9,6 +9,8 @@ import Registration from 'pages/Registration';
 import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Toaster } from 'react-hot-toast';
 import Loader from 'components/Loader';
 // import { ToastContainer } from 'react-toastify';
@@ -23,11 +25,16 @@ const StatisticPage = lazy(() =>
   import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
 );
 
+const DevelopersPage = lazy(() =>
+  import('pages/DevelopersPage/DevelopersPage' /* webpackChunkName: "Developers-page" */),
+);
+
 const App = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <div className={style.mainWrapper}> */}
       <Toaster />
       <AppBar />
       <Routes>
@@ -82,6 +89,28 @@ const App = () => {
           }
         />
         <Route
+          path="developers"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense
+                fallback={
+                  <div className={style.loader}>
+                    <Stack sx={{ color: 'grey.500' }}>
+                      <CircularProgress color="inherit" />
+                    </Stack>
+                  </div>
+                }
+              >
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <DevelopersPage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="reports"
           element={
             <PrivateRoute accessToken={accessToken}>
@@ -120,6 +149,7 @@ const App = () => {
           }
         />
       </Routes>
+      {/* </div> */}
     </ThemeProvider>
   );
 };

@@ -4,12 +4,14 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import CancelIcon from '@mui/icons-material/Close';
+import { useState } from 'react';
 import FormaUpdatePhone from 'pages/ProfilePage/FormaUpdatePhone';
 import style from './EditPhoneModal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
 const EditPhoneModal = ({ open, handleClose }) => {
+  const [isOpen, setOpen] = useState(open);
   return createPortal(
     <>
       <Modal
@@ -24,7 +26,7 @@ const EditPhoneModal = ({ open, handleClose }) => {
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
             Укажите ваш номер телефона
           </Typography>
-          <FormaUpdatePhone />
+          <FormaUpdatePhone setOpen={setOpen} />
         </Box>
       </Modal>
     </>,

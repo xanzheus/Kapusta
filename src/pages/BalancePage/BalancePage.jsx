@@ -74,11 +74,10 @@ const BalancePage = () => {
 
   const firstOfMonth = format(startOfMonth(date), 'yyyy-MM-dd');
   const lastOfMonth = format(lastDayOfMonth(date), 'yyyy-MM-dd');
-  const firstDayOfYear = format(startOfYear(date), 'yyyy-MM-dd');
-  const lastDayOfYear = format(endOfYear(date), 'yyyy-MM-dd');
+  // const firstDayOfYear = format(startOfYear(date), 'yyyy-MM-dd');
+  // const lastDayOfYear = format(endOfYear(date), 'yyyy-MM-dd');
 
-  console.log(firstDayOfYear);
-  console.log(lastDayOfYear);
+  // const { data, isSuccess } = useGetTransactionsQuery(firstOfMonth, lastOfMonth);
 
   const { data, isSuccess } = useGetTransactionsQuery({
     startDate: firstOfMonth,
