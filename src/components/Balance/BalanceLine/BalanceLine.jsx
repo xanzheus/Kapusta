@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaPredicate } from 'react-media-hook';
 import Stack from '@mui/material/Stack';
+import toast from 'react-hot-toast';
 import { makeStyles } from '@material-ui/core';
 import Button from 'components/Button';
 import COLORS from 'Constants/COLORS';
@@ -126,7 +127,7 @@ const BalanceLine = ({ userData }) => {
   const balance = userData[userData.length - 1].balance;
 
   const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(false);
 
   const [updateBalanse] = useUpdateBalanseMutation();
 
@@ -138,7 +139,8 @@ const BalanceLine = ({ userData }) => {
     event.preventDefault();
 
     if (Number(amount) <= 0) {
-      alert('Введите сумму');
+      toast.error('Введите сумму больше нуля.');
+
       return;
     }
 

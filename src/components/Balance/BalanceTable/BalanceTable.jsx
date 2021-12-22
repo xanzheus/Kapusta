@@ -4,6 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
+import toast from 'react-hot-toast';
 import { Box } from '@mui/system';
 import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
@@ -129,6 +130,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
   const deleteTransAction = useCallback(
     id => () => {
       deleteTransaction(id);
+      toast.error('Трансакция удалена!');
     },
     [deleteTransaction],
   );
@@ -136,7 +138,12 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
   const updateTransAction = useCallback(
     params => () => {
       if (data.find(row => row === params.row)) {
-        alert('Изменения не обнаружены, либо ещё не готовы к сохранению');
+        toast(t => (
+          <span>
+            <b>Изменения не обнаружены!</b>
+            <button onClick={() => toast.dismiss(t.id)}> Понятно </button>
+          </span>
+        ));
         return;
       }
       const preparedDate = params.row.date.toString();
@@ -154,7 +161,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
 
       updateTransaction(result);
 
-      alert('Изменения сохранены');
+      toast.success('Изменения сохранены!');
     },
     [data, updateTransaction],
   );

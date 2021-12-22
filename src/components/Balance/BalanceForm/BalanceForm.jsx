@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Stack from '@mui/material/Stack';
 import DatePicker from '@mui/lab/DatePicker';
+import toast from 'react-hot-toast';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -168,6 +169,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
+    toast.success('Форма очищена!');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -181,7 +183,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
     if (category && amount) {
       if (amount <= 0) {
-        alert('Сумма должна быть дольше нуля');
+        toast.error('Сумма должна быть больше нуля.');
+
         return;
       }
 
@@ -195,6 +198,10 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
       createTransaction(result);
       reset();
+
+      toast('Транс акция добавлена!', {
+        icon: '👏',
+      });
     }
 
     if (category === '') {

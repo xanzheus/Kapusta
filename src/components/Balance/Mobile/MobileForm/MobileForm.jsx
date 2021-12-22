@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import Stack from '@mui/material/Stack';
 import format from 'date-fns/format';
+import toast from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import CalculateIcon from '@mui/icons-material/Calculate';
@@ -121,6 +122,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
+    toast.success('Форма очищена!');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -134,7 +136,8 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
     if (category && amount) {
       if (amount <= 0) {
-        alert('Сумма должна быть дольше нуля');
+        toast.error('Сумма должна быть дольше нуля.');
+
         return;
       }
 
@@ -147,10 +150,13 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
       };
       createTransaction(result);
 
-      console.log(result);
-      console.log('Submit Form');
       reset();
+
       toggleForm();
+
+      toast('Транс акция добавлена!', {
+        icon: '👏',
+      });
     }
 
     if (category === '') {

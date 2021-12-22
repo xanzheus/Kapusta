@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
+import toast from 'react-hot-toast';
 // import SaveIcon from '@mui/icons-material/Save';
 // import EditIcon from '@mui/icons-material/Edit';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
@@ -85,7 +86,10 @@ const TranceActions = ({ transactionsData }) => {
 
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-  const handelDeleteTransaction = id => deleteTransaction(id);
+  const handelDeleteTransaction = id => {
+    deleteTransaction(id);
+    toast.error('Трансакция удалена!');
+  };
 
   return (
     <div className={classes.wrapper}>
