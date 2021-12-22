@@ -124,10 +124,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceLine = ({ userData }) => {
-  const balance = userData[userData.length - 1].balance;
+  const { balance, isBalanceSetted } = userData[userData.length - 1];
 
-  const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(false);
+  const [amount, setAmount] = useState(null);
+
+  console.log(amount);
 
   const [updateBalanse] = useUpdateBalanseMutation();
 
@@ -153,7 +154,8 @@ const BalanceLine = ({ userData }) => {
     toast('Поздравляем всё готово к работе!', {
       icon: '👏',
     });
-    setStart(true);
+
+    setAmount(null);
   };
 
   const small = useMediaPredicate('(max-width: 767px)');
@@ -170,7 +172,7 @@ const BalanceLine = ({ userData }) => {
       >
         <p className={classes.balance__title}>Баланс: </p>
 
-        {start ? (
+        {isBalanceSetted ? (
           <Stack direction="row">
             <p
               className={[classes.balance__input, classes.disabled].join(' ')}
