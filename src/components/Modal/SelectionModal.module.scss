@@ -1,16 +1,21 @@
 @import 'styles/shared.scss';
 
 .modal {
+  min-width: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 380px;
+
   min-height: 194px;
   text-align: center;
   background-color: $mainLight-color;
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
+
+  @media screen and (min-width: $tablet) {
+    min-width: 380px;
+  }
 }
 
 .modal__title {

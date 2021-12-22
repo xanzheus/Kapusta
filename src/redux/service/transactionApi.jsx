@@ -71,10 +71,11 @@ export const transactionApi = createApi({
     }),
     getTransactions: builder.query({
       query: ({ startDate, endDate }) => ({
-        url: `transactions?startDate${startDate}&endDate=${endDate}`,
+        url: `transactions?startDate=${startDate}&endDate=${endDate}`,
       }),
-      // transformResponse(response, meta, args)
+      providesTags: ['Transaction'],
     }),
+
     createTransaction: builder.mutation({
       query: ({ date, category, comment, amount, type }) => ({
         url: `transactions`,
@@ -86,11 +87,50 @@ export const transactionApi = createApi({
           amount,
           type,
         },
-        invalidatesTags: ['Transaction'],
       }),
+      invalidatesTags: ['Transaction'],
+    }),
+
+    deleteTransaction: builder.mutation({
+      query: id => ({
+        url: `transactions/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
+    
+    updateTransaction: builder.mutation({
+      query: ({ id, date, category, comment, amount, type }) => ({
+        url: `transactions/${id}`,
+        method: 'PATCH',
+        body: {
+          date,
+          category,
+          comment,
+          amount,
+          type,
+        },
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
+    updateBalanse: builder.mutation({
+      query: ({ balance }) => ({
+        url: `users/update`,
+        method: 'PATCH',
+        body: {
+          balance,
+        },
+      }),
+      invalidatesTags: ['Transaction'],
     }),
   }),
 });
 
-export const { useGetCategoriesQuery, useGetTransactionsQuery, useCreateTransactionMutation } =
-  transactionApi;
+export const {
+  useGetCategoriesQuery,
+  useGetTransactionsQuery,
+  useCreateTransactionMutation,
+  useDeleteTransactionMutation,
+  useUpdateTransactionMutation,
+  useUpdateBalanseMutation,
+} = transactionApi;

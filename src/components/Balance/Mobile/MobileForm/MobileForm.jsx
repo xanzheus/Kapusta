@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import Stack from '@mui/material/Stack';
 import format from 'date-fns/format';
+import toast from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import CalculateIcon from '@mui/icons-material/Calculate';
@@ -15,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import Calculator from 'components/Calculator';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
+import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
 const useStyles = makeStyles({
   form: {
@@ -110,6 +113,8 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
   const classes = useStyles();
 
+  const [createTransaction] = useCreateTransactionMutation();
+
   const reset = () => {
     setCategory('');
     setComment('');
@@ -117,6 +122,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
+    toast.success('Форма очищена!');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -130,20 +136,27 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
     if (category && amount) {
       if (amount <= 0) {
-        alert('Сумма должна быть дольше нуля');
+        toast.error('Сумма должна быть дольше нуля.');
+
         return;
       }
-      const dateResponse = {
-        date: format(date, 'dd-MM-yyyy'),
-        category,
+
+      const result = {
+        date: format(date, 'yyyy-MM-dd'),
+        category: TRANSLATE_CATEGORIES[category],
         comment,
-        amount: Number(amount),
-        types: categoryTypes,
+        amount,
+        type: categoryTypes,
       };
-      console.log(dateResponse);
-      console.log('Submit Form');
+      createTransaction(result);
+
       reset();
+
       toggleForm();
+
+      toast('Транс акция добавлена!', {
+        icon: '👏',
+      });
     }
 
     if (category === '') {

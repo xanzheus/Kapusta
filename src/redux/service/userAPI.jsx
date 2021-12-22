@@ -17,6 +17,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   const refreshToken = api.getState().auth.refreshToken;
+  console.log('userAPI', refreshToken);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
@@ -25,11 +26,14 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         method: 'POST',
         body: { refreshToken },
       },
+      api,
       extraOptions,
     );
     if (refreshResult.data) {
+      console.log('refreshDATA', refreshResult.data.data);
+      const { data } = refreshResult.data;
       // store the new token
-      api.dispatch(setCredentials(refreshResult.data));
+      api.dispatch(setCredentials(data));
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
@@ -79,6 +83,7 @@ export const userAPI = createApi({
           authorization: '',
         },
       }),
+      invalidatesTags: ['User'],
     }),
 
     getDataUser: builder.query({
@@ -117,7 +122,7 @@ export const userAPI = createApi({
     sendRequestAccept: builder.mutation({
       query: body => ({
         url: '/phone-verify',
-        method: 'POST',
+        method: 'PATCH',
         body,
       }),
     }),

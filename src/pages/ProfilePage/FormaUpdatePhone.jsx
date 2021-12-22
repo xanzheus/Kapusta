@@ -8,7 +8,7 @@ import { COLORS } from '../../Constants';
 import { useSendRequestAcceptMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
-const FormaUpdatePhone = ({ phone = '' }) => {
+const FormaUpdatePhone = ({ phone = '', setOpen }) => {
   const [newPhone, setnewPhone] = useState('');
   const [sendRequestAccept] = useSendRequestAcceptMutation({
     fixedCacheKey: 'shared-update-user',
@@ -59,7 +59,6 @@ const FormaUpdatePhone = ({ phone = '' }) => {
       console.log(newPhone);
       const req = {
         phone: values.phone,
-        acceptCode: '',
       };
       console.log(req);
       sendRequestAccept(req);
@@ -68,15 +67,15 @@ const FormaUpdatePhone = ({ phone = '' }) => {
 
   const formikPhoneAccept = useFormik({
     initialValues: {
-      acceptCode: '',
+      code: '',
     },
 
     onSubmit: (values, formikBag) => {
       const req = {
         phone: newPhone,
-        acceptCode: values.acceptCode,
+        code: values.code,
       };
-      console.log(req);
+      setOpen(false);
       sendRequestAccept(req);
     },
   });
@@ -107,16 +106,14 @@ const FormaUpdatePhone = ({ phone = '' }) => {
       <form className={style.tableData} onSubmit={formikPhoneAccept.handleSubmit}>
         <TextField
           className={classes.field}
-          id="acceptCode"
-          name="acceptCode"
+          id="code"
+          name="code"
           label="Код подтверждения"
-          value={formikPhoneAccept.values.acceptCode}
+          value={formikPhoneAccept.values.code}
           onBlur={formikPhoneAccept.handleBlur}
           onChange={formikPhoneAccept.handleChange}
-          error={
-            formikPhoneAccept.touched.acceptCode && Boolean(formikPhoneAccept.errors.acceptCode)
-          }
-          helperText={formikPhoneAccept.touched.acceptCode && formikPhoneAccept.errors.acceptCode}
+          error={formikPhoneAccept.touched.code && Boolean(formikPhoneAccept.errors.code)}
+          helperText={formikPhoneAccept.touched.code && formikPhoneAccept.errors.code}
         />
 
         <Button

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { format } from 'date-fns';
 import { makeStyles } from '@material-ui/core';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Stack from '@mui/material/Stack';
 import DatePicker from '@mui/lab/DatePicker';
+import toast from 'react-hot-toast';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
+import { format } from 'date-fns';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import Calculator from 'components/Calculator';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: COLORS.primary,
       fontWeight: 700,
-      padding: '0 10px 0 20px',
+      padding: '0 0 0 20px',
     },
 
     '& .MuiFormHelperText-root ': {
@@ -108,6 +109,10 @@ const useStyles = makeStyles(theme => ({
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px 16px 16px 0px',
     },
+
+    '& .MuiOutlinedInput-input': {
+      padding: '0 10px 0 0',
+    },
   },
 
   dateField: {
@@ -144,18 +149,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
-  const [date, setDate] = useState(() => new Date());
+const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initialDate }) => {
+  const [date, setDate] = useState(initialDate);
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
   const [amountError, setAmountError] = useState(false);
   const [isCalculator, setIsCalculator] = useState(false);
-
-  useEffect(() => {
-    getCurrentDate(date);
-  }, [date, getCurrentDate]);
 
   const [createTransaction] = useCreateTransactionMutation();
 
@@ -168,6 +169,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
+    toast.success('Форма очищена!');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -181,9 +183,11 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
 
     if (category && amount) {
       if (amount <= 0) {
-        alert('Сумма должна быть дольше нуля');
+        toast.error('Сумма должна быть больше нуля.');
+
         return;
       }
+
       const result = {
         date: format(date, 'yyyy-MM-dd'),
         category: TRANSLATE_CATEGORIES[category],
@@ -194,6 +198,10 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
 
       createTransaction(result);
       reset();
+
+      toast('Транс акция добавлена!', {
+        icon: '👏',
+      });
     }
 
     if (category === '') {
@@ -205,10 +213,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
     }
   };
 
-  const onResetClick = () => {
-    reset();
-    console.log('Reset');
-  };
+  const onResetClick = () => reset();
 
   const getAmountFromCalculator = amount => {
     setAmount(amount.result);
@@ -226,6 +231,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate }) => {
               value={date}
               onChange={newValue => {
                 setDate(newValue);
+                getCurrentDate(newValue);
               }}
               renderInput={params => (
                 <TextField color="info" className={classes.field} {...params} />
@@ -305,6 +311,7 @@ BalanceForm.propTypes = {
   categoryArray: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
   getCurrentDate: PropTypes.func.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default BalanceForm;

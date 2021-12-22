@@ -95,7 +95,6 @@ const RegistrationForm = () => {
         password: values.password,
       };
       createUser(newUser);
-      alert(JSON.stringify(values, null, 2));
     },
   });
 

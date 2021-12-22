@@ -21,7 +21,7 @@ import { transactionApi } from './service/transactionApi';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['accessToken'],
+  whitelist: ['accessToken', 'refreshToken'],
 };
 
 export const store = configureStore({

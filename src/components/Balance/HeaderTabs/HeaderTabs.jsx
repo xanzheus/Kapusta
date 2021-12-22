@@ -6,14 +6,14 @@ import TabContext from '@mui/lab/TabContext';
 import { makeStyles } from '@material-ui/core';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-// import BalanceTable from 'components/Balance/BalanceTable';
+import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
 import {
   expensesCatagoryArray,
   incomeCatagoryArray,
   CATEGORYTYPE,
-  // TRANSLATE_CATEGORIES,
+  TRANSLATE_CATEGORIES,
 } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
@@ -59,27 +59,31 @@ const HeaderTabs = ({
   transactions,
   incomReportData,
   expensesReportData,
-  isFetching,
+  initialDate,
 }) => {
   const [value, setValue] = useState('1');
 
-  // const refreshedTransactions = (symbol, type, transactions) => {
-  //   const fn = str => str.slice(0, str.indexOf('T'));
+  const refreshedTransactions = (symbol, type) => {
+    const transactionsArr = transactions.slice(0, transactions.length - 1);
 
-  //   return transactions
-  //     .map(item => {
-  //       console.log(item.date);
-  //       return {
-  //         id: item._id,
-  //         date: fn(item.date),
-  //         type: item.type,
-  //         category: TRANSLATE_CATEGORIES[item.category],
-  //         comment: item.comment,
-  //         amount: `${symbol} ${item.amount} грн.`,
-  //       };
-  //     })
-  //     .filter(item => item.type === type);
-  // };
+    return transactionsArr
+      .map(item => {
+        const dateStr = item?.date?.toString();
+        const preparedDate = dateStr.slice(0, dateStr.indexOf('T'));
+        const splitDate = preparedDate.split('-');
+        const resultDate = `${splitDate[2]}.${splitDate[1]}.${splitDate[0]}`;
+
+        return {
+          id: item._id,
+          date: resultDate,
+          type: item.type,
+          category: TRANSLATE_CATEGORIES[item.category],
+          comment: item.comment,
+          amount: `${symbol} ${item.amount} грн.`,
+        };
+      })
+      .filter(item => item.type === type);
+  };
 
   const classes = useStyles();
 
@@ -104,36 +108,36 @@ const HeaderTabs = ({
 
         <TabPanel className={classes.tabsThumb} value="1">
           <BalanceForm
+            initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.EXPENSE}
             placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
-          {/* {!isFetching && (
-            <BalanceTable
-              Class="expenses"
-              data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE, transactions)}
-              reportData={expensesReportData}
-              category={expensesCatagoryArray}
-            />
-          )} */}
+
+          <BalanceTable
+            Class="expenses"
+            data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
+            reportData={expensesReportData}
+            category={expensesCatagoryArray}
+          />
         </TabPanel>
 
         <TabPanel className={classes.tabsThumb} value="2">
           <BalanceForm
+            initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.INCOME}
             placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
-          {/* {!isFetching && (
-            <BalanceTable
-              Class="income"
-              data={refreshedTransactions('', CATEGORYTYPE.INCOME, transactions)}
-              reportData={incomReportData}
-              category={incomeCatagoryArray}
-            />
-          )} */}
+
+          <BalanceTable
+            Class="income"
+            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
+            reportData={incomReportData}
+            category={incomeCatagoryArray}
+          />
         </TabPanel>
       </TabContext>
     </Box>
@@ -145,6 +149,7 @@ HeaderTabs.propTypes = {
   incomReportData: PropTypes.array.isRequired,
   expensesReportData: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default HeaderTabs;
