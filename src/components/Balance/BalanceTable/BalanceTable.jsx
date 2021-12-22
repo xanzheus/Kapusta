@@ -135,23 +135,22 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
 
   const updateTransAction = useCallback(
     params => () => {
-      console.log(params.id);
-      console.log(params.row);
       if (data.find(row => row === params.row)) {
         alert('Изменения не обнаружены, либо ещё не готовы к сохранению');
         return;
       }
+      const preparedDate = params.row.date.toString();
+      const splitDate = preparedDate.split('.');
+      const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
       const result = {
         id: params.id,
         type: params.row.type,
-        date: '2021-10-12',
+        date: resultDate,
         category: TRANSLATE_CATEGORIES[params.row.category],
         comment: params.row.comment,
         amount: Number(params.row.amount.slice(2, -5)),
       };
-
-      console.log(result);
 
       updateTransaction(result);
 
