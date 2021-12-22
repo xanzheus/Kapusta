@@ -4,14 +4,13 @@ import s from './Balance.module.scss';
 const Balance = () => {
   const { data = [], isLoading, isFetching } = useGetTransactionsQuery('2021-12-01', '2021-12-31');
 
-  // const balanceTotal = val => {};
-
+  const balanceTotal = data => data.data.transactions[data.data.transactions.length - 1].balance;
   return (
     <div className={s.balance}>
-      {/* {console.log(data.data.transactions)} */}
+      {/* {!isFetching && console.log(balanceTotal(data))} */}
       <h2 className={s.balance__title}>Баланс:</h2>
       <div className={s.balance__amountBlock}>
-        <div className={s.balance__amountSum}>{'666'} UAH</div>
+        <div className={s.balance__amountSum}>{!isFetching && balanceTotal(data)} UAH</div>
       </div>
       <div>
         <div className={s.balance__confirmButton}>Подтвердить</div>

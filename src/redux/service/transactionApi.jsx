@@ -54,16 +54,15 @@ export const transactionApi = createApi({
           params: { startDate, endDate },
         };
       },
-      // query: () => ({
-      //   url: `categories?startDate=2021-12-01&endDate=2021-12-31`,
-      //   // url: `categories`,
-      // }),
+      providesTags: ['Transaction'],
     }),
+
     getTransactions: builder.query({
       query: ({ startDate, endDate }) => ({
         url: `transactions?startDate${startDate}&endDate=${endDate}`,
       }),
       // transformResponse(response, meta, args)
+      providesTags: ['Transaction'],
     }),
     createTransaction: builder.mutation({
       query: ({ date, category, comment, amount, type }) => ({
@@ -76,8 +75,8 @@ export const transactionApi = createApi({
           amount,
           type,
         },
-        invalidatesTags: ['Transaction'],
       }),
+      invalidatesTags: ['Transaction'],
     }),
   }),
 });

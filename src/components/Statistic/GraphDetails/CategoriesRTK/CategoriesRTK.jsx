@@ -117,6 +117,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
 
   return (
     <div className={s.categories}>
+      {console.log(data.data)}
       <div className={s.categories__select}>
         <button
           className={s.search__buttonPickerBack}
