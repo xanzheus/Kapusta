@@ -98,9 +98,9 @@ const RegistrationForm = () => {
             }}
             variant="google__button"
             type="button"
+            name="Google"
           >
             <GoogleIcon className={style.google__icon} />
-            Google
           </Button>
         </div>
         <p className={style.registration__title}>
