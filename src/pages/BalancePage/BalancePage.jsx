@@ -183,7 +183,7 @@ const BalancePage = () => {
 
   // const firstOfYear = format(startOfYear(date), 'yyyy-MM-dd');
 
-  const { data, isFetching } = useGetTransactionsQuery(firstOfMonth, lastOfMonth);
+  const { data, isSuccess } = useGetTransactionsQuery(firstOfMonth, lastOfMonth);
 
   // console.log(firstOfYear);
 
@@ -192,7 +192,7 @@ const BalancePage = () => {
       <Container>
         {small && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <MobilePage
                 getCurrentDate={getCurrentDate}
                 userData={data.data?.transactions.find(item => item.balance)}
@@ -204,7 +204,7 @@ const BalancePage = () => {
 
         {medium && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <>
                 <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
 
@@ -221,12 +221,12 @@ const BalancePage = () => {
 
         {large && (
           <>
-            {!isFetching && (
+            {isSuccess && (
               <>
                 <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
 
                 <HeaderTabs
-                  isFetching={isFetching}
+                  isSuccess={isSuccess}
                   getCurrentDate={getCurrentDate}
                   transactions={data.data?.transactions}
                   incomReportData={incomReportData}
