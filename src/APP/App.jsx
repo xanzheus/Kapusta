@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
 import { Toaster } from 'react-hot-toast';
+import Loader from 'components/Loader';
 // import { ToastContainer } from 'react-toastify';
 
 const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
@@ -56,7 +57,7 @@ const App = () => {
           path="balance"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <BalancePage />{' '}
@@ -70,7 +71,7 @@ const App = () => {
           path="profile"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <ProfilePage />{' '}
@@ -84,7 +85,7 @@ const App = () => {
           path="reports"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <StatisticPage />{' '}
@@ -98,7 +99,7 @@ const App = () => {
           path="*"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <BalancePage />{' '}
