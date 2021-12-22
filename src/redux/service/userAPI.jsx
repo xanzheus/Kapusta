@@ -54,13 +54,10 @@ export const userAPI = createApi({
   tagTypes: ['User'],
   endpoints: builder => ({
     createUser: builder.mutation({
-      query: ({ email, password }) => ({
+      query: newUser => ({
         url: `/registration`,
         method: 'POST',
-        body: {
-          email,
-          password,
-        },
+        body: newUser,
       }),
     }),
     login: builder.mutation({
