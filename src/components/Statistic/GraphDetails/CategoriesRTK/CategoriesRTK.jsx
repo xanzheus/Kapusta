@@ -7,12 +7,9 @@ import sprite from '../../../../images/svg/sprite.svg';
 import s from './CategoriesRTK.module.scss';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
-  const [value, setValue] = useState('expense');
-  // const [selectedCategory, setselectedCategory] = useState('');
-  // const { data = [], isLoading, isFetching } = useGetCategoriesQuery();
   const { data = [], isLoading, isFetching } = useGetCategoriesQuery({ startDate, endDate });
+  const [value, setValue] = useState('expense');
 
-  // const newDDD = data.map(p => (p.category === 'products' ? { ...p, category: 'Продукты' } : p));
   const dataTranslated = val => {
     const newOb = val.map(i => {
       if (i.category === 'products') {
@@ -86,14 +83,6 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
   //   { OTHER: 'Прочее' },
   // ];
 
-  // let newData = [];
-  // if ('data' in data) {
-  //   const { transactions } = data.data;
-  //   transactions.forEach(el => console.log(el));
-  //   console.log(transactions);
-  //   newData = [...transactions];
-  // }
-
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = (type, value) => {
     // const newCat = data.data.filter(category => {
@@ -163,15 +152,12 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                     data-name={item.category}
                     key={item.category}
                     onClick={e => {
-                      // setselectedCategory(e.currentTarget.getAttribute('data-name'));
-
                       setCategory(e.currentTarget.getAttribute('data-name'));
                       setActiveCalss(true);
                     }}
                   >
                     <div className={s.categorie__link}>
                       {item.total}
-                      {/* <svg className={isActive ? s.icon : s.iconActive}> */}
                       <svg className={s.icon}>
                         <use xlinkHref={`${sprite}#${item.category}`} />
                       </svg>
@@ -185,9 +171,6 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           </div>
         </div>
       )}
-      {/* <Stack sx={{ color: 'grey.500' }}>
-        <CircularProgress color="inherit" />
-      </Stack> */}
     </div>
   );
 };

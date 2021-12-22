@@ -26,7 +26,7 @@ const StatisticPage = () => {
   return (
     <>
       <StatHeader monthPick={monthRangePicker} newMonth={newMonth} newYear={newYear} />
-      <IncomeCosts />
+      <IncomeCosts startDate={startMonth} endDate={endMonth} />
       {/* <Categories /> */}
       <GraphDetails startDate={startMonth} endDate={endMonth} />
     </>

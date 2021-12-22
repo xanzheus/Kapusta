@@ -2,7 +2,7 @@ import { useGetTransactionsQuery } from '../../../../redux/service/transactionAp
 import s from './Balance.module.scss';
 
 const Balance = () => {
-  const { data = [], isLoading, isFetching } = useGetTransactionsQuery('2021-12-01', '2021-12-31');
+  const { data = [], isFetching } = useGetTransactionsQuery('2000-12-01', '2200-12-31');
 
   const balanceTotal = data => data.data.transactions[data.data.transactions.length - 1].balance;
   return (

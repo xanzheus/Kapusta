@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
-// import Categories from './Categories';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
 import PieChartIcon from '@mui/icons-material/PieChart';
@@ -10,18 +8,16 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
 
 const GraphDetails = ({ startDate, endDate }) => {
-  // const [resultValue, setResultValue] = useState('РАСХОДЫ');
+  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [isActive, setisActive] = useState(false);
   const [selectedCategory, setselectedCategory] = useState('');
-  // const { data = [] } = useGetCategoriesQuery();
-  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
-  // if ('data' in data) {
-  //   const newData = data.data;
-  //   console.log(newData);
-  // }
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, false);
+    handlerDiagramType();
+  }, [windowSize]);
 
   const dataTranslated = val => {
     const newOb = val.map(i => {
@@ -47,7 +43,7 @@ const GraphDetails = ({ startDate, endDate }) => {
         return { ...i, category: 'Техника' };
       }
       if (i.category === 'communication') {
-        return { ...i, category: 'Комуналка, связь' };
+        return { ...i, category: 'Коммуналка, связь' };
       }
       if (i.category === 'hobby') {
         return { ...i, category: 'Спорт, хобби' };
@@ -82,11 +78,6 @@ const GraphDetails = ({ startDate, endDate }) => {
       setDiagramType('column');
     }
   };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize, false);
-    handlerDiagramType();
-  }, [windowSize]);
 
   // Функция вывода детелей расходов или доходов выбраной категории
   const sortCategoryDetails = data => {
@@ -124,11 +115,6 @@ const GraphDetails = ({ startDate, endDate }) => {
     const options = {
       chart: {
         type: diagramType,
-        // type: pie, column, bar,
-        // options3d: {
-        //   enabled: true,
-        //   alpha: 45,
-        // },
       },
 
       title: {
@@ -161,9 +147,7 @@ const GraphDetails = ({ startDate, endDate }) => {
           },
         },
       },
-
       responsive: {},
-
       series: [
         {
           name: 'Категории',
@@ -177,11 +161,8 @@ const GraphDetails = ({ startDate, endDate }) => {
   };
 
   return (
-    // <></>
     <div className={s.graphDetails}>
-      {/* <Categories updateData={setResultValue} setActiveCalss={setisActive} /> */}
       <CategoriesRTK
-        // updateData={setResultValue}
         setActiveCalss={setisActive}
         setCategory={setselectedCategory}
         setDiagramType={setDiagramType}
