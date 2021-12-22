@@ -78,6 +78,12 @@ const BalancePage = () => {
     endDate: lastOfMonth,
   });
 
+  // console.log(data?.data.transactions);
+
+  // if (data?.data.transactions.length <= 1) {
+  //   return;
+  // }
+
   return (
     <section className={classes.balanceSection}>
       <Container>
@@ -97,12 +103,12 @@ const BalancePage = () => {
           <>
             {!isFetching && (
               <>
-                <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
+                <BalanceLine userData={data?.data?.transactions} />
 
                 <HeaderTabs
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
-                  transactions={data.data?.transactions}
+                  transactions={data?.data?.transactions}
                   incomReportData={incomReportData}
                   expensesReportData={expensesReportData}
                 />
@@ -115,12 +121,12 @@ const BalancePage = () => {
           <>
             {!isFetching && (
               <>
-                <BalanceLine userData={data.data?.transactions.find(item => item.balance)} />
+                <BalanceLine userData={data?.data?.transactions} />
 
                 <HeaderTabs
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
-                  transactions={data.data?.transactions}
+                  transactions={data?.data?.transactions}
                   incomReportData={incomReportData}
                   expensesReportData={expensesReportData}
                 />

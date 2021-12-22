@@ -122,12 +122,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceLine = ({ userData }) => {
-  const { balance } = userData;
-
-  const classes = useStyles();
+  const balance = userData[userData.length - 1].balance;
 
   const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(false);
+
+  console.log(amount);
+
+  const classes = useStyles();
 
   const handleChangeBalance = event => setAmount(event.target.value);
 
@@ -141,8 +143,10 @@ const BalanceLine = ({ userData }) => {
 
     const dateResponse = {
       balance: Number(amount),
-      isStart: true,
     };
+
+    setStart(true);
+
     console.log(dateResponse);
     console.log(amount);
     setStart(true);
@@ -211,7 +215,7 @@ const BalanceLine = ({ userData }) => {
 };
 
 BalanceLine.propTypes = {
-  userData: PropTypes.object.isRequired,
+  userData: PropTypes.array.isRequired,
 };
 
 export default BalanceLine;
