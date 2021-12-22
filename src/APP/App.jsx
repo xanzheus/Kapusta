@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
 import Stack from '@mui/material/Stack';
-import Footer from 'components/Footer';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Toaster } from 'react-hot-toast';
 // import { ToastContainer } from 'react-toastify';
@@ -34,6 +33,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <div className={style.mainWrapper}> */}
       <Toaster />
       <AppBar />
       <Routes>
@@ -180,7 +180,7 @@ const App = () => {
           }
         />
       </Routes>
-      <Footer />
+      {/* </div> */}
     </ThemeProvider>
   );
 };

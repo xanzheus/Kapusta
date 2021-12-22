@@ -85,6 +85,7 @@ export const userAPI = createApi({
       query: () => ({
         url: `/current`,
       }),
+      providesTags: ['User'],
     }),
 
     updateAvatar: builder.mutation({
