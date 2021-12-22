@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { format, startOfMonth, lastDayOfMonth, startOfYear, endOfYear } from 'date-fns';
+import { format, startOfMonth, lastDayOfMonth } from 'date-fns';
 import { useMediaPredicate } from 'react-media-hook';
 import Container from 'components/Container';
 import HeaderTabs from 'components/Balance/HeaderTabs';
@@ -27,39 +27,39 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const incomReportData = [
-  {
-    id: 234,
-    month: 'Январь',
-    totalsum: 30000,
-    type: 'income',
-  },
-  {
-    id: 235,
-    month: 'Февраль',
-    type: 'income',
-    totalsum: 35000,
-  },
-];
+// const incomReportData = [
+//   {
+//     id: 234,
+//     month: 'Январь',
+//     totalsum: 30000,
+//     type: 'income',
+//   },
+//   {
+//     id: 235,
+//     month: 'Февраль',
+//     type: 'income',
+//     totalsum: 35000,
+//   },
+// ];
 
-const expensesReportData = [
-  {
-    id: 2322,
-    month: 'Январь',
-    totalsum: 20000,
-  },
-  {
-    id: 23434,
-    month: 'Февраль',
-    totalsum: 25000,
-  },
+// const expensesReportData = [
+//   {
+//     id: 2322,
+//     month: 'Январь',
+//     totalsum: 20000,
+//   },
+//   {
+//     id: 23434,
+//     month: 'Февраль',
+//     totalsum: 25000,
+//   },
 
-  {
-    id: 2343444,
-    month: 'Март',
-    totalsum: 2000,
-  },
-];
+//   {
+//     id: 2343444,
+//     month: 'Март',
+//     totalsum: 2000,
+//   },
+// ];
 
 const BalancePage = () => {
   const [date, setDate] = useState(() => new Date());
@@ -74,8 +74,6 @@ const BalancePage = () => {
 
   const firstOfMonth = format(startOfMonth(date), 'yyyy-MM-dd');
   const lastOfMonth = format(lastDayOfMonth(date), 'yyyy-MM-dd');
-  // const firstDayOfYear = format(startOfYear(date), 'yyyy-MM-dd');
-  // const lastDayOfYear = format(endOfYear(date), 'yyyy-MM-dd');
 
   const { data, isSuccess } = useGetTransactionsQuery({
     startDate: firstOfMonth,
@@ -108,8 +106,8 @@ const BalancePage = () => {
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
                   transactions={data?.data?.transactions}
-                  incomReportData={incomReportData}
-                  expensesReportData={expensesReportData}
+                  // incomReportData={incomReportData}
+                  // expensesReportData={expensesReportData}
                 />
               </>
             )}
@@ -126,8 +124,8 @@ const BalancePage = () => {
                   initialDate={date}
                   getCurrentDate={getCurrentDate}
                   transactions={data?.data?.transactions}
-                  incomReportData={incomReportData}
-                  expensesReportData={expensesReportData}
+                  // incomReportData={incomReportData}
+                  // expensesReportData={expensesReportData}
                 />
               </>
             )}

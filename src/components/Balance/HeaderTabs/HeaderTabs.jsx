@@ -116,9 +116,11 @@ const HeaderTabs = ({
           />
 
           <BalanceTable
+            initialDate={initialDate}
             Class="expenses"
             data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
-            reportData={expensesReportData}
+            // reportData={expensesReportData}
+            type={CATEGORYTYPE.EXPENSE}
             category={expensesCatagoryArray}
           />
         </TabPanel>
@@ -133,10 +135,12 @@ const HeaderTabs = ({
           />
 
           <BalanceTable
+            initialDate={initialDate}
             Class="income"
             data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
-            reportData={incomReportData}
+            // reportData={incomReportData}
             category={incomeCatagoryArray}
+            type={CATEGORYTYPE.INCOME}
           />
         </TabPanel>
       </TabContext>

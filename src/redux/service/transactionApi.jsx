@@ -123,6 +123,13 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+
+    getMonthTransaction: builder.query({
+      query: ({ type, year }) => ({
+        url: `transactions/summary?type=${type}&year=${year}`,
+      }),
+      providesTags: ['Transaction'],
+    }),
   }),
 });
 
@@ -133,4 +140,5 @@ export const {
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
   useUpdateBalanseMutation,
+  useGetMonthTransactionQuery,
 } = transactionApi;
