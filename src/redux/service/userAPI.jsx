@@ -62,7 +62,6 @@ export const userAPI = createApi({
           password,
         },
       }),
-      providesTags: ['Auth'],
     }),
     login: builder.mutation({
       query: ({ email, password, refreshToken }) => ({
@@ -83,7 +82,6 @@ export const userAPI = createApi({
         headers: {
           authorization: '',
         },
-        invalidatesTags: ['Auth'],
       }),
     }),
 
