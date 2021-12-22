@@ -4,7 +4,7 @@ import { userAPI } from './userAPI';
 // import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
@@ -98,7 +98,7 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
-    
+
     updateTransaction: builder.mutation({
       query: ({ id, date, category, comment, amount, type }) => ({
         url: `transactions/${id}`,
