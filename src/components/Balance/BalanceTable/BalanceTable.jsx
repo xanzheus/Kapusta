@@ -9,6 +9,11 @@ import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
+import { TRANSLATE_CATEGORIES } from 'Constants/category';
+import {
+  useDeleteTransactionMutation,
+  useUpdateTransactionMutation,
+} from 'redux/service/transactionApi';
 
 const useStyles = makeStyles(theme => ({
   balancetable: {
@@ -111,8 +116,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceTable = ({ data, reportData, category, Class }) => {
-  const [rows, setRows] = useState(data);
   const [open, setOpen] = useState(false);
+
+  const [deleteTransaction] = useDeleteTransactionMutation();
+  const [updateTransaction] = useUpdateTransactionMutation();
 
   const classes = useStyles();
 
@@ -121,25 +128,36 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
 
   const deleteTransAction = useCallback(
     id => () => {
-      setTimeout(() => {
-        setRows(prevRows => prevRows.filter(row => row.id !== id));
-      });
+      deleteTransaction(id);
     },
-    [],
+    [deleteTransaction],
   );
 
   const updateTransAction = useCallback(
     params => () => {
-      if (rows.find(row => row === params.row)) {
+      console.log(params.id);
+      console.log(params.row);
+      if (data.find(row => row === params.row)) {
         alert('Изменения не обнаружены, либо ещё не готовы к сохранению');
         return;
       }
 
-      setRows(prevRows => prevRows.map(row => (row.id === params.id ? { ...params.row } : row)));
+      const result = {
+        id: params.id,
+        type: params.row.type,
+        date: '2021-10-12',
+        category: TRANSLATE_CATEGORIES[params.row.category],
+        comment: params.row.comment,
+        amount: Number(params.row.amount.slice(2, -5)),
+      };
+
+      console.log(result);
+
+      updateTransaction(result);
 
       alert('Изменения сохранены');
     },
-    [rows],
+    [data, updateTransaction],
   );
 
   const infoMessageByEdit = () => {
@@ -160,7 +178,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             onCellEditCommit={infoMessageByEdit}
             rowsPerPageOptions={[8, 20]}
             pageSize={8}
-            rows={rows}
+            rows={data}
             columns={columns}
           />
         </Stack>

@@ -70,11 +70,37 @@ export const transactionApi = createApi({
           amount,
           type,
         },
-        invalidatesTags: ['Transaction'],
       }),
+      invalidatesTags: ['Transaction'],
+    }),
+    deleteTransaction: builder.mutation({
+      query: id => ({
+        url: `transactions/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Transaction'],
+    }),
+    updateTransaction: builder.mutation({
+      query: ({ id, date, category, comment, amount, type }) => ({
+        url: `transactions/${id}`,
+        method: 'PATCH',
+        body: {
+          date,
+          category,
+          comment,
+          amount,
+          type,
+        },
+      }),
+      invalidatesTags: ['Transaction'],
     }),
   }),
 });
 
-export const { useGetCategoriesQuery, useGetTransactionsQuery, useCreateTransactionMutation } =
-  transactionApi;
+export const {
+  useGetCategoriesQuery,
+  useGetTransactionsQuery,
+  useCreateTransactionMutation,
+  useDeleteTransactionMutation,
+  useUpdateTransactionMutation,
+} = transactionApi;
