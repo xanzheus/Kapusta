@@ -64,13 +64,12 @@ export const userAPI = createApi({
       }),
     }),
     login: builder.mutation({
-      query: ({ email, password, refreshToken }) => ({
+      query: ({ email, password }) => ({
         url: '/login',
         method: 'POST',
         body: {
           email,
           password,
-          refreshToken,
         },
       }),
     }),
