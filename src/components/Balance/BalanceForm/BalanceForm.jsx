@@ -108,6 +108,10 @@ const useStyles = makeStyles(theme => ({
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px 16px 16px 0px',
     },
+
+    '& .MuiOutlinedInput-input': {
+      padding: '0 10px 0 0',
+    },
   },
 
   dateField: {
