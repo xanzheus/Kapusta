@@ -37,7 +37,6 @@
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "surprise-santa": "^1.0.6",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.11"
   },

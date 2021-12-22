@@ -174,7 +174,7 @@ const BalanceLine = ({ userData }) => {
           <Stack direction="row">
             <p
               className={[classes.balance__input, classes.disabled].join(' ')}
-            >{`${amount} UAH`}</p>
+            >{`${balance} UAH`}</p>
             <p
               className={[classes.balance__input, classes.disabled, classes.disable__button].join(
                 ' ',

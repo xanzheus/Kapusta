@@ -59,6 +59,7 @@ export const transactionApi = createApi({
       }),
       providesTags: ['Transaction'],
     }),
+
     createTransaction: builder.mutation({
       query: ({ date, category, comment, amount, type }) => ({
         url: `transactions`,
@@ -73,6 +74,7 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+
     deleteTransaction: builder.mutation({
       query: id => ({
         url: `transactions/${id}`,
@@ -80,6 +82,7 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+    
     updateTransaction: builder.mutation({
       query: ({ id, date, category, comment, amount, type }) => ({
         url: `transactions/${id}`,
@@ -102,6 +105,7 @@ export const transactionApi = createApi({
           balance,
         },
       }),
+      invalidatesTags: ['Transaction'],
     }),
   }),
 });
