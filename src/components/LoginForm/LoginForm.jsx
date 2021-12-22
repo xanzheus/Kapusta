@@ -34,6 +34,10 @@ const LoginForm = () => {
   };
   const useStyles = makeStyles({
     field: {
+      '& .MuiInputAdornment-root': {
+        position: 'absolute ',
+        right: '8px',
+      },
       '& .MuiInputLabel-root': {
         fontSize: 14,
       },
@@ -44,6 +48,7 @@ const LoginForm = () => {
 
       '& .MuiOutlinedInput-root': {
         // Работает
+        position: 'relative',
         backgroundColor: `${COLORS.auxiliaryLight}`,
         borderRadius: 30,
         marginBottom: 15,
@@ -88,7 +93,7 @@ const LoginForm = () => {
 
   return (
     <div className={style.box}>
-      <form onSubmit={formik.handleSubmit}>
+      <form autoComplete="on" onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
           Вы можете авторизоваться с помощью Google Account:
         </p>

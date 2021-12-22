@@ -80,7 +80,15 @@ const RegistrationForm = () => {
     },
     validationSchema: userSchema,
     onSubmit: values => {
-      createUser(values);
+      const newUser = {
+        fullName: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+        },
+        email: values.email,
+        password: values.password,
+      };
+      createUser(newUser);
       alert(JSON.stringify(values, null, 2));
     },
   });
