@@ -4,12 +4,12 @@ import s from './Balance.module.scss';
 
 const Balance = () => {
   const { data = [], isSuccess } = useGetTransactionsQuery('2000-12-01', '2200-12-31');
-  const { data:dataCurrency, isFetching } = useGetDataUserQuery();
+  const { data: dataCurrency, isFetching } = useGetDataUserQuery();
 
   const getBalanceTotal = data => data.data.transactions[data.data.transactions.length - 1].balance;
 
-  const currency = data => data.data.user.settings.currency
-  
+  const currency = data => data.data.user.settings.currency;
+
   return (
     <div className={s.balance}>
       {/* {isSuccess && console.log(balanceTotal(data))} */}
