@@ -3,6 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
+import dataTranslated from './translateDataFunction.jsx'
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
@@ -19,50 +20,6 @@ const GraphDetails = ({ startDate, endDate }) => {
     handlerDiagramType();
   }, [windowSize]);
 
-  const dataTranslated = val => {
-    const newOb = val.map(i => {
-      if (i.category === 'products') {
-        return { ...i, category: 'Продукты' };
-      }
-      if (i.category === 'home') {
-        return { ...i, category: 'Всё для дома' };
-      }
-      if (i.category === 'entertainment') {
-        return { ...i, category: 'Развлечения' };
-      }
-      if (i.category === 'healthy') {
-        return { ...i, category: 'Здоровье' };
-      }
-      if (i.category === 'transport') {
-        return { ...i, category: 'Транспорт' };
-      }
-      if (i.category === 'alcohol') {
-        return { ...i, category: 'Алкоголь' };
-      }
-      if (i.category === 'technic') {
-        return { ...i, category: 'Техника' };
-      }
-      if (i.category === 'communication') {
-        return { ...i, category: 'Коммуналка, связь' };
-      }
-      if (i.category === 'hobby') {
-        return { ...i, category: 'Спорт, хобби' };
-      }
-      if (i.category === 'education') {
-        return { ...i, category: 'Образование' };
-      }
-      if (i.category === 'other') {
-        return { ...i, category: 'Прочее' };
-      }
-      if (i.category === 'salary') {
-        return { ...i, category: 'ЗП' };
-      }
-      if (i.category === 'additional') {
-        return { ...i, category: 'Доп.доход' };
-      }
-    });
-    return newOb;
-  };
 
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
@@ -106,7 +63,6 @@ const GraphDetails = ({ startDate, endDate }) => {
         y: detailsArrayValues[index],
       };
     });
-    console.log(detailsArrayKeys);
     return detailsArray;
   };
 
@@ -139,9 +95,9 @@ const GraphDetails = ({ startDate, endDate }) => {
           dataLabels: {
             enabled: true,
             distance: -40,
-            // rotation: 40,
+            // rotation: 80,
             style: {
-              textOverflow: 'ellipsis',
+              // textOverflow: 'ellipsis',
               rotate: 42,
             },
           },

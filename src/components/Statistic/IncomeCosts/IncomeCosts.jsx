@@ -20,7 +20,6 @@ const IncomeCosts = ({ startDate, endDate }) => {
 
   return (
     <div className={s.incomeCosts}>
-      {isSuccess && console.log(data.data)}
       {/*  */}
       <div className={s.costs}>
         <p className={s.incomeCosts__title}>Расходы:</p>
