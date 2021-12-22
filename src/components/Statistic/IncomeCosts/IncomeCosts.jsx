@@ -23,12 +23,12 @@ const IncomeCosts = ({ startDate, endDate }) => {
       {/*  */}
       <div className={s.costs}>
         <p className={s.incomeCosts__title}>Расходы:</p>
-        <div className={s.incomeCosts__costs}>{isSuccess && -getExpenseTotal(data.data)}</div>
+        <div className={s.incomeCosts__costs}>- {isSuccess && getExpenseTotal(data.data).toFixed(2)} грн.</div>
       </div>
 
       <div className={s.incoming}>
         <p className={s.incomeCosts__title}>Доходы:</p>
-        <div className={s.incomeCosts__income}>{isSuccess && getIncomeTotal(data.data)}</div>
+        <div className={s.incomeCosts__income}>{isSuccess && getIncomeTotal(data.data).toFixed(2)} грн.</div>
       </div>
     </div>
   );
