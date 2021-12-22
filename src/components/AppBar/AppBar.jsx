@@ -17,7 +17,7 @@ const AppBar = () => {
             <Link to="/balance">
               <div className={style.logo}></div>
             </Link>
-            {/* {!isFetching && <UserMenu />} */}
+            {!isFetching && <UserMenu />}
           </div>
         </Container>
       </header>
