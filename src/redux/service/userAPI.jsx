@@ -79,6 +79,7 @@ export const userAPI = createApi({
           authorization: '',
         },
       }),
+      invalidatesTags: ['User'],
     }),
 
     getDataUser: builder.query({
@@ -117,7 +118,7 @@ export const userAPI = createApi({
     sendRequestAccept: builder.mutation({
       query: body => ({
         url: '/phone-verify',
-        method: 'POST',
+        method: 'PATCH',
         body,
       }),
     }),

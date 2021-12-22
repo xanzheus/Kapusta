@@ -38,6 +38,7 @@ const UserMenu = () => {
       })
       .catch(error => console.log(error.message));
     handleClose();
+
     navigate('/');
   };
 
