@@ -85,6 +85,7 @@ const BalancePage = () => {
           <>
             {!isFetching && (
               <MobilePage
+                initialDate={date}
                 getCurrentDate={getCurrentDate}
                 userData={data?.data?.transactions}
                 transactionsData={data.data?.transactions}

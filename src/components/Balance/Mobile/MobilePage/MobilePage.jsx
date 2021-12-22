@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { makeStyles } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
@@ -66,16 +66,12 @@ const useStyles = makeStyles({
   },
 });
 
-const MobilePage = ({ getCurrentDate, userData, transactionsData }) => {
-  const [date, setDate] = useState(() => new Date());
+const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate }) => {
+  const [date, setDate] = useState(initialDate);
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [categoryTypes, setCategoryTypes] = useState('');
   const [categories, setCtegories] = useState([]);
   const classes = useStyles();
-
-  useEffect(() => {
-    getCurrentDate(date);
-  }, [date, getCurrentDate]);
 
   const toggleForm = () => setIsOpenForm(!isOpenForm);
 
@@ -107,6 +103,7 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData }) => {
                 value={date}
                 onChange={newValue => {
                   setDate(newValue);
+                  getCurrentDate(newValue);
                 }}
                 renderInput={params => (
                   <TextField color="info" className={classes.field} {...params} />
