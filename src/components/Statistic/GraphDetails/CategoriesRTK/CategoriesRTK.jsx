@@ -7,7 +7,7 @@ import sprite from '../../../../images/svg/sprite.svg';
 import s from './CategoriesRTK.module.scss';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
-  const { data = [], isLoading, isFetching } = useGetCategoriesQuery({ startDate, endDate });
+  const { data = [], isLoading, isSuccess } = useGetCategoriesQuery({ startDate, endDate });
   const [value, setValue] = useState('expense');
 
   const dataTranslated = val => {
@@ -140,7 +140,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           </Stack>
         </div>
       )}{' '}
-      {!isFetching && (
+      {isSuccess && (
         <div className={s.income}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
