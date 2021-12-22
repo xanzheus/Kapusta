@@ -20,7 +20,7 @@ const UserMenu = () => {
   const [logout] = useLogoutMutation();
   const [open, setOpen] = useState(false);
 
-  const { data, isFetching } = useGetDataUserQuery();
+  const { data, isSuccess } = useGetDataUserQuery();
 
   const fullName = (firstName, lastName) => {
     return firstName || lastName ? `${firstName} ${lastName}` : '';
@@ -48,7 +48,7 @@ const UserMenu = () => {
     <>
       <Stack direction="row" alignItems="center" spacing={2} color="#CBCCD0">
         <Link className={style.buttonProfile} type="button" to={'/profile'}>
-          {!isFetching && (
+          {isSuccess && (
             <IconAvatar
               src={data.data.user.avatar ? data.data.user.avatar : ''}
               width={32}
@@ -65,7 +65,7 @@ const UserMenu = () => {
           )}
           {medium && (
             <>
-              {!isFetching && (
+              {isSuccess && (
                 <>
                   {(fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName) ||
                     data.data.user.email) && (
@@ -85,7 +85,7 @@ const UserMenu = () => {
           )}
           {large && (
             <>
-              {!isFetching && (
+              {isSuccess && (
                 <>
                   {(fullName(data.data.user.fullName.firstName, data.data.user.fullName.lastName) ||
                     data.data.user.email) && (
