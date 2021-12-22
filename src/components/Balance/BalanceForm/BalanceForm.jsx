@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: 12,
       color: COLORS.primary,
       fontWeight: 700,
-      padding: '0 10px 0 20px',
+      padding: '0 0 0 20px',
     },
 
     '& .MuiFormHelperText-root ': {
