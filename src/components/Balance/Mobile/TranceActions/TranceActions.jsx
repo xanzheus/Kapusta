@@ -117,7 +117,7 @@ const TranceActions = ({ transactionsData }) => {
                 {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
               </p>
             ) : (
-              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amounttoFixed(
+              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
                 2,
               )} ${t('tranceActions.currencyUAH')}.`}</p>
             )}
