@@ -1,69 +1,25 @@
 import { useState, useEffect } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
-// import Categories from './Categories';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
+import dataTranslated from './translateDataFunction.jsx'
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
 
 const GraphDetails = ({ startDate, endDate }) => {
-  // const [resultValue, setResultValue] = useState('РАСХОДЫ');
+  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [isActive, setisActive] = useState(false);
   const [selectedCategory, setselectedCategory] = useState('');
-  // const { data = [] } = useGetCategoriesQuery();
-  const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
-  // if ('data' in data) {
-  //   const newData = data.data;
-  //   console.log(newData);
-  // }
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, false);
+    handlerDiagramType();
+  }, [windowSize]);
 
-  const dataTranslated = val => {
-    const newOb = val.map(i => {
-      if (i.category === 'products') {
-        return { ...i, category: 'Продукты' };
-      }
-      if (i.category === 'home') {
-        return { ...i, category: 'Всё для дома' };
-      }
-      if (i.category === 'entertainment') {
-        return { ...i, category: 'Развлечения' };
-      }
-      if (i.category === 'healthy') {
-        return { ...i, category: 'Здоровье' };
-      }
-      if (i.category === 'transport') {
-        return { ...i, category: 'Транспорт' };
-      }
-      if (i.category === 'technic') {
-        return { ...i, category: 'Техника' };
-      }
-      if (i.category === 'communication') {
-        return { ...i, category: 'Комуналка, связь' };
-      }
-      if (i.category === 'hobby') {
-        return { ...i, category: 'Спорт, хобби' };
-      }
-      if (i.category === 'education') {
-        return { ...i, category: 'Образование' };
-      }
-      if (i.category === 'other') {
-        return { ...i, category: 'Прочее' };
-      }
-      if (i.category === 'salary') {
-        return { ...i, category: 'ЗП' };
-      }
-      if (i.category === 'additional') {
-        return { ...i, category: 'Доп.доход' };
-      }
-    });
-    return newOb;
-  };
 
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
@@ -79,11 +35,6 @@ const GraphDetails = ({ startDate, endDate }) => {
       setDiagramType('column');
     }
   };
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize, false);
-    handlerDiagramType();
-  }, [windowSize]);
 
   // Функция вывода детелей расходов или доходов выбраной категории
   const sortCategoryDetails = data => {
@@ -112,7 +63,6 @@ const GraphDetails = ({ startDate, endDate }) => {
         y: detailsArrayValues[index],
       };
     });
-    console.log(detailsArrayKeys);
     return detailsArray;
   };
 
@@ -121,11 +71,6 @@ const GraphDetails = ({ startDate, endDate }) => {
     const options = {
       chart: {
         type: diagramType,
-        // type: pie, column, bar,
-        // options3d: {
-        //   enabled: true,
-        //   alpha: 45,
-        // },
       },
 
       title: {
@@ -150,17 +95,15 @@ const GraphDetails = ({ startDate, endDate }) => {
           dataLabels: {
             enabled: true,
             distance: -40,
-            // rotation: 40,
+            // rotation: 80,
             style: {
-              textOverflow: 'ellipsis',
+              // textOverflow: 'ellipsis',
               rotate: 42,
             },
           },
         },
       },
-
       responsive: {},
-
       series: [
         {
           name: 'Категории',
@@ -174,11 +117,8 @@ const GraphDetails = ({ startDate, endDate }) => {
   };
 
   return (
-    // <></>
     <div className={s.graphDetails}>
-      {/* <Categories updateData={setResultValue} setActiveCalss={setisActive} /> */}
       <CategoriesRTK
-        // updateData={setResultValue}
         setActiveCalss={setisActive}
         setCategory={setselectedCategory}
         setDiagramType={setDiagramType}
