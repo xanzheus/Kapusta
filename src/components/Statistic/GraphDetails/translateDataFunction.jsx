@@ -41,7 +41,6 @@ const dataTranslated = val => {
     }
     return i.category === 'salary' ? { ...i, category: 'ЗП' } : { ...i, category: 'Доп.доход' };
   });
-  console.log(newOb);
   return newOb;
 };
 

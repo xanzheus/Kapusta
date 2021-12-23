@@ -16,6 +16,16 @@ const GraphDetails = ({ startDate, endDate }) => {
   const [windowSize, setWindowSize] = useState(window.outerWidth);
 
   useEffect(() => {
+    // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
+    const handlerDiagramType = () => {
+      if (windowSize < 321) {
+        setDiagramType('bar');
+      }
+      if (windowSize > 320) {
+        setDiagramType('column');
+      }
+    };
+
     window.addEventListener('resize', handleResize, false);
     handlerDiagramType();
   }, [windowSize]);
@@ -26,14 +36,14 @@ const GraphDetails = ({ startDate, endDate }) => {
   };
 
   // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
-  const handlerDiagramType = () => {
-    if (windowSize < 321) {
-      setDiagramType('bar');
-    }
-    if (windowSize > 320) {
-      setDiagramType('column');
-    }
-  };
+  // const handlerDiagramType = () => {
+  //   if (windowSize < 321) {
+  //     setDiagramType('bar');
+  //   }
+  //   if (windowSize > 320) {
+  //     setDiagramType('column');
+  //   }
+  // };
 
   // Функция вывода детелей расходов или доходов выбраной категории
   const sortCategoryDetails = data => {
