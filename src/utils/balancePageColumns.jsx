@@ -102,7 +102,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       renderCell: params => (
         <SaveIcon
           className={[classes.button, classes.save].join(' ')}
-          titleAccess="сохранит"
+          titleAccess="сохранить"
           onClick={updateTransAction(params)}
         />
       ),

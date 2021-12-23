@@ -1,11 +1,5 @@
-// LOCALISE
-import { useTranslation } from 'react-i18next';
-
 const dataTranslated = val => {
   const newOb = val.map(i => {
-    // LOCALISE
-    const { t } = useTranslation();
-
     if (i.category === 'products') {
       return { ...i, category: 'Продукты' };
     }
@@ -37,7 +31,7 @@ const dataTranslated = val => {
       return { ...i, category: 'Образование' };
     }
     if (i.category === 'other') {
-      return { ...i, category: t('catagories.other') };
+      return { ...i, category: 'Другие' };
     }
     if (i.category === 'salary') {
       return { ...i, category: 'Прочее' };
@@ -50,3 +44,39 @@ const dataTranslated = val => {
 };
 
 export default dataTranslated;
+
+// import { expensesCatagoryArray, TRANSLATE_CATEGORIES } from '../../../Constants/category';
+
+// const newData = (data, lang) => {
+//   const newValue = name => {
+//     const key = EXPENSE_CATEGORIES.reduce((acc, el) => {
+//       if (Object.values(el)[0] === name) {
+//         acc = Object.keys(el)[0];
+//       }
+//       return acc;
+//     }, '');
+//     const newValueRu = EXPENSE_CATEGORIES_RU.filter(el => Object.keys(el)[0] === key)[0][key];
+//     const newValueEn = EXPENSE_CATEGORIES.filter(el => Object.keys(el)[0] === key)[0][key];
+
+//     switch (lang) {
+//       case 'RU':
+//         return newValueRu;
+
+//       case 'EN':
+//         return newValueEn;
+
+//       default:
+//         return newValueEn;
+//     }
+//   };
+
+//   return data.reduce((acc, transaction) => {
+//     const newTransaction = Object.assign(transaction, {
+//       category: newValue(transaction.category),
+//     });
+//     acc.push(newTransaction);
+//     return acc;
+//   }, []);
+// };
+
+// console.log(newData(data, 'RU'));

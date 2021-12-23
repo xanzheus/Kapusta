@@ -250,6 +250,14 @@ const translationRU = {
     theme: 'Тема',
     saveButton: 'Сохранить',
   },
+  balanceColumns: {
+    date: '',
+    description: '',
+    category: '',
+    amount: '',
+    delete: '',
+    edit: '',
+  },
 };
 const resources = {
   en: {
