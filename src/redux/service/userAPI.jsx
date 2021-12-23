@@ -3,7 +3,8 @@ import toast from 'react-hot-toast';
 // import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
+  baseUrl: 'http://localhost:4000/api/users',
+  credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
@@ -72,6 +73,7 @@ export const userAPI = createApi({
           email,
           password,
         },
+        credentials: 'include',
       }),
     }),
 
@@ -82,6 +84,7 @@ export const userAPI = createApi({
         headers: {
           authorization: '',
         },
+        credentials: 'include',
       }),
       invalidatesTags: ['User'],
     }),
