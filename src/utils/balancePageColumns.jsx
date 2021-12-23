@@ -4,6 +4,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles({
   button: {
     width: 18,
@@ -33,11 +36,13 @@ const useStyles = makeStyles({
 
 const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
   const classes = useStyles();
+  // LOCALISE
+  const { t } = useTranslation();
   return [
     { field: 'id', hide: true, headerAlign: 'center' },
     {
       field: 'date',
-      headerName: 'Дата',
+      headerName: t('balanceColumns.date'),
       minWidth: 120,
       type: 'date',
       editable: true,
@@ -45,14 +50,14 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     },
     {
       field: 'comment',
-      headerName: 'Описание',
+      headerName: t('balanceColumns.description'),
       minWidth: 200,
       editable: true,
       headerAlign: 'center',
     },
     {
       field: 'category',
-      headerName: 'Категория',
+      headerName: t('balanceColumns.category'),
       minWidth: 120,
       editable: true,
       headerAlign: 'center',
@@ -61,7 +66,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
     },
     {
       field: 'amount',
-      headerName: 'Сумма',
+      headerName: t('balanceColumns.amount'),
       minWidth: 150,
       editable: true,
       headerAlign: 'center',
@@ -76,7 +81,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
         <DeleteForeverIcon
           className={[classes.button, classes.delete].join(' ')}
           onClick={deleteTransAction(params.id)}
-          titleAccess="удалить"
+          titleAccess={t('balanceColumns.delete')}
         />
       ),
     },
@@ -88,7 +93,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       renderCell: params => (
         <EditIcon
           className={[classes.button, classes.edit].join(' ')}
-          titleAccess="редактировать"
+          titleAccess={t('balanceColumns.edit')}
           onClick={handleOpen}
         />
       ),
@@ -102,7 +107,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       renderCell: params => (
         <SaveIcon
           className={[classes.button, classes.save].join(' ')}
-          titleAccess="сохранить"
+          titleAccess={t('balanceColumns.save')}
           onClick={updateTransAction(params)}
         />
       ),

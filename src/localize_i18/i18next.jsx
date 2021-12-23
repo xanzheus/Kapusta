@@ -126,6 +126,15 @@ const translationEN = {
     theme: 'theme',
     saveButton: 'Save',
   },
+  balanceColumns: {
+    date: 'Date',
+    description: 'Description',
+    category: 'Category',
+    amount: 'Amount',
+    delete: 'Delete',
+    edit: 'Edit',
+    save: 'Save',
+  },
 };
 
 const translationRU = {
@@ -251,12 +260,13 @@ const translationRU = {
     saveButton: 'Сохранить',
   },
   balanceColumns: {
-    date: '',
-    description: '',
-    category: '',
-    amount: '',
-    delete: '',
-    edit: '',
+    date: 'Дата',
+    description: 'Описание',
+    category: 'Категория',
+    amount: 'Сумма',
+    delete: 'Удалить',
+    edit: 'Редактировать',
+    save: 'Сохранить',
   },
 };
 const resources = {
