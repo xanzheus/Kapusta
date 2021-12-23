@@ -87,14 +87,13 @@ const RegistrationForm = () => {
     validationSchema: userSchema,
     onSubmit: values => {
       const newUser = {
-        fullName: {
-          firstName: values.firstName,
-          lastName: values.lastName,
-        },
         email: values.email,
         password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
       };
       createUser(newUser);
+      navigate('/balance');
     },
   });
 
@@ -107,13 +106,14 @@ const RegistrationForm = () => {
         </p>
         <div className={style.google_button__wrapper}>
           <Button
-            onClick={() => {
-              googleAuth();
-            }}
+            // onClick={() => {
+            //   googleAuth();
+            // }}
             variant="google__button"
             type="button"
             name="Google"
           >
+            <a href="https://adamants-wallet-project-back.herokuapp.com/api/auth/google"></a>
             <GoogleIcon className={style.google__icon} />
           </Button>
         </div>

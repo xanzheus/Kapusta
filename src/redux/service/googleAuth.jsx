@@ -4,7 +4,7 @@ export const googleAPI = createApi({
   reducerPath: 'googleAPI',
 
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/auth',
+    baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/auth/',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.accessToken;
       if (token) {
