@@ -13,28 +13,28 @@ import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Toaster } from 'react-hot-toast';
 import Loader from 'components/Loader';
+import { BalancePage, ProfilePage, StatisticPage, DevelopersPage } from 'pages';
 // import { ToastContainer } from 'react-toastify';
 
-const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
+// const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
 
-const ProfilePage = lazy(() =>
-  import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
-);
+// const ProfilePage = lazy(() =>
+//   import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
+// );
 
-const StatisticPage = lazy(() =>
-  import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
-);
+// const StatisticPage = lazy(() =>
+//   import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
+// );
 
-const DevelopersPage = lazy(() =>
-  import('pages/DevelopersPage/DevelopersPage' /* webpackChunkName: "Developers-page" */),
-);
+// const DevelopersPage = lazy(() =>
+//   import('pages/DevelopersPage/DevelopersPage' /* webpackChunkName: "Developers-page" */),
+// );
 
 const App = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <div className={style.mainWrapper}> */}
       <Toaster />
       <AppBar />
       <Routes>
@@ -149,7 +149,6 @@ const App = () => {
           }
         />
       </Routes>
-      {/* </div> */}
     </ThemeProvider>
   );
 };
