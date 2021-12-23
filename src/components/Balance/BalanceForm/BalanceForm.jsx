@@ -203,7 +203,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
       createTransaction(result);
       reset();
-
       toast(t('balanceForm.transactionAdded'), {
         icon: '👏',
       });

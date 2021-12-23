@@ -57,13 +57,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HeaderTabs = ({
-  getCurrentDate,
-  transactions,
-  incomReportData,
-  expensesReportData,
-  initialDate,
-}) => {
+const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
   const [value, setValue] = useState('1');
 
   const refreshedTransactions = (symbol, type) => {
@@ -122,9 +116,10 @@ const HeaderTabs = ({
           />
 
           <BalanceTable
+            initialDate={initialDate}
             Class="expenses"
             data={refreshedTransactions('-', CATEGORYTYPE.EXPENSE)}
-            reportData={expensesReportData}
+            type={CATEGORYTYPE.EXPENSE}
             category={expensesCatagoryArray}
           />
         </TabPanel>
@@ -139,10 +134,11 @@ const HeaderTabs = ({
           />
 
           <BalanceTable
+            initialDate={initialDate}
             Class="income"
             data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
-            reportData={incomReportData}
             category={incomeCatagoryArray}
+            type={CATEGORYTYPE.INCOME}
           />
         </TabPanel>
       </TabContext>
@@ -152,8 +148,6 @@ const HeaderTabs = ({
 
 HeaderTabs.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
-  incomReportData: PropTypes.array.isRequired,
-  expensesReportData: PropTypes.array.isRequired,
   transactions: PropTypes.array.isRequired,
   initialDate: PropTypes.object.isRequired,
 };

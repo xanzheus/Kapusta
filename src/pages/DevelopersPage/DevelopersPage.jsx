@@ -1,92 +1,57 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-import { InviteModal } from 'components/Modal';
-import ShareIcon from '@mui/icons-material/Share';
-import FormaUser from './FormaUser';
-import FormaUpdatePhoto from './FormaUpdatePhoto';
-import { COLORS } from '../../Constants';
-
-import { useGetDataUserQuery } from 'redux/service/userAPI';
-
-import IconAvatar from 'components/IconAvatar';
+import { useGetDataDevelopersQuery } from 'redux/service/developerAPI';
 import Container from 'components/Container';
-import style from './ProfilePage.module.scss';
+import CardDeveloper from './CardDeveloper';
+import style from './DevelopersPage.module.scss';
 
 const DevelopersPage = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    return setOpen(true);
-  };
-  const handleClose = () => setOpen(false);
-
-  const { data, isFetching } = useGetDataUserQuery();
-
-  const firstName = data => data.data.user.fullName.firstName;
-  const lastName = data => data.data.user.fullName.lastName;
-  const avatar = data => data.data.user.avatar;
+  const { data, isSuccess } = useGetDataDevelopersQuery();
+  const id = obj => obj._id;
+  const firstName = obj => obj.fullName.firstName;
+  const lastName = obj => obj.fullName.lastName;
+  const avatarUrl = obj => obj.avatarUrl;
+  const email = obj => obj.email;
+  const linkedinLink = obj => obj.linkedinLink;
+  const gitLink = obj => obj.gitLink;
+  const role = obj => obj.role;
 
   return (
     <>
-      {!isFetching && (
-        <section className={style.profile}>
-          <Container>
-            <IconButton
-              className={style.profile__buttonShare}
-              aria-label="Поделиться с другом"
-              onClick={handleOpen}
-              type={'button'}
+      <section className={style.developers}>
+        <Container>
+          <Link className={style.buttonBack} type="button" to={'/balance'}>
+            <svg
+              width="18"
+              height="12"
+              viewBox="0 0 18 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={style.backButtonIcon}
             >
-              <ShareIcon sx={{ fontSize: 32, color: COLORS.mainAccent }} />
-            </IconButton>
+              <path d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z" fill="#FF751D" />
+            </svg>
+          </Link>
 
-            <Link className={style.buttonBack} type="button" to={'/balance'}>
-              <svg
-                width="18"
-                height="12"
-                viewBox="0 0 18 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className={style.backButtonIcon}
-              >
-                <path
-                  d="M18 5H3.83L7.41 1.41L6 0L0 6L6 12L7.41 10.59L3.83 7H18V5Z"
-                  fill="#FF751D"
-                />
-              </svg>
-            </Link>
-            <div className={style.profile__wrapper}>
-              <div className={style.profile__sidebar}>
-                <div className={style.avatar__wrapper}>
-                  <IconAvatar src={avatar(data)} width={240} height={240} />
-                  <FormaUpdatePhoto />
-                </div>
-
-                <div className={style.profile__info}>
-                  {(firstName(data) || data.data.user.fullName.lastName) && (
-                    <h2 className={style.profile__name}>
-                      {firstName(data) || lastName(data)
-                        ? `${firstName(data)} ${lastName(data)}`
-                        : ''}
-                    </h2>
-                  )}
-                  <h3 className={style.profile__email}>{data.data.user.email}</h3>
-                </div>
-              </div>
-              <div className={style.profile__settings}>
-                <FormaUser
-                  firstName={firstName(data)}
-                  lastName={lastName(data)}
-                  language={data.data.user.settings.language}
-                  currency={data.data.user.settings.currency}
-                  theme={data.data.user.settings.theme}
-                />
-              </div>
-            </div>
-            {open && <InviteModal open={open} handleClose={handleClose} />}
-          </Container>
-        </section>
-      )}
+          <h2 className={style.developers__title}>Команда разработчиков</h2>
+          {isSuccess && (
+            <ul className={style.developers__list}>
+              {data.data.result.map(obj => (
+                <li key={id(obj)} className={style.developers__item}>
+                  <CardDeveloper
+                    firstName={firstName(obj)}
+                    lastName={lastName(obj)}
+                    avatarUrl={avatarUrl(obj)}
+                    email={email(obj)}
+                    linkedinLink={linkedinLink(obj)}
+                    gitLink={gitLink(obj)}
+                    role={role(obj)}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
+        </Container>
+      </section>
     </>
   );
 };

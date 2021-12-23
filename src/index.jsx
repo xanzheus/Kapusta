@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'APP/App';
-import Footer from 'components/Footer';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store';
@@ -16,7 +15,6 @@ ReactDOM.render(
         <Suspense fallback={<div>loading...</div>}>
           <BrowserRouter>
             <App />
-            <Footer />
           </BrowserRouter>
         </Suspense>
       </PersistGate>

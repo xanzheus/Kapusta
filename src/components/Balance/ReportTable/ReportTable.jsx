@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
+import { getYear } from 'date-fns';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 // LOCALISE
 import { useTranslation } from 'react-i18next';
+
+import { useGetMonthTransactionQuery } from 'redux/service/transactionApi';
+import { MONTH } from 'Constants/MONTH';
 
 const useStyles = makeStyles(theme => ({
   reports__thumb: {
@@ -64,27 +68,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ReportTable = ({ data }) => {
+const ReportTable = ({ type, initialDate }) => {
+  const year = getYear(initialDate);
+
+  const { data, isSuccess } = useGetMonthTransactionQuery({
+    type,
+    year,
+  });
+
+  const reportsData = data?.data?.result;
+
   const classes = useStyles();
   // LOCALISE
   const { t } = useTranslation();
   return (
-    <div className={classes.reports__thumb}>
-      <h3 className={classes.report__title}>{t('reportTable.summary')}</h3>
-      <ul className={classes.report__list}>
-        {data.map(item => (
-          <li key={item.id} className={classes.report__item}>
-            <p>{item.month}</p>
-            <p>{item.totalsum}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      {isSuccess && (
+        <div className={classes.reports__thumb}>
+          <h3 className={classes.report__title}>{t('reportTable.summary')}</h3>
+          <ul className={classes.report__list}>
+            {reportsData.map(item =>
+              item.total === 0 ? null : (
+                <li key={item.month} className={classes.report__item}>
+                  <p>{MONTH[item.month]}</p>
+                  <p>{item.total}</p>
+                </li>
+              ),
+            )}
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 
 ReportTable.propTypes = {
-  data: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default ReportTable;

@@ -10,6 +10,7 @@ import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { useUpdateBalanseMutation } from 'redux/service/transactionApi';
 import trend from 'images/trend.png';
+import Baner from './Baner';
 
 import { useTranslation } from 'react-i18next';
 
@@ -126,10 +127,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const BalanceLine = ({ userData }) => {
-  const balance = userData[userData.length - 1].balance;
+  const { balance, isBalanceSetted } = userData[userData.length - 1];
 
-  const [amount, setAmount] = useState(balance);
-  const [start, setStart] = useState(false);
+  const [amount, setAmount] = useState(null);
 
   const [updateBalanse] = useUpdateBalanseMutation();
 
@@ -157,7 +157,8 @@ const BalanceLine = ({ userData }) => {
     toast(t('balanceLine.congratulations'), {
       icon: '👏',
     });
-    setStart(true);
+
+    setAmount(null);
   };
 
   const small = useMediaPredicate('(max-width: 767px)');
@@ -174,7 +175,7 @@ const BalanceLine = ({ userData }) => {
       >
         <p className={classes.balance__title}>{t('balanceLine.balance')} </p>
 
-        {start ? (
+        {isBalanceSetted ? (
           <Stack direction="row">
             <p
               className={[classes.balance__input, classes.disabled].join(' ')}
@@ -188,40 +189,46 @@ const BalanceLine = ({ userData }) => {
             </p>
           </Stack>
         ) : (
-          <Stack direction="row">
-            <input
-              className={classes.balance__input}
-              placeholder="00.00 UAH"
-              onChange={handleChangeBalance}
-              type="number"
-              name="balance"
-            />
-            {small && (
-              <Button
-                name={t('balanceLine.confirm')}
-                type="submit"
-                onClick={onSubmit}
-                variant="secondary"
-                borderType="mobile"
+          <>
+            <Baner />
+            <Stack direction="row">
+              <input
+                className={classes.balance__input}
+                placeholder="00.00 UAH"
+                onChange={handleChangeBalance}
+                type="number"
+                name="balance"
               />
-            )}
-            {medium && (
-              <Button
-                name={t('balanceLine.confirm')}
-                type="submit"
-                onClick={onSubmit}
-                variant="secondary"
-              />
-            )}
-            {large && (
-              <Button
-                name={t('balanceLine.confirm')}
-                type="submit"
-                onClick={onSubmit}
-                variant="secondary"
-              />
-            )}
-          </Stack>
+
+              {small && (
+                <Button
+                  name={t('balanceLine.confirm')}
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                  borderType="mobile"
+                />
+              )}
+
+              {medium && (
+                <Button
+                  name={t('balanceLine.confirm')}
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                />
+              )}
+
+              {large && (
+                <Button
+                  name={t('balanceLine.confirm')}
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                />
+              )}
+            </Stack>
+          </>
         )}
 
         <Link className={classes.reports__link} to="/reports">

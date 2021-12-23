@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from 'utils/theme';
@@ -13,28 +13,13 @@ import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Toaster } from 'react-hot-toast';
 import Loader from 'components/Loader';
-// import { ToastContainer } from 'react-toastify';
-
-const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
-
-const ProfilePage = lazy(() =>
-  import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
-);
-
-const StatisticPage = lazy(() =>
-  import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
-);
-
-const DevelopersPage = lazy(() =>
-  import('pages/DevelopersPage/DevelopersPage' /* webpackChunkName: "Developers-page" */),
-);
+import { BalancePage, ProfilePage, StatisticPage, DevelopersPage } from 'pages';
 
 const App = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <div className={style.mainWrapper}> */}
       <Toaster />
       <AppBar />
       <Routes>
@@ -149,7 +134,6 @@ const App = () => {
           }
         />
       </Routes>
-      {/* </div> */}
     </ThemeProvider>
   );
 };

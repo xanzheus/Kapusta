@@ -119,7 +119,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BalanceTable = ({ data, reportData, category, Class }) => {
+const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const [open, setOpen] = useState(false);
 
   const [deleteTransaction] = useDeleteTransactionMutation();
@@ -193,7 +193,7 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
             columns={columns}
           />
         </Stack>
-        <ReportTable data={reportData} />
+        <ReportTable type={type} initialDate={initialDate} />
       </Box>
     </>
   );
@@ -201,9 +201,10 @@ const BalanceTable = ({ data, reportData, category, Class }) => {
 
 BalanceTable.propTypes = {
   data: PropTypes.array.isRequired,
-  reportData: PropTypes.array.isRequired,
+  initialDate: PropTypes.object.isRequired,
   category: PropTypes.array.isRequired,
   Class: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default BalanceTable;

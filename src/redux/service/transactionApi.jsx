@@ -64,11 +64,9 @@ export const transactionApi = createApi({
           params: { startDate, endDate },
         };
       },
-      // query: () => ({
-      //   url: `categories?startDate=2021-12-01&endDate=2021-12-31`,
-      //   // url: `categories`,
-      // }),
+      providesTags: ['Transaction'],
     }),
+
     getTransactions: builder.query({
       query: ({ startDate, endDate }) => ({
         url: `transactions?startDate=${startDate}&endDate=${endDate}`,
@@ -123,6 +121,13 @@ export const transactionApi = createApi({
       }),
       invalidatesTags: ['Transaction'],
     }),
+
+    getMonthTransaction: builder.query({
+      query: ({ type, year }) => ({
+        url: `transactions/summary?type=${type}&year=${year}`,
+      }),
+      providesTags: ['Transaction'],
+    }),
   }),
 });
 
@@ -133,4 +138,5 @@ export const {
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
   useUpdateBalanseMutation,
+  useGetMonthTransactionQuery,
 } = transactionApi;

@@ -1,11 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import toast from 'react-hot-toast';
 import { userAPI } from './userAPI';
-// import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api',
-  credentials: 'include',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
     console.log('header', token);
@@ -18,19 +16,24 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
+  const refreshToken = api.getState().auth.refreshToken;
+  console.log('userAPI', refreshToken);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
       {
         url: `/refresh`,
         method: 'POST',
+        body: { refreshToken },
       },
       api,
       extraOptions,
     );
     if (refreshResult.data) {
+      console.log('refreshDATA', refreshResult.data.data);
+      const { data } = refreshResult.data;
       // store the new token
-      api.dispatch(setCredentials(refreshResult.data));
+      api.dispatch(setCredentials(data));
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
@@ -41,9 +44,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     const { data } = result.error;
     toast.error(data.message);
   }
-
   return result;
 };
+
 //////////////////////////////////////////////////////////////////
 export const developerAPI = createApi({
   reducerPath: 'developersAPI',

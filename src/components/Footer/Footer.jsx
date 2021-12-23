@@ -1,14 +1,9 @@
-import UserMenu from 'components/UserMenu';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
-
-import { useGetDataUserQuery } from 'redux/service/userAPI';
 import style from './Footer.module.scss';
 
 const Footer = () => {
-  const { isFetching } = useGetDataUserQuery();
-
   return (
     <>
       <footer className={style.footer}>
