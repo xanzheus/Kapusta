@@ -7,9 +7,14 @@ import CancelIcon from '@mui/icons-material/Close';
 import FormaUpdatePhone from 'pages/ProfilePage/FormaUpdatePhone';
 import style from './EditPhoneModal.module.scss';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const modalRoot = document.querySelector('#modal-root');
 
 const EditPhoneModal = ({ toggleOpen, open }) => {
+  // LOCALISE
+  const { t } = useTranslation();
   return createPortal(
     <>
       <Modal
@@ -22,7 +27,7 @@ const EditPhoneModal = ({ toggleOpen, open }) => {
         <Box className={style.modal}>
           <CancelIcon className={style.modal__close_button} onClick={toggleOpen} />
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
-            Укажите ваш номер телефона
+            {t('modal.phone')}
           </Typography>
           <FormaUpdatePhone toggleOpen={toggleOpen} />
         </Box>

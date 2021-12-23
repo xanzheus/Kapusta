@@ -7,6 +7,9 @@ import toast from 'react-hot-toast';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles({
   list: {
     listStyle: 'none',
@@ -85,9 +88,12 @@ const TranceActions = ({ transactionsData }) => {
 
   const [deleteTransaction] = useDeleteTransactionMutation();
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   const handelDeleteTransaction = id => {
     deleteTransaction(id);
-    toast.error('Транзакция удалена!');
+    toast.error(t('tranceActions.transactionDeleted'));
   };
 
   return (
