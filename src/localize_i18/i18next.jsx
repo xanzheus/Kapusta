@@ -50,6 +50,9 @@ const translationEN = {
     transactionDeleted: 'Transaction deleted!',
     currencyUAH: 'UAH',
   },
+  reportTable: {
+    summary: 'Current year summary',
+  },
 };
 const translationRU = {
   registration: {
@@ -97,6 +100,9 @@ const translationRU = {
   tranceActions: {
     transactionDeleted: 'Трансакция удалена!',
     currencyUAH: 'UAH',
+  },
+  reportTable: {
+    summary: 'Сводка за текущий год',
   },
 };
 const resources = {
