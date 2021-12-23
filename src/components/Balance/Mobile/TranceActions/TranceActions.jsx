@@ -88,7 +88,7 @@ const TranceActions = ({ transactionsData }) => {
 
   const handelDeleteTransaction = id => {
     deleteTransaction(id);
-    toast.error('Трансакция удалена!');
+    toast.error('Транзакция удалена!');
   };
 
   return (
