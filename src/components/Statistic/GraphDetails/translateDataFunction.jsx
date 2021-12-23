@@ -37,14 +37,15 @@ const dataTranslated = val => {
       return { ...i, category: 'Образование' };
     }
     if (i.category === 'other') {
-      return { ...i, category: t('catagories.other') };
+      return { ...i, category: 'Прочее' };
     }
     if (i.category === 'salary') {
-      return { ...i, category: 'Прочее' };
+      return { ...i, category: 'ЗП' };
     }
     if (i.category === 'additional') {
       return { ...i, category: 'Доп.доход' };
     }
+    return i.category === 'salary' ? { ...i, category: 'ЗП' } : { ...i, category: 'Доп.доход' };
   });
   return newOb;
 };

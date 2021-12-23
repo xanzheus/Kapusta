@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
-// import SaveIcon from '@mui/icons-material/Save';
 // import EditIcon from '@mui/icons-material/Edit';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
@@ -115,20 +114,19 @@ const TranceActions = ({ transactionsData }) => {
 
             {item.type === CATEGORYTYPE.EXPENSE ? (
               <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount} ${t('tranceActions.currencyUAH')}.`}
+                {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
               </p>
             ) : (
-              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount} ${t(
-                'tranceActions.currencyUAH',
-              )}.`}</p>
+              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
+                2,
+              )} ${t('tranceActions.currencyUAH')}.`}</p>
             )}
 
             <DeleteForeverIcon
               onClick={() => handelDeleteTransaction(item._id)}
               className={classes.buttonIcon}
             />
-            {/* <EditIcon className={classes.buttonIcon} />
-            <SaveIcon className={classes.buttonIcon} /> */}
+            {/* <EditIcon className={classes.buttonIcon} /> */}
           </li>
         ))}
       </ul>
