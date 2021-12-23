@@ -137,7 +137,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       deleteTransaction(id);
       toast.error(t('balanceTable.transactionDeleted'));
     },
-    [deleteTransaction],
+    [deleteTransaction, t],
   );
 
   const updateTransAction = useCallback(
@@ -169,7 +169,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
       toast.success(t('balanceTable.сhangesSaved'));
     },
-    [data, updateTransaction],
+    [data, updateTransaction, t],
   );
 
   const infoMessageByEdit = () => {
