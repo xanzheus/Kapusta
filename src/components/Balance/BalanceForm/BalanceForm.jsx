@@ -199,7 +199,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
       createTransaction(result);
       reset();
 
-      toast('Транс акция добавлена!', {
+      toast('Транзакция добавлена!', {
         icon: '👏',
       });
     }

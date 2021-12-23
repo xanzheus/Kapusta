@@ -154,7 +154,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
       toggleForm();
 
-      toast('Транс акция добавлена!', {
+      toast('Транзакция добавлена!', {
         icon: '👏',
       });
     }

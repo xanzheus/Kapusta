@@ -130,7 +130,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const deleteTransAction = useCallback(
     id => () => {
       deleteTransaction(id);
-      toast.error('Трансакция удалена!');
+      toast.error('Транзакция удалена!');
     },
     [deleteTransaction],
   );
