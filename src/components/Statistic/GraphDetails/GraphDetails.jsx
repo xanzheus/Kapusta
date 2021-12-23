@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
-import dataTranslated from './translateDataFunction.jsx'
+import dataTranslated from './translateDataFunction.jsx';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
@@ -19,7 +19,6 @@ const GraphDetails = ({ startDate, endDate }) => {
     window.addEventListener('resize', handleResize, false);
     handlerDiagramType();
   }, [windowSize]);
-
 
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
@@ -89,6 +88,11 @@ const GraphDetails = ({ startDate, endDate }) => {
         enabled: false,
       },
       plotOptions: {
+        series: {
+          plotOptions: {
+            series: { bartWidth: 15 },
+          },
+        },
         pie: {
           allowPointSelect: true,
           cursor: 'pointer',
@@ -107,15 +111,20 @@ const GraphDetails = ({ startDate, endDate }) => {
       series: [
         {
           name: 'Категории',
+          pointWidth: 38,
+          borderRadius: 10,
           colorByPoint: true,
           data: sortCategoryDetails(data),
-          // keys: ['y', 'name'],
+          keys: ['y', 'name'],
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.2f} грн',
+          },
         },
       ],
     };
     return options;
   };
-
   return (
     <div className={s.graphDetails}>
       <CategoriesRTK
