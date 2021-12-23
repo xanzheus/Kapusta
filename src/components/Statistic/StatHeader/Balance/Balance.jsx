@@ -1,8 +1,12 @@
 import { useGetTransactionsQuery } from '../../../../redux/service/transactionApi';
 import { useGetDataUserQuery } from '../../../../redux/service/userAPI';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 import s from './Balance.module.scss';
 
 const Balance = () => {
+  // LOCALISE
+  const { t } = useTranslation();
   const { data = [], isSuccess } = useGetTransactionsQuery('2000-12-01', '2200-12-31');
   const { data: dataCurrency, isFetching } = useGetDataUserQuery();
 
@@ -13,7 +17,7 @@ const Balance = () => {
   return (
     <div className={s.balance}>
       {/* {isSuccess && console.log(balanceTotal(data))} */}
-      <h2 className={s.balance__title}>Баланс:</h2>
+      <h2 className={s.balance__title}>{t('statHeader.balance')}</h2>
       <div className={s.balance__amountBlock}>
         <div className={s.balance__amountSum}>
           {/* {!isFetching && console.log(dataCurrency)} */}
@@ -21,7 +25,7 @@ const Balance = () => {
         </div>
       </div>
       <div>
-        <div className={s.balance__confirmButton}>Подтвердить</div>
+        <div className={s.balance__confirmButton}>{t('statHeader.confirm')}</div>
       </div>
     </div>
   );

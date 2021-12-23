@@ -11,6 +11,8 @@ import TranceActions from 'components/Balance/Mobile/TranceActions';
 import MobileForm from 'components/Balance/Mobile/MobileForm';
 import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   field: {
@@ -87,6 +89,9 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
     setCtegories(expensesCatagoryArray);
   };
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   return (
     <>
       {!isOpenForm ? (
@@ -116,11 +121,11 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
 
           <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
             <button onClick={expenseButtonClick} className={classes.button} type="button">
-              Расход
+              {t('headersTabs.consumption')}
             </button>
 
             <button onClick={incomeButtonClick} className={classes.button} type="button">
-              Доход
+              {t('headersTabs.income')}
             </button>
           </Stack>
         </>

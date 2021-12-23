@@ -1,37 +1,46 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// FORM
 import { useFormik } from 'formik';
+import loginSchema from 'validationSchemas/login';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+// MUI
 import { TextField, InputAdornment, IconButton } from '@mui/material/';
+import { makeStyles } from '@mui/styles';
+import Stack from '@mui/material/Stack';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
-import Stack from '@mui/material/Stack';
-import { useLoginMutation } from 'redux/service/userAPI';
-// import { useLogoutMutation } from 'redux/service/userAPI';
+// REDUX STORE
 import { useDispatch } from 'react-redux';
-
+import { useLoginMutation } from 'redux/service/userAPI';
+import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 import { setCredentials } from 'redux/service/authSlice';
-import loginSchema from 'validationSchemas/login';
-import { useNavigate } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
+// STYLES
 import style from './loginForm.module.scss';
 import { COLORS } from '../../Constants';
 import { ReactComponent as GoogleIcon } from '../../images/google_icon.svg';
-import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 
 const LoginForm = () => {
+  // DISPATCH TO STORE
   const dispatch = useDispatch();
+  // NAVIGATION
   const navigate = useNavigate();
+  const navigateToRegistration = () => {
+    navigate('/');
+  };
+
+  const { t } = useTranslation();
+
+  // REDUX HOOKS MUTATION
   const [login] = useLoginMutation();
-  // const [logout] = useLogoutMutation();
   const [googleAuth] = useGoogleAuthMutation();
   // showPassword
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const navigateToRegistration = () => {
-    navigate('/');
-  };
   const useStyles = makeStyles({
     field: {
       '& .MuiInputAdornment-root': {
@@ -95,7 +104,8 @@ const LoginForm = () => {
     <div className={style.box}>
       <form autoComplete="on" onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
-          Вы можете авторизоваться с помощью Google Account:
+          {t('registration.googleTitle')}
+          {/* Вы можете авторизоваться с помощью Google Account: */}
         </p>
         <div className={style.google_button__wrapper}>
           <Button
@@ -109,7 +119,10 @@ const LoginForm = () => {
             <GoogleIcon className={style.google__icon} />
           </Button>
         </div>
-        <p className={style.registration__title}>Или зайти с помощью e-mail и пароля:</p>
+        <p className={style.registration__title}>
+          {t('registration.mainTitle')}
+          {/* Или зайти с помощью e-mail и пароля: */}
+        </p>
 
         <TextField
           className={classes.field}
@@ -118,7 +131,7 @@ const LoginForm = () => {
           color="warning"
           id="email"
           name="email"
-          label="Электронная почта:"
+          label={t('registration.email')}
           // autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
@@ -149,7 +162,7 @@ const LoginForm = () => {
           color="warning"
           id="password"
           name="password"
-          label="Пароль"
+          label={t('registration.password')}
           type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -162,11 +175,15 @@ const LoginForm = () => {
         <Stack mt={2} spacing={2} direction="row">
           <Button
             className={style.login__button}
-            name="Войти"
+            name={t('registration.enter')}
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button onClick={navigateToRegistration} name="Регистрация" type="button"></Button>
+          <Button
+            onClick={navigateToRegistration}
+            name={t('registration.registration')}
+            type="button"
+          ></Button>
         </Stack>
       </form>
     </div>
