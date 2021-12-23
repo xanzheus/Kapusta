@@ -146,6 +146,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
         ));
         return;
       }
+
       const preparedDate = params.row.date.toString();
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
@@ -156,7 +157,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
         date: resultDate,
         category: TRANSLATE_CATEGORIES[params.row.category],
         comment: params.row.comment,
-        amount: Number(params.row.amount.slice(2, -5)),
+        amount: Number(params.row.amount),
       };
 
       updateTransaction(result);
