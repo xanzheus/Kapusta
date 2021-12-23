@@ -57,8 +57,7 @@ export const transactionApi = createApi({
     getCategories: builder.query({
       query: arg => {
         const { startDate, endDate } = arg;
-        console.log(startDate);
-        console.log(endDate);
+
         return {
           url: `transactions/categories`,
           params: { startDate, endDate },

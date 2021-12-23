@@ -76,7 +76,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
           type: item.type,
           category: TRANSLATE_CATEGORIES[item.category],
           comment: item.comment,
-          amount: `${symbol} ${item.amount} грн.`,
+          amount: `${symbol} ${item.amount.toFixed(2)} грн.`,
         };
       })
       .filter(item => item.type === type);
