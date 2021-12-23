@@ -4,14 +4,12 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import CancelIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
 import FormaUpdatePhone from 'pages/ProfilePage/FormaUpdatePhone';
 import style from './EditPhoneModal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
 const EditPhoneModal = ({ toggleOpen, open }) => {
-  // const [isOpen, setOpen] = useState(open);
   return createPortal(
     <>
       <Modal

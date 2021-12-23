@@ -1,14 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import IconButton from '@mui/material/IconButton';
-
-import ShareIcon from '@mui/icons-material/Share';
-
-import { COLORS } from '../../Constants';
-
 import { useGetDataDevelopersQuery } from 'redux/service/developerAPI';
-
-import IconAvatar from 'components/IconAvatar';
 import Container from 'components/Container';
 import CardDeveloper from './CardDeveloper';
 import style from './DevelopersPage.module.scss';
