@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 // import { toast } from 'react-toastify';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:4000/api/users',
+  baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
