@@ -1,11 +1,7 @@
 // LOCALISE
-import { useTranslation } from 'react-i18next';
-
 const dataTranslated = val => {
   const newOb = val.map(i => {
     // LOCALISE
-    const { t } = useTranslation();
-
     if (i.category === 'products') {
       return { ...i, category: 'Продукты' };
     }
