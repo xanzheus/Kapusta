@@ -16,7 +16,7 @@ const AppBar = () => {
       <header className={style.header}>
         <Container>
           <div className={style.header__wrapper}>
-            <Link to="/balance">
+            <Link to="/developers">
               <div className={style.logo}></div>
             </Link>
             {console.log(`AppBar ${isSuccess}`)}
