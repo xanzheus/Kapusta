@@ -6,7 +6,7 @@
   margin-right: auto;
   background-image: url(../images/bgc-grey-m.png);
   background-repeat: no-repeat;
-  background-position: top -56px center;
+  background-position: top -86px center;
 
   @media screen and (min-width: $tablet) {
     max-width: $tablet;
@@ -54,4 +54,13 @@
     background-size: $desktop, $desktop, 183px;
     background-position: top 20px left 10px, top 0 left 0, left 100px bottom 56px;
   }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+.mainWrapper {
+  // min-height: calc(100vh-84px);
 }

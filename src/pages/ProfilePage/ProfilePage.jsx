@@ -20,15 +20,19 @@ const ProfilePage = () => {
   };
   const handleClose = () => setOpen(false);
 
-  const { data, isFetching } = useGetDataUserQuery();
+  const { data, isSuccess } = useGetDataUserQuery();
 
   const firstName = data => data.data.user.fullName.firstName;
   const lastName = data => data.data.user.fullName.lastName;
   const avatar = data => data.data.user.avatar;
+  const language = data => data.data.user.settings.language;
+  const currency = data => data.data.user.settings.currency;
+  const theme = data => data.data.user.settings.theme;
+  const phone = data => data.data.user.phone;
 
   return (
     <>
-      {!isFetching && (
+      {isSuccess && (
         <section className={style.profile}>
           <Container>
             <IconButton
@@ -77,9 +81,10 @@ const ProfilePage = () => {
                 <FormaUser
                   firstName={firstName(data)}
                   lastName={lastName(data)}
-                  language={data.data.user.settings.language}
-                  currency={data.data.user.settings.currency}
-                  theme={data.data.user.settings.theme}
+                  language={language(data)}
+                  currency={currency(data)}
+                  theme={theme(data)}
+                  phone={phone(data)}
                 />
               </div>
             </div>

@@ -1,0 +1,132 @@
+@import 'styles/shared.scss';
+.footer {
+  background-color: $secondaryAccent-color;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: auto;
+
+  &.dark__theme {
+    background-color: $mainDark-color;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56));
+    color: $mainLight-color;
+  }
+}
+
+.footer__info {
+  @media screen and(min-width: $tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.footer__copyrightParth {
+  display: flex;
+  justify-content: center;
+}
+
+.footer__copyrightText {
+  position: relative;
+  margin-right: 10px;
+  font-size: 16px;
+  line-height: 1.171;
+  font-weight: 400;
+  color: $secondory-color;
+
+  &.dark__theme {
+    color: $mainLight-color;
+  }
+  @media screen and(min-width: $tablet) {
+    font-size: 14px;
+  }
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    display: block;
+    width: 1px;
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    content: '';
+
+    background-color: $secondory-color;
+  }
+}
+
+.footer__link {
+  text-decoration: underline;
+  color: inherit;
+  width: 10px;
+  padding: 20px 5px;
+}
+
+.footer__developedParth {
+  display: flex;
+  justify-content: center;
+}
+
+.footer.dark__theme .footer__copyrightText,
+.footer.dark__theme .footer__developedText {
+  color: $mainLight-color;
+}
+.footer__developedText {
+  color: $secondory-color;
+  font-size: 16px;
+  line-height: 1.171;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and(min-width:$tablet) {
+    font-size: 14px;
+  }
+}
+
+.heart {
+  display: block;
+  color: $mainAccent-color;
+  font-size: 16px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.heart {
+  animation: heart 5s ease infinite;
+}
+
+@keyframes heart {
+  0% {
+    transform: scale(1);
+  }
+
+  5% {
+    transform: scale(1.75);
+  }
+
+  20% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1);
+  }
+
+  35% {
+    transform: scale(1.75);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  55% {
+    transform: scale(1.75);
+  }
+
+  70% {
+    transform: scale(1);
+  }
+}

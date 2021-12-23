@@ -4,100 +4,20 @@ import { useGetCategoriesQuery } from '../../../../redux/service/transactionApi'
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import sprite from '../../../../images/svg/sprite.svg';
+import dataTranslated from './../translateDataFunction.jsx'
 import s from './CategoriesRTK.module.scss';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
+  const { data = [], isLoading, isSuccess } = useGetCategoriesQuery({ startDate, endDate });
   const [value, setValue] = useState('expense');
-  // const [selectedCategory, setselectedCategory] = useState('');
-  // const { data = [], isLoading, isFetching } = useGetCategoriesQuery();
-  const { data = [], isLoading, isFetching } = useGetCategoriesQuery({ startDate, endDate });
 
-  // const newDDD = data.map(p => (p.category === 'products' ? { ...p, category: 'Продукты' } : p));
-  const dataTranslated = val => {
-    const newOb = val.map(i => {
-      if (i.category === 'products') {
-        return { ...i, category: 'Продукты' };
-      }
-      if (i.category === 'home') {
-        return { ...i, category: 'Всё для дома' };
-      }
-      if (i.category === 'entertainment') {
-        return { ...i, category: 'Развлечения' };
-      }
-      if (i.category === 'healthy') {
-        return { ...i, category: 'Здоровье' };
-      }
-      if (i.category === 'transport') {
-        return { ...i, category: 'Транспорт' };
-      }
-      if (i.category === 'technic') {
-        return { ...i, category: 'Техника' };
-      }
-      if (i.category === 'communication') {
-        return { ...i, category: 'Комуналка, связь' };
-      }
-      if (i.category === 'hobby') {
-        return { ...i, category: 'Спорт, хобби' };
-      }
-      if (i.category === 'education') {
-        return { ...i, category: 'Образование' };
-      }
-      if (i.category === 'other') {
-        return { ...i, category: 'Прочее' };
-      }
-      if (i.category === 'salary') {
-        return { ...i, category: 'ЗП' };
-      }
-      if (i.category === 'additional') {
-        return { ...i, category: 'Доп.доход' };
-      }
-    });
-    return newOb;
-  };
 
-  // const EXPENSE_CATEGORIES = [
-  //   { PRODUCTS: 'products' },
-  //   { ALCOHOL: 'alcohol' },
-  //   { ENTERTAINMENT: 'entertainment' },
-  //   { HEALTHY: 'healthy' },
-  //   { TRANSPORT: 'transport' },
-  //   { HOME: 'home' },
-  //   { TECHNIC: 'technic' },
-  //   { COMMUNICATION: 'communication' },
-  //   { HOBBY: 'hobby' },
-  //   { EDUCATION: 'education' },
-  //   { OTHER: 'other' },
-  // ];
-
-  // const EXPENSE_CATEGORIES_RU = [
-  //   { PRODUCTS: 'Продукты' },
-  //   { ALCOHOL: 'Алкоголь' },
-  //   { ENTERTAINMENT: 'Развлечения' },
-  //   { HEALTHY: 'Здоровье' },
-  //   { TRANSPORT: 'Транспорт' },
-  //   { HOME: 'Все для дома' },
-  //   { TECHNIC: 'Техника' },
-  //   { COMMUNICATION: 'Комуналка, связь' },
-  //   { HOBBY: 'Спорт, хобби' },
-  //   { EDUCATION: 'Образование' },
-  //   { OTHER: 'Прочее' },
-  // ];
-
-  // let newData = [];
-  // if ('data' in data) {
-  //   const { transactions } = data.data;
-  //   transactions.forEach(el => console.log(el));
-  //   console.log(transactions);
-  //   newData = [...transactions];
-  // }
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
-  const sortCategoryValues = (type, data) => {
-    // const newCat = data.data.filter(category => {
-    const newCat = data.filter(category => {
+  const sortCategoryValues = (type, value) => {
+    const newCat = value.filter(category => {
       return category.type === type;
     });
-    console.log(newCat);
     return newCat;
   };
 
@@ -134,7 +54,6 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           className={s.search__buttonPickerNext}
           onClick={() => {
             resultValue();
-
             setActiveCalss(false);
           }}
         ></button>
@@ -146,7 +65,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           </Stack>
         </div>
       )}{' '}
-      {!isFetching && (
+      {isSuccess && (
         <div className={s.income}>
           <div className={s.categories__listItems}>
             <ul className={s.categorie__list}>
@@ -157,19 +76,15 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
                     data-name={item.category}
                     key={item.category}
                     onClick={e => {
-                      // setselectedCategory(e.currentTarget.getAttribute('data-name'));
-
                       setCategory(e.currentTarget.getAttribute('data-name'));
                       setActiveCalss(true);
                     }}
                   >
                     <div className={s.categorie__link}>
                       {item.total}
-                      {/* <svg className={isActive ? s.icon : s.iconActive}> */}
                       <svg className={s.icon}>
                         <use xlinkHref={`${sprite}#${item.category}`} />
                       </svg>
-
                       <p className={s.categorie__name}>{item.category}</p>
                     </div>
                   </li>
@@ -179,9 +94,6 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           </div>
         </div>
       )}
-      {/* <Stack sx={{ color: 'grey.500' }}>
-        <CircularProgress color="inherit" />
-      </Stack> */}
     </div>
   );
 };

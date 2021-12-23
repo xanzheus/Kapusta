@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from 'utils/theme';
@@ -9,18 +9,11 @@ import Registration from 'pages/Registration';
 import { useSelector } from 'react-redux';
 import Login from 'pages/Login';
 import style from './App.module.scss';
+import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 import { Toaster } from 'react-hot-toast';
-// import { ToastContainer } from 'react-toastify';
-
-const BalancePage = lazy(() => import('pages/BalancePage' /* webpackChunkName: "BalancePage" */));
-
-const ProfilePage = lazy(() =>
-  import('pages/ProfilePage/ProfilePage' /* webpackChunkName: "Profile-page" */),
-);
-
-const StatisticPage = lazy(() =>
-  import('pages/StatisticPage/StatisticPage' /* webpackChunkName: "Statistic-page" */),
-);
+import Loader from 'components/Loader';
+import { BalancePage, ProfilePage, StatisticPage, DevelopersPage } from 'pages';
 
 const App = () => {
   const accessToken = useSelector(state => state.auth.accessToken);
@@ -56,7 +49,7 @@ const App = () => {
           path="balance"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <BalancePage />{' '}
@@ -70,7 +63,7 @@ const App = () => {
           path="profile"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <ProfilePage />{' '}
@@ -81,10 +74,32 @@ const App = () => {
           }
         />
         <Route
+          path="developers"
+          element={
+            <PrivateRoute accessToken={accessToken}>
+              <Suspense
+                fallback={
+                  <div className={style.loader}>
+                    <Stack sx={{ color: 'grey.500' }}>
+                      <CircularProgress color="inherit" />
+                    </Stack>
+                  </div>
+                }
+              >
+                <main className={style.main}>
+                  <div className={style.backgroundWrapperMain}>
+                    <DevelopersPage />{' '}
+                  </div>
+                </main>
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="reports"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <StatisticPage />{' '}
@@ -98,7 +113,7 @@ const App = () => {
           path="*"
           element={
             <PrivateRoute accessToken={accessToken}>
-              <Suspense fallback={<h1>Loading...</h1>}>
+              <Suspense fallback={<Loader />}>
                 <main className={style.main}>
                   <div className={style.backgroundWrapperMain}>
                     <BalancePage />{' '}

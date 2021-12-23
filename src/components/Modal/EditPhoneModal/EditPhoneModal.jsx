@@ -9,22 +9,22 @@ import style from './EditPhoneModal.module.scss';
 
 const modalRoot = document.querySelector('#modal-root');
 
-const EditPhoneModal = ({ open, handleClose }) => {
+const EditPhoneModal = ({ toggleOpen, open }) => {
   return createPortal(
     <>
       <Modal
         keepMounted
         open={open}
-        onClose={handleClose}
+        onClose={toggleOpen}
         aria-labelledby="keep-mounted-modal-title"
         aria-describedby="keep-mounted-modal-description"
       >
         <Box className={style.modal}>
-          <CancelIcon className={style.modal__close_button} onClick={handleClose} />
+          <CancelIcon className={style.modal__close_button} onClick={toggleOpen} />
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
             Укажите ваш номер телефона
           </Typography>
-          <FormaUpdatePhone />
+          <FormaUpdatePhone toggleOpen={toggleOpen} />
         </Box>
       </Modal>
     </>,

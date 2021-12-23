@@ -1,28 +1,10 @@
 import { useState } from 'react';
-// import { format, startOfMonth, endOfMonth } from 'date-fns';
-// import TextField from '@mui/material/TextField';
-// import AdapterDateFns from '@mui/lab/AdapterDateFns';
-// import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import DatePicker from '@mui/lab/DatePicker';
-// import Stack from '@mui/material/Stack';
-
+import { format } from 'date-fns';
 import s from './Period.module.scss';
 
 const Period = ({ monthRangePicker, month, year }) => {
   const [date, setDate] = useState(new Date());
-
-  // const [startMonth, setStartMonth] = [format(startOfMonth(date), 'yyyy-MM-dd')];
-  // const [endMonth, setEndMonth] = [format(endOfMonth(date), 'yyyy-MM-dd')];
-
-  // const newMonth = date.toLocaleString('ru', { month: 'long' }).toUpperCase();
-  // const newYear = date.getFullYear();
-  // const monthRangePicker = (currentDate, range) => {
-  //   const newDate = currentDate.setMonth(currentDate.getMonth() + range);
-  //   setDate(new Date(newDate));
-  // };
-
-  // console.log(`1й день выбраного месяца(${newMonth}): ${startMonth}`);
-  // console.log(`последний выбраного месяца(${newMonth}): ${endMonth}`);
+  const currentMonth = new Date();
 
   return (
     <div className={s.period}>
@@ -38,23 +20,14 @@ const Period = ({ monthRangePicker, month, year }) => {
         ></button>
 
         <div className={s.period__currentDate}>{`${month} ${year}`}</div>
-        {/* <div className={s.period__currentDate}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
-              <DatePicker
-                views={['year', 'month']}
-                date={date}
-                onChange={newdate => {
-                  setDate(newdate);
-                }}
-                renderInput={params => <TextField {...params} helperText={null} />}
-              />
-            </Stack>
-          </LocalizationProvider>
-        </div> */}
 
         <button
-          className={s.search__buttonPickerNext}
+          disabled={format(date, 'yyyy-MM-dd') === format(currentMonth, 'yyyy-MM-dd') && true}
+          className={
+            format(date, 'yyyy-MM-dd') === format(currentMonth, 'yyyy-MM-dd')
+              ? s.search__buttonPickerNextDisabled
+              : s.search__buttonPickerNext
+          }
           onClick={() => {
             setDate(date, +1);
             monthRangePicker(date, +1);

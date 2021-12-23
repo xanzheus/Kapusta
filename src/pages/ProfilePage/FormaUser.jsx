@@ -18,6 +18,7 @@ import style from './ProfilePage.module.scss';
 const FormaUser = ({
   firstName = '',
   lastName = '',
+  phone = '',
   language = LANGUAGE.RUSSIAN,
   currency = CURRENCY.HRYVNIA,
   theme = THEME.LIGHT,
@@ -29,10 +30,10 @@ const FormaUser = ({
     fixedCacheKey: 'shared-update-user',
   });
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    return setOpen(true);
+
+  const toggleOpen = () => {
+    return setOpen(!open);
   };
-  const handleClose = () => setOpen(false);
 
   const useStyles = makeStyles(theme => ({
     field: {
@@ -71,7 +72,7 @@ const FormaUser = ({
     initialValues: {
       firstName: firstName || '',
       lastName: lastName || '',
-      phone: '111-11-11',
+      phone: phone || '',
       password: '',
       confirmPassword: '',
       language,
@@ -81,6 +82,7 @@ const FormaUser = ({
     validationSchema: userUpdateSchema,
     onSubmit: (values, formikBag) => {
       const newData = {
+        password: values.password,
         fullName: {
           firstName: values.firstName,
           lastName: values.lastName,
@@ -167,7 +169,7 @@ const FormaUser = ({
           <IconButton
             className={style.profile__buttonEdit}
             aria-label="Поделиться с другом"
-            onClick={handleOpen}
+            onClick={toggleOpen}
             type={'button'}
           >
             <EditIcon sx={{ fontSize: 26 }} />
@@ -257,7 +259,7 @@ const FormaUser = ({
           disabled={!(formik.isValid && formik.dirty)}
         />
       </form>
-      {open && <EditPhoneModal open={open} handleClose={handleClose} />}
+      {open && <EditPhoneModal open={open} toggleOpen={toggleOpen} />}
     </>
   );
 };

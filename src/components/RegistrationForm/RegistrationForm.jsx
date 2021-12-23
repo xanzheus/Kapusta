@@ -80,8 +80,15 @@ const RegistrationForm = () => {
     },
     validationSchema: userSchema,
     onSubmit: values => {
-      createUser(values);
-      alert(JSON.stringify(values, null, 2));
+      const newUser = {
+        fullName: {
+          firstName: values.firstName,
+          lastName: values.lastName,
+        },
+        email: values.email,
+        password: values.password,
+      };
+      createUser(newUser);
     },
   });
 
@@ -98,9 +105,9 @@ const RegistrationForm = () => {
             }}
             variant="google__button"
             type="button"
+            name="Google"
           >
             <GoogleIcon className={style.google__icon} />
-            Google
           </Button>
         </div>
         <p className={style.registration__title}>
