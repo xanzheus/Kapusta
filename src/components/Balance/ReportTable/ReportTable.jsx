@@ -82,14 +82,13 @@ const ReportTable = ({ type, initialDate }) => {
         <div className={classes.reports__thumb}>
           <h3 className={classes.report__title}>Сводка за текущий год</h3>
           <ul className={classes.report__list}>
-            {reportsData.map(
-              item =>
-                item.total && (
-                  <li key={item.month} className={classes.report__item}>
-                    <p>{MONTH[item.month]}</p>
-                    <p>{item.total}</p>
-                  </li>
-                ),
+            {reportsData.map(item =>
+              item.total === 0 ? null : (
+                <li key={item.month} className={classes.report__item}>
+                  <p>{MONTH[item.month]}</p>
+                  <p>{item.total}</p>
+                </li>
+              ),
             )}
           </ul>
         </div>
