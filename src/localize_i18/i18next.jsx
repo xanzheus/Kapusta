@@ -53,7 +53,49 @@ const translationEN = {
   reportTable: {
     summary: 'Current year summary',
   },
+  footer: {
+    allRightsReserved: 'All rights reserved',
+    developed: 'Developed with',
+    students: 'students',
+  },
+  modal: {
+    number: ' Enter your phone number',
+    sendInvite: 'Send an invitation to a friend',
+    friendsMail: 'Friend mail',
+    friendName: 'Friend name',
+    sendButton: 'Send',
+    cancelButton: 'Cancel',
+    editTitle: 'Editing information',
+    edit: 'In order to edit the cell you need, you need to double-click on the desired cell and then make your change. During the editing process, you will receive notifications for your convenience :)',
+    sure: 'Are you sure?',
+    yes: 'Yes',
+    no: 'No',
+  },
+  catagories: {
+    products: 'products',
+    home: 'home',
+    entertainment: 'entertainment',
+    healthy: 'healthy',
+    transport: 'transport',
+    alcohol: 'alcohol',
+    technic: 'technic',
+    communication: 'communication',
+    hobby: 'hobby',
+    education: 'education',
+    other: 'other',
+    salary: 'salary',
+    additional: 'additional',
+  },
+  graphDetails: {
+    catagory: 'categories',
+    selectCategory: 'Select a category',
+  },
+  incomeCosts: {
+    costs: 'Costs',
+    income: 'Income',
+  },
 };
+
 const translationRU = {
   registration: {
     googleTitle: 'Вы можете авторизоваться с помощью Google Account:',
@@ -103,6 +145,50 @@ const translationRU = {
   },
   reportTable: {
     summary: 'Сводка за текущий год',
+  },
+  footer: {
+    allRightsReserved: 'Все права защищены',
+    developed: 'Разработано с',
+    students: 'студентами',
+  },
+  modal: {
+    phone: ' Укажите ваш номер телефона',
+    sendInvite: 'Отправить другу приглашение',
+    friendsMail: 'Почта друга',
+    friendName: 'Имя друга',
+    sendButton: 'Отправить',
+    cancelButton: 'Отмена',
+    editTitle: 'Информация о редактирование',
+    edit: 'Для того что бы редактировать нужную вам ячейку, вам необходимо дважды кликнуть по нужной ячейке и после внести своё изменение. В процессе редактирования вы будите получать уведомления, для вашего удобства :)',
+    sure: 'Вы уверены?',
+    yes: 'Да',
+    no: 'Нет',
+  },
+  catagories: {
+    products: 'Продукты',
+    home: 'Всё для дома',
+    entertainment: 'Развлечения',
+    healthy: 'Здоровье',
+    transport: 'Транспорт',
+    alcohol: 'Алкоголь',
+    technic: 'Техника',
+    communication: 'Коммуналка, связь',
+    hobby: 'Спорт, хобби',
+    education: 'Образование',
+    other: 'Разное',
+    salary: 'ЗП',
+    additional: 'Доп.доход',
+  },
+  graphDetails: {
+    catagory: 'Категории',
+    selectCategory: 'Выберите категорию',
+  },
+  incomeCosts: {
+    costs: 'Расходы',
+    income: 'Доходы',
+  },
+  statHeader: {
+    backButton: '',
   },
 };
 const resources = {

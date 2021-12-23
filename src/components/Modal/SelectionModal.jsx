@@ -8,9 +8,14 @@ import Button from 'components/Button';
 import CancelIcon from '@mui/icons-material/Close';
 import style from './SelectionModal.module.scss';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const modalRoot = document.querySelector('#modal-root');
 
 const SelectionModal = ({ open, handleClose, onClick }) => {
+  // LOCALISE
+  const { t } = useTranslation();
   return createPortal(
     <>
       <Modal
@@ -22,12 +27,12 @@ const SelectionModal = ({ open, handleClose, onClick }) => {
         <Box className={style.modal}>
           <CancelIcon className={style.modal__close_button} onClick={handleClose} />
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
-            Вы уверены?
+            {t('modal.sure')}
           </Typography>
 
           <Stack direction="row" alignItems="center" spacing={2} justifyContent="center">
-            <Button type="button" name="Да" onClick={onClick} />
-            <Button type="button" name="Нет" onClick={handleClose} />
+            <Button type="button" name={t('modal.yes')} onClick={onClick} />
+            <Button type="button" name={t('modal.no')} onClick={handleClose} />
           </Stack>
         </Box>
       </Modal>
