@@ -25,7 +25,7 @@
 }
 
 .diagramLarge {
-  min-height: 200px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,14 @@
   box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
   border-radius: 30px;
   margin: 0 auto;
+  margin-bottom: 18px;
   width: 100%;
+    @media screen and (min-width: $tablet) {
+   min-height: 130px;
+  }
+  @media screen and (min-width: $desktop) {
+  // margin-bottom: 200px;
+  }
 }
 .diagram_emptyTitle {
   text-align: center;
