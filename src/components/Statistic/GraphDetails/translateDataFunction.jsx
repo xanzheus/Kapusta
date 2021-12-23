@@ -1,5 +1,11 @@
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const dataTranslated = val => {
   const newOb = val.map(i => {
+    // LOCALISE
+    const { t } = useTranslation();
+
     if (i.category === 'products') {
       return { ...i, category: 'Продукты' };
     }
@@ -22,10 +28,10 @@ const dataTranslated = val => {
       return { ...i, category: 'Техника' };
     }
     if (i.category === 'communication') {
-      return { ...i, category: 'Коммуналка, связь' };
+      return { ...i, category: 'Комуналка, связь' };
     }
     if (i.category === 'hobby') {
-      return { ...i, category: 'Спорт, хобби' };
+      return { ...i, category: 'Спорт, Хоби' };
     }
     if (i.category === 'education') {
       return { ...i, category: 'Образование' };

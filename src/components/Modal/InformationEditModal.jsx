@@ -5,10 +5,14 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import CancelIcon from '@mui/icons-material/Close';
 import style from './SelectionModal.module.scss';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 
 const modalRoot = document.querySelector('#modal-root');
 
 const InformationEditModal = ({ open, handleClose }) => {
+  // LOCALISE
+  const { t } = useTranslation();
   return createPortal(
     <Box>
       <Modal
@@ -21,13 +25,11 @@ const InformationEditModal = ({ open, handleClose }) => {
         <Box className={style.modal}>
           <CancelIcon className={style.modal__close_button} onClick={handleClose} />
           <Typography color="#ff751d" mt={6} id="keep-mounted-modal-title" variant="h4">
-            Информация о редактирование
+            {t('modal.editTitle')}
           </Typography>
 
           <Typography pl={6} pr={6} id="modal-modal-description" mt={3} variant="h6" mb={6}>
-            Для того что бы редактировать нужную вам ячейку, вам необходимо дважды кликнуть по
-            нужной ячейке и после внести своё изменение. В процессе редактирования вы будите
-            получать уведомления, для вашего удобства :)
+            {t('modal.edit')}
           </Typography>
         </Box>
       </Modal>

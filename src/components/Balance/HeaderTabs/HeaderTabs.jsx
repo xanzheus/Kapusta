@@ -17,6 +17,9 @@ import {
 } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles(theme => ({
   tabs: {
     backgroundColor: '#fafbfd',
@@ -85,6 +88,9 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
     setValue(newValue);
   };
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ width: '100%' }}>
       <TabContext value={value}>
@@ -95,8 +101,8 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             onChange={handleChange}
             aria-label="lab API tabs example"
           >
-            <Tab className={classes.tabs} label="Расход" value="1" />
-            <Tab className={classes.tabs} label="Доход" value="2" />
+            <Tab className={classes.tabs} label={t('headersTabs.consumption')} value="1" />
+            <Tab className={classes.tabs} label={t('headersTabs.income')} value="2" />
           </TabList>
         </Box>
 
@@ -105,7 +111,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.EXPENSE}
-            placeholder={['Описание товара', 'Категория товара']}
+            placeholder={[t('headersTabs.productDescription'), t('headersTabs.productCategory')]}
             categoryArray={expensesCatagoryArray}
           />
 
@@ -123,7 +129,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.INCOME}
-            placeholder={['Описание дохода', 'Категория дохода']}
+            placeholder={[t('headersTabs.descriptionIncome'), t('headersTabs.incomeCategory')]}
             categoryArray={incomeCatagoryArray}
           />
 
