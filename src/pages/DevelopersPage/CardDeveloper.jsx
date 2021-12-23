@@ -25,12 +25,17 @@ const CardDeveloper = ({ firstName, lastName, avatarUrl, email, linkedinLink, gi
             </a>
           </li>
           <li>
-            <a href={linkedinLink} className={style.developer__linkedin}>
+            <a
+              href={linkedinLink}
+              className={style.developer__linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
               <LinkedInIcon sx={{ fontSize: 32, color: COLORS.mainAccent }} />
             </a>
           </li>
           <li>
-            <a href={gitLink} className={style.git}>
+            <a href={gitLink} className={style.git} target="_blank" rel="noreferrer">
               <GitHubIcon sx={{ fontSize: 32, color: COLORS.mainAccent }} />
             </a>
           </li>
