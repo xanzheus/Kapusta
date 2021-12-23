@@ -31,7 +31,7 @@ const translationEN = {
     reports: 'Go to reports',
   },
   balanceTable: {
-    TransactionDeleted: 'Transaction deleted!',
+    transactionDeleted: 'Transaction deleted!',
     noChangesFound: 'No changes found!',
     itsClear: 'it is clear',
     сhangesSaved: 'Changes saved!',
@@ -39,7 +39,7 @@ const translationEN = {
   },
 
   headersTabs: {
-    consumption: 'Сonsumption',
+    consumption: 'Expense',
     income: 'Income',
     productDescription: 'Product description',
     productCategory: 'Product category',
@@ -59,7 +59,7 @@ const translationEN = {
     students: 'students',
   },
   modal: {
-    number: ' Enter your phone number',
+    phone: ' Enter your phone number',
     sendInvite: 'Send an invitation to a friend',
     friendsMail: 'Friend mail',
     friendName: 'Friend name',
@@ -93,6 +93,38 @@ const translationEN = {
   incomeCosts: {
     costs: 'Costs',
     income: 'Income',
+  },
+  statHeader: {
+    backButton: 'Go back to the main page',
+    balance: 'Balance',
+    confirm: 'Сonfirm',
+  },
+
+  period: {
+    period: 'Current period',
+    from: 'Period from',
+    to: 'Period to',
+    exit: 'Logout',
+  },
+  month: {
+    changeLn: 'en',
+  },
+  formUpdatePhone: {
+    number: 'Phone number',
+    getCode: 'Get code',
+    confirmCode: 'Confirm code',
+  },
+  formUser: {
+    newPassword: 'New password',
+    confirmNewPassword: 'Confirm new password',
+    phoneNumber: 'Phone number',
+    share: 'Share with a friend',
+    firstName: 'First name',
+    lastName: 'Last name',
+    language: 'language',
+    currency: 'currency',
+    theme: 'theme',
+    saveButton: 'Save',
   },
 };
 
@@ -188,7 +220,35 @@ const translationRU = {
     income: 'Доходы',
   },
   statHeader: {
-    backButton: '',
+    backButton: 'Вернуться на главную',
+    balance: 'Баланс',
+    confirm: 'Подтвердить',
+  },
+  period: {
+    period: 'Текущий период',
+    from: 'Период c',
+    to: 'Период до',
+    exit: 'Выйти',
+  },
+  month: {
+    changeLn: 'ru',
+  },
+  formUpdatePhone: {
+    number: 'Номер телефона',
+    getCode: 'Пoлучить код',
+    confirmCode: 'Код подтверждения',
+  },
+  formUser: {
+    newPassword: 'Новый пароль',
+    confirmNewPassword: 'Подтвердите новый пароль',
+    phoneNumber: 'Номер телефона',
+    share: 'Поделиться с другом',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    language: 'Язык',
+    currency: 'Валюта',
+    theme: 'Тема',
+    saveButton: 'Сохранить',
   },
 };
 const resources = {
