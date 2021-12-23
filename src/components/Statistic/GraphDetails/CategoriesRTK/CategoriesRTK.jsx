@@ -4,14 +4,17 @@ import { useGetCategoriesQuery } from '../../../../redux/service/transactionApi'
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
 import sprite from '../../../../images/svg/sprite.svg';
-import dataTranslated from './../translateDataFunction.jsx'
+import dataTranslated from './../translateDataFunction.jsx';
 import s from './CategoriesRTK.module.scss';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 
 const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, endDate }) => {
   const { data = [], isLoading, isSuccess } = useGetCategoriesQuery({ startDate, endDate });
   const [value, setValue] = useState('expense');
 
-
+  // LOCALISE
+  const { t } = useTranslation();
 
   // ************** Функция сортировки только РАСХОДЫ(ДОХОДЫ)
   const sortCategoryValues = (type, value) => {
@@ -47,7 +50,7 @@ const CategoriesQuery = ({ updateData, setActiveCalss, setCategory, startDate, e
           }}
           className={s.categories__currentValue}
         >
-          {value === 'expense' ? 'Расходы' : 'Доходы'}
+          {value === 'expense' ? t('headersTabs.consumption') : t('headersTabs.income')}
         </div>
 
         <button

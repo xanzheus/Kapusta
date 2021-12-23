@@ -16,6 +16,9 @@ import {
   useUpdateTransactionMutation,
 } from 'redux/service/transactionApi';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles(theme => ({
   balancetable: {
     height: 385,
@@ -126,11 +129,13 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  // LOCALISE
+  const { t } = useTranslation();
 
   const deleteTransAction = useCallback(
     id => () => {
       deleteTransaction(id);
-      toast.error('Транзакция удалена!');
+      toast.error(t('balanceTable.transactionDeleted'));
     },
     [deleteTransaction],
   );
@@ -140,8 +145,8 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       if (data.find(row => row === params.row)) {
         toast(t => (
           <span>
-            <b>Изменения не обнаружены!</b>
-            <button onClick={() => toast.dismiss(t.id)}> Понятно </button>
+            <b>{t('balanceTable.noChangesFound')}</b>
+            <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
           </span>
         ));
         return;
@@ -161,13 +166,13 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
       updateTransaction(result);
 
-      toast.success('Изменения сохранены!');
+      toast.success(t('balanceTable.сhangesSaved'));
     },
     [data, updateTransaction],
   );
 
   const infoMessageByEdit = () => {
-    alert('Если вы внесли изминение, не забудьте сохранить их!');
+    alert(t('balanceTable.madeChange'));
     return;
   };
 
