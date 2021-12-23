@@ -114,12 +114,12 @@ const TranceActions = ({ transactionsData }) => {
 
             {item.type === CATEGORYTYPE.EXPENSE ? (
               <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount.toFixed(2)} грн.`}
+                {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
               </p>
             ) : (
-              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
+              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amounttoFixed(
                 2,
-              )} грн.`}</p>
+              )} ${t('tranceActions.currencyUAH')}.`}</p>
             )}
 
             <DeleteForeverIcon
