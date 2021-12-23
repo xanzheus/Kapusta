@@ -3,10 +3,12 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import CategoriesRTK from './CategoriesRTK';
 import { useGetCategoriesQuery } from '../../../redux/service/transactionApi';
-import dataTranslated from './translateDataFunction.jsx'
+import dataTranslated from './translateDataFunction.jsx';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 
 const GraphDetails = ({ startDate, endDate }) => {
   const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
@@ -14,12 +16,23 @@ const GraphDetails = ({ startDate, endDate }) => {
   const [selectedCategory, setselectedCategory] = useState('');
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
+  // LOCALISE
+  const { t } = useTranslation();
 
   useEffect(() => {
+    // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
+    const handlerDiagramType = () => {
+      if (windowSize < 321) {
+        setDiagramType('bar');
+      }
+      if (windowSize > 320) {
+        setDiagramType('column');
+      }
+    };
+
     window.addEventListener('resize', handleResize, false);
     handlerDiagramType();
   }, [windowSize]);
-
 
   // ФУНКЦИЯ Установка в стейт значения текущего width экрана
   const handleResize = () => {
@@ -27,14 +40,14 @@ const GraphDetails = ({ startDate, endDate }) => {
   };
 
   // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
-  const handlerDiagramType = () => {
-    if (windowSize < 321) {
-      setDiagramType('bar');
-    }
-    if (windowSize > 320) {
-      setDiagramType('column');
-    }
-  };
+  // const handlerDiagramType = () => {
+  //   if (windowSize < 321) {
+  //     setDiagramType('bar');
+  //   }
+  //   if (windowSize > 320) {
+  //     setDiagramType('column');
+  //   }
+  // };
 
   // Функция вывода детелей расходов или доходов выбраной категории
   const sortCategoryDetails = data => {
@@ -78,7 +91,7 @@ const GraphDetails = ({ startDate, endDate }) => {
         // text: 'Расходы',
       },
       xAxis: {
-        type: 'category',
+        // type: 'category',
       },
       yAxis: {
         title: {
@@ -89,6 +102,11 @@ const GraphDetails = ({ startDate, endDate }) => {
         enabled: false,
       },
       plotOptions: {
+        series: {
+          plotOptions: {
+            series: { bartWidth: 15 },
+          },
+        },
         pie: {
           allowPointSelect: true,
           cursor: 'pointer',
@@ -106,16 +124,21 @@ const GraphDetails = ({ startDate, endDate }) => {
       responsive: {},
       series: [
         {
-          name: 'Категории',
+          name: t('graphDetails.catagory'),
+          pointWidth: 38,
+          borderRadius: 10,
           colorByPoint: true,
           data: sortCategoryDetails(data),
-          // keys: ['y', 'name'],
+          keys: ['y', 'name'],
+          dataLabels: {
+            enabled: true,
+            format: '{point.name} {point.y:.2f} грн',
+          },
         },
       ],
     };
     return options;
   };
-
   return (
     <div className={s.graphDetails}>
       <CategoriesRTK
@@ -126,7 +149,9 @@ const GraphDetails = ({ startDate, endDate }) => {
         endDate={endDate}
       />
       <div className={isActive === false ? s.diagramLarge : s.diagram}>
-        {isActive === false && <h2 className={s.diagram_emptyTitle}>Выберите категорию</h2>}
+        {isActive === false && (
+          <h2 className={s.diagram_emptyTitle}>{t('graphDetails.selectCategory')}</h2>
+        )}
         {isActive === true && (
           <div className={s.diagram__toggle}>
             <button onClick={() => setDiagramType('pie')} className={s.diagram__buttonPie}>

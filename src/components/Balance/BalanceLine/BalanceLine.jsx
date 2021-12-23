@@ -12,6 +12,8 @@ import { useUpdateBalanseMutation } from 'redux/service/transactionApi';
 import trend from 'images/trend.png';
 import Baner from './Baner';
 
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles(theme => ({
   balance__title: {
     color: COLORS.secondory,
@@ -135,11 +137,13 @@ const BalanceLine = ({ userData }) => {
 
   const handleChangeBalance = event => setAmount(event.target.value);
 
+  const { t } = useTranslation();
+
   const onSubmit = event => {
     event.preventDefault();
 
     if (Number(amount) <= 0) {
-      toast.error('Введите сумму больше нуля.');
+      toast.error(t('balanceForm.amountGreaterZero'));
 
       return;
     }
@@ -150,7 +154,7 @@ const BalanceLine = ({ userData }) => {
 
     updateBalanse(result);
 
-    toast('Поздравляем всё готово к работе!', {
+    toast(t('balanceLine.congratulations'), {
       icon: '👏',
     });
 
@@ -169,19 +173,19 @@ const BalanceLine = ({ userData }) => {
         justifyContent="end"
         mb={{ sm: 4, md: 7, lg: 1 }}
       >
-        <p className={classes.balance__title}>Баланс: </p>
+        <p className={classes.balance__title}>{t('balanceLine.balance')} </p>
 
         {isBalanceSetted ? (
           <Stack direction="row">
-            <p
-              className={[classes.balance__input, classes.disabled].join(' ')}
-            >{`${balance} UAH`}</p>
+            <p className={[classes.balance__input, classes.disabled].join(' ')}>{`${balance.toFixed(
+              2,
+            )} UAH`}</p>
             <p
               className={[classes.balance__input, classes.disabled, classes.disable__button].join(
                 ' ',
               )}
             >
-              ПОДТВЕРДИТЬ
+              {t('balanceLine.confirm')}
             </p>
           </Stack>
         ) : (
@@ -198,7 +202,7 @@ const BalanceLine = ({ userData }) => {
 
               {small && (
                 <Button
-                  name="ПОДТВЕРДИТЬ"
+                  name={t('balanceLine.confirm')}
                   type="submit"
                   onClick={onSubmit}
                   variant="secondary"
@@ -207,18 +211,28 @@ const BalanceLine = ({ userData }) => {
               )}
 
               {medium && (
-                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+                <Button
+                  name={t('balanceLine.confirm')}
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                />
               )}
 
               {large && (
-                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
+                <Button
+                  name={t('balanceLine.confirm')}
+                  type="submit"
+                  onClick={onSubmit}
+                  variant="secondary"
+                />
               )}
             </Stack>
           </>
         )}
 
         <Link className={classes.reports__link} to="/reports">
-          Перейти к отчётам
+          {t('balanceLine.reports')}
         </Link>
       </Stack>
     </>

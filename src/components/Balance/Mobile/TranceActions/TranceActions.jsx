@@ -3,10 +3,12 @@ import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
-// import SaveIcon from '@mui/icons-material/Save';
 // import EditIcon from '@mui/icons-material/Edit';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
+
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles({
   list: {
@@ -86,9 +88,12 @@ const TranceActions = ({ transactionsData }) => {
 
   const [deleteTransaction] = useDeleteTransactionMutation();
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   const handelDeleteTransaction = id => {
     deleteTransaction(id);
-    toast.error('Транзакция удалена!');
+    toast.error(t('tranceActions.transactionDeleted'));
   };
 
   return (
@@ -109,20 +114,19 @@ const TranceActions = ({ transactionsData }) => {
 
             {item.type === CATEGORYTYPE.EXPENSE ? (
               <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount} грн.`}
+                {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
               </p>
             ) : (
-              <p
-                className={[classes.amoun, classes.positive].join(' ')}
-              >{` ${item.amount} грн.`}</p>
+              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
+                2,
+              )} ${t('tranceActions.currencyUAH')}.`}</p>
             )}
 
             <DeleteForeverIcon
               onClick={() => handelDeleteTransaction(item._id)}
               className={classes.buttonIcon}
             />
-            {/* <EditIcon className={classes.buttonIcon} />
-            <SaveIcon className={classes.buttonIcon} /> */}
+            {/* <EditIcon className={classes.buttonIcon} /> */}
           </li>
         ))}
       </ul>

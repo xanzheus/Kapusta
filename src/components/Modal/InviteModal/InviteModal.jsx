@@ -14,10 +14,16 @@ import { COLORS } from '../../../Constants';
 import { useInviteFriendMutation } from 'redux/service/userAPI';
 import style from './inviteModal.module.scss';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const modalRoot = document.querySelector('#modal-root');
 
 const InviteModal = ({ open, handleClose }) => {
   const [inviteFriend] = useInviteFriendMutation();
+
+  // LOCALISE
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -84,14 +90,14 @@ const InviteModal = ({ open, handleClose }) => {
         <Box className={style.modal}>
           <CancelIcon className={style.modal__close_button} onClick={handleClose} />
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
-            Отправить другу приглашение
+            {t('modal.sendInvite')}
           </Typography>
           <form autoComplete="off" className={style.tableData} onSubmit={formik.handleSubmit}>
             <TextField
               className={classes.field}
               id="email"
               name="email"
-              label="Емейл друга"
+              label={t('modal.friendsMail')}
               type={'text'}
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -103,7 +109,7 @@ const InviteModal = ({ open, handleClose }) => {
               className={classes.field}
               id="name"
               name="name"
-              label="Имя друга"
+              label={t('modal.friendName')}
               type={'text'}
               value={formik.values.name}
               onChange={formik.handleChange}
@@ -112,8 +118,8 @@ const InviteModal = ({ open, handleClose }) => {
               helperText={formik.touched.name && formik.errors.name}
             />
             <Stack direction="row" alignItems="center" spacing={2} justifyContent="center">
-              <Button type="submit" name="Отправить" variant="accentButton" />
-              <Button type="button" name="Отмена" onClick={handleClose} />
+              <Button type="submit" name={t('modal.sendButton')} variant="accentButton" />
+              <Button type="button" name={t('modal.cancelButton')} onClick={handleClose} />
             </Stack>
           </form>
         </Box>

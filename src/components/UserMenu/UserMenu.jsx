@@ -14,6 +14,9 @@ import style from './UserMenu.module.scss';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/service/authSlice';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,6 +31,9 @@ const UserMenu = () => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // LOCALISE
+  const { t } = useTranslation();
 
   const goToHomePage = () => {
     // logout(dispatch(logOut()));
@@ -61,7 +67,7 @@ const UserMenu = () => {
             <LogoutIcon
               onClick={handleOpen}
               sx={{ fontSize: 18, color: COLORS.auxiliaryDark }}
-              titleAccess={'Выйти'}
+              titleAccess={t('period.exit')}
             />
           )}
           {medium && (
@@ -110,14 +116,14 @@ const UserMenu = () => {
         {medium && (
           <>
             <button className={style.user__button__logout} onClick={handleOpen}>
-              Выйти
+              {t('period.exit')}
             </button>
           </>
         )}
         {large && (
           <>
             <button className={style.user__button__logout} onClick={handleOpen}>
-              Выйти
+              {t('period.exit')}
             </button>
           </>
         )}

@@ -22,6 +22,8 @@ import Calculator from 'components/Calculator';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
 import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   form: {
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
@@ -162,6 +164,9 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
   const classes = useStyles();
 
+  // LOCALISE
+  const { t } = useTranslation();
+
   const reset = () => {
     setCategory('');
     setComment('');
@@ -169,7 +174,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
-    toast.success('Форма очищена!');
+    toast.success(t('balanceForm.clearForm'));
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -183,7 +188,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
     if (category && amount) {
       if (amount <= 0) {
-        toast.error('Сумма должна быть больше нуля.');
+        toast.error(t('balanceForm.amountGreaterZero'));
 
         return;
       }
@@ -198,8 +203,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
       createTransaction(result);
       reset();
-
-      toast('Транзакция добавлена!', {
+      toast(t('balanceForm.transactionAdded'), {
         icon: '👏',
       });
     }
@@ -243,7 +247,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         <TextField
           className={[classes.field, classes.description].join(' ')}
           color="info"
-          helperText="Введите описание"
+          helperText={t('balanceForm.enterDescription')}
           label={placeholder[0]}
           onChange={handleChangeDescription}
           value={comment}
@@ -273,7 +277,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         <TextField
           color="info"
           className={[classes.field, classes.amount].join(' ')}
-          helperText="Введите сумму"
+          helperText={t('balanceForm.enterAmount')}
           placeholder="0,00"
           value={amount}
           onChange={handleChangeSum}
@@ -295,8 +299,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         <Stack m="auto" mt={{ md: 4, lg: 0 }}>
           <Stack spacing={2} direction="row" alignItems="center">
-            <Button name="ВВОД" type="submit" />
-            <Button name="ОЧИСТИТЬ" type="button" onClick={onResetClick} />
+            <Button name={t('balanceForm.enterButton')} type="submit" />
+            <Button name={t('balanceForm.clearButton')} type="button" onClick={onResetClick} />
           </Stack>
         </Stack>
       </form>

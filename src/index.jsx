@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'APP/App';
@@ -12,9 +12,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <Suspense fallback={<div>loading...</div>}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Suspense>
       </PersistGate>
     </Provider>
   </React.StrictMode>,
