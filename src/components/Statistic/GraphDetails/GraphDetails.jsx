@@ -20,6 +20,16 @@ const GraphDetails = ({ startDate, endDate }) => {
   const { t } = useTranslation();
 
   useEffect(() => {
+    // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
+    const handlerDiagramType = () => {
+      if (windowSize < 321) {
+        setDiagramType('bar');
+      }
+      if (windowSize > 320) {
+        setDiagramType('column');
+      }
+    };
+
     window.addEventListener('resize', handleResize, false);
     handlerDiagramType();
   }, [windowSize]);
@@ -30,14 +40,14 @@ const GraphDetails = ({ startDate, endDate }) => {
   };
 
   // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
-  const handlerDiagramType = () => {
-    if (windowSize < 321) {
-      setDiagramType('bar');
-    }
-    if (windowSize > 320) {
-      setDiagramType('column');
-    }
-  };
+  // const handlerDiagramType = () => {
+  //   if (windowSize < 321) {
+  //     setDiagramType('bar');
+  //   }
+  //   if (windowSize > 320) {
+  //     setDiagramType('column');
+  //   }
+  // };
 
   // Функция вывода детелей расходов или доходов выбраной категории
   const sortCategoryDetails = data => {
@@ -81,7 +91,7 @@ const GraphDetails = ({ startDate, endDate }) => {
         // text: 'Расходы',
       },
       xAxis: {
-        type: 'category',
+        // type: 'category',
       },
       yAxis: {
         title: {
@@ -92,6 +102,11 @@ const GraphDetails = ({ startDate, endDate }) => {
         enabled: false,
       },
       plotOptions: {
+        series: {
+          plotOptions: {
+            series: { bartWidth: 15 },
+          },
+        },
         pie: {
           allowPointSelect: true,
           cursor: 'pointer',
@@ -110,15 +125,20 @@ const GraphDetails = ({ startDate, endDate }) => {
       series: [
         {
           name: t('graphDetails.catagory'),
+          pointWidth: 38,
+          borderRadius: 10,
           colorByPoint: true,
           data: sortCategoryDetails(data),
-          // keys: ['y', 'name'],
+          keys: ['y', 'name'],
+          dataLabels: {
+            enabled: true,
+            format: '{point.name} {point.y:.2f} грн',
+          },
         },
       ],
     };
     return options;
   };
-
   return (
     <div className={s.graphDetails}>
       <CategoriesRTK
