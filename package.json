@@ -17,7 +17,6 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "awesome-react-calculator": "^1.1.0",
-    "babel-plugin-styled-components": "^2.0.2",
     "date-fns": "^2.27.0",
     "formik": "^2.2.9",
     "highcharts": "^9.3.2",
@@ -49,8 +48,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
