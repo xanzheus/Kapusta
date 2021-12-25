@@ -79,16 +79,26 @@ const useStyles = makeStyles(theme => ({
   },
 
   description: {
-    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
-      width: 197,
-    },
+    '& .MuiOutlinedInput-root': {
+      [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+        width: 197,
+      },
 
-    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
-      width: 290,
+      [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+        width: 290,
+      },
     },
   },
 
   category: {
+    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
+      {
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: 20,
+        minHeight: 44,
+      },
+
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       width: 160,
     },
@@ -96,20 +106,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
       width: 190,
     },
-
-    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
-      {
-        display: 'flex',
-        alignItems: 'center',
-        paddingLeft: 20,
-      },
   },
 
   amount: {
-    width: 120,
-
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px 16px 16px 0px',
+      width: 120,
     },
 
     '& .MuiOutlinedInput-input': {
@@ -118,7 +120,10 @@ const useStyles = makeStyles(theme => ({
   },
 
   dateField: {
-    width: 130,
+    '& .css-1u3bzj6-MuiFormControl-root-MuiTextField-root': {
+      width: 130,
+    },
+
     '& .MuiOutlinedInput-root': {
       borderRadius: '16px 0px 0px 0px',
     },
