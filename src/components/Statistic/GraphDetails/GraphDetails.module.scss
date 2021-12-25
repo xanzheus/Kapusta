@@ -35,11 +35,11 @@
   margin: 0 auto;
   margin-bottom: 18px;
   width: 100%;
-    @media screen and (min-width: $tablet) {
-   min-height: 130px;
+  @media screen and (min-width: $tablet) {
+    min-height: 130px;
   }
   @media screen and (min-width: $desktop) {
-  // margin-bottom: 200px;
+    // margin-bottom: 200px;
   }
 }
 .diagram_emptyTitle {
@@ -52,24 +52,26 @@ a {
 .diagram__button {
 }
 
-button {
-  border: none;
-  background-color: transparent;
-  width: 36px;
-  height: 36px;
-  opacity: 60%;
-}
-
 button:hover,
 button:focus {
   color: $mainAccent-color;
 }
 
 .diagram__buttonPie {
+  border: none;
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+  opacity: 60%;
   display: inline-block;
 }
 
 .diagram__buttonColumn {
+  border: none;
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+  opacity: 60%;
   display: none;
   @media screen and (min-width: $tablet) {
     display: inline-block;
@@ -81,6 +83,11 @@ button:focus {
 
 // горизонтвльно
 .diagram__buttonBar {
+  border: none;
+  background-color: transparent;
+  width: 36px;
+  height: 36px;
+  opacity: 60%;
   display: inline-block;
   transform: rotate(90deg);
   @media screen and (min-width: $tablet) {

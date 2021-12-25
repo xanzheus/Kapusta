@@ -1,5 +1,6 @@
 const dataTranslated = val => {
   const newOb = val.map(i => {
+    z;
     if (i.category === 'products') {
       return { ...i, category: 'Продукты' };
     }
