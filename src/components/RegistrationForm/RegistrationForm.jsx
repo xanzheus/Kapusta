@@ -93,7 +93,6 @@ const RegistrationForm = () => {
         lastName: values.lastName,
       };
       createUser(newUser);
-      navigate('/balance');
     },
   });
 
