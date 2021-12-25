@@ -153,32 +153,20 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
-      if (isNaN(params.row.amount)) {
-        const result = {
-          id: params.id,
-          type: params.row.type,
-          date: resultDate,
-          category: TRANSLATE_CATEGORIES[params.row.category],
-          comment: params.row.comment,
-          amount: Number(params.row.amount.slice(2, -8)),
-        };
-
-        updateTransaction(result);
-
-        toast.success(t('balanceTable.сhangesSaved'));
-        return;
-      }
-
-      const result = {
+      const bodyObj = amount => ({
         id: params.id,
         type: params.row.type,
         date: resultDate,
         category: TRANSLATE_CATEGORIES[params.row.category],
         comment: params.row.comment,
-        amount: Number(params.row.amount),
-      };
+        amount,
+      });
 
-      updateTransaction(result);
+      const resultObj = isNaN(params.row.amount)
+        ? bodyObj(Number(params.row.amount.slice(2, -8)))
+        : bodyObj(Number(params.row.amount));
+
+      updateTransaction(resultObj);
 
       toast.success(t('balanceTable.сhangesSaved'));
     },
