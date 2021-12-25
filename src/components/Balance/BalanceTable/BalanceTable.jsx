@@ -133,12 +133,19 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const updateTransAction = useCallback(
     params => () => {
       if (data.find(row => row === params.row)) {
+        // toast(t => (
+        //   <span>
+        //     <b>{t('balanceTable.noChangesFound')}</b>
+        //     <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
+        //   </span>
+        // ));
         toast(t => (
           <span>
-            <b>{t('balanceTable.noChangesFound')}</b>
-            <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
+            <b>Измения не обнаружены</b>
+            <button onClick={() => toast.dismiss(t.id)}>Понятно</button>
           </span>
         ));
+
         return;
       }
 
@@ -146,7 +153,21 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
-      console.log(params.row.amount);
+      if (isNaN(params.row.amount)) {
+        const result = {
+          id: params.id,
+          type: params.row.type,
+          date: resultDate,
+          category: TRANSLATE_CATEGORIES[params.row.category],
+          comment: params.row.comment,
+          amount: Number(params.row.amount.slice(2, -8)),
+        };
+
+        updateTransaction(result);
+
+        toast.success(t('balanceTable.сhangesSaved'));
+        return;
+      }
 
       const result = {
         id: params.id,
@@ -156,8 +177,6 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
         comment: params.row.comment,
         amount: Number(params.row.amount),
       };
-
-      console.log(result);
 
       updateTransaction(result);
 
