@@ -5,28 +5,35 @@ import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
-  button: {
-    width: 18,
-    height: 18,
-    cursor: 'pointer',
+  iconButton: {
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      width: 18,
+      height: 18,
+    },
   },
 
   delete: {
-    '&:hover': {
-      color: COLORS.negative,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      '&:hover': {
+        color: COLORS.negative,
+      },
     },
   },
 
   edit: {
-    justifyContent: 'start',
-    '&:hover': {
-      color: COLORS.positive,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      justifyContent: 'start',
+      '&:hover': {
+        color: COLORS.positive,
+      },
     },
   },
 
   save: {
-    '&:hover': {
-      color: COLORS.mainAccent,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      '&:hover': {
+        color: COLORS.mainAccent,
+      },
     },
   },
 });
@@ -74,7 +81,8 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <DeleteForeverIcon
-          className={[classes.button, classes.delete].join(' ')}
+          cursor="pointer"
+          className={[classes.iconButton, classes.delete].join(' ')}
           onClick={deleteTransAction(params.id)}
           titleAccess="удалить"
         />
@@ -87,7 +95,8 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <EditIcon
-          className={[classes.button, classes.edit].join(' ')}
+          cursor="pointer"
+          className={[classes.iconButton, classes.edit].join(' ')}
           titleAccess="редактировать"
           onClick={handleOpen}
         />
@@ -101,7 +110,8 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <SaveIcon
-          className={[classes.button, classes.save].join(' ')}
+          cursor="pointer"
+          className={[classes.iconButton, classes.save].join(' ')}
           titleAccess="сохранит"
           onClick={updateTransAction(params)}
         />

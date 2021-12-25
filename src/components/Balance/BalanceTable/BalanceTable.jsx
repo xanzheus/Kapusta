@@ -22,23 +22,24 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   balancetable: {
     height: 385,
-
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       minWidth: 605,
       marginBottom: 40,
     },
-
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
       minWidth: 760,
       marginBottom: 0,
     },
+  },
 
-    '& .css-1i9y1n9-MuiDataGrid-root': {
+  balanceGrid: {
+    '&.css-2c3rf6-MuiDataGrid-root': {
       borderRadius: '20px 20px 0px 0px',
     },
 
     '& .MuiDataGrid-columnHeaders.css-okt5j6-MuiDataGrid-columnHeaders': {
       borderRadius: '20px 20px 0px 0px',
+      backgroundColor: COLORS.auxiliaryLight,
     },
 
     '& .MuiDataGrid-columnHeaderTitle': {
@@ -49,12 +50,8 @@ const useStyles = makeStyles(theme => ({
       color: COLORS.mainBlack,
     },
 
-    '& .MuiDataGrid-columnSeparator': {
-      color: COLORS.auxiliaryLight,
-    },
-
-    '& .MuiDataGrid-columnHeaders': {
-      backgroundColor: COLORS.auxiliaryLight,
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-iconSeparator': {
+      color: 'transparent',
     },
 
     '& .MuiDataGrid-row': {
@@ -67,35 +64,28 @@ const useStyles = makeStyles(theme => ({
       },
     },
 
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textCenter.MuiDataGrid-cell--withRenderer':
-      {
-        justifyContent: 'start',
-      },
-
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
       backgroundColor: COLORS.auxiliaryLight,
     },
 
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
-      display: 'flex',
-      justifyContent: 'center',
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
+      textAlign: 'center',
     },
 
-    '& .css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+    },
+
+    '& .css-pdct74-MuiTablePagination-selectLabel': {
       color: COLORS.primary,
       fontSize: 12,
       lineHeight: 1.16,
     },
 
-    '& .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input':
-      {
-        color: COLORS.mainDark,
-        fontSize: 12,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-      },
+    '& .css-16c50h-MuiInputBase-root-MuiTablePagination-select ': {
+      color: COLORS.mainDark,
+      fontSize: 12,
+    },
 
     '& .css-levciy-MuiTablePagination-displayedRows': {
       fontSize: 12,
@@ -103,7 +93,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   income: {
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.positive,
       fontWeight: 900,
@@ -111,7 +101,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   expenses: {
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.negative,
       fontWeight: 900,
@@ -156,6 +146,8 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
+      console.log(params.row.amount);
+
       const result = {
         id: params.id,
         type: params.row.type,
@@ -164,6 +156,8 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
         comment: params.row.comment,
         amount: Number(params.row.amount),
       };
+
+      console.log(result);
 
       updateTransaction(result);
 
@@ -183,8 +177,9 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
       <Box display={{ md: 'block', lg: 'flex' }} alignItems="center" justifyContent="space-between">
-        <Stack className={[classes.balancetable, classes[Class]].join(' ')}>
+        <Stack className={classes.balancetable}>
           <DataGrid
+            className={[classes.balanceGrid, classes[Class]].join(' ')}
             headerHeight={40}
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
