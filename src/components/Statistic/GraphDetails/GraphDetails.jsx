@@ -7,8 +7,6 @@ import dataTranslated from './translateDataFunction.jsx';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import s from './GraphDetails.module.scss';
-// LOCALISE
-import { useTranslation } from 'react-i18next';
 
 const GraphDetails = ({ startDate, endDate }) => {
   const { data = [] } = useGetCategoriesQuery({ startDate, endDate });
@@ -16,8 +14,6 @@ const GraphDetails = ({ startDate, endDate }) => {
   const [selectedCategory, setselectedCategory] = useState('');
   const [diagramType, setDiagramType] = useState('column');
   const [windowSize, setWindowSize] = useState(window.outerWidth);
-  // LOCALISE
-  const { t } = useTranslation();
 
   useEffect(() => {
     // ФУНКЦИЯ Установка в стейт тип диаграммы для разных устройств
@@ -124,7 +120,7 @@ const GraphDetails = ({ startDate, endDate }) => {
       responsive: {},
       series: [
         {
-          name: t('graphDetails.catagory'),
+          name: 'Категории',
           pointWidth: 38,
           borderRadius: 10,
           colorByPoint: true,
@@ -149,9 +145,7 @@ const GraphDetails = ({ startDate, endDate }) => {
         endDate={endDate}
       />
       <div className={isActive === false ? s.diagramLarge : s.diagram}>
-        {isActive === false && (
-          <h2 className={s.diagram_emptyTitle}>{t('graphDetails.selectCategory')}</h2>
-        )}
+        {isActive === false && <h2 className={s.diagram_emptyTitle}>'Выберите категорию'</h2>}
         {isActive === true && (
           <div className={s.diagram__toggle}>
             <button onClick={() => setDiagramType('pie')} className={s.diagram__buttonPie}>

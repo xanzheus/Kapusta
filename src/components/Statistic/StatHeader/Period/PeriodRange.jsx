@@ -5,8 +5,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Stack from '@mui/material/Stack';
 import DateRangePicker from '@mui/lab/DateRangePicker';
 import Box from '@mui/material/Box';
-// LOCALISE
-import { useTranslation } from 'react-i18next';
 
 const PeriodRange = () => {
   const [value, setValue] = useState([null, null]);
@@ -18,17 +16,14 @@ const PeriodRange = () => {
 
   today = yyyy + '-' + mm + '-' + dd;
 
-  // LOCALISE
-  const { t } = useTranslation();
-
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <Stack spacing={3}>
           <DateRangePicker
             showFirstButton={false}
-            startText={t('period.from')}
-            endText={t('period.to')}
+            startText="От"
+            endText="До"
             // minDate={new Date('2021-03-01')}
             maxDate={new Date(today)}
             value={value}

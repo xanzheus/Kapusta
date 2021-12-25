@@ -104,7 +104,7 @@ const LoginForm = () => {
     <div className={style.box}>
       <form autoComplete="on" onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
-          {t('registration.googleTitle')}
+          Вы можете авторизоваться с помощью Google Account:
           {/* Вы можете авторизоваться с помощью Google Account: */}
         </p>
         <div className={style.google_button__wrapper}>
@@ -120,7 +120,7 @@ const LoginForm = () => {
           </Button>
         </div>
         <p className={style.registration__title}>
-          {t('registration.mainTitle')}
+          Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
           {/* Или зайти с помощью e-mail и пароля: */}
         </p>
 
@@ -131,7 +131,7 @@ const LoginForm = () => {
           color="warning"
           id="email"
           name="email"
-          label={t('registration.email')}
+          label="Почта"
           // autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
@@ -162,7 +162,7 @@ const LoginForm = () => {
           color="warning"
           id="password"
           name="password"
-          label={t('registration.password')}
+          label="Пароль"
           type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -175,15 +175,11 @@ const LoginForm = () => {
         <Stack mt={2} spacing={2} direction="row">
           <Button
             className={style.login__button}
-            name={t('registration.enter')}
+            name="Вход"
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button
-            onClick={navigateToRegistration}
-            name={t('registration.registration')}
-            type="button"
-          ></Button>
+          <Button onClick={navigateToRegistration} name="Регистрация" type="button"></Button>
         </Stack>
       </form>
     </div>

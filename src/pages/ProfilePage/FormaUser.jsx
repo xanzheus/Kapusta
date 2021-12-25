@@ -15,9 +15,6 @@ import { LANGUAGE, CURRENCY, THEME, COLORS } from '../../Constants';
 import { useUpdateDataUserMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
-// LOCALISE
-import { useTranslation } from 'react-i18next';
-
 const FormaUser = ({
   firstName = '',
   lastName = '',
@@ -37,9 +34,6 @@ const FormaUser = ({
   const toggleOpen = () => {
     return setOpen(!open);
   };
-
-  // LOCALISE
-  const { t } = useTranslation();
 
   const useStyles = makeStyles(theme => ({
     field: {
@@ -113,7 +107,7 @@ const FormaUser = ({
           className={classes.field}
           id="password"
           name="password"
-          label={t('formUser.newPassword')}
+          label="Новый пароль"
           type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -138,7 +132,7 @@ const FormaUser = ({
           className={classes.field}
           id="confirmPassword"
           name="confirmPassword"
-          label={t('formUser.confirmNewPassword')}
+          label="Подтвердите новый пароль"
           type={showPassword ? 'text' : 'password'}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
@@ -164,7 +158,7 @@ const FormaUser = ({
             className={classes.field}
             id="phone"
             name="phone"
-            label={t('formUser.phoneNumber')}
+            label="Номер телефона"
             value={formik.values.phone}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
@@ -174,7 +168,7 @@ const FormaUser = ({
           />
           <IconButton
             className={style.profile__buttonEdit}
-            aria-label={t('formUser.share')}
+            aria-label="Поделиться с другом"
             onClick={toggleOpen}
             type={'button'}
           >
@@ -186,7 +180,7 @@ const FormaUser = ({
           className={classes.field}
           id="firstName"
           name="firstName"
-          label={t('formUser.firstName')}
+          label="Имя"
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -197,7 +191,7 @@ const FormaUser = ({
           className={classes.field}
           id="lastName"
           name="lastName"
-          label={t('formUser.lastName')}
+          label="Фамилия"
           value={formik.values.lastName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -208,7 +202,7 @@ const FormaUser = ({
           className={classes.field}
           id="language"
           name="language"
-          label={t('formUser.language')}
+          label="Язык"
           select
           value={formik.values.language}
           onBlur={formik.handleBlur}
@@ -227,7 +221,7 @@ const FormaUser = ({
           select
           id="currency"
           name="currency"
-          label={t('formUser.currency')}
+          label="Валюта"
           value={formik.values.currency}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -245,7 +239,7 @@ const FormaUser = ({
           select
           id="theme"
           name="theme"
-          label={t('formUser.theme')}
+          label="Тема"
           value={formik.values.theme}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -259,7 +253,7 @@ const FormaUser = ({
           ))}
         </TextField>
         <Button
-          name={t('formUser.saveButton')}
+          name="Сохранить"
           type="submit"
           variant="centerAccent"
           disabled={!(formik.isValid && formik.dirty)}

@@ -137,13 +137,11 @@ const BalanceLine = ({ userData }) => {
 
   const handleChangeBalance = event => setAmount(event.target.value);
 
-  const { t } = useTranslation();
-
   const onSubmit = event => {
     event.preventDefault();
 
     if (Number(amount) <= 0) {
-      toast.error(t('balanceForm.amountGreaterZero'));
+      toast.error('Сумма должна быть больше нуля.');
 
       return;
     }
@@ -154,7 +152,7 @@ const BalanceLine = ({ userData }) => {
 
     updateBalanse(result);
 
-    toast(t('balanceLine.congratulations'), {
+    toast('Поздравляем всё готово к работе!', {
       icon: '👏',
     });
 
@@ -173,7 +171,7 @@ const BalanceLine = ({ userData }) => {
         justifyContent="end"
         mb={{ sm: 4, md: 7, lg: 1 }}
       >
-        <p className={classes.balance__title}>{t('balanceLine.balance')} </p>
+        <p className={classes.balance__title}>'Баланс: </p>
 
         {isBalanceSetted ? (
           <Stack direction="row">
@@ -185,7 +183,7 @@ const BalanceLine = ({ userData }) => {
                 ' ',
               )}
             >
-              {t('balanceLine.confirm')}
+              'ПОДТВЕРДИТЬ'
             </p>
           </Stack>
         ) : (
@@ -202,7 +200,7 @@ const BalanceLine = ({ userData }) => {
 
               {small && (
                 <Button
-                  name={t('balanceLine.confirm')}
+                  name="ПОДТВЕРДИТЬ"
                   type="submit"
                   onClick={onSubmit}
                   variant="secondary"
@@ -211,28 +209,18 @@ const BalanceLine = ({ userData }) => {
               )}
 
               {medium && (
-                <Button
-                  name={t('balanceLine.confirm')}
-                  type="submit"
-                  onClick={onSubmit}
-                  variant="secondary"
-                />
+                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
               )}
 
               {large && (
-                <Button
-                  name={t('balanceLine.confirm')}
-                  type="submit"
-                  onClick={onSubmit}
-                  variant="secondary"
-                />
+                <Button name="ПОДТВЕРДИТЬ" type="submit" onClick={onSubmit} variant="secondary" />
               )}
             </Stack>
           </>
         )}
 
         <Link className={classes.reports__link} to="/reports">
-          {t('balanceLine.reports')}
+          'Перейти к отчётам'
         </Link>
       </Stack>
     </>

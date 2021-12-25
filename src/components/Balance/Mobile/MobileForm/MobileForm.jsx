@@ -118,9 +118,6 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
   const [createTransaction] = useCreateTransactionMutation();
 
-  // LOCALISE
-  const { t } = useTranslation();
-
   const reset = () => {
     setCategory('');
     setComment('');
@@ -128,7 +125,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
-    toast.success(t('balanceForm.clearForm'));
+    toast.success('ОЧИСТИТЬ');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -142,7 +139,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
     if (category && amount) {
       if (amount <= 0) {
-        toast.error(t('balanceForm.amountGreaterZero'));
+        toast.error('Сумма должна быть больше нуля.');
 
         return;
       }
@@ -160,7 +157,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
       toggleForm();
 
-      toast(t('balanceForm.transactionAdded'), {
+      toast('Трансакция добавлена!', {
         icon: '👏',
       });
     }
@@ -193,7 +190,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
         <TextField
           className={[classes.field, classes.description].join(' ')}
           color="info"
-          label={t('headersTabs.productDescription')}
+          label="Описание товара"
           onChange={handleChangeDescription}
           value={comment}
           type="text"
@@ -201,7 +198,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
         />
         <Box className={[classes.field, classes.category].join(' ')}>
           <FormControl fullWidth>
-            <InputLabel>{t('headersTabs.incomeCategory')}</InputLabel>
+            <InputLabel>Категория дохода</InputLabel>
             <Select
               color="info"
               error={categoryError}
@@ -239,13 +236,8 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
         <Stack m="auto" mt={{ md: 4, lg: 0 }}>
           <Stack spacing={2} direction="row" alignItems="center">
-            <Button name={t('balanceForm.enterButton')} type="submit" variant="greyBackground" />
-            <Button
-              name={t('balanceForm.clearButton')}
-              type="button"
-              variant="greyBackground"
-              onClick={onResetClick}
-            />
+            <Button name="ВВОД" type="submit" variant="greyBackground" />
+            <Button name="ОЧИСТИТЬ" type="button" variant="greyBackground" onClick={onResetClick} />
           </Stack>
         </Stack>
       </form>

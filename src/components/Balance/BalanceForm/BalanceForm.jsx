@@ -174,7 +174,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
-    toast.success(t('balanceForm.clearForm'));
+    toast.success('Форма очищена!');
   };
 
   const handleChangeCategry = event => setCategory(event.target.value);
@@ -188,7 +188,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
     if (category && amount) {
       if (amount <= 0) {
-        toast.error(t('balanceForm.amountGreaterZero'));
+        toast.error('Сумма должна быть больше нуля.');
 
         return;
       }
@@ -203,7 +203,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
       createTransaction(result);
       reset();
-      toast(t('balanceForm.transactionAdded'), {
+      toast('Трансакция добавлена!', {
         icon: '👏',
       });
     }
@@ -247,7 +247,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         <TextField
           className={[classes.field, classes.description].join(' ')}
           color="info"
-          helperText={t('balanceForm.enterDescription')}
+          helperText={'Введите описание'}
           label={placeholder[0]}
           onChange={handleChangeDescription}
           value={comment}
@@ -277,7 +277,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         <TextField
           color="info"
           className={[classes.field, classes.amount].join(' ')}
-          helperText={t('balanceForm.enterAmount')}
+          helperText="Введите сумму"
           placeholder="0,00"
           value={amount}
           onChange={handleChangeSum}
@@ -299,8 +299,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         <Stack m="auto" mt={{ md: 4, lg: 0 }}>
           <Stack spacing={2} direction="row" alignItems="center">
-            <Button name={t('balanceForm.enterButton')} type="submit" />
-            <Button name={t('balanceForm.clearButton')} type="button" onClick={onResetClick} />
+            <Button name="ВВОД" type="submit" />
+            <Button name="ОЧИСТИТЬ" type="button" onClick={onResetClick} />
           </Stack>
         </Stack>
       </form>

@@ -88,12 +88,9 @@ const TranceActions = ({ transactionsData }) => {
 
   const [deleteTransaction] = useDeleteTransactionMutation();
 
-  // LOCALISE
-  const { t } = useTranslation();
-
   const handelDeleteTransaction = id => {
     deleteTransaction(id);
-    toast.error(t('tranceActions.transactionDeleted'));
+    toast.error('Трансакция удалена!');
   };
 
   return (
@@ -114,12 +111,12 @@ const TranceActions = ({ transactionsData }) => {
 
             {item.type === CATEGORYTYPE.EXPENSE ? (
               <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
+                {` - ${item.amount.toFixed(2)} UAH.`}
               </p>
             ) : (
               <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
                 2,
-              )} ${t('tranceActions.currencyUAH')}.`}</p>
+              )} UAH.`}</p>
             )}
 
             <DeleteForeverIcon

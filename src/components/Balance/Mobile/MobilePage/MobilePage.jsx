@@ -89,9 +89,6 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
     setCtegories(expensesCatagoryArray);
   };
 
-  // LOCALISE
-  const { t } = useTranslation();
-
   return (
     <>
       {!isOpenForm ? (
@@ -121,11 +118,11 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
 
           <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
             <button onClick={expenseButtonClick} className={classes.button} type="button">
-              {t('headersTabs.consumption')}
+              Расход
             </button>
 
             <button onClick={incomeButtonClick} className={classes.button} type="button">
-              {t('headersTabs.income')}
+              Доход
             </button>
           </Stack>
         </>

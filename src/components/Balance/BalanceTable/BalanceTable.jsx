@@ -130,14 +130,13 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   // LOCALISE
-  const { t } = useTranslation();
 
   const deleteTransAction = useCallback(
     id => () => {
       deleteTransaction(id);
-      toast.error(t('balanceTable.transactionDeleted'));
+      toast.error('Трансакция удалена!');
     },
-    [deleteTransaction, t],
+    [deleteTransaction],
   );
 
   const updateTransAction = useCallback(
@@ -145,8 +144,8 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       if (data.find(row => row === params.row)) {
         toast(t => (
           <span>
-            <b>{t('balanceTable.noChangesFound')}</b>
-            <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
+            <b>{'Изменения не обнаружены!'}</b>
+            <button onClick={() => toast.dismiss(t.id)}>'Понятно'</button>
           </span>
         ));
         return;
@@ -167,13 +166,13 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
       updateTransaction(result);
 
-      toast.success(t('balanceTable.сhangesSaved'));
+      toast.success('Изменения сохранены!');
     },
-    [data, updateTransaction, t],
+    [data, updateTransaction],
   );
 
   const infoMessageByEdit = () => {
-    alert(t('balanceTable.madeChange'));
+    alert('Если вы внесли изминение, не забудьте сохранить их!');
     return;
   };
 

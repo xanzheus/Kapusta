@@ -8,9 +8,6 @@ import { COLORS } from '../../Constants';
 import { useSendRequestAcceptMutation, useUpdateDataUserMutation } from 'redux/service/userAPI';
 import style from './ProfilePage.module.scss';
 
-// LOCALISE
-import { useTranslation } from 'react-i18next';
-
 const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
   const [newPhone, setnewPhone] = useState('');
   const [sendRequestAccept, isSuccess] = useSendRequestAcceptMutation({
@@ -20,8 +17,6 @@ const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
   const [updateDataUser] = useUpdateDataUserMutation({
     fixedCacheKey: 'shared-update-user',
   });
-  // LOCALISE
-  const { t } = useTranslation();
 
   const useStyles = makeStyles(theme => ({
     field: {
@@ -99,7 +94,7 @@ const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
           name="phone"
           placeholder="+380671234567"
           type="text"
-          label={t('formUpdatePhone.number')}
+          label="Номер телефона"
           value={formikPhone.values.phone}
           onBlur={formikPhone.handleBlur}
           onChange={formikPhone.handleChange}
@@ -107,7 +102,7 @@ const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
           helperText={formikPhone.touched.phone && formikPhone.errors.phone}
         />
         <Button
-          name={t('formUpdatePhone.getCode')}
+          name="Пoлучить код"
           type="submit"
           variant="smallRight"
           disabled={!(formikPhone.isValid && formikPhone.dirty)}
@@ -118,7 +113,7 @@ const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
           className={classes.field}
           id="code"
           name="code"
-          label={t('formUpdatePhone.confirmCode')}
+          label="Код подтверждения"
           value={formikPhoneAccept.values.code}
           onBlur={formikPhoneAccept.handleBlur}
           onChange={formikPhoneAccept.handleChange}
@@ -127,7 +122,7 @@ const FormaUpdatePhone = ({ phone = '', toggleOpen }) => {
         />
 
         <Button
-          name={t('statHeader.confirm')}
+          name="Подтвердить"
           type="submit"
           variant="accentButton"
           disabled={!formikPhoneAccept.dirty}

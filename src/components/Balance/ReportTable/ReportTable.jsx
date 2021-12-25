@@ -3,9 +3,6 @@ import { makeStyles } from '@material-ui/core';
 import { getYear } from 'date-fns';
 import COLORS from 'Constants/COLORS';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
-// LOCALISE
-import { useTranslation } from 'react-i18next';
-
 import { useGetMonthTransactionQuery } from 'redux/service/transactionApi';
 import { MONTH } from 'Constants/MONTH';
 
@@ -79,13 +76,12 @@ const ReportTable = ({ type, initialDate }) => {
   const reportsData = data?.data?.result;
 
   const classes = useStyles();
-  // LOCALISE
-  const { t } = useTranslation();
+
   return (
     <>
       {isSuccess && (
         <div className={classes.reports__thumb}>
-          <h3 className={classes.report__title}>{t('reportTable.summary')}</h3>
+          <h3 className={classes.report__title}>Сводка за текущий год</h3>
           <ul className={classes.report__list}>
             {reportsData.map(item =>
               item.total === 0 ? null : (

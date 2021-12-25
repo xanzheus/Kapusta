@@ -1,8 +1,10 @@
 import { useState } from 'react';
 // FORM
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 // LOCALISE
 import { useTranslation } from 'react-i18next';
+import { setCredentials } from 'redux/service/authSlice';
 // API
 import { useCreateUserMutation } from 'redux/service/userAPI';
 import { useGoogleAuthMutation } from 'redux/service/googleAuth';
@@ -59,11 +61,11 @@ const RegistrationForm = () => {
   const [createUser] = useCreateUserMutation();
   const [googleAuth] = useGoogleAuthMutation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const moveToLogin = () => {
     navigate('/login');
   };
   // LOCALISE Fn
+  const dispatch = useDispatch();
 
   // useCustomStyle
   const classes = useStyles();
@@ -87,14 +89,19 @@ const RegistrationForm = () => {
     validationSchema: userSchema,
     onSubmit: values => {
       const newUser = {
-        fullName: {
-          firstName: values.firstName,
-          lastName: values.lastName,
-        },
+        firstName: values.firstName,
+        lastName: values.lastName,
         email: values.email,
         password: values.password,
       };
-      createUser(newUser);
+      createUser(newUser)
+        .unwrap()
+        .then(({ data }) => {
+          console.log('component', data.accessToken);
+          dispatch(setCredentials(data));
+          navigate('/balance');
+        });
+      navigate('/balance');
     },
   });
 
@@ -102,8 +109,7 @@ const RegistrationForm = () => {
     <div className={style.box}>
       <form autoComplete="off" onSubmit={formik.handleSubmit}>
         <p className={style.registration__title}>
-          {t('registration.googleTitle')}
-          {/* Вы можете авторизоваться с помощью Google Account: */}
+          Вы можете авторизоваться с помощью Google Account:
         </p>
         <div className={style.google_button__wrapper}>
           <Button
@@ -118,8 +124,7 @@ const RegistrationForm = () => {
           </Button>
         </div>
         <p className={style.registration__title}>
-          {t('registration.mainTitle')}
-          {/* Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись: */}
+          Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:
         </p>
         <TextField
           className={classes.field}
@@ -128,7 +133,7 @@ const RegistrationForm = () => {
           color="warning"
           id="email"
           name="email"
-          label={t('registration.email')}
+          label="Почта"
           value={formik.values.email}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -157,7 +162,7 @@ const RegistrationForm = () => {
           color="warning"
           id="password"
           name="password"
-          label={t('registration.password')}
+          label="Пароль"
           type={showPassword ? 'text' : 'password'}
           value={formik.values.password}
           onChange={formik.handleChange}
@@ -187,7 +192,7 @@ const RegistrationForm = () => {
           }}
           id="confirmPassword"
           name="confirmPassword"
-          label={t('registration.confirmPassword')}
+          label="Подтвердите пароль"
           type={showPassword ? 'text' : 'password'}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
@@ -203,7 +208,7 @@ const RegistrationForm = () => {
           color="warning"
           id="firstName"
           name="firstName"
-          label={t('registration.firstName')}
+          label="Ваше имя"
           value={formik.values.firstName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -217,7 +222,7 @@ const RegistrationForm = () => {
           color="warning"
           id="lastName"
           name="lastName"
-          label={t('registration.lastName')}
+          label="Ваше фамилия"
           value={formik.values.lastName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -235,16 +240,16 @@ const RegistrationForm = () => {
               error={formik.touched.acceptedTerms && Boolean(formik.errors.acceptedTerms)}
             />
           }
-          label={t('registration.aceptedTerms')}
+          label="Пользовательское соглашение"
         ></FormControlLabel>
         <Stack mt={2} spacing={2} direction="row">
           <Button
             className={style.login__button}
-            name={t('registration.registration')}
+            name="Регистрация"
             disabled={!(formik.isValid && formik.dirty)}
             type="submit"
           ></Button>
-          <Button name={t('registration.enter')} type="button" onClick={moveToLogin}></Button>
+          <Button name="Вход" type="button" onClick={moveToLogin}></Button>
         </Stack>
       </form>
     </div>

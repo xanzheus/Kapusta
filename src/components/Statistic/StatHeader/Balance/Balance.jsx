@@ -17,7 +17,7 @@ const Balance = () => {
   return (
     <div className={s.balance}>
       {/* {isSuccess && console.log(balanceTotal(data))} */}
-      <h2 className={s.balance__title}>{t('statHeader.balance')}</h2>
+      <h2 className={s.balance__title}>Баланс</h2>
       <div className={s.balance__amountBlock}>
         <div className={s.balance__amountSum}>
           {/* {!isFetching && console.log(dataCurrency)} */}
@@ -25,7 +25,7 @@ const Balance = () => {
         </div>
       </div>
       <div>
-        <div className={s.balance__confirmButton}>{t('statHeader.confirm')}</div>
+        <div className={s.balance__confirmButton}>Подтвердить</div>
       </div>
     </div>
   );

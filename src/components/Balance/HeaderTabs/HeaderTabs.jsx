@@ -101,8 +101,8 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             onChange={handleChange}
             aria-label="lab API tabs example"
           >
-            <Tab className={classes.tabs} label={t('headersTabs.consumption')} value="1" />
-            <Tab className={classes.tabs} label={t('headersTabs.income')} value="2" />
+            <Tab className={classes.tabs} label="Расход" value="1" />
+            <Tab className={classes.tabs} label="Доход" value="2" />
           </TabList>
         </Box>
 
@@ -111,7 +111,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.EXPENSE}
-            placeholder={[t('headersTabs.productDescription'), t('headersTabs.productCategory')]}
+            placeholder={['Описание товара', 'Категория товара']}
             categoryArray={expensesCatagoryArray}
           />
 
@@ -129,7 +129,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
             initialDate={initialDate}
             getCurrentDate={getCurrentDate}
             type={CATEGORYTYPE.INCOME}
-            placeholder={[t('headersTabs.descriptionIncome'), t('headersTabs.incomeCategory')]}
+            placeholder={['Описание дохода', 'Категория дохода']}
             categoryArray={incomeCatagoryArray}
           />
 

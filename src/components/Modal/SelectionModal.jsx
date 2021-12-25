@@ -27,12 +27,12 @@ const SelectionModal = ({ open, handleClose, onClick }) => {
         <Box className={style.modal}>
           <CancelIcon className={style.modal__close_button} onClick={handleClose} />
           <Typography className={style.modal__title} id="keep-mounted-modal-title" mt={6} mb={2}>
-            {t('modal.sure')}
+            Вы уверены?
           </Typography>
 
           <Stack direction="row" alignItems="center" spacing={2} justifyContent="center">
-            <Button type="button" name={t('modal.yes')} onClick={onClick} />
-            <Button type="button" name={t('modal.no')} onClick={handleClose} />
+            <Button type="button" name="ДА" onClick={onClick} />
+            <Button type="button" name="НЕТ" onClick={handleClose} />
           </Stack>
         </Box>
       </Modal>

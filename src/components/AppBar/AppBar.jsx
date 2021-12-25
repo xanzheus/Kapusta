@@ -26,8 +26,8 @@ const AppBar = () => {
             <Link to="/developers">
               <div className={style.logo}></div>
             </Link>
-            <button onClick={() => changeLanguage('en')}>EN</button>
-            <button onClick={() => changeLanguage('ru')}>RU</button>
+            {/* <button onClick={() => changeLanguage('en')}>EN</button>
+            <button onClick={() => changeLanguage('ru')}>RU</button> */}
             {console.log(`AppBar ${isSuccess}`)}
             {isSuccess && accessToken && <UserMenu />}
           </div>
