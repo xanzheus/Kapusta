@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
+import { format } from 'date-fns';
 import COLORS from 'Constants/COLORS';
 import toast from 'react-hot-toast';
 import { Box } from '@mui/system';
@@ -153,20 +154,24 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
-      const bodyObj = amount => ({
+      const bodyObj = {
         id: params.id,
         type: params.row.type,
-        date: resultDate,
+        date: '',
         category: TRANSLATE_CATEGORIES[params.row.category],
         comment: params.row.comment,
-        amount,
-      });
+        amount: '',
+      };
 
-      const resultObj = isNaN(params.row.amount)
-        ? bodyObj(Number(params.row.amount.slice(2, -8)))
-        : bodyObj(Number(params.row.amount));
+      typeof params.row.date === 'object'
+        ? (bodyObj.date = format(params.row.date, 'yyyy-MM-dd'))
+        : (bodyObj.date = resultDate);
 
-      updateTransaction(resultObj);
+      isNaN(params.row.amount)
+        ? (bodyObj.amount = Number(params.row.amount.slice(2, -8)))
+        : (bodyObj.amount = Number(params.row.amount));
+
+      updateTransaction(bodyObj);
 
       toast.success(t('balanceTable.сhangesSaved'));
     },

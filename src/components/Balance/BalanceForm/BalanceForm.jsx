@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Stack from '@mui/material/Stack';
-import DatePicker from '@mui/lab/DatePicker';
 import toast from 'react-hot-toast';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import CalculateIcon from '@mui/icons-material/Calculate';
@@ -16,14 +14,12 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
-import { format } from 'date-fns';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import Calculator from 'components/Calculator';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
 import { useCreateTransactionMutation } from 'redux/service/transactionApi';
+import { DateInput } from './DateInput';
 
-// LOCALISE
-import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   form: {
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
@@ -119,45 +115,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
 
-  dateField: {
-    '& .css-1u3bzj6-MuiFormControl-root-MuiTextField-root': {
-      width: 130,
-    },
-
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '16px 0px 0px 0px',
-    },
-
-    '& .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root:hover': {
-      backgroundColor: 'transparent',
-    },
-
-    '& .MuiButtonBase-root': {
-      paddingLeft: 0,
-    },
-
-    '& .MuiSvgIcon-root': {
-      width: 20,
-      hight: 20,
-    },
-
-    '& .css-axso3v-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
-      {
-        borderColor: COLORS.mainAccent,
-      },
-
-    '& .MuiOutlinedInput-input': {
-      paddingLeft: 15,
-    },
-  },
-
   calculateButton: {
     cursor: 'pointer',
   },
 }));
 
 const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initialDate }) => {
-  const [date, setDate] = useState(initialDate);
   const [category, setCategory] = useState('');
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
@@ -165,9 +128,9 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const [amountError, setAmountError] = useState(false);
   const [isCalculator, setIsCalculator] = useState(false);
 
-  const [createTransaction] = useCreateTransactionMutation();
-
   const classes = useStyles();
+
+  const [createTransaction] = useCreateTransactionMutation();
 
   // LOCALISE
   const { t } = useTranslation();
@@ -182,11 +145,9 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     toast.success(t('balanceForm.clearForm'));
   };
 
-  const handleChangeCategry = event => setCategory(event.target.value);
+  const dateObj = { value: '' };
 
-  const handleChangeDescription = event => setComment(event.target.value);
-
-  const handleChangeSum = event => setAmount(event.target.value);
+  const getDate = date => (dateObj.value = date);
 
   const onSubmit = event => {
     event.preventDefault();
@@ -194,15 +155,14 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     if (category && amount) {
       if (amount <= 0) {
         toast.error(t('balanceForm.amountGreaterZero'));
-
         return;
       }
 
       const result = {
-        date: format(date, 'yyyy-MM-dd'),
+        date: dateObj.value,
         category: TRANSLATE_CATEGORIES[category],
-        comment,
-        amount,
+        comment: comment,
+        amount: amount,
         type,
       };
 
@@ -222,32 +182,19 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     }
   };
 
-  const onResetClick = () => reset();
-
   const getAmountFromCalculator = amount => {
     setAmount(amount.result);
     setIsCalculator(!isCalculator);
   };
 
+  const handleChangeDescription = event => setComment(event.target.value);
+  const handleChangeCategry = event => setCategory(event.target.value);
+  const handleChangeAmount = event => setAmount(event.target.value);
+
   return (
     <>
       <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Stack className={classes.dateField}>
-            <DatePicker
-              inputFormat="dd/MM/yyyy"
-              openTo="year"
-              value={date}
-              onChange={newValue => {
-                setDate(newValue);
-                getCurrentDate(newValue);
-              }}
-              renderInput={params => (
-                <TextField color="info" className={classes.field} {...params} />
-              )}
-            />
-          </Stack>
-        </LocalizationProvider>
+        <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} getDate={getDate} />
 
         <TextField
           className={[classes.field, classes.description].join(' ')}
@@ -259,6 +206,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
           type="text"
           name="description"
         />
+
         <Box className={[classes.field, classes.category].join(' ')}>
           <FormControl fullWidth>
             <InputLabel>{placeholder[1]}</InputLabel>
@@ -285,7 +233,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
           helperText={t('balanceForm.enterAmount')}
           placeholder="0,00"
           value={amount}
-          onChange={handleChangeSum}
+          onChange={handleChangeAmount}
           type="number"
           name="amount"
           required
@@ -305,7 +253,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         <Stack m="auto" mt={{ md: 4, lg: 0 }}>
           <Stack spacing={2} direction="row" alignItems="center">
             <Button name={t('balanceForm.enterButton')} type="submit" />
-            <Button name={t('balanceForm.clearButton')} type="button" onClick={onResetClick} />
+            <Button name={t('balanceForm.clearButton')} type="button" onClick={reset} />
           </Stack>
         </Stack>
       </form>
