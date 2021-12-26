@@ -1,4 +1,7 @@
+import { useMemo } from 'react';
+import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useMediaPredicate } from 'react-media-hook';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
@@ -40,7 +43,70 @@ const useStyles = makeStyles({
 
 const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
   const classes = useStyles();
-  return [
+
+  const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
+  const large = useMediaPredicate('(min-width: 1280px)');
+
+  const columnMedium = useMemo(
+    () => [
+      { field: 'id', hide: true, headerAlign: 'center' },
+      {
+        field: 'date',
+        headerName: 'Дата',
+        minWidth: 100,
+        type: 'date',
+        editable: true,
+        headerAlign: 'center',
+      },
+      {
+        field: 'comment',
+        headerName: 'Описание',
+        minWidth: 180,
+        editable: true,
+        headerAlign: 'center',
+      },
+      {
+        field: 'category',
+        headerName: 'Категория',
+        minWidth: 100,
+        editable: true,
+        headerAlign: 'center',
+        type: 'singleSelect',
+        valueOptions: category,
+      },
+      {
+        field: 'amount',
+        headerName: 'Сумма',
+        minWidth: 150,
+        editable: true,
+        headerAlign: 'center',
+        type: 'number',
+      },
+
+      {
+        field: 'actions',
+        type: 'actions',
+        width: 50,
+        getActions: params => [
+          <GridActionsCellItem
+            icon={<DeleteForeverIcon />}
+            onClick={deleteTransAction(params.id)}
+          />,
+
+          <GridActionsCellItem icon={<EditIcon />} onClick={handleOpen} showInMenu />,
+
+          <GridActionsCellItem
+            icon={<SaveIcon />}
+            onClick={updateTransAction(params)}
+            showInMenu
+          />,
+        ],
+      },
+    ],
+    [category, deleteTransAction, handleOpen, updateTransAction],
+  );
+
+  const columnLarge = [
     { field: 'id', hide: true, headerAlign: 'center' },
     {
       field: 'date',
@@ -118,6 +184,14 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       ),
     },
   ];
+
+  if (medium) {
+    return columnMedium;
+  }
+
+  if (large) {
+    return columnLarge;
+  }
 };
 
 export default BalancePageColumns;
