@@ -1,7 +1,4 @@
 @import 'styles/shared.scss';
-a {
-  text-decoration: none;
-}
 
 .backButton {
   margin-bottom: 16px;
@@ -14,6 +11,9 @@ a {
   @media screen and (min-width: $desktop) {
     margin-right: 158px;
     width: 174px;
+  }
+  a {
+    text-decoration: none;
   }
 }
 
