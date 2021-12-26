@@ -134,8 +134,8 @@ const GraphDetails = ({ startDate, endDate }) => {
           keys: ['y', 'name'],
           dataLabels: {
             enabled: true,
-            format: '{point.y:.2f} грн',
-            // format: '{point.name} {point.y:.2f} грн',
+            // format: '{point.y:.2f} грн',
+            format: '{point.name} {point.y:.2f} грн',
           },
         },
       ],
