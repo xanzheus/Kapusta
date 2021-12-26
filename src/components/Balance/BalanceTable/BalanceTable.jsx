@@ -134,16 +134,10 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const updateTransAction = useCallback(
     params => () => {
       if (data.find(row => row === params.row)) {
-        // toast(t => (
-        //   <span>
-        //     <b>{t('balanceTable.noChangesFound')}</b>
-        //     <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
-        //   </span>
-        // ));
-        toast(t => (
+        toast(p => (
           <span>
-            <b>Измения не обнаружены</b>
-            <button onClick={() => toast.dismiss(t.id)}>Понятно</button>
+            <b>{t('balanceTable.noChangesFound')}</b>
+            <button onClick={() => toast.dismiss(p.id)}>{t('balanceTable.itsClear')}</button>
           </span>
         ));
 
