@@ -147,7 +147,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
           <BalanceTable
             initialDate={initialDate}
             Class="income"
-            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
+            data={refreshedTransactions(' ', CATEGORYTYPE.INCOME)}
             category={incomeCatagoryArray}
             type={CATEGORYTYPE.INCOME}
           />
