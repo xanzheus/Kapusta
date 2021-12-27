@@ -16,7 +16,7 @@ import {
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
 } from 'redux/service/transactionApi';
-import GridToOverlay from './GridToOverlay';
+import OverlayToGridTable from './OverlayToGridTable';
 
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -202,7 +202,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
             rows={data}
             columns={columns}
             components={{
-              NoRowsOverlay: GridToOverlay,
+              NoRowsOverlay: OverlayToGridTable,
             }}
           />
         </Stack>

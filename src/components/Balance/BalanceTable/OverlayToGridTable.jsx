@@ -22,7 +22,7 @@ const StyledGridOverlay = styled(GridOverlay)(({ theme }) => ({
   },
 }));
 
-const GridToOverlay = () => {
+const OverlayToGridTable = () => {
   return (
     <StyledGridOverlay>
       <svg width="120" height="100" viewBox="0 0 184 152" aria-hidden focusable="false">
@@ -57,4 +57,4 @@ const GridToOverlay = () => {
   );
 };
 
-export default GridToOverlay;
+export default OverlayToGridTable;
