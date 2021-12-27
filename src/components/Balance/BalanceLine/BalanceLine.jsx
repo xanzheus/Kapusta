@@ -105,6 +105,7 @@ const useStyles = makeStyles(theme => ({
 
     position: 'absolute',
     top: 30,
+    minWidth: 160,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginLeft: 110,
