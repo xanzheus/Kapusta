@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { GridOverlay } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
+import COLORS from 'Constants/COLORS';
 
 const StyledGridOverlay = styled(GridOverlay)(({ theme }) => ({
   flexDirection: 'column',
@@ -52,7 +53,9 @@ const OverlayToGridTable = () => {
           </g>
         </g>
       </svg>
-      <Box sx={{ mt: 1 }}>Нет транзакций!</Box>
+      <Box sx={{ mt: 1 }} color={COLORS.mainAccent} fontWeight={700} fontSize={12}>
+        Нет транзакций!
+      </Box>
     </StyledGridOverlay>
   );
 };

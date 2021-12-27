@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import Stack from '@mui/material/Stack';
-import format from 'date-fns/format';
 import toast from 'react-hot-toast';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,83 +26,83 @@ const useStyles = makeStyles({
     width: '100%',
   },
 
-  field: {
-    '& .MuiInputLabel-root': {
-      fontSize: 12,
-      lineHeight: 1.16,
-      letterSpacing: '0.02em',
-      color: '#c7ccdc',
-    },
+  // field: {
+  //   '& .MuiInputLabel-root': {
+  //     fontSize: 12,
+  //     lineHeight: 1.16,
+  //     letterSpacing: '0.02em',
+  //     color: '#c7ccdc',
+  //   },
 
-    '& .MuiOutlinedInput-input': {
-      minHeight: 44,
-      fontSize: 12,
-      color: COLORS.primary,
-      fontWeight: 700,
-      padding: 0,
-      textAlign: 'center',
-    },
+  //   '& .MuiOutlinedInput-input': {
+  //     minHeight: 44,
+  //     fontSize: 12,
+  //     color: COLORS.primary,
+  //     fontWeight: 700,
+  //     padding: 0,
+  //     textAlign: 'center',
+  //   },
 
-    '& .MuiFormHelperText-root ': {
-      fontSize: 10,
-      lineHeight: 1.16,
-      letterSpacing: '0.02em',
-      color: '#c7ccdc',
-      textAlign: 'center',
-    },
+  //   '& .MuiFormHelperText-root ': {
+  //     fontSize: 10,
+  //     lineHeight: 1.16,
+  //     letterSpacing: '0.02em',
+  //     color: '#c7ccdc',
+  //     textAlign: 'center',
+  //   },
 
-    '& .MuiOutlinedInput-root': {
-      borderRadius: 0,
-    },
+  //   '& .MuiOutlinedInput-root': {
+  //     borderRadius: 0,
+  //   },
 
-    '& .MuiOutlinedInput-notchedOutline': {
-      border: `2px solid ${COLORS.mainLight}`,
-    },
+  //   '& .MuiOutlinedInput-notchedOutline': {
+  //     border: `2px solid ${COLORS.mainLight}`,
+  //   },
 
-    '& .css-orzrz6-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
-      {
-        borderColor: COLORS.mainAccent,
-      },
-  },
+  //   '& .css-orzrz6-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
+  //     {
+  //       borderColor: COLORS.mainAccent,
+  //     },
+  // },
 
-  description: {
-    width: 'inherit',
+  // description: {
+  //   width: 'inherit',
 
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '16px 16px 0 0',
-    },
-  },
+  //   '& .MuiOutlinedInput-root': {
+  //     borderRadius: '16px 16px 0 0',
+  //   },
+  // },
 
-  category: {
-    width: 'inherit',
-    marginBottom: 30,
+  // category: {
+  //   width: 'inherit',
+  //   marginBottom: 30,
 
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '0 0 16px 16px',
-    },
+  //   '& .MuiOutlinedInput-root': {
+  //     borderRadius: '0 0 16px 16px',
+  //   },
 
-    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
-      {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-  },
+  //   '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
+  //     {
+  //       display: 'flex',
+  //       alignItems: 'center',
+  //       justifyContent: 'center',
+  //     },
+  // },
 
-  amount: {
-    width: 185,
-    marginLeft: 45,
+  // amount: {
+  //   width: 185,
+  //   marginLeft: 45,
 
-    '& .MuiOutlinedInput-root': {
-      borderRadius: 16,
-    },
+  //   '& .MuiOutlinedInput-root': {
+  //     borderRadius: 16,
+  //   },
 
-    '& .MuiOutlinedInput-input': {
-      borderLeft: `2px solid ${COLORS.mainLight}`,
-    },
+  //   '& .MuiOutlinedInput-input': {
+  //     borderLeft: `2px solid ${COLORS.mainLight}`,
+  //   },
 
-    marginBottom: 155,
-  },
+  //   marginBottom: 155,
+  // },
 });
 
 const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
@@ -148,7 +147,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
       }
 
       const result = {
-        date: format(date, 'yyyy-MM-dd'),
+        date,
         category: TRANSLATE_CATEGORIES[category],
         comment,
         amount,
@@ -256,7 +255,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 };
 
 MobileForm.propTypes = {
-  date: PropTypes.object.isRequired,
+  date: PropTypes.string.isRequired,
   categoryTypes: PropTypes.string.isRequired,
   toggleForm: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,

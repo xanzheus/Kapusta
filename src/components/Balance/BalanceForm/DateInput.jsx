@@ -8,6 +8,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import TextField from '@mui/material/TextField';
 import COLORS from 'Constants/COLORS';
+import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 const useStyles = makeStyles(theme => ({
   field: {
@@ -39,22 +40,39 @@ const useStyles = makeStyles(theme => ({
     },
 
     '& .MuiOutlinedInput-notchedOutline': {
-      border: '2px solid #F5F6FB',
+      border: '2px solid transparent',
+
+      [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+        border: '2px solid #F5F6FB',
+      },
     },
 
     '& .css-orzrz6-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline':
       {
-        borderColor: COLORS.mainAccent,
+        borderColor: 'transparent',
+
+        [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+          borderColor: COLORS.mainAccent,
+        },
       },
   },
 
   dateField: {
     '& .css-1u3bzj6-MuiFormControl-root-MuiTextField-root': {
       width: 130,
+      margin: 'auto',
+
+      [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+        margin: 0,
+      },
     },
 
     '& .MuiOutlinedInput-root': {
-      borderRadius: '16px 0px 0px 0px',
+      borderRadius: 16,
+
+      [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+        borderRadius: '16px 0px 0px 0px',
+      },
     },
 
     '& .css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root:hover': {

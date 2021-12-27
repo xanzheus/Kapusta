@@ -4,6 +4,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
 // import EditIcon from '@mui/icons-material/Edit';
+import MobileOverlayToTransactions from './MobileOverlayToTransactions';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
 import { COLORS } from 'Constants';
 
@@ -22,7 +23,6 @@ const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-between',
     height: 50,
-    padding: '0 20px',
 
     '&:not(:last-child)': {
       borderBottom: `1px solid ${COLORS.auxiliaryLight}`,
@@ -98,6 +98,8 @@ const TranceActions = ({ transactionsData }) => {
 
   return (
     <div className={classes.wrapper}>
+      {transactionsArr.length === 0 && <MobileOverlayToTransactions />}
+
       <ul className={classes.list}>
         {transactionsArr.map(item => (
           <li className={classes.transaction} key={item._id}>

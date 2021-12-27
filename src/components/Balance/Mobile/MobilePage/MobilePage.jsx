@@ -1,52 +1,20 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { makeStyles } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import TextField from '@mui/material/TextField';
 import BalanceLine from 'components/Balance/BalanceLine/BalanceLine';
 import TranceActions from 'components/Balance/Mobile/TranceActions';
-import MobileForm from 'components/Balance/Mobile/MobileForm';
+// import MobileForm from 'components/Balance/Mobile/MobileForm';
+import Box from '@mui/material/Box';
+import GoBackButton from 'components/Balance/Mobile/GoBackButton';
+import BalanceForm from 'components/Balance/BalanceForm';
 import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 // LOCALISE
 import { useTranslation } from 'react-i18next';
+import { DateInput } from 'components/Balance/BalanceForm/DateInput';
 
 const useStyles = makeStyles({
-  field: {
-    '& .MuiOutlinedInput-input': {
-      minHeight: 44,
-      fontSize: 12,
-      color: COLORS.primary,
-      fontWeight: 700,
-      padding: '0 10px 0 0',
-    },
-
-    '& .MuiOutlinedInput-notchedOutline': {
-      border: '2px solid transparent',
-    },
-  },
-
-  dateField: {
-    width: 130,
-    margin: 'auto',
-
-    '& .MuiButtonBase-root': {
-      paddingLeft: 0,
-    },
-
-    '& .MuiSvgIcon-root': {
-      width: 20,
-      hight: 20,
-    },
-
-    '& .MuiOutlinedInput-input': {
-      paddingLeft: 15,
-    },
-  },
-
   button: {
     height: 55,
     width: '50%',
@@ -69,10 +37,11 @@ const useStyles = makeStyles({
 });
 
 const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate }) => {
-  const [date, setDate] = useState(initialDate);
+  // const [date, setDate] = useState('');
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [categoryTypes, setCategoryTypes] = useState('');
   const [categories, setCtegories] = useState([]);
+
   const classes = useStyles();
 
   const toggleForm = () => setIsOpenForm(!isOpenForm);
@@ -89,6 +58,10 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
     setCtegories(expensesCatagoryArray);
   };
 
+  const dateObj = { value: '' };
+
+  const getDate = date => (dateObj.value = date);
+
   // LOCALISE
   const { t } = useTranslation();
 
@@ -100,22 +73,7 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
             <BalanceLine userData={userData} />
           </Stack>
 
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack className={classes.dateField}>
-              <DatePicker
-                inputFormat="dd/MM/yyyy"
-                openTo="year"
-                value={date}
-                onChange={newValue => {
-                  setDate(newValue);
-                  getCurrentDate(newValue);
-                }}
-                renderInput={params => (
-                  <TextField color="info" className={classes.field} {...params} />
-                )}
-              />
-            </Stack>
-          </LocalizationProvider>
+          <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} getDate={getDate} />
 
           <TranceActions transactionsData={transactionsData} />
 
@@ -130,12 +88,19 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
           </Stack>
         </>
       ) : (
-        <MobileForm
-          date={date}
-          toggleForm={toggleForm}
-          categoryTypes={categoryTypes}
-          categories={categories}
-        />
+        <>
+          <Box pt={2}>
+            <GoBackButton toggleForm={toggleForm} />
+          </Box>
+
+          <BalanceForm categoryArray={categories} type={categoryTypes} initialDate={initialDate} />
+        </>
+        // <MobileForm
+        //   date={dateObj.value}
+        //   toggleForm={toggleForm}
+        //   categoryTypes={categoryTypes}
+        //   categories={categories}
+        // />
       )}
     </>
   );
