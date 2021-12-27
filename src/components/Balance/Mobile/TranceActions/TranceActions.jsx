@@ -101,36 +101,40 @@ const TranceActions = ({ transactionsData }) => {
       {transactionsArr.length === 0 && <MobileOverlayToTransactions />}
 
       <ul className={classes.list}>
-        {transactionsArr.map(item => (
-          <li className={classes.transaction} key={item._id}>
-            <span className={classes.flexColumn}>
-              <p className={classes.comment}>{item.comment}</p>
-              <p className={classes.dateAndCategory}>
-                {item.date.slice(0, item.date.indexOf('T'))}
+        {transactionsArr.map(item => {
+          const preparedDate = item.date.slice(0, item.date.indexOf('T'));
+          const splitDate = preparedDate.split('-');
+          const resultDate = `${splitDate[2]}.${splitDate[1]}.${splitDate[0]}`;
+
+          return (
+            <li className={classes.transaction} key={item._id}>
+              <span className={classes.flexColumn}>
+                <p className={classes.comment}>{item.comment}</p>
+                <p className={classes.dateAndCategory}>{resultDate}</p>
+              </span>
+
+              <p className={[classes.dateAndCategory, classes.category].join(' ')}>
+                {TRANSLATE_CATEGORIES[item.category]}
               </p>
-            </span>
 
-            <p className={[classes.dateAndCategory, classes.category].join(' ')}>
-              {TRANSLATE_CATEGORIES[item.category]}
-            </p>
+              {item.type === CATEGORYTYPE.EXPENSE ? (
+                <p className={[classes.amoun, classes.negative].join(' ')}>
+                  {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
+                </p>
+              ) : (
+                <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
+                  2,
+                )} ${t('tranceActions.currencyUAH')}.`}</p>
+              )}
 
-            {item.type === CATEGORYTYPE.EXPENSE ? (
-              <p className={[classes.amoun, classes.negative].join(' ')}>
-                {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
-              </p>
-            ) : (
-              <p className={[classes.amoun, classes.positive].join(' ')}>{` ${item.amount.toFixed(
-                2,
-              )} ${t('tranceActions.currencyUAH')}.`}</p>
-            )}
-
-            <DeleteForeverIcon
-              onClick={() => handelDeleteTransaction(item._id)}
-              className={classes.buttonIcon}
-            />
-            {/* <EditIcon className={classes.buttonIcon} /> */}
-          </li>
-        ))}
+              <DeleteForeverIcon
+                onClick={() => handelDeleteTransaction(item._id)}
+                className={classes.buttonIcon}
+              />
+              {/* <EditIcon className={classes.buttonIcon} /> */}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
