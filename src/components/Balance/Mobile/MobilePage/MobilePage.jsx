@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
 import BalanceLine from 'components/Balance/BalanceLine/BalanceLine';
 import TranceActions from 'components/Balance/Mobile/TranceActions';
-// import MobileForm from 'components/Balance/Mobile/MobileForm';
 import Box from '@mui/material/Box';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import BalanceForm from 'components/Balance/BalanceForm';
@@ -37,7 +36,6 @@ const useStyles = makeStyles({
 });
 
 const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate }) => {
-  // const [date, setDate] = useState('');
   const [isOpenForm, setIsOpenForm] = useState(false);
   const [categoryTypes, setCategoryTypes] = useState('');
   const [categories, setCtegories] = useState([]);
@@ -95,12 +93,6 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
 
           <BalanceForm categoryArray={categories} type={categoryTypes} initialDate={initialDate} />
         </>
-        // <MobileForm
-        //   date={dateObj.value}
-        //   toggleForm={toggleForm}
-        //   categoryTypes={categoryTypes}
-        //   categories={categories}
-        // />
       )}
     </>
   );

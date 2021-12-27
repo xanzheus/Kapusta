@@ -55,11 +55,8 @@ const useStyles = makeStyles(theme => ({
       fontWeight: 700,
       padding: 0,
 
-      // textAlign: 'center',
-
       [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
         padding: '0 0 0 20px',
-        // textAlign: 'start',
       },
     },
 
@@ -197,7 +194,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const [createTransaction] = useCreateTransactionMutation();
 
   const small = useMediaPredicate('(max-width: 767px)');
-  // const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
+  const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
   const large = useMediaPredicate('(min-width: 1280px)');
 
   // LOCALISE
@@ -331,6 +328,77 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
                   variant="greyBackground"
                   onClick={reset}
                 />
+              </Stack>
+            </Stack>
+          </>
+        )}
+
+        {medium && (
+          <>
+            <DateInput
+              getCurrentDate={getCurrentDate}
+              initialDate={initialDate}
+              getDate={getDate}
+            />
+
+            <TextField
+              className={[classes.field, classes.description].join(' ')}
+              color="info"
+              helperText={t('balanceForm.enterDescription')}
+              label={placeholder[0]}
+              onChange={handleChangeDescription}
+              value={comment}
+              type="text"
+              name="description"
+            />
+
+            <Box className={[classes.field, classes.category].join(' ')}>
+              <FormControl fullWidth>
+                <InputLabel>{placeholder[1]}</InputLabel>
+                <Select
+                  color="info"
+                  error={categoryError}
+                  label={placeholder[1]}
+                  value={category}
+                  onChange={handleChangeCategry}
+                  required
+                >
+                  {categoryArray.map(item => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+
+            <TextField
+              color="info"
+              className={[classes.field, classes.amount].join(' ')}
+              helperText={t('balanceForm.enterAmount')}
+              placeholder="0,00"
+              value={amount}
+              onChange={handleChangeAmount}
+              type="number"
+              name="amount"
+              required
+              error={amountError}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment color="info" position="start">
+                    <CalculateIcon
+                      className={classes.calculateButton}
+                      onClick={() => setIsCalculator(!isCalculator)}
+                    />
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <Stack m="auto" mt={{ md: 4, lg: 0 }}>
+              <Stack spacing={2} direction="row" alignItems="center">
+                <Button name={t('balanceForm.enterButton')} type="submit" />
+                <Button name={t('balanceForm.clearButton')} type="button" onClick={reset} />
               </Stack>
             </Stack>
           </>
