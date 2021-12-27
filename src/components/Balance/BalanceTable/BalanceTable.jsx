@@ -16,6 +16,7 @@ import {
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
 } from 'redux/service/transactionApi';
+import GridToOverlay from './GridToOverlay';
 
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -90,6 +91,13 @@ const useStyles = makeStyles(theme => ({
 
     '& .css-levciy-MuiTablePagination-displayedRows': {
       fontSize: 12,
+      fontWeight: 700,
+    },
+
+    '& .css-1b34haf-MuiDataGrid-footerContainer': {
+      minHeight: 28,
+      height: 28,
+      backgroundColor: COLORS.auxiliaryLight,
     },
   },
 
@@ -189,10 +197,13 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
             headerHeight={40}
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
-            rowsPerPageOptions={[8, 20]}
-            pageSize={8}
+            rowsPerPageOptions={[9]}
+            pageSize={9}
             rows={data}
             columns={columns}
+            components={{
+              NoRowsOverlay: GridToOverlay,
+            }}
           />
         </Stack>
         <ReportTable type={type} initialDate={initialDate} />
