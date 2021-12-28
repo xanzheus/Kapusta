@@ -97,6 +97,24 @@ const TranceActions = ({ transactionsData }) => {
   // LOCALISE
   const { t } = useTranslation();
 
+  const toggleModal = () => setOpenModal(!openModal);
+
+  const reset = () => {
+    toggleModal();
+    setTranceactionId(null);
+  };
+
+  const handleDeleteTransaction = id => {
+    deleteTransaction(id);
+    reset();
+    toast.error(t('tranceActions.transactionDeleted'));
+  };
+
+  const handleDeleteButton = id => {
+    toggleModal();
+    setTranceactionId(id);
+  };
+
   return (
     <div className={classes.wrapper}>
       {transactionsArr.length === 0 && <MobileOverlayToTransactions />}
@@ -104,18 +122,11 @@ const TranceActions = ({ transactionsData }) => {
       {openModal && (
         <SelectionModal
           open={openModal}
-          handleClose={() => {
-            setOpenModal(false);
-            setTranceactionId(null);
-          }}
-          onClick={() => {
-            deleteTransaction(tranceactionId);
-            setOpenModal(false);
-            setTranceactionId(null);
-            toast.error(t('tranceActions.transactionDeleted'));
-          }}
+          handleClose={reset}
+          onClick={() => handleDeleteTransaction(tranceactionId)}
         />
       )}
+
       <ul className={classes.list}>
         {transactionsArr.map(item => {
           const preparedDate = item.date.slice(0, item.date.indexOf('T'));
@@ -144,10 +155,7 @@ const TranceActions = ({ transactionsData }) => {
               )}
 
               <DeleteForeverIcon
-                onClick={() => {
-                  setOpenModal(true);
-                  setTranceactionId(item._id);
-                }}
+                onClick={() => handleDeleteButton(item._id)}
                 className={classes.buttonIcon}
               />
               {/* <EditIcon className={classes.buttonIcon} /> */}
