@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
+import SelectionModal from 'components/Modal/SelectionModal';
 // import EditIcon from '@mui/icons-material/Edit';
 import MobileOverlayToTransactions from './MobileOverlayToTransactions';
 import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
@@ -83,7 +85,11 @@ const useStyles = makeStyles({
 });
 
 const TranceActions = ({ transactionsData }) => {
+  const [tranceactionId, setTranceactionId] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
+
   const classes = useStyles();
+
   const transactionsArr = transactionsData.slice(0, transactionsData.length - 1);
 
   const [deleteTransaction] = useDeleteTransactionMutation();
@@ -91,15 +97,25 @@ const TranceActions = ({ transactionsData }) => {
   // LOCALISE
   const { t } = useTranslation();
 
-  const handelDeleteTransaction = id => {
-    deleteTransaction(id);
-    toast.error(t('tranceActions.transactionDeleted'));
-  };
-
   return (
     <div className={classes.wrapper}>
       {transactionsArr.length === 0 && <MobileOverlayToTransactions />}
 
+      {openModal && (
+        <SelectionModal
+          open={openModal}
+          handleClose={() => {
+            setOpenModal(false);
+            setTranceactionId(null);
+          }}
+          onClick={() => {
+            deleteTransaction(tranceactionId);
+            setOpenModal(false);
+            setTranceactionId(null);
+            toast.error(t('tranceActions.transactionDeleted'));
+          }}
+        />
+      )}
       <ul className={classes.list}>
         {transactionsArr.map(item => {
           const preparedDate = item.date.slice(0, item.date.indexOf('T'));
@@ -128,7 +144,10 @@ const TranceActions = ({ transactionsData }) => {
               )}
 
               <DeleteForeverIcon
-                onClick={() => handelDeleteTransaction(item._id)}
+                onClick={() => {
+                  setOpenModal(true);
+                  setTranceactionId(item._id);
+                }}
                 className={classes.buttonIcon}
               />
               {/* <EditIcon className={classes.buttonIcon} /> */}

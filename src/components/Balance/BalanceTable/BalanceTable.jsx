@@ -206,6 +206,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
             deleteTransaction(tranceactionId);
             setOpenModal(false);
             setTranceactionId(null);
+            toast.error(t('tranceActions.transactionDeleted'));
           }}
         />
       )}
