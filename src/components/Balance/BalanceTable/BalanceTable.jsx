@@ -189,6 +189,19 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
     return;
   };
 
+  const toggleModal = () => setOpenModal(!openModal);
+
+  const reset = () => {
+    toggleModal();
+    setTranceactionId(null);
+  };
+
+  const handleDeleteTransaction = id => {
+    deleteTransaction(id);
+    reset();
+    toast.error(t('tranceActions.transactionDeleted'));
+  };
+
   const columns = BalancePageColumns(category, openDeleteModale, handleOpen, updateTransAction);
 
   return (
@@ -198,16 +211,8 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       {openModal && (
         <SelectionModal
           open={openModal}
-          handleClose={() => {
-            setOpenModal(false);
-            setTranceactionId(null);
-          }}
-          onClick={() => {
-            deleteTransaction(tranceactionId);
-            setOpenModal(false);
-            setTranceactionId(null);
-            toast.error(t('tranceActions.transactionDeleted'));
-          }}
+          handleClose={reset}
+          onClick={() => handleDeleteTransaction(tranceactionId)}
         />
       )}
 
