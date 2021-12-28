@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useMediaPredicate } from 'react-media-hook';
@@ -193,6 +194,13 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
   if (large) {
     return columnLarge;
   }
+};
+
+BalancePageColumns.propTypes = {
+  category: PropTypes.array.isRequired,
+  openDeleteModale: PropTypes.func.isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  updateTransAction: PropTypes.func.isRequired,
 };
 
 export default BalancePageColumns;
