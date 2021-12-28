@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
+const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransAction) => {
   const classes = useStyles();
 
   const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
@@ -90,7 +90,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
         getActions: params => [
           <GridActionsCellItem
             icon={<DeleteForeverIcon />}
-            onClick={deleteTransAction(params.id)}
+            onClick={openDeleteModale(params.id)}
           />,
 
           <GridActionsCellItem icon={<EditIcon />} onClick={handleOpen} showInMenu />,
@@ -103,7 +103,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
         ],
       },
     ],
-    [category, deleteTransAction, handleOpen, updateTransAction],
+    [category, openDeleteModale, handleOpen, updateTransAction],
   );
 
   const columnLarge = [
@@ -140,6 +140,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       headerAlign: 'center',
       type: 'number',
     },
+
     {
       field: 'delete',
       headerName: '',
@@ -149,7 +150,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
         <DeleteForeverIcon
           cursor="pointer"
           className={[classes.iconButton, classes.delete].join(' ')}
-          onClick={deleteTransAction(params.id)}
+          onClick={openDeleteModale(params.id)}
           titleAccess="удалить"
         />
       ),

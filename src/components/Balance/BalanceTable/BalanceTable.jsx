@@ -10,6 +10,7 @@ import { Box } from '@mui/system';
 import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
+import SelectionModal from 'components/Modal/SelectionModal';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
 import {
@@ -120,6 +121,8 @@ const useStyles = makeStyles(theme => ({
 
 const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [tranceactionId, setTranceactionId] = useState(null);
 
   const [deleteTransaction] = useDeleteTransactionMutation();
   const [updateTransaction] = useUpdateTransactionMutation();
@@ -128,15 +131,16 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   // LOCALISE
   const { t } = useTranslation();
 
-  const deleteTransAction = useCallback(
+  const openDeleteModale = useCallback(
     id => () => {
-      deleteTransaction(id);
-      toast.error(t('balanceTable.transactionDeleted'));
+      setOpenModal(true);
+      setTranceactionId(id);
     },
-    [deleteTransaction, t],
+    [],
   );
 
   const updateTransAction = useCallback(
@@ -185,11 +189,27 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
     return;
   };
 
-  const columns = BalancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
+  const columns = BalancePageColumns(category, openDeleteModale, handleOpen, updateTransAction);
 
   return (
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
+
+      {openModal && (
+        <SelectionModal
+          open={openModal}
+          handleClose={() => {
+            setOpenModal(false);
+            setTranceactionId(null);
+          }}
+          onClick={() => {
+            deleteTransaction(tranceactionId);
+            setOpenModal(false);
+            setTranceactionId(null);
+          }}
+        />
+      )}
+
       <Box display={{ md: 'block', lg: 'flex' }} alignItems="center" justifyContent="space-between">
         <Stack className={classes.balancetable}>
           <DataGrid
