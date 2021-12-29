@@ -144,7 +144,7 @@ const translationRU = {
   balanceForm: {
     clearForm: 'Форма очищена!',
     amountGreaterZero: 'Сумма должна быть больше нуля.',
-    transactionAdded: 'Трансакция добавлена!',
+    transactionAdded: 'Транзакция добавлена!',
     enterDescription: 'Введите описание',
     enterAmount: 'Введите сумму',
     enterButton: 'ВВОД',
@@ -157,7 +157,7 @@ const translationRU = {
     reports: 'Перейти к отчётам',
   },
   balanceTable: {
-    transactionDeleted: 'Трансакция удалена!',
+    transactionDeleted: 'Транзакция удалена!',
     noChangesFound: 'Изменения не обнаружены!',
     itsClear: 'Понятно',
     сhangesSaved: 'Изменения сохранены!',
@@ -172,7 +172,7 @@ const translationRU = {
     incomeCategory: 'Категория дохода',
   },
   tranceActions: {
-    transactionDeleted: 'Трансакция удалена!',
+    transactionDeleted: 'Транзакция удалена!',
     currencyUAH: 'UAH',
   },
   reportTable: {
