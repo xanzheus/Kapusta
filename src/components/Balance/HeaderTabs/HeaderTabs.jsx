@@ -21,38 +21,49 @@ import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
+  tabsList: {
+    '&.css-18acmos-MuiTabs-root': {
+      minHeight: 40,
+    },
+  },
+
   tabs: {
-    backgroundColor: '#fafbfd',
-    borderRadius: '20px 20px 0 0',
-    minWidth: 140,
-    minHeight: 40,
-    fontSize: 12,
-    lineHeight: 1.16,
-    letterSpacing: '0.02em',
-    fontWeight: 700,
-    color: COLORS.mainDark,
-    '&.Mui-selected': {
+    '&.css-1m35abl-MuiButtonBase-root-MuiTab-root': {
+      backgroundColor: '#fafbfd',
+      borderRadius: '20px 20px 0 0',
+      minWidth: 140,
+      fontSize: 12,
+      minHeight: 40,
+      lineHeight: 1.16,
+      letterSpacing: '0.02em',
+      fontWeight: 700,
+      color: COLORS.mainDark,
+    },
+
+    '&.css-18acmos-MuiTabs-root': {
+      minHeight: 40,
+    },
+
+    '&.css-1m35abl-MuiButtonBase-root-MuiTab-root.Mui-selected': {
       color: COLORS.mainAccent,
       backgroundColor: '#fefefe',
     },
   },
 
-  tabsline: {
-    minHeight: 0,
-  },
-
   tabsThumb: {
-    padding: '35px 20px 50px 20px',
-    background: COLORS.mainLight,
-    boxShadow: '0px 10px 60px rgba(170, 178, 197, 0.2)',
-    borderRadius: '0px 30px 30px 30px',
-
-    [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
-      padding: '30px 30px 60px 30px',
-    },
-
-    [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+    '&.css-13xfq8m-MuiTabPanel-root': {
       padding: '35px 20px 50px 20px',
+      background: COLORS.mainLight,
+      boxShadow: '0px 10px 60px rgba(170, 178, 197, 0.2)',
+      borderRadius: '0px 30px 30px 30px',
+
+      [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
+        padding: '30px 30px 60px 30px',
+      },
+
+      [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
+        padding: '35px 20px 50px 20px',
+      },
     },
   },
 }));
@@ -96,7 +107,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
       <TabContext value={value}>
         <Box>
           <TabList
-            className={classes.tabsline}
+            className={classes.tabsList}
             TabIndicatorProps={{ style: { display: 'none' } }}
             onChange={handleChange}
             aria-label="lab API tabs example"
@@ -136,7 +147,7 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
           <BalanceTable
             initialDate={initialDate}
             Class="income"
-            data={refreshedTransactions('', CATEGORYTYPE.INCOME)}
+            data={refreshedTransactions(' ', CATEGORYTYPE.INCOME)}
             category={incomeCatagoryArray}
             type={CATEGORYTYPE.INCOME}
           />
