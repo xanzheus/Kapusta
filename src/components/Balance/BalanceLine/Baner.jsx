@@ -37,9 +37,6 @@ const useStyles = makeStyles(theme => ({
       top: 160,
     },
   },
-  },
-
-  
 
   baner__title: {
     fontSize: 14,
