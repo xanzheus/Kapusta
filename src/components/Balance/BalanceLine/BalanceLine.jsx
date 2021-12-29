@@ -88,6 +88,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: 0,
 
     borderRadius: '0 16px 16px 0 ',
+    fontWeight: 400,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       borderRadius: 16,
@@ -105,6 +106,7 @@ const useStyles = makeStyles(theme => ({
 
     position: 'absolute',
     top: 30,
+    minWidth: 160,
 
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       marginLeft: 110,

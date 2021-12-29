@@ -3,18 +3,21 @@ import { useCallback, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Stack } from '@mui/material';
 import { makeStyles } from '@material-ui/core';
+import { format } from 'date-fns';
 import COLORS from 'Constants/COLORS';
 import toast from 'react-hot-toast';
 import { Box } from '@mui/system';
 import ReportTable from 'components/Balance/ReportTable';
 import BalancePageColumns from 'utils/balancePageColumns';
 import InformationEditModal from 'components/Modal/InformationEditModal';
+import SelectionModal from 'components/Modal/SelectionModal';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
 import {
   useDeleteTransactionMutation,
   useUpdateTransactionMutation,
 } from 'redux/service/transactionApi';
+import OverlayToGridTable from './OverlayToGridTable';
 
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -22,23 +25,24 @@ import { useTranslation } from 'react-i18next';
 const useStyles = makeStyles(theme => ({
   balancetable: {
     height: 385,
-
     [theme.breakpoints.up(BREAKPOINTS.tablet)]: {
       minWidth: 605,
       marginBottom: 40,
     },
-
     [theme.breakpoints.up(BREAKPOINTS.desktop)]: {
       minWidth: 760,
       marginBottom: 0,
     },
+  },
 
-    '& .css-1i9y1n9-MuiDataGrid-root': {
+  balanceGrid: {
+    '&.css-2c3rf6-MuiDataGrid-root': {
       borderRadius: '20px 20px 0px 0px',
     },
 
     '& .MuiDataGrid-columnHeaders.css-okt5j6-MuiDataGrid-columnHeaders': {
       borderRadius: '20px 20px 0px 0px',
+      backgroundColor: COLORS.auxiliaryLight,
     },
 
     '& .MuiDataGrid-columnHeaderTitle': {
@@ -49,12 +53,8 @@ const useStyles = makeStyles(theme => ({
       color: COLORS.mainBlack,
     },
 
-    '& .MuiDataGrid-columnSeparator': {
-      color: COLORS.auxiliaryLight,
-    },
-
-    '& .MuiDataGrid-columnHeaders': {
-      backgroundColor: COLORS.auxiliaryLight,
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-iconSeparator': {
+      color: 'transparent',
     },
 
     '& .MuiDataGrid-row': {
@@ -67,43 +67,43 @@ const useStyles = makeStyles(theme => ({
       },
     },
 
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textCenter.MuiDataGrid-cell--withRenderer':
-      {
-        justifyContent: 'start',
-      },
-
     '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
       backgroundColor: COLORS.auxiliaryLight,
     },
 
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
-      display: 'flex',
-      justifyContent: 'center',
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textLeft': {
+      textAlign: 'center',
     },
 
-    '& .css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+      textAlign: 'center',
+    },
+
+    '& .css-pdct74-MuiTablePagination-selectLabel': {
       color: COLORS.primary,
       fontSize: 12,
       lineHeight: 1.16,
     },
 
-    '& .css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input':
-      {
-        color: COLORS.mainDark,
-        fontSize: 12,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingLeft: 0,
-      },
+    '& .css-16c50h-MuiInputBase-root-MuiTablePagination-select ': {
+      color: COLORS.mainDark,
+      fontSize: 12,
+    },
 
     '& .css-levciy-MuiTablePagination-displayedRows': {
       fontSize: 12,
+      fontWeight: 700,
+    },
+
+    '& .css-1b34haf-MuiDataGrid-footerContainer': {
+      minHeight: 28,
+      height: 28,
+      backgroundColor: COLORS.auxiliaryLight,
     },
   },
 
   income: {
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.positive,
       fontWeight: 900,
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   expenses: {
-    '& .css-1i9y1n9-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
+    '&.css-2c3rf6-MuiDataGrid-root .MuiDataGrid-cell--textRight': {
       textAlign: 'center',
       color: COLORS.negative,
       fontWeight: 900,
@@ -121,6 +121,8 @@ const useStyles = makeStyles(theme => ({
 
 const BalanceTable = ({ data, initialDate, category, Class, type }) => {
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [tranceactionId, setTranceactionId] = useState(null);
 
   const [deleteTransaction] = useDeleteTransactionMutation();
   const [updateTransaction] = useUpdateTransactionMutation();
@@ -129,26 +131,28 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   // LOCALISE
   const { t } = useTranslation();
 
-  const deleteTransAction = useCallback(
+  const openDeleteModale = useCallback(
     id => () => {
-      deleteTransaction(id);
-      toast.error(t('balanceTable.transactionDeleted'));
+      setOpenModal(true);
+      setTranceactionId(id);
     },
-    [deleteTransaction, t],
+    [],
   );
 
   const updateTransAction = useCallback(
     params => () => {
       if (data.find(row => row === params.row)) {
-        toast(t => (
+        toast(p => (
           <span>
             <b>{t('balanceTable.noChangesFound')}</b>
-            <button onClick={() => toast.dismiss(t.id)}>{t('balanceTable.itsClear')}</button>
+            <button onClick={() => toast.dismiss(p.id)}>{t('balanceTable.itsClear')}</button>
           </span>
         ));
+
         return;
       }
 
@@ -156,16 +160,24 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
       const splitDate = preparedDate.split('.');
       const resultDate = `${splitDate[2]}-${splitDate[1]}-${splitDate[0]}`;
 
-      const result = {
+      const bodyObj = {
         id: params.id,
         type: params.row.type,
-        date: resultDate,
+        date: '',
         category: TRANSLATE_CATEGORIES[params.row.category],
         comment: params.row.comment,
-        amount: Number(params.row.amount),
+        amount: '',
       };
 
-      updateTransaction(result);
+      typeof params.row.date === 'object'
+        ? (bodyObj.date = format(params.row.date, 'yyyy-MM-dd'))
+        : (bodyObj.date = resultDate);
+
+      isNaN(params.row.amount)
+        ? (bodyObj.amount = Number(params.row.amount.slice(2, -8)))
+        : (bodyObj.amount = Number(params.row.amount));
+
+      updateTransaction(bodyObj);
 
       toast.success(t('balanceTable.сhangesSaved'));
     },
@@ -177,21 +189,47 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
     return;
   };
 
-  const columns = BalancePageColumns(category, deleteTransAction, handleOpen, updateTransAction);
+  const toggleModal = () => setOpenModal(!openModal);
+
+  const reset = () => {
+    toggleModal();
+    setTranceactionId(null);
+  };
+
+  const handleDeleteTransaction = id => {
+    deleteTransaction(id);
+    reset();
+    toast.error(t('tranceActions.transactionDeleted'));
+  };
+
+  const columns = BalancePageColumns(category, openDeleteModale, handleOpen, updateTransAction);
 
   return (
     <>
       {open && <InformationEditModal open={open} handleClose={handleClose} />}
+
+      {openModal && (
+        <SelectionModal
+          open={openModal}
+          handleClose={reset}
+          onClick={() => handleDeleteTransaction(tranceactionId)}
+        />
+      )}
+
       <Box display={{ md: 'block', lg: 'flex' }} alignItems="center" justifyContent="space-between">
-        <Stack className={[classes.balancetable, classes[Class]].join(' ')}>
+        <Stack className={classes.balancetable}>
           <DataGrid
+            className={[classes.balanceGrid, classes[Class]].join(' ')}
             headerHeight={40}
             rowHeight={35}
             onCellEditCommit={infoMessageByEdit}
-            rowsPerPageOptions={[8, 20]}
-            pageSize={8}
+            rowsPerPageOptions={[9]}
+            pageSize={9}
             rows={data}
             columns={columns}
+            components={{
+              NoRowsOverlay: OverlayToGridTable,
+            }}
           />
         </Stack>
         <ReportTable type={type} initialDate={initialDate} />
