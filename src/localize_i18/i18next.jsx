@@ -150,6 +150,7 @@ const translationRU = {
     clearForm: 'Форма очищена!',
     amountGreaterZero: 'Сумма должна быть больше нуля.',
     transactionUpdate: 'Транзакция обновлена!',
+    transactionAdded: 'Транзакция добавлена!',
     enterDescription: 'Введите описание',
     enterAmount: 'Введите сумму',
     enterButton: 'ВВОД',
