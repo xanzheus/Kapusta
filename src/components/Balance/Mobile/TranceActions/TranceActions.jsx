@@ -55,6 +55,7 @@ const useStyles = makeStyles({
     lineHeight: 1.16,
     letterSpacing: '0.04em',
     marginBottom: 5,
+    maxWidth: 70,
   },
 
   dateAndCategory: {

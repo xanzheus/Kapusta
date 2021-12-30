@@ -129,7 +129,7 @@ const MobileEditForm = ({
   const [openEditModal, setOpenEditModal] = useState(false);
 
   const prepareDate = editDate.slice(0, editDate.indexOf('T'));
-  const www = new Date(prepareDate);
+  const resultDate = new Date(prepareDate);
 
   const toggleEditForm = () => setOpenEditModal(!openEditModal);
 
@@ -173,7 +173,7 @@ const MobileEditForm = ({
         category === initialCategory &&
         comment === initialComment &&
         Number(amount) === initialAmount &&
-        www.toString() === new Date(dateObj.value).toString()
+        resultDate.toString() === new Date(dateObj.value).toString()
       ) {
         toast.error(t('MobileEditForm.NothingHasChanged'));
 
@@ -221,7 +221,11 @@ const MobileEditForm = ({
 
           <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>
             <>
-              <DateInput getCurrentDate={getCurrentDate} initialDate={www} getDate={getDate} />
+              <DateInput
+                getCurrentDate={getCurrentDate}
+                initialDate={resultDate}
+                getDate={getDate}
+              />
 
               <TextField
                 className={[classes.field, classes.description].join(' ')}
