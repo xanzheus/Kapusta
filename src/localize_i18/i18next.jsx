@@ -19,10 +19,15 @@ const translationEN = {
     clearForm: 'The form is cleared!',
     amountGreaterZero: 'The amount must be greater than zero.',
     transactionAdded: 'Transaction added!',
+    transactionUpdate: 'Transaction update',
     enterDescription: 'Enter a description',
     enterAmount: 'Enter the amount',
     enterButton: 'Input',
     clearButton: 'To clear',
+  },
+  MobileEditForm: {
+    updateButton: 'Update',
+    NothingHasChanged: 'Nothing has changed!',
   },
   balanceLine: {
     congratulations: 'Congratulations, everything is ready to go!',
@@ -144,11 +149,15 @@ const translationRU = {
   balanceForm: {
     clearForm: 'Форма очищена!',
     amountGreaterZero: 'Сумма должна быть больше нуля.',
-    transactionAdded: 'Транзакция добавлена!',
+    transactionUpdate: 'Транзакция обновлена!',
     enterDescription: 'Введите описание',
     enterAmount: 'Введите сумму',
     enterButton: 'ВВОД',
     clearButton: 'ОЧИСТИТЬ',
+  },
+  MobileEditForm: {
+    updateButton: 'Обновить',
+    NothingHasChanged: 'Изменений нет!',
   },
   balanceLine: {
     congratulations: 'Поздравляем всё готово к работе!',

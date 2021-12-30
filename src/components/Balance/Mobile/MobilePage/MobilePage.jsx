@@ -73,7 +73,7 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
 
           <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} getDate={getDate} />
 
-          <TranceActions transactionsData={transactionsData} />
+          <TranceActions transactionsData={transactionsData} getCurrentDate={getCurrentDate} />
 
           <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
             <button onClick={expenseButtonClick} className={classes.button} type="button">

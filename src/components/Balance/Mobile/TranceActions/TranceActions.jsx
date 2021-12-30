@@ -5,10 +5,15 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
 import SelectionModal from 'components/Modal/SelectionModal';
-// import EditIcon from '@mui/icons-material/Edit';
 import MobileOverlayToTransactions from './MobileOverlayToTransactions';
-import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
+import {
+  TRANSLATE_CATEGORIES,
+  CATEGORYTYPE,
+  expensesCatagoryArray,
+  incomeCatagoryArray,
+} from 'Constants/category';
 import { COLORS } from 'Constants';
+import MobileEditForm from 'components/Balance/Mobile/MobileEditForm';
 
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -84,7 +89,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TranceActions = ({ transactionsData }) => {
+const TranceActions = ({ transactionsData, getCurrentDate }) => {
   const [tranceactionId, setTranceactionId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
@@ -133,6 +138,9 @@ const TranceActions = ({ transactionsData }) => {
           const splitDate = preparedDate.split('-');
           const resultDate = `${splitDate[2]}.${splitDate[1]}.${splitDate[0]}`;
 
+          const categoryArray =
+            item.type === 'income' ? incomeCatagoryArray : expensesCatagoryArray;
+
           return (
             <li className={classes.transaction} key={item._id}>
               <span className={classes.flexColumn}>
@@ -158,7 +166,16 @@ const TranceActions = ({ transactionsData }) => {
                 onClick={() => handleDeleteButton(item._id)}
                 className={classes.buttonIcon}
               />
-              {/* <EditIcon className={classes.buttonIcon} /> */}
+              <MobileEditForm
+                getCurrentDate={getCurrentDate}
+                initialAmount={item.amount}
+                initialComment={item.comment}
+                initialCategory={TRANSLATE_CATEGORIES[item.category]}
+                categoryArray={categoryArray}
+                type={item.type}
+                id={item._id}
+                editDate={item.date}
+              />
             </li>
           );
         })}
