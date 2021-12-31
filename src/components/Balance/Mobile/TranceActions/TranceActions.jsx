@@ -148,11 +148,9 @@ const TranceActions = ({ transactionsData, getCurrentDate }) => {
                 <p className={classes.comment}>{item.comment}</p>
                 <p className={classes.dateAndCategory}>{resultDate}</p>
               </span>
-
               <p className={[classes.dateAndCategory, classes.category].join(' ')}>
                 {TRANSLATE_CATEGORIES[item.category]}
               </p>
-
               {item.type === CATEGORYTYPE.EXPENSE ? (
                 <p className={[classes.amoun, classes.negative].join(' ')}>
                   {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
@@ -162,11 +160,11 @@ const TranceActions = ({ transactionsData, getCurrentDate }) => {
                   2,
                 )} ${t('tranceActions.currencyUAH')}.`}</p>
               )}
-
               <DeleteForeverIcon
                 onClick={() => handleDeleteButton(item._id)}
                 className={classes.buttonIcon}
               />
+
               <MobileEditForm
                 getCurrentDate={getCurrentDate}
                 initialAmount={item.amount}

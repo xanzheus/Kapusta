@@ -224,6 +224,7 @@ const MobileEditForm = ({
                 getCurrentDate={getCurrentDate}
                 initialDate={resultDate}
                 getDate={getDate}
+                edit={true}
               />
 
               <TextField

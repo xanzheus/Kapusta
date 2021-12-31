@@ -99,10 +99,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const DateInput = ({ getCurrentDate, initialDate, getDate }) => {
+export const DateInput = ({ getCurrentDate, initialDate, getDate, edit }) => {
   const [date, setDate] = useState(initialDate);
 
-  getDate(format(date, 'yyyy-MM-dd'));
+  if (edit) {
+    getDate(format(date, 'yyyy-MM-dd'));
+  }
 
   const classes = useStyles();
   return (
@@ -125,7 +127,7 @@ export const DateInput = ({ getCurrentDate, initialDate, getDate }) => {
 };
 
 DateInput.propTypes = {
-  getDate: PropTypes.func.isRequired,
+  getDate: PropTypes.func,
   getCurrentDate: PropTypes.func.isRequired,
   initialDate: PropTypes.object.isRequired,
 };
