@@ -220,12 +220,7 @@ const MobileEditForm = ({
 
           <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>
             <>
-              <DateInput
-                getCurrentDate={getCurrentDate}
-                initialDate={resultDate}
-                getDate={getDate}
-                edit={true}
-              />
+              <DateInput initialDate={resultDate} getDate={getDate} edit={true} />
 
               <TextField
                 className={[classes.field, classes.description].join(' ')}
