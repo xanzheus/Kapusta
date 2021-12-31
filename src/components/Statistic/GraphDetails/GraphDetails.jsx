@@ -91,7 +91,9 @@ const GraphDetails = ({ startDate, endDate }) => {
         // text: 'Расходы',
       },
       xAxis: {
-        // type: 'category',
+        type: 'category',
+        // categories: data.name,
+        enabled: true,
       },
       yAxis: {
         title: {
@@ -132,6 +134,7 @@ const GraphDetails = ({ startDate, endDate }) => {
           keys: ['y', 'name'],
           dataLabels: {
             enabled: true,
+            // format: '{point.y:.2f} грн',
             format: '{point.name} {point.y:.2f} грн',
           },
         },

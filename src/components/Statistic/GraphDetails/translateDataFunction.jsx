@@ -24,10 +24,10 @@ const dataTranslated = val => {
       return { ...i, category: 'Техника' };
     }
     if (i.category === 'communication') {
-      return { ...i, category: 'Комуналка, связь' };
+      return { ...i, category: 'Коммуналка, связь' };
     }
     if (i.category === 'hobby') {
-      return { ...i, category: 'Спорт, Хоби' };
+      return { ...i, category: 'Спорт, хобби' };
     }
     if (i.category === 'education') {
       return { ...i, category: 'Образование' };

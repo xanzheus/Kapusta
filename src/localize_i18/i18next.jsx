@@ -39,7 +39,7 @@ const translationEN = {
   },
 
   headersTabs: {
-    consumption: 'Expense',
+    consumption: 'Сosts',
     income: 'Income',
     productDescription: 'Product description',
     productCategory: 'Product category',

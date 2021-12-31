@@ -1,39 +1,113 @@
+import { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useMediaPredicate } from 'react-media-hook';
 import SaveIcon from '@mui/icons-material/Save';
 import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
 
 const useStyles = makeStyles({
-  button: {
-    width: 18,
-    height: 18,
-    cursor: 'pointer',
+  iconButton: {
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      width: 18,
+      height: 18,
+    },
   },
 
   delete: {
-    '&:hover': {
-      color: COLORS.negative,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      '&:hover': {
+        color: COLORS.negative,
+      },
     },
   },
 
   edit: {
-    justifyContent: 'start',
-    '&:hover': {
-      color: COLORS.positive,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      justifyContent: 'start',
+      '&:hover': {
+        color: COLORS.positive,
+      },
     },
   },
 
   save: {
-    '&:hover': {
-      color: COLORS.mainAccent,
+    '&.css-i4bv87-MuiSvgIcon-root': {
+      '&:hover': {
+        color: COLORS.mainAccent,
+      },
     },
   },
 });
 
-const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTransAction) => {
+const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransAction) => {
   const classes = useStyles();
-  return [
+
+  const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
+  const large = useMediaPredicate('(min-width: 1280px)');
+
+  const columnMedium = useMemo(
+    () => [
+      { field: 'id', hide: true, headerAlign: 'center' },
+      {
+        field: 'date',
+        headerName: 'Дата',
+        minWidth: 100,
+        type: 'date',
+        editable: true,
+        headerAlign: 'center',
+      },
+      {
+        field: 'comment',
+        headerName: 'Описание',
+        minWidth: 180,
+        editable: true,
+        headerAlign: 'center',
+      },
+      {
+        field: 'category',
+        headerName: 'Категория',
+        minWidth: 100,
+        editable: true,
+        headerAlign: 'center',
+        type: 'singleSelect',
+        valueOptions: category,
+      },
+      {
+        field: 'amount',
+        headerName: 'Сумма',
+        minWidth: 150,
+        editable: true,
+        headerAlign: 'center',
+        type: 'number',
+      },
+
+      {
+        field: 'actions',
+        type: 'actions',
+        width: 50,
+        getActions: params => [
+          <GridActionsCellItem
+            icon={<DeleteForeverIcon />}
+            onClick={openDeleteModale(params.id)}
+          />,
+
+          <GridActionsCellItem icon={<EditIcon />} onClick={handleOpen} showInMenu />,
+
+          <GridActionsCellItem
+            icon={<SaveIcon />}
+            onClick={updateTransAction(params)}
+            showInMenu
+          />,
+        ],
+      },
+    ],
+    [category, openDeleteModale, handleOpen, updateTransAction],
+  );
+
+  const columnLarge = [
     { field: 'id', hide: true, headerAlign: 'center' },
     {
       field: 'date',
@@ -67,6 +141,7 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
       headerAlign: 'center',
       type: 'number',
     },
+
     {
       field: 'delete',
       headerName: '',
@@ -74,8 +149,9 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <DeleteForeverIcon
-          className={[classes.button, classes.delete].join(' ')}
-          onClick={deleteTransAction(params.id)}
+          cursor="pointer"
+          className={[classes.iconButton, classes.delete].join(' ')}
+          onClick={openDeleteModale(params.id)}
           titleAccess="удалить"
         />
       ),
@@ -87,7 +163,8 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <EditIcon
-          className={[classes.button, classes.edit].join(' ')}
+          cursor="pointer"
+          className={[classes.iconButton, classes.edit].join(' ')}
           titleAccess="редактировать"
           onClick={handleOpen}
         />
@@ -101,13 +178,29 @@ const BalancePageColumns = (category, deleteTransAction, handleOpen, updateTrans
 
       renderCell: params => (
         <SaveIcon
-          className={[classes.button, classes.save].join(' ')}
+          cursor="pointer"
+          className={[classes.iconButton, classes.save].join(' ')}
           titleAccess="сохранит"
           onClick={updateTransAction(params)}
         />
       ),
     },
   ];
+
+  if (medium) {
+    return columnMedium;
+  }
+
+  if (large) {
+    return columnLarge;
+  }
+};
+
+BalancePageColumns.propTypes = {
+  category: PropTypes.array.isRequired,
+  openDeleteModale: PropTypes.func.isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  updateTransAction: PropTypes.func.isRequired,
 };
 
 export default BalancePageColumns;

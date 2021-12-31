@@ -45,17 +45,6 @@
 .diagram_emptyTitle {
   text-align: center;
 }
-a {
-  cursor: pointer;
-}
-
-.diagram__button {
-}
-
-button:hover,
-button:focus {
-  color: $mainAccent-color;
-}
 
 .diagram__buttonPie {
   border: none;
@@ -64,6 +53,16 @@ button:focus {
   height: 36px;
   opacity: 60%;
   display: inline-block;
+  cursor: pointer;
+
+  @media screen and (min-width: $desktop) {
+    &:hover {
+      color: $mainAccent-color;
+    }
+    &:focus {
+      color: $mainAccent-color;
+    }
+  }
 }
 
 .diagram__buttonColumn {
@@ -73,11 +72,18 @@ button:focus {
   height: 36px;
   opacity: 60%;
   display: none;
+  cursor: pointer;
   @media screen and (min-width: $tablet) {
     display: inline-block;
   }
   @media screen and (min-width: $desktop) {
     display: inline-block;
+    &:hover {
+      color: $mainAccent-color;
+    }
+    &:focus {
+      color: $mainAccent-color;
+    }
   }
 }
 
@@ -90,10 +96,23 @@ button:focus {
   opacity: 60%;
   display: inline-block;
   transform: rotate(90deg);
+  cursor: pointer;
   @media screen and (min-width: $tablet) {
     display: none;
+    &:hover {
+      color: $mainAccent-color;
+    }
+    &:focus {
+      color: $mainAccent-color;
+    }
   }
   @media screen and (min-width: $desktop) {
     display: none;
+    &:hover {
+      color: $mainAccent-color;
+    }
+    &:focus {
+      color: $mainAccent-color;
+    }
   }
 }
