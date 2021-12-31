@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
+import { format } from 'date-fns';
 import { useMediaPredicate } from 'react-media-hook';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -210,10 +211,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     toast.success(t('balanceForm.clearForm'));
   };
 
-  const dateObj = { value: '' };
-
-  const getDate = date => (dateObj.value = date);
-
   const onSubmit = event => {
     event.preventDefault();
 
@@ -224,12 +221,14 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
       }
 
       const result = {
-        date: dateObj.value || initialDate,
+        date: format(initialDate, 'yyyy-MM-dd'),
         category: TRANSLATE_CATEGORIES[category],
         comment: comment,
         amount: amount,
         type,
       };
+
+      console.log(result);
 
       createTransaction(result);
       reset();
@@ -335,11 +334,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         {medium && (
           <>
-            <DateInput
-              getCurrentDate={getCurrentDate}
-              initialDate={initialDate}
-              getDate={getDate}
-            />
+            <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} />
 
             <TextField
               className={[classes.field, classes.description].join(' ')}
@@ -406,11 +401,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         {large && (
           <>
-            <DateInput
-              getCurrentDate={getCurrentDate}
-              initialDate={initialDate}
-              getDate={getDate}
-            />
+            <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} />
 
             <TextField
               className={[classes.field, classes.description].join(' ')}

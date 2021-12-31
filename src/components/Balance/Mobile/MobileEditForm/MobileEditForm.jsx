@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -232,7 +231,6 @@ const MobileEditForm = ({
                 color="info"
                 error={commentError}
                 helperText={t('balanceForm.enterDescription')}
-                // label={placeholder[0]}
                 onChange={handleChangeDescription}
                 value={comment}
                 type="text"
@@ -241,11 +239,9 @@ const MobileEditForm = ({
 
               <Box className={[classes.field, classes.category].join(' ')}>
                 <FormControl fullWidth>
-                  {/* <InputLabel>{placeholder[1]}</InputLabel> */}
                   <Select
                     color="info"
                     error={categoryError}
-                    // label={placeholder[1]}
                     value={category}
                     onChange={handleChangeCategry}
                     required
