@@ -90,7 +90,7 @@ const useStyles = makeStyles({
   },
 });
 
-const TranceActions = ({ transactionsData, getCurrentDate }) => {
+const TranceActions = ({ transactionsData }) => {
   const [tranceactionId, setTranceactionId] = useState(null);
   const [openModal, setOpenModal] = useState(false);
 
@@ -166,7 +166,6 @@ const TranceActions = ({ transactionsData, getCurrentDate }) => {
               />
 
               <MobileEditForm
-                getCurrentDate={getCurrentDate}
                 initialAmount={item.amount}
                 initialComment={item.comment}
                 initialCategory={TRANSLATE_CATEGORIES[item.category]}

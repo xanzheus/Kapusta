@@ -187,6 +187,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
+  const [commentError, setCommentError] = useState(false);
   const [amountError, setAmountError] = useState(false);
   const [isCalculator, setIsCalculator] = useState(false);
 
@@ -205,6 +206,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setCategory('');
     setComment('');
     setAmount('');
+    setCommentError(false);
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
@@ -214,7 +216,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const onSubmit = event => {
     event.preventDefault();
 
-    if (category && amount) {
+    if (comment && category && amount) {
       if (amount <= 0) {
         toast.error(t('balanceForm.amountGreaterZero'));
         return;
@@ -228,13 +230,15 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         type,
       };
 
-      console.log(result);
-
       createTransaction(result);
       reset();
       toast(t('balanceForm.transactionAdded'), {
         icon: '👏',
       });
+    }
+
+    if (comment === '') {
+      setCommentError(true);
     }
 
     if (category === '') {
@@ -265,6 +269,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label="Описание товара"
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"
@@ -341,6 +346,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label={placeholder[0]}
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"
@@ -408,6 +414,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label={placeholder[0]}
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"

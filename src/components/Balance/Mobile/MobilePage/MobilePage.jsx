@@ -73,7 +73,7 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
 
           <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} getDate={getDate} />
 
-          <TranceActions transactionsData={transactionsData} getCurrentDate={getCurrentDate} />
+          <TranceActions transactionsData={transactionsData} />
 
           <Stack position="absolute" bottom={0} left={0} direction="row" width="100%">
             <button onClick={expenseButtonClick} className={classes.button} type="button">
@@ -102,6 +102,7 @@ MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
   userData: PropTypes.array.isRequired,
   transactionsData: PropTypes.array.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default MobilePage;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import { makeStyles } from '@material-ui/core';
 import Box from '@mui/material/Box';
@@ -43,6 +44,12 @@ const EditModal = ({ openEditModal, toggleEditForm, children }) => {
 
     modalRoot,
   );
+};
+
+EditModal.propTypes = {
+  children: PropTypes.node,
+  openEditModal: PropTypes.bool.isRequired,
+  toggleEditForm: PropTypes.func.isRequired,
 };
 
 export default EditModal;

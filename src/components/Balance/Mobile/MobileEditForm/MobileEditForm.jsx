@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
@@ -110,7 +110,6 @@ const useStyles = makeStyles({
 
 const MobileEditForm = ({
   type,
-  getCurrentDate,
   initialAmount,
   initialComment,
   initialCategory,
@@ -285,6 +284,16 @@ const MobileEditForm = ({
       )}
     </>
   );
+};
+
+MobileEditForm.propTypes = {
+  type: PropTypes.string.isRequired,
+  initialAmount: PropTypes.number.isRequired,
+  initialComment: PropTypes.string.isRequired,
+  initialCategory: PropTypes.string.isRequired,
+  categoryArray: PropTypes.array.isRequired,
+  id: PropTypes.string.isRequired,
+  editDate: PropTypes.string.isRequired,
 };
 
 export default MobileEditForm;

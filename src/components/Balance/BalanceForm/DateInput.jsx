@@ -134,4 +134,5 @@ DateInput.propTypes = {
   getDate: PropTypes.func,
   getCurrentDate: PropTypes.func,
   initialDate: PropTypes.object.isRequired,
+  edit: PropTypes.bool,
 };
