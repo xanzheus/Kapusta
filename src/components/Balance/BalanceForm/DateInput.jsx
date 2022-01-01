@@ -99,12 +99,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const DateInput = ({ getCurrentDate, initialDate, getDate }) => {
+export const DateInput = ({ getCurrentDate, initialDate, getDate, edit }) => {
   const [date, setDate] = useState(initialDate);
 
-  getDate(format(date, 'yyyy-MM-dd'));
+  if (edit) {
+    getDate(format(date, 'yyyy-MM-dd'));
+  }
 
   const classes = useStyles();
+
+  const hadleChange = newValue => {
+    setDate(newValue);
+    if (!edit) {
+      getCurrentDate(newValue);
+    }
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Stack className={classes.dateField}>
@@ -113,10 +122,7 @@ export const DateInput = ({ getCurrentDate, initialDate, getDate }) => {
           inputFormat="dd.MM.yyyy"
           openTo="year"
           value={date}
-          onChange={newValue => {
-            setDate(newValue);
-            getCurrentDate(newValue);
-          }}
+          onChange={newValue => hadleChange(newValue)}
           renderInput={params => <TextField color="info" className={classes.field} {...params} />}
         />
       </Stack>
@@ -125,7 +131,8 @@ export const DateInput = ({ getCurrentDate, initialDate, getDate }) => {
 };
 
 DateInput.propTypes = {
-  getDate: PropTypes.func.isRequired,
-  getCurrentDate: PropTypes.func.isRequired,
+  getDate: PropTypes.func,
+  getCurrentDate: PropTypes.func,
   initialDate: PropTypes.object.isRequired,
+  edit: PropTypes.bool,
 };

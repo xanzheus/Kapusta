@@ -5,10 +5,15 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useDeleteTransactionMutation } from 'redux/service/transactionApi';
 import toast from 'react-hot-toast';
 import SelectionModal from 'components/Modal/SelectionModal';
-// import EditIcon from '@mui/icons-material/Edit';
 import MobileOverlayToTransactions from './MobileOverlayToTransactions';
-import { TRANSLATE_CATEGORIES, CATEGORYTYPE } from 'Constants/category';
+import {
+  TRANSLATE_CATEGORIES,
+  CATEGORYTYPE,
+  expensesCatagoryArray,
+  incomeCatagoryArray,
+} from 'Constants/category';
 import { COLORS } from 'Constants';
+import MobileEditForm from 'components/Balance/Mobile/MobileEditForm';
 
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -50,6 +55,7 @@ const useStyles = makeStyles({
     lineHeight: 1.16,
     letterSpacing: '0.04em',
     marginBottom: 5,
+    maxWidth: 70,
   },
 
   dateAndCategory: {
@@ -133,17 +139,18 @@ const TranceActions = ({ transactionsData }) => {
           const splitDate = preparedDate.split('-');
           const resultDate = `${splitDate[2]}.${splitDate[1]}.${splitDate[0]}`;
 
+          const categoryArray =
+            item.type === 'income' ? incomeCatagoryArray : expensesCatagoryArray;
+
           return (
             <li className={classes.transaction} key={item._id}>
               <span className={classes.flexColumn}>
                 <p className={classes.comment}>{item.comment}</p>
                 <p className={classes.dateAndCategory}>{resultDate}</p>
               </span>
-
               <p className={[classes.dateAndCategory, classes.category].join(' ')}>
                 {TRANSLATE_CATEGORIES[item.category]}
               </p>
-
               {item.type === CATEGORYTYPE.EXPENSE ? (
                 <p className={[classes.amoun, classes.negative].join(' ')}>
                   {` - ${item.amount.toFixed(2)} ${t('tranceActions.currencyUAH')}.`}
@@ -153,12 +160,20 @@ const TranceActions = ({ transactionsData }) => {
                   2,
                 )} ${t('tranceActions.currencyUAH')}.`}</p>
               )}
-
               <DeleteForeverIcon
                 onClick={() => handleDeleteButton(item._id)}
                 className={classes.buttonIcon}
               />
-              {/* <EditIcon className={classes.buttonIcon} /> */}
+
+              <MobileEditForm
+                initialAmount={item.amount}
+                initialComment={item.comment}
+                initialCategory={TRANSLATE_CATEGORIES[item.category]}
+                categoryArray={categoryArray}
+                type={item.type}
+                id={item._id}
+                editDate={item.date}
+              />
             </li>
           );
         })}

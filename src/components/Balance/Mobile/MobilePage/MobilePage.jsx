@@ -102,6 +102,7 @@ MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
   userData: PropTypes.array.isRequired,
   transactionsData: PropTypes.array.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default MobilePage;

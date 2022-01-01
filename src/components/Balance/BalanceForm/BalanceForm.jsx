@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import Stack from '@mui/material/Stack';
+import { format } from 'date-fns';
 import { useMediaPredicate } from 'react-media-hook';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -186,6 +187,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const [comment, setComment] = useState('');
   const [amount, setAmount] = useState('');
   const [categoryError, setCategoryError] = useState(false);
+  const [commentError, setCommentError] = useState(false);
   const [amountError, setAmountError] = useState(false);
   const [isCalculator, setIsCalculator] = useState(false);
 
@@ -204,27 +206,24 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setCategory('');
     setComment('');
     setAmount('');
+    setCommentError(false);
     setCategoryError(false);
     setAmountError(false);
     setIsCalculator(false);
     toast.success(t('balanceForm.clearForm'));
   };
 
-  const dateObj = { value: '' };
-
-  const getDate = date => (dateObj.value = date);
-
   const onSubmit = event => {
     event.preventDefault();
 
-    if (category && amount) {
+    if (comment && category && amount) {
       if (amount <= 0) {
         toast.error(t('balanceForm.amountGreaterZero'));
         return;
       }
 
       const result = {
-        date: dateObj.value || initialDate,
+        date: format(initialDate, 'yyyy-MM-dd'),
         category: TRANSLATE_CATEGORIES[category],
         comment: comment,
         amount: amount,
@@ -236,6 +235,10 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
       toast(t('balanceForm.transactionAdded'), {
         icon: '👏',
       });
+    }
+
+    if (comment === '') {
+      setCommentError(true);
     }
 
     if (category === '') {
@@ -266,6 +269,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label="Описание товара"
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"
@@ -335,17 +339,14 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         {medium && (
           <>
-            <DateInput
-              getCurrentDate={getCurrentDate}
-              initialDate={initialDate}
-              getDate={getDate}
-            />
+            <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} />
 
             <TextField
               className={[classes.field, classes.description].join(' ')}
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label={placeholder[0]}
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"
@@ -406,17 +407,14 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
         {large && (
           <>
-            <DateInput
-              getCurrentDate={getCurrentDate}
-              initialDate={initialDate}
-              getDate={getDate}
-            />
+            <DateInput getCurrentDate={getCurrentDate} initialDate={initialDate} />
 
             <TextField
               className={[classes.field, classes.description].join(' ')}
               color="info"
               helperText={t('balanceForm.enterDescription')}
               label={placeholder[0]}
+              error={commentError}
               onChange={handleChangeDescription}
               value={comment}
               type="text"
