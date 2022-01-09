@@ -9,12 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import {
-  // expensesCatagoryArray,
-  // incomeCatagoryArray,
-  CATEGORYTYPE,
-  TRANSLATE_CATEGORIES,
-} from 'Constants/category';
+import { CATEGORYTYPE, TRANSLATE_CATEGORIES } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 // LOCALISE

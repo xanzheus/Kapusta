@@ -20,7 +20,8 @@
     "enterDescription": "Введите описание",
     "enterAmount": "Введите сумму",
     "enterButton": "ВВОД",
-    "clearButton": "ОЧИСТИТЬ"
+    "clearButton": "ОЧИСТИТЬ",
+    "transactionUpdate": "Транзакция обновлена!"
   },
   "balanceLine": {
     "congratulations": "Поздравляем всё готово к работе!",
@@ -41,7 +42,8 @@
     "productDescription": "Описание товара",
     "productCategory": "Категория товара",
     "descriptionIncome": "Описание дохода",
-    "incomeCategory": "Категория дохода"
+    "incomeCategory": "Категория дохода",
+    "withoutTransaction": "Нет транзакций"
   },
   "tranceActions": { "transactionDeleted": "Трансакция удалена!", "currencyUAH": "Грн" },
   "reportTable": { "summary": "Сводка за текущий год" },
@@ -142,5 +144,9 @@
     "delete": "Удалить",
     "edit": "Редактировать",
     "save": "Сохранить"
+  },
+  "MobileEditForm": {
+    "updateButton": "Обновить",
+    "NothingHasChanged": "Изменений нет!"
   }
 }

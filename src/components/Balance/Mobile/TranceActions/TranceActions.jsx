@@ -9,12 +9,11 @@ import MobileOverlayToTransactions from './MobileOverlayToTransactions';
 import {
   TRANSLATE_CATEGORIES,
   CATEGORYTYPE,
-  expensesCatagoryArray,
-  incomeCatagoryArray,
+  // expensesCatagoryArray,
+  // incomeCatagoryArray,
 } from 'Constants/category';
 import { COLORS } from 'Constants';
 import MobileEditForm from 'components/Balance/Mobile/MobileEditForm';
-
 // LOCALISE
 import { useTranslation } from 'react-i18next';
 
@@ -95,11 +94,13 @@ const TranceActions = ({ transactionsData }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const classes = useStyles();
+  const { t } = useTranslation();
+  const expensesCatagoryArray = t('expensesCatagoryArray', { returnObjects: true });
+  const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
 
   const transactionsArr = transactionsData.slice(0, transactionsData.length - 1);
   const [deleteTransaction] = useDeleteTransactionMutation();
-  // LOCALISE
-  const { t } = useTranslation();
+
   // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
 
   const toggleModal = () => setOpenModal(!openModal);

@@ -20,7 +20,8 @@
     "enterDescription": "Enter a description",
     "enterAmount": "Enter the amount",
     "enterButton": "Input",
-    "clearButton": "To clear"
+    "clearButton": "To clear",
+    "transactionUpdate": "Transaction update"
   },
   "balanceLine": {
     "congratulations": "Congratulations, everything is ready to go!",
@@ -41,7 +42,8 @@
     "productDescription": "Product description",
     "productCategory": "Product category",
     "descriptionIncome": "Description of income",
-    "incomeCategory": "Income category"
+    "incomeCategory": "Income category",
+    "withoutTransaction": "No transactions"
   },
   "tranceActions": { "transactionDeleted": "Transaction deleted!", "currencyUAH": "UAH" },
   "reportTable": { "summary": "Current year summary" },
@@ -147,5 +149,9 @@
     "delete": "Delete",
     "edit": "Edit",
     "save": "Save"
+  },
+  "MobileEditForm": {
+    "updateButton": "Update",
+    "NothingHasChanged": "Nothing has changed!"
   }
 }
