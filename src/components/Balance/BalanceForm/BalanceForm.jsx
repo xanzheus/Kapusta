@@ -201,6 +201,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
   // LOCALISE
   const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
+  // console.log('catagory balance', TRANSLATE_CATEGORIES);
 
   const reset = () => {
     setCategory('');
@@ -230,6 +232,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         type,
       };
 
+      console.log(result);
       createTransaction(result);
       reset();
       toast(t('balanceForm.transactionAdded'), {
@@ -258,7 +261,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
   const handleChangeDescription = event => setComment(event.target.value);
   const handleChangeCategry = event => setCategory(event.target.value);
   const handleChangeAmount = event => setAmount(event.target.value);
-
   return (
     <>
       <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>

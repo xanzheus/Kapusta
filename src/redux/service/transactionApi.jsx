@@ -7,7 +7,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
-    console.log('header', token);
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }

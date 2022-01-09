@@ -1,12 +1,8 @@
 import * as Yup from 'yup';
 
 const userSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, 'Must be 2 characters or more')
-    .max(15, 'Must be 15 characters or less'),
-  lastName: Yup.string()
-    .min(2, 'Must be 2 characters or more')
-    .max(15, 'Must be 15 characters or less'),
+  firstName: Yup.string().max(15, 'Must be 15 characters or less'),
+  lastName: Yup.string().max(15, 'Must be 15 characters or less'),
   email: Yup.string()
     .email('Email is invalid,please try again')
     .required('Адрес электронной почты обязателен'),

@@ -30,14 +30,14 @@ const IncomeCosts = ({ startDate, endDate }) => {
       <div className={s.costs}>
         <p className={s.incomeCosts__title}>{t('incomeCosts.costs')}:</p>
         <div className={s.incomeCosts__costs}>
-          - {isSuccess && getExpenseTotal(data.data).toFixed(2)} грн.
+          - {isSuccess && getExpenseTotal(data.data).toFixed(2)} {t('tranceActions.currencyUAH')}
         </div>
       </div>
 
       <div className={s.incoming}>
         <p className={s.incomeCosts__title}>{t('incomeCosts.income')}:</p>
         <div className={s.incomeCosts__income}>
-          {isSuccess && getIncomeTotal(data.data).toFixed(2)} грн.
+          {isSuccess && getIncomeTotal(data.data).toFixed(2)} {t('tranceActions.currencyUAH')}
         </div>
       </div>
     </div>

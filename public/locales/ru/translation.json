@@ -1,0 +1,152 @@
+{
+  "registration": {
+    "googleTitle": "Вы можете авторизоваться с помощью Google Account:",
+    "mainTitle": "Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись:",
+    "email": "Почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите Пароль",
+    "firstName": "Ваше Имя",
+    "lastName": "Ваша Фамилия",
+    "aceptedTerms": "Пользовательское соглашение",
+    "registration": "Регистрация",
+    "enter": "Войти",
+    "registration_success": "Регистрация прошла успешно,на почту отправлено письмо для подтверждения аккаунта",
+    "registration_error": "Данная почта уже существует"
+  },
+  "balanceForm": {
+    "clearForm": "Форма очищена!",
+    "amountGreaterZero": "Сумма должна быть больше нуля.",
+    "transactionAdded": "Трансакция добавлена!",
+    "enterDescription": "Введите описание",
+    "enterAmount": "Введите сумму",
+    "enterButton": "ВВОД",
+    "clearButton": "ОЧИСТИТЬ",
+    "transactionUpdate": "Транзакция обновлена!"
+  },
+  "balanceLine": {
+    "congratulations": "Поздравляем всё готово к работе!",
+    "balance": "Баланс:",
+    "confirm": "ПОДТВЕРДИТЬ",
+    "reports": "Перейти к отчётам"
+  },
+  "balanceTable": {
+    "transactionDeleted": "Трансакция удалена!",
+    "noChangesFound": "Изменения не обнаружены!",
+    "itsClear": "Понятно",
+    "сhangesSaved": "Изменения сохранены!",
+    "madeChange": "Если вы внесли изминение, не забудьте сохранить их!"
+  },
+  "headersTabs": {
+    "consumption": "Расход",
+    "income": "Доход",
+    "productDescription": "Описание товара",
+    "productCategory": "Категория товара",
+    "descriptionIncome": "Описание дохода",
+    "incomeCategory": "Категория дохода",
+    "withoutTransaction": "Нет транзакций"
+  },
+  "tranceActions": { "transactionDeleted": "Трансакция удалена!", "currencyUAH": "Грн" },
+  "reportTable": { "summary": "Сводка за текущий год" },
+  "footer": {
+    "allRightsReserved": "Все права защищены",
+    "developed": "Разработано с",
+    "students": "студентами"
+  },
+  "modal": {
+    "phone": " Укажите ваш номер телефона",
+    "sendInvite": "Отправить другу приглашение",
+    "friendsMail": "Почта друга",
+    "friendName": "Имя друга",
+    "sendButton": "Отправить",
+    "cancelButton": "Отмена",
+    "editTitle": "Информация о редактирование",
+    "edit": "Для того что бы редактировать нужную вам ячейку, вам необходимо дважды кликнуть по нужной ячейке и после внести своё изменение. В процессе редактирования вы будите получать уведомления, для вашего удобства :)",
+    "sure": "Вы уверены?",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "catagories": {
+    "products": "Продукты",
+    "home": "Всё для дома",
+    "entertainment": "Развлечения",
+    "healthy": "Здоровье",
+    "transport": "Транспорт",
+    "alcohol": "Алкоголь",
+    "technic": "Техника",
+    "communication": "Коммуналка, связь",
+    "hobby": "Спорт, хобби",
+    "education": "Образование",
+    "other": "Разное",
+    "salary": "ЗП",
+    "additional": "Доп.доход"
+  },
+  "expensesCatagoryArray": [
+    "Транспорт",
+    "Продукты",
+    "Здоровье",
+    "Алкоголь",
+    "Развлечения",
+    "Всё для дома",
+    "Техника",
+    "Комуналка, связь",
+    "Спорт, Хоби",
+    "Образование",
+    "Прочее"
+  ],
+  "incomeCatagoryArray": ["ЗП", "Доп.доход"],
+
+  "MONTH": {
+    "january": "Январь",
+    "february": "Февраль",
+    "march": "Май",
+    "april": "Апрель",
+    "may": "Май",
+    "june": "Июнь",
+    "july": "Июль",
+    "august": "Август",
+    "september": "Сентябрь",
+    "october": "Октябрь",
+    "november": "Ноябрь",
+    "december": "Декабрь"
+  },
+
+  "graphDetails": { "catagory": "Категории", "selectCategory": "Выберите категорию" },
+  "incomeCosts": { "costs": "Расходы", "income": "Доходы" },
+  "statHeader": {
+    "backButton": "Вернуться на главную",
+    "balance": "Баланс",
+    "confirm": "Подтвердить"
+  },
+  "period": { "period": "Текущий период", "from": "Период c", "to": "Период до", "exit": "Выйти" },
+  "month": { "changeLn": "ru" },
+  "formUpdatePhone": {
+    "number": "Номер телефона",
+    "getCode": "Пoлучить код",
+    "confirmCode": "Код подтверждения"
+  },
+  "formUser": {
+    "newPassword": "Новый пароль",
+    "confirmNewPassword": "Подтвердите новый пароль",
+    "phoneNumber": "Номер телефона",
+    "share": "Поделиться с другом",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "language": "Язык",
+    "currency": "Валюта",
+    "theme": "Тема",
+    "saveButton": "Сохранить"
+  },
+  "balanceColumns": {
+    "date": "Дата",
+    "description": "Описание",
+    "category": "Категория",
+    "amount": "Сумма",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "save": "Сохранить"
+  },
+  "MobileEditForm": {
+    "updateButton": "Обновить",
+    "NothingHasChanged": "Изменений нет!"
+  }
+}

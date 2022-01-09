@@ -1,0 +1,157 @@
+{
+  "registration": {
+    "googleTitle": "You can log in with your Google Account:",
+    "mainTitle": "Or log in using your e-mail and password, after registering:",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm the password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "aceptedTerms": "User Agreement",
+    "registration": "Registration",
+    "enter": "Enter",
+    "registration_success": "Registration was successful, a letter was sent to the mail to confirm the account",
+    "registration_error": "Bad request,email already exist"
+  },
+  "balanceForm": {
+    "clearForm": "The form is cleared!",
+    "amountGreaterZero": "The amount must be greater than zero.",
+    "transactionAdded": "Transaction added!",
+    "enterDescription": "Enter a description",
+    "enterAmount": "Enter the amount",
+    "enterButton": "Input",
+    "clearButton": "To clear",
+    "transactionUpdate": "Transaction update"
+  },
+  "balanceLine": {
+    "congratulations": "Congratulations, everything is ready to go!",
+    "balance": "Balance:",
+    "confirm": "CONFIRM",
+    "reports": "Go to reports"
+  },
+  "balanceTable": {
+    "transactionDeleted": "Transaction deleted!",
+    "noChangesFound": "No changes found!",
+    "itsClear": "it is clear",
+    "сhangesSaved": "Changes saved!",
+    "madeChange": "If youve made a change, do not forget to save it!"
+  },
+  "headersTabs": {
+    "consumption": "Expense",
+    "income": "Income",
+    "productDescription": "Product description",
+    "productCategory": "Product category",
+    "descriptionIncome": "Description of income",
+    "incomeCategory": "Income category",
+    "withoutTransaction": "No transactions"
+  },
+  "tranceActions": { "transactionDeleted": "Transaction deleted!", "currencyUAH": "UAH" },
+  "reportTable": { "summary": "Current year summary" },
+  "footer": {
+    "allRightsReserved": "All rights reserved",
+    "developed": "Developed with",
+    "students": "students"
+  },
+  "modal": {
+    "phone": " Enter your phone number",
+    "sendInvite": "Send an invitation to a friend",
+    "friendsMail": "Friend mail",
+    "friendName": "Friend name",
+    "sendButton": "Send",
+    "cancelButton": "Cancel",
+    "editTitle": "Editing information",
+    "edit": "In order to edit the cell you need, you need to double-click on the desired cell and then make your change. During the editing process, you will receive notifications for your convenience :)",
+    "sure": "Are you sure?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "catagories": {
+    "products": "products",
+    "home": "home",
+    "entertainment": "entertainment",
+    "healthy": "healthy",
+    "transport": "transport",
+    "alcohol": "alcohol",
+    "technic": "technic",
+    "communication": "communication",
+    "hobby": "hobby",
+    "education": "education",
+    "other": "other",
+    "salary": "salary",
+    "additional": "additional"
+  },
+  "expensesCatagoryArray": [
+    "transport",
+    "products",
+    "healthy",
+    "alcohol",
+    "entertainment",
+    "home",
+    "technic",
+    "communication",
+    "hobby",
+    "education",
+    "other"
+  ],
+  "incomeCatagoryArray": ["Salary", "Extra income"],
+
+  "MONTH": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+
+  "graphDetails": { "catagory": "categories", "selectCategory": "Select a category" },
+  "incomeCosts": { "costs": "Costs", "income": "Income" },
+  "statHeader": {
+    "backButton": "Go back to the main page",
+    "balance": "Balance",
+    "confirm": "Сonfirm"
+  },
+  "period": {
+    "period": "Current period",
+    "from": "Period from",
+    "to": "Period to",
+    "exit": "Logout"
+  },
+  "month": { "changeLn": "en" },
+  "formUpdatePhone": {
+    "number": "Phone number",
+    "getCode": "Get code",
+    "confirmCode": "Confirm code"
+  },
+  "formUser": {
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "phoneNumber": "Phone number",
+    "share": "Share with a friend",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "language": "language",
+    "currency": "currency",
+    "theme": "theme",
+    "saveButton": "Save"
+  },
+  "balanceColumns": {
+    "date": "Date",
+    "description": "Description",
+    "category": "Category",
+    "amount": "Amount",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save"
+  },
+  "MobileEditForm": {
+    "updateButton": "Update",
+    "NothingHasChanged": "Nothing has changed!"
+  }
+}

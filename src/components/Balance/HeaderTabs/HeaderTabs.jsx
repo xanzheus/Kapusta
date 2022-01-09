@@ -9,12 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import {
-  expensesCatagoryArray,
-  incomeCatagoryArray,
-  CATEGORYTYPE,
-  TRANSLATE_CATEGORIES,
-} from 'Constants/category';
+import { CATEGORYTYPE, TRANSLATE_CATEGORIES } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 // LOCALISE
@@ -69,6 +64,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
+  // LOCALISE
+  const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
+  const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
+
   const [value, setValue] = useState('1');
 
   const refreshedTransactions = (symbol, type) => {
@@ -93,14 +93,12 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
       .filter(item => item.type === type);
   };
 
+  const expensesCatagoryArray = t('expensesCatagoryArray', { returnObjects: true });
   const classes = useStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // LOCALISE
-  const { t } = useTranslation();
 
   return (
     <Box sx={{ width: '100%' }}>

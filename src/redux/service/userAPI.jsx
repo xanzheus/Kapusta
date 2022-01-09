@@ -7,7 +7,6 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
-    console.log('header', token);
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -18,7 +17,6 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   const refreshToken = api.getState().auth.refreshToken;
-  console.log('userAPI', refreshToken);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
@@ -38,13 +36,13 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(userAPI.logout());
+      api.dispatch(userAPI.logout(refreshToken));
     }
   }
-  if (result.error && result.error.status === 400) {
-    const { data } = result.error;
-    toast.error(data.message);
-  }
+  // if (result.error && result.error.status === 400) {
+  //   const { data } = result.error;
+  //   toast.error(data.message);
+  // }
 
   // if (result.error && result.error.status === 403) {
   //   const { data } = result.error;
@@ -73,21 +71,28 @@ export const userAPI = createApi({
           email,
           password,
         },
-        credentials: 'include',
       }),
     }),
-
     logout: builder.mutation({
-      query: () => ({
+      query: refreshToken => ({
         url: '/logout',
-        method: 'GET',
+        method: 'POST',
         headers: {
           authorization: '',
         },
-        credentials: 'include',
+        body: {
+          refreshToken,
+        },
       }),
-      invalidatesTags: ['User'],
     }),
+
+    // logout: builder.mutation({
+    //   query: refreshToken => ({
+    //     url: '/logout',
+    //     method: 'POST',
+    //     body: refreshToken,
+    //   }),
+    // }),
 
     getDataUser: builder.query({
       query: () => ({

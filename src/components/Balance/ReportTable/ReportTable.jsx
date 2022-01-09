@@ -7,7 +7,7 @@ import BREAKPOINTS from 'Constants/BREAKPOINTS';
 import { useTranslation } from 'react-i18next';
 
 import { useGetMonthTransactionQuery } from 'redux/service/transactionApi';
-import { MONTH } from 'Constants/MONTH';
+// import { MONTH } from 'Constants/MONTH';
 
 const useStyles = makeStyles(theme => ({
   reports__thumb: {
@@ -81,6 +81,7 @@ const ReportTable = ({ type, initialDate }) => {
   const classes = useStyles();
   // LOCALISE
   const { t } = useTranslation();
+  const MONTH = t('MONTH', { returnObjects: true });
   return (
     <>
       {isSuccess && (

@@ -3,7 +3,7 @@ import Container from 'components/Container';
 import { Link } from 'react-router-dom';
 import Snowflakes from 'magic-snowflakes';
 import { useGetDataUserQuery } from 'redux/service/userAPI';
-import i18n from '../../localize_i18/i18next';
+import i18n from '../../i18next';
 import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
 
@@ -28,7 +28,6 @@ const AppBar = () => {
             </Link>
             <button onClick={() => changeLanguage('en')}>EN</button>
             <button onClick={() => changeLanguage('ru')}>RU</button>
-            {console.log(`AppBar ${isSuccess}`)}
             {isSuccess && accessToken && <UserMenu />}
           </div>
         </Container>
