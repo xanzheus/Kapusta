@@ -17,6 +17,7 @@ import Button from 'components/Button/Button';
 import COLORS from 'Constants/COLORS';
 import Calculator from 'components/Calculator';
 import { TRANSLATE_CATEGORIES } from 'Constants/category';
+
 import { useCreateTransactionMutation } from 'redux/service/transactionApi';
 
 // LOCALISE
@@ -120,6 +121,7 @@ const MobileForm = ({ date, categoryTypes, toggleForm, categories }) => {
 
   // LOCALISE
   const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
 
   const reset = () => {
     setCategory('');

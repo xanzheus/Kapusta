@@ -10,8 +10,8 @@ import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
 import {
-  expensesCatagoryArray,
-  incomeCatagoryArray,
+  // expensesCatagoryArray,
+  // incomeCatagoryArray,
   CATEGORYTYPE,
   TRANSLATE_CATEGORIES,
 } from 'Constants/category';
@@ -58,6 +58,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
+  // LOCALISE
+  const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
+  const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
+
   const [value, setValue] = useState('1');
 
   const refreshedTransactions = (symbol, type) => {
@@ -82,14 +87,12 @@ const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
       .filter(item => item.type === type);
   };
 
+  const expensesCatagoryArray = t('expensesCatagoryArray', { returnObjects: true });
   const classes = useStyles();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // LOCALISE
-  const { t } = useTranslation();
 
   return (
     <Box sx={{ width: '100%' }}>

@@ -9,7 +9,11 @@ import TextField from '@mui/material/TextField';
 import BalanceLine from 'components/Balance/BalanceLine/BalanceLine';
 import TranceActions from 'components/Balance/Mobile/TranceActions';
 import MobileForm from 'components/Balance/Mobile/MobileForm';
-import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
+import {
+  // expensesCatagoryArray,
+  // incomeCatagoryArray,
+  CATEGORYTYPE,
+} from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -74,7 +78,12 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
   const [categoryTypes, setCategoryTypes] = useState('');
   const [categories, setCtegories] = useState([]);
   const classes = useStyles();
+  // LOCALISE
+  const { t } = useTranslation();
+  const expensesCatagoryArray = t('expensesCatagoryArray', { returnObjects: true });
+  const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
 
+  console.log(expensesCatagoryArray);
   const toggleForm = () => setIsOpenForm(!isOpenForm);
 
   const incomeButtonClick = () => {
@@ -88,9 +97,6 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
     setCategoryTypes(CATEGORYTYPE.EXPENSE);
     setCtegories(expensesCatagoryArray);
   };
-
-  // LOCALISE
-  const { t } = useTranslation();
 
   return (
     <>

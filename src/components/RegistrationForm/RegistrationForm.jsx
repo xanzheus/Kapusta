@@ -5,7 +5,6 @@ import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 // API
 import { useCreateUserMutation } from 'redux/service/userAPI';
-import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 import { userSchema } from 'validationSchemas/userSchema';
 import { useNavigate } from 'react-router-dom';
 // MUI
@@ -13,58 +12,26 @@ import { TextField, InputAdornment, IconButton } from '@mui/material/';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
+import ButtonGoogle from 'components/Button/Google';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 // STYLES
-import { COLORS } from '../../Constants';
+import toast from 'react-hot-toast';
+import useStyles from './registrationFormMUIstyles';
 import style from './registrationForm.module.scss';
 import { ReactComponent as GoogleIcon } from '../../images/google_icon.svg';
-
-const useStyles = makeStyles({
-  field: {
-    '& .MuiInputLabel-root': {
-      fontSize: 14,
-    },
-
-    '& .MuiTypography-root': {
-      fontSize: '14px',
-    },
-
-    '& .MuiOutlinedInput-root': {
-      // Работает
-      backgroundColor: `${COLORS.auxiliaryLight}`,
-      borderRadius: 30,
-      marginBottom: 15,
-      '& fieldset': {
-        borderRadius: 30,
-        width: 265,
-        height: 55,
-        // background: '#F6F7FB',
-        borderColor: 'transparent',
-      },
-
-      '& input': {
-        padding: '13px 14px',
-        borderRadius: 30,
-      },
-    },
-  },
-});
 
 const RegistrationForm = () => {
   // API_Hook
   const [createUser] = useCreateUserMutation();
-  const [googleAuth] = useGoogleAuthMutation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+
   const moveToLogin = () => {
     navigate('/login');
   };
   // LOCALISE Fn
-
+  const { t } = useTranslation();
   // useCustomStyle
   const classes = useStyles();
 
@@ -74,7 +41,7 @@ const RegistrationForm = () => {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
   const formik = useFormik({
-    // formik_State
+    // formik state
 
     initialValues: {
       firstName: '',
@@ -82,48 +49,47 @@ const RegistrationForm = () => {
       email: '',
       password: '',
       confirmPassword: '',
-      acceptedTerms: '',
+      acceptedTerms: false,
     },
     validationSchema: userSchema,
-    onSubmit: values => {
+    onSubmit: (values, { resetForm }) => {
       const newUser = {
         email: values.email,
         password: values.password,
         firstName: values.firstName,
         lastName: values.lastName,
       };
-      createUser(newUser);
+      createUser(newUser)
+        .unwrap()
+        .then(({ message }) => {
+          if (message === 'success') {
+            toast.success(t('registration.registration_success'));
+          }
+        })
+        .catch(error => {
+          console.log(error.status);
+          if (error.status === 400) {
+            toast.error(t('registration.registration_error'));
+          }
+        });
+
+      resetForm(formik.initialValues);
     },
   });
 
   return (
     <div className={style.box}>
       <form autoComplete="off" onSubmit={formik.handleSubmit}>
-        <p className={style.registration__title}>
-          {t('registration.googleTitle')}
-          {/* Вы можете авторизоваться с помощью Google Account: */}
-        </p>
+        <p className={style.registration__title}>{t('registration.googleTitle')}</p>
         <div className={style.google_button__wrapper}>
-          <Button
-            // onClick={() => {
-            //   googleAuth();
-            // }}
-            variant="google__button"
-            type="button"
-            name="Google"
-          >
-            <a href="https://adamants-wallet-project-back.herokuapp.com/api/auth/google"></a>
+          <ButtonGoogle variant="google__button" type="button" name="Google">
             <GoogleIcon className={style.google__icon} />
-          </Button>
+          </ButtonGoogle>
         </div>
-        <p className={style.registration__title}>
-          {t('registration.mainTitle')}
-          {/* Или зайти с помощью e-mail и пароля, предварительно зарегистрировавшись: */}
-        </p>
+        <p className={style.registration__title}>{t('registration.mainTitle')}</p>
         <TextField
           className={classes.field}
           fullWidth
-          // margin="normal"
           color="warning"
           id="email"
           name="email"
@@ -139,7 +105,6 @@ const RegistrationForm = () => {
         <TextField
           className={classes.field}
           fullWidth
-          // margin="normal"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -231,7 +196,6 @@ const RegistrationForm = () => {
               name="acceptedTerms"
               value={formik.values.acceptedTerms}
               onChange={formik.handleChange}
-              error={formik.touched.acceptedTerms && Boolean(formik.errors.acceptedTerms)}
             />
           }
           label={t('registration.aceptedTerms')}
@@ -249,83 +213,5 @@ const RegistrationForm = () => {
     </div>
   );
 };
-
-// const RegistrationForm = () => {
-//   return (
-//     <Formik
-//       initialValues={{
-//         firstName: '',
-//         lastName: '',
-//         email: '',
-//         password: '',
-//         confirmPassword: '',
-//         acceptedTerms: '',
-//       }}
-//       validationSchema={userSchema}
-//       validateOnMount
-//       onSubmit={(values, { setSubmitting }) => {
-//         setTimeout(() => {
-//           alert(JSON.stringify(values, null, 2));
-//           setSubmitting(false);
-//         }, 400);
-//       }}
-//     >
-//       {({ isValid }) => (
-//         <Form>
-//           <label>
-//             First Name
-//             <Field name="firstName" type="text" />
-//             <ErrorMessage name="firstName" />
-//           </label>
-
-//           <label>Last Name</label>
-//           <Field name="lastName" type="text" />
-//           <ErrorMessage name="lastName" />
-
-//           <label htmlFor="email">Email Address</label>
-//           <Field name="email" type="email" />
-//           <ErrorMessage name="email" />
-
-//           <label htmlFor="password">Password</label>
-//           <Field name="password" type="password" />
-//           <ErrorMessage name="password" />
-
-//           <label htmlFor="confirmPassword">Confirm password</label>
-//           <Field name="confirmPassword" type="password" />
-//           <ErrorMessage name="confirmPassword" />
-
-//           <label>
-//             <a href="#">I accepted terms conditions</a>
-//             <Field name="acceptedTerms" type="checkbox" />
-//           </label>
-//           <ErrorMessage name="acceptedTerms" />
-
-//           <button disabled={!isValid} type="submit">
-//             register
-//           </button>
-
-//           <button type="submit">Login</button>
-
-//           <button type="submit">Login with Google</button>
-
-//           {/* WITH CUSTOM HOOKS  */}
-
-//           {/* <Input label="First-name" type="text" id="firstName" name="firstName" placeholder="" />
-//           <Input label="Last-name" type="text" id="lastName" name="lastName" placeholder="" />
-//           <Input label="Email Address" type="email" id="email" name="email" placeholder="" />
-//           <Input label="Password" type="password" id="password" name="password" placeholder="" />
-//           <Input
-//             label="Confirm password"
-//             type="password"
-//             id="confirmPassword"
-//             name="confirmPassword"
-//             placeholder=""
-//           />
-//           <CheckBox name="acceptedTerms"> I accepted terms conditions</CheckBox> */}
-//         </Form>
-//       )}
-//     </Formik>
-//   );
-// };
 
 export default RegistrationForm;

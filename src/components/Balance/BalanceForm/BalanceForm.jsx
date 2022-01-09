@@ -166,6 +166,8 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
 
   // LOCALISE
   const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
+  // console.log('catagory balance', TRANSLATE_CATEGORIES);
 
   const reset = () => {
     setCategory('');
@@ -189,7 +191,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     if (category && amount) {
       if (amount <= 0) {
         toast.error(t('balanceForm.amountGreaterZero'));
-
         return;
       }
 
@@ -201,6 +202,7 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
         type,
       };
 
+      console.log(result);
       createTransaction(result);
       reset();
       toast(t('balanceForm.transactionAdded'), {
@@ -223,7 +225,6 @@ const BalanceForm = ({ placeholder, categoryArray, type, getCurrentDate, initial
     setAmount(amount.result);
     setIsCalculator(!isCalculator);
   };
-
   return (
     <>
       <form noValidate className={classes.form} autoComplete="off" onSubmit={onSubmit}>

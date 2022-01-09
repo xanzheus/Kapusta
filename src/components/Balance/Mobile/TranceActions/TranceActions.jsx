@@ -85,11 +85,10 @@ const useStyles = makeStyles({
 const TranceActions = ({ transactionsData }) => {
   const classes = useStyles();
   const transactionsArr = transactionsData.slice(0, transactionsData.length - 1);
-
   const [deleteTransaction] = useDeleteTransactionMutation();
-
   // LOCALISE
   const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
 
   const handelDeleteTransaction = id => {
     deleteTransaction(id);

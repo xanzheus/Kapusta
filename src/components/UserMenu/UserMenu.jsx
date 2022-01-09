@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useMediaPredicate } from 'react-media-hook';
 import { Link } from 'react-router-dom';
@@ -35,12 +36,14 @@ const UserMenu = () => {
   // LOCALISE
   const { t } = useTranslation();
 
+  const refreshToken = useSelector(state => state.auth.refreshToken);
+  // console.log('refresh user', refreshToken);
   const goToHomePage = () => {
-    // logout(dispatch(logOut()));
+    // logout(dispatch(logOut(refreshToken)))
 
     logout()
       .then(() => {
-        dispatch(logOut());
+        dispatch(logOut(refreshToken));
       })
       .catch(error => console.log(error.message));
     handleClose();
