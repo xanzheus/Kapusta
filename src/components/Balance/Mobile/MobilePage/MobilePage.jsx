@@ -7,7 +7,7 @@ import TranceActions from 'components/Balance/Mobile/TranceActions';
 import Box from '@mui/material/Box';
 import GoBackButton from 'components/Balance/Mobile/GoBackButton';
 import BalanceForm from 'components/Balance/BalanceForm';
-import { expensesCatagoryArray, incomeCatagoryArray, CATEGORYTYPE } from 'Constants/category';
+import { CATEGORYTYPE } from 'Constants/category';
 import COLORS from 'Constants/COLORS';
 // LOCALISE
 import { useTranslation } from 'react-i18next';
@@ -41,7 +41,12 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
   const [categories, setCtegories] = useState([]);
 
   const classes = useStyles();
+  // LOCALISE
+  const { t } = useTranslation();
+  const expensesCatagoryArray = t('expensesCatagoryArray', { returnObjects: true });
+  const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
 
+  console.log(expensesCatagoryArray);
   const toggleForm = () => setIsOpenForm(!isOpenForm);
 
   const incomeButtonClick = () => {
@@ -59,9 +64,6 @@ const MobilePage = ({ getCurrentDate, userData, transactionsData, initialDate })
   const dateObj = { value: '' };
 
   const getDate = date => (dateObj.value = date);
-
-  // LOCALISE
-  const { t } = useTranslation();
 
   return (
     <>
@@ -102,6 +104,7 @@ MobilePage.propTypes = {
   getCurrentDate: PropTypes.func.isRequired,
   userData: PropTypes.array.isRequired,
   transactionsData: PropTypes.array.isRequired,
+  initialDate: PropTypes.object.isRequired,
 };
 
 export default MobilePage;

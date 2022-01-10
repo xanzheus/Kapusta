@@ -8,6 +8,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { makeStyles } from '@material-ui/core';
 import COLORS from 'Constants/COLORS';
 
+// LOCALISE
+import { useTranslation } from 'react-i18next';
+
 const useStyles = makeStyles({
   iconButton: {
     '&.css-i4bv87-MuiSvgIcon-root': {
@@ -45,6 +48,8 @@ const useStyles = makeStyles({
 const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransAction) => {
   const classes = useStyles();
 
+  // LOCALISE
+  const { t } = useTranslation();
   const medium = useMediaPredicate('(min-width: 768px) and (max-width: 1279px)');
   const large = useMediaPredicate('(min-width: 1280px)');
 
@@ -111,7 +116,7 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
     { field: 'id', hide: true, headerAlign: 'center' },
     {
       field: 'date',
-      headerName: 'Дата',
+      headerName: t('balanceColumns.date'),
       minWidth: 120,
       type: 'date',
       editable: true,
@@ -119,14 +124,14 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
     },
     {
       field: 'comment',
-      headerName: 'Описание',
+      headerName: t('balanceColumns.description'),
       minWidth: 200,
       editable: true,
       headerAlign: 'center',
     },
     {
       field: 'category',
-      headerName: 'Категория',
+      headerName: t('balanceColumns.category'),
       minWidth: 120,
       editable: true,
       headerAlign: 'center',
@@ -135,7 +140,7 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
     },
     {
       field: 'amount',
-      headerName: 'Сумма',
+      headerName: t('balanceColumns.amount'),
       minWidth: 150,
       editable: true,
       headerAlign: 'center',
@@ -152,7 +157,7 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
           cursor="pointer"
           className={[classes.iconButton, classes.delete].join(' ')}
           onClick={openDeleteModale(params.id)}
-          titleAccess="удалить"
+          titleAccess={t('balanceColumns.delete')}
         />
       ),
     },
@@ -165,7 +170,7 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
         <EditIcon
           cursor="pointer"
           className={[classes.iconButton, classes.edit].join(' ')}
-          titleAccess="редактировать"
+          titleAccess={t('balanceColumns.edit')}
           onClick={handleOpen}
         />
       ),
@@ -180,7 +185,7 @@ const BalancePageColumns = (category, openDeleteModale, handleOpen, updateTransA
         <SaveIcon
           cursor="pointer"
           className={[classes.iconButton, classes.save].join(' ')}
-          titleAccess="сохранит"
+          titleAccess={t('balanceColumns.save')}
           onClick={updateTransAction(params)}
         />
       ),

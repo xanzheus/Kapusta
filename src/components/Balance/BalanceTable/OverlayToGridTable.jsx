@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import { GridOverlay } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 import COLORS from 'Constants/COLORS';
 
 const StyledGridOverlay = styled(GridOverlay)(({ theme }) => ({
@@ -24,6 +25,7 @@ const StyledGridOverlay = styled(GridOverlay)(({ theme }) => ({
 }));
 
 const OverlayToGridTable = () => {
+  const { t } = useTranslation();
   return (
     <StyledGridOverlay>
       <svg width="120" height="100" viewBox="0 0 184 152" aria-hidden focusable="false">
@@ -54,7 +56,7 @@ const OverlayToGridTable = () => {
         </g>
       </svg>
       <Box sx={{ mt: 1 }} color={COLORS.mainAccent} fontWeight={700} fontSize={12}>
-        Нет транзакций!
+        {t('headersTabs.withoutTransaction')}
       </Box>
     </StyledGridOverlay>
   );

@@ -7,19 +7,18 @@ import loginSchema from 'validationSchemas/login';
 import { useTranslation } from 'react-i18next';
 // MUI
 import { TextField, InputAdornment, IconButton } from '@mui/material/';
-import { makeStyles } from '@mui/styles';
 import Stack from '@mui/material/Stack';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Button from 'components/Button';
+import ButtonGoogle from 'components/Button/Google';
 // REDUX STORE
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from 'redux/service/userAPI';
-import { useGoogleAuthMutation } from 'redux/service/googleAuth';
 import { setCredentials } from 'redux/service/authSlice';
 // STYLES
 import style from './loginForm.module.scss';
-import { COLORS } from '../../Constants';
+import useStyles from './loginFormMUIstyles';
 import { ReactComponent as GoogleIcon } from '../../images/google_icon.svg';
 
 const LoginForm = () => {
@@ -30,57 +29,20 @@ const LoginForm = () => {
   const navigateToRegistration = () => {
     navigate('/');
   };
-
+  // LOCALIZATION
   const { t } = useTranslation();
 
   // REDUX HOOKS MUTATION
   const [login] = useLoginMutation();
-  const [googleAuth] = useGoogleAuthMutation();
+
   // showPassword
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
-  const useStyles = makeStyles({
-    field: {
-      '& .MuiInputAdornment-root': {
-        position: 'absolute ',
-        right: '8px',
-      },
-      '& .MuiInputLabel-root': {
-        fontSize: 14,
-      },
-
-      '& .MuiTypography-root': {
-        fontSize: '14px',
-      },
-
-      '& .MuiOutlinedInput-root': {
-        // Работает
-        position: 'relative',
-        backgroundColor: `${COLORS.auxiliaryLight}`,
-        borderRadius: 30,
-        marginBottom: 15,
-        '& fieldset': {
-          borderRadius: 30,
-          width: 265,
-          height: 55,
-          // background: '#F6F7FB',
-          borderColor: 'transparent',
-        },
-
-        '& input': {
-          padding: '13px 14px',
-          borderRadius: 30,
-        },
-      },
-    },
-  });
-
   // useCustomStyle
   const classes = useStyles();
-  // const { refreshToken } = useAuth();
-  // console.log(refresToken);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -103,36 +65,21 @@ const LoginForm = () => {
   return (
     <div className={style.box}>
       <form autoComplete="on" onSubmit={formik.handleSubmit}>
-        <p className={style.registration__title}>
-          {t('registration.googleTitle')}
-          {/* Вы можете авторизоваться с помощью Google Account: */}
-        </p>
+        <p className={style.registration__title}>{t('registration.googleTitle')}</p>
         <div className={style.google_button__wrapper}>
-          <Button
-            onClick={() => {
-              googleAuth();
-            }}
-            variant="google__button"
-            name="Google"
-            type="button"
-          >
+          <ButtonGoogle variant="google__button" name="Google" type="button">
             <GoogleIcon className={style.google__icon} />
-          </Button>
+          </ButtonGoogle>
         </div>
-        <p className={style.registration__title}>
-          {t('registration.mainTitle')}
-          {/* Или зайти с помощью e-mail и пароля: */}
-        </p>
+        <p className={style.registration__title}>{t('registration.mainTitle')}</p>
 
         <TextField
           className={classes.field}
           fullWidth
-          // margin="normal"
           color="warning"
           id="email"
           name="email"
           label={t('registration.email')}
-          // autocomplete="off"
           value={formik.values.email}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -144,8 +91,6 @@ const LoginForm = () => {
         <TextField
           className={classes.field}
           fullWidth
-          // autocomplete="off"
-          // margin="normal"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">

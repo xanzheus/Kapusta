@@ -134,6 +134,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
   // LOCALISE
   const { t } = useTranslation();
+  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
 
   const openDeleteModale = useCallback(
     id => () => {
@@ -181,7 +182,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
       toast.success(t('balanceTable.сhangesSaved'));
     },
-    [data, updateTransaction, t],
+    [data, TRANSLATE_CATEGORIES, updateTransaction, t],
   );
 
   const infoMessageByEdit = () => {

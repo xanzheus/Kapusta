@@ -28,6 +28,11 @@ const useStyles = makeStyles(theme => ({
     },
 
     [theme.breakpoints.up('1440')]: {
+      left: 610,
+      top: 160,
+    },
+
+    [theme.breakpoints.up('1940')]: {
       left: 860,
       top: 160,
     },
