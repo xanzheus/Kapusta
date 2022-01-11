@@ -182,7 +182,7 @@ const BalanceTable = ({ data, initialDate, category, Class, type }) => {
 
       toast.success(t('balanceTable.сhangesSaved'));
     },
-    [data, TRANSLATE_CATEGORIES, updateTransaction, t],
+    [data, updateTransaction, t],
   );
 
   const infoMessageByEdit = () => {

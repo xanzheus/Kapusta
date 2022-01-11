@@ -6,7 +6,6 @@ const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
-    console.log('header', token);
     if (token) {
       headers.set('Authorization', `Bearer ${token}`);
     }
@@ -17,7 +16,6 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
   const refreshToken = api.getState().auth.refreshToken;
-  console.log('userAPI', refreshToken);
   if (result.error && result.error.status === 401) {
     // try to get a new token
     const refreshResult = await baseQuery(
