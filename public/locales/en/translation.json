@@ -9,7 +9,7 @@
     "lastName": "Last Name",
     "aceptedTerms": "User Agreement",
     "registration": "Registration",
-    "enter": "Enter",
+    "enter": "Login",
     "registration_success": "Registration was successful, a letter was sent to the mail to confirm the account",
     "registration_error": "Bad request,email already exist"
   },

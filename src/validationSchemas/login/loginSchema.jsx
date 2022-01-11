@@ -2,12 +2,12 @@ import * as Yup from 'yup';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
-    .email('Электронная почта недействительна, попробуйте еще раз')
-    .required('Адрес электронной почты обязателен'),
+    .email('Email is not valid, please try again')
+    .required('Email address is required'),
   password: Yup.string()
-    .min(6, 'Пароль должен состоять из 6 или более символов.')
-    .max(20, 'Pпароль должен содержать не более 20 символов')
-    .required('Пароль обязательное поле'),
+    .min(6, 'The password must be 6 or more characters.')
+    .max(20, 'Password must be no more than 20 characters')
+    .required('Password is required'),
 });
 
 export default loginSchema;
