@@ -148,5 +148,8 @@
   "MobileEditForm": {
     "updateButton": "Обновить",
     "NothingHasChanged": "Изменений нет!"
+  },
+  "developers": {
+    "team": "Команда разработчиков"
   }
 }

@@ -6,6 +6,8 @@ import { useGetDataUserQuery } from 'redux/service/userAPI';
 import i18n from '../../i18next';
 import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
+import usaIcon from '../../images/united-states.svg';
+import russiaIcon from '../../images/Russia.svg';
 
 const AppBar = () => {
   const { isSuccess } = useGetDataUserQuery();
@@ -26,8 +28,14 @@ const AppBar = () => {
             <Link to="/developers">
               <div className={style.logo}></div>
             </Link>
-            <button onClick={() => changeLanguage('en')}>EN</button>
-            <button onClick={() => changeLanguage('ru')}>RU</button>
+            <div>
+              <button className={style.localization_icon} onClick={() => changeLanguage('en')}>
+                <img src={usaIcon} alt="" width={20} />
+              </button>
+              <button className={style.localization_icon} onClick={() => changeLanguage('ru')}>
+                <img src={russiaIcon} alt="" width={20} />
+              </button>
+            </div>
             {isSuccess && accessToken && <UserMenu />}
           </div>
         </Container>

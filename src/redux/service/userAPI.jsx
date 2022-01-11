@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import toast from 'react-hot-toast';
-// import { toast } from 'react-toastify';
+// import toast from 'react-hot-toast';
 import { setCredentials } from './authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
@@ -85,14 +84,6 @@ export const userAPI = createApi({
         },
       }),
     }),
-
-    // logout: builder.mutation({
-    //   query: refreshToken => ({
-    //     url: '/logout',
-    //     method: 'POST',
-    //     body: refreshToken,
-    //   }),
-    // }),
 
     getDataUser: builder.query({
       query: () => ({

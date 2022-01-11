@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useGetDataDevelopersQuery } from 'redux/service/developerAPI';
 import Container from 'components/Container';
 import CardDeveloper from './CardDeveloper';
+import { useTranslation } from 'react-i18next';
 import style from './DevelopersPage.module.scss';
 
 const DevelopersPage = () => {
@@ -14,7 +15,7 @@ const DevelopersPage = () => {
   const linkedinLink = obj => obj.linkedinLink;
   const gitLink = obj => obj.gitLink;
   const role = obj => obj.role;
-
+  const { t } = useTranslation();
   return (
     <>
       <section className={style.developers}>
@@ -32,7 +33,7 @@ const DevelopersPage = () => {
             </svg>
           </Link>
 
-          <h2 className={style.developers__title}>Команда разработчиков</h2>
+          <h2 className={style.developers__title}>{t('developers.team')}</h2>
           {isSuccess && (
             <ul className={style.developers__list}>
               {data.data.result.map(obj => (

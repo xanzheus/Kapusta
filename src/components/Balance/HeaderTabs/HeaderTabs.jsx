@@ -9,7 +9,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import BalanceTable from 'components/Balance/BalanceTable';
 import BalanceForm from 'components/Balance/BalanceForm';
 import COLORS from 'Constants/COLORS';
-import { CATEGORYTYPE, TRANSLATE_CATEGORIES } from 'Constants/category';
+import { CATEGORYTYPE } from 'Constants/category';
 import BREAKPOINTS from 'Constants/BREAKPOINTS';
 
 // LOCALISE
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
 const HeaderTabs = ({ getCurrentDate, transactions, initialDate }) => {
   // LOCALISE
   const { t } = useTranslation();
-  // const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
+  const TRANSLATE_CATEGORIES = t('catagories', { returnObjects: true });
   const incomeCatagoryArray = t('incomeCatagoryArray', { returnObjects: true });
 
   const [value, setValue] = useState('1');

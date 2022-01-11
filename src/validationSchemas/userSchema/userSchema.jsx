@@ -5,17 +5,17 @@ const userSchema = Yup.object().shape({
   lastName: Yup.string().max(15, 'Must be 15 characters or less'),
   email: Yup.string()
     .email('Email is invalid,please try again')
-    .required('Адрес электронной почты обязателен'),
+    .required('Email address is required'),
   password: Yup.string()
     .min(6, 'Password must be 6 characters or more ')
     .max(20, 'Password must be 20 characters or less')
-    .required('Пароль обязателен'),
+    .required('Password is required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'passwords must match')
-    .required('Подтверждение пароля обязательно'),
+    .required('Password confirmation is required'),
 
   acceptedTerms: Yup.boolean()
-    .required('Пользовательское соглашения обязательно')
+    .required('User agreement is required')
     .oneOf([true], 'You must accept the terms of conditions'),
 });
 
