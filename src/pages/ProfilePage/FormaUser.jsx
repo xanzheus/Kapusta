@@ -88,7 +88,7 @@ const FormaUser = ({
     validationSchema: userUpdateSchema,
     onSubmit: (values, formikBag) => {
       const newData = {
-        password: values.password,
+        // password: values.password,
         fullName: {
           firstName: values.firstName,
           lastName: values.lastName,
