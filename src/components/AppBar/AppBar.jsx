@@ -2,7 +2,6 @@ import UserMenu from 'components/UserMenu';
 import Container from 'components/Container';
 import { Link } from 'react-router-dom';
 import Snowflakes from 'magic-snowflakes';
-import { useGetDataUserQuery } from 'redux/service/userAPI';
 import i18n from '../../i18next';
 import { useSelector } from 'react-redux';
 import style from './AppBar.module.scss';
@@ -10,7 +9,6 @@ import usaIcon from '../../images/united-states.svg';
 import russiaIcon from '../../images/Russia.svg';
 
 const AppBar = () => {
-  const { isSuccess } = useGetDataUserQuery();
   const snowflakes = new Snowflakes({ height: 40, speed: 0.1, count: 16 });
 
   const changeLanguage = language => {
@@ -36,7 +34,7 @@ const AppBar = () => {
                 <img src={russiaIcon} alt="" width={20} />
               </button>
             </div>
-            {isSuccess && accessToken && <UserMenu />}
+            {accessToken && <UserMenu />}
           </div>
         </Container>
       </header>

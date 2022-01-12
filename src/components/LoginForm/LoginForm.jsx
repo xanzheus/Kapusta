@@ -54,7 +54,7 @@ const LoginForm = () => {
       login({ email, password })
         .unwrap()
         .then(({ data }) => {
-          console.log('component', data.accessToken);
+          // console.log('component', data.accessToken);
           dispatch(setCredentials(data));
           navigate('/balance');
         })
