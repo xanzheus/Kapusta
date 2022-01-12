@@ -4,8 +4,10 @@ import COLORS from 'Constants/COLORS';
 
 const MobileOverlayToTransactions = () => {
   const { t } = useTranslation();
-  <Stack textAlign="center" mt={8} fontWeight={700} color={COLORS.mainAccent}>
-    {t('headersTabs.withoutTransaction')}
-  </Stack>;
+  return (
+    <Stack textAlign="center" mt={8} fontWeight={700} color={COLORS.mainAccent}>
+      {t('headersTabs.withoutTransaction')}
+    </Stack>
+  );
 };
 export default MobileOverlayToTransactions;
