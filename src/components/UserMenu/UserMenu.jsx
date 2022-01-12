@@ -66,13 +66,6 @@ const UserMenu = () => {
             />
           )}
 
-          {small && (
-            <LogoutIcon
-              onClick={handleOpen}
-              sx={{ fontSize: 18, color: COLORS.auxiliaryDark }}
-              titleAccess={t('period.exit')}
-            />
-          )}
           {medium && (
             <>
               {isSuccess && (
@@ -115,7 +108,13 @@ const UserMenu = () => {
             </>
           )}
         </Link>
-
+        {small && (
+          <LogoutIcon
+            onClick={handleOpen}
+            sx={{ fontSize: 18, color: COLORS.auxiliaryDark }}
+            titleAccess={t('period.exit')}
+          />
+        )}
         {medium && (
           <>
             <button className={style.user__button__logout} onClick={handleOpen}>
