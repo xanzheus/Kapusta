@@ -123,7 +123,7 @@ const App = () => {
             </PrivateRoute>
           }
         />
-        {/* <Route
+        <Route
           path="*"
           element={
             <PublicRoute accessToken={accessToken}>
@@ -132,7 +132,7 @@ const App = () => {
               </div>
             </PublicRoute>
           }
-        /> */}
+        />
       </Routes>
     </ThemeProvider>
   );
