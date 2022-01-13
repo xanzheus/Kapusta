@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // import toast from 'react-hot-toast';
-import { setCredentials } from './authSlice';
+import { setCredentials, logOut } from './authSlice';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://adamants-wallet-project-back.herokuapp.com/api/users',
   credentials: 'include',
@@ -35,7 +35,16 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       // retry the initial query
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(userAPI.logout(refreshToken));
+      await baseQuery(
+        {
+          url: `/logout`,
+          method: 'POST',
+          body: { refreshToken },
+        },
+        // clean state
+        api.dispatch(logOut()),
+        extraOptions,
+      );
     }
   }
   // if (result.error && result.error.status === 400) {
