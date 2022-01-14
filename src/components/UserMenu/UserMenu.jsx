@@ -41,9 +41,9 @@ const UserMenu = () => {
   const goToHomePage = () => {
     // logout(dispatch(logOut(refreshToken)))
 
-    logout()
+    logout(refreshToken)
       .then(() => {
-        dispatch(logOut(refreshToken));
+        dispatch(logOut());
       })
       .catch(error => console.log(error.message));
     handleClose();
